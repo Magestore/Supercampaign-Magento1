@@ -23,7 +23,7 @@
 <config>
     <modules>
         <Magestore_Campaign>
-            <version>0.2.2</version>
+            <version>0.2.3</version>
         </Magestore_Campaign>
     </modules>
     <frontend>
@@ -228,6 +228,15 @@
                     <widget_banner>
                         <table>magestore_campaign_widget_banner</table>
                     </widget_banner>
+                    <bannerslider>
+                        <table>magestore_campaign_banner_item</table>
+                    </bannerslider>
+                    <banner>
+                        <table>magestore_campaign_banner</table>
+                    </banner>
+                    <value>
+                        <table>magestore_campaign_value</table>
+                    </value>
                 </entities>
             </campaign_resource>
         </models>

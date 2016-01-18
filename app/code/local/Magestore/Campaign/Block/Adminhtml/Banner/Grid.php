@@ -28,99 +28,105 @@
  */
 class Magestore_Campaign_Block_Adminhtml_Banner_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
-    public function __construct()
-    {
+
+    public function __construct() {
         parent::__construct();
-        $this->setId('banner_grid');
-        $this->setDefaultSort('widget_banner_id');
-        $this->setDefaultDir('DESC');
+        $this->setId('bannerGrid');
+        $this->setDefaultSort('banner_id');
+        $this->setDefaultDir('ASC');
         $this->setSaveParametersInSession(true);
     }
-    
-    /**
-     * prepare collection for block to display
-     *
-     * @return Magestore_Campaign_Block_Adminhtml_Widget_Grid
-     */
-    protected function _prepareCollection()
-    {
-        $collection = Mage::getModel('campaign/widget_banner')->getCollection();
-        $collection->getSelect()
-            ->joinLeft(array('campaign'=>$collection->getTable('campaign/campaign')),
-                'main_table.campaign_id = campaign.campaign_id', '')
-            ->columns(array('campaign_name'=>'campaign.name'))
-            ->group('main_table.widget_banner_id');
+
+    protected function _prepareCollection() {
+
+        $storeId = $this->getRequest()->getParam('store');
+        $collection = Mage::getModel('campaign/banner')->getCollection()->setStoreId($storeId);
+
+        $collection->getSelect()->joinLeft(array('table_alias' => $collection->getTable('campaign/bannerslider')), 'main_table.bannerslider_id = table_alias.bannerslider_id', array('bannerslider_title' => 'table_alias.title'));
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
-    
-    /**
-     * prepare columns for this grid
-     *
-     * @return Magestore_Campaign_Block_Adminhtml_Widget_Grid
-     */
-    protected function _prepareColumns()
-    {
-        $this->addColumn('widget_banner_id', array(
-            'header'    => Mage::helper('campaign')->__('ID'),
-            'align'     =>'right',
-            'width'     => '50px',
-            'index'     => 'widget_banner_id',
+
+    protected function _prepareColumns() {
+        $this->addColumn('banner_id', array(
+            'header' => Mage::helper('campaign')->__('ID'),
+            'align' => 'right',
+            'width' => '50px',
+            'filter_index' => 'main_table.banner_id',
+            'index' => 'banner_id',
         ));
 
-        $this->addColumn('banner_type', array(
-            'header'    => Mage::helper('campaign')->__('Banner Type'),
-            'align'     =>'left',
-            'width'     => '220px',
-            'index'     => 'type',
-            'renderer'  => 'Magestore_Campaign_Block_Adminhtml_Banner_Grid_Renderer_BannerType',
-            'filter' => false,
+        $this->addColumn('name', array(
+            'header' => Mage::helper('campaign')->__('Name'),
+            'align' => 'left',
+            'width' => '100px',
+            'index' => 'name',
         ));
 
-        $this->addColumn('in_widgets', array(
-            'header'    => Mage::helper('campaign')->__('In Widgets'),
-            'index'     => 'widget_selected_ids',
-            //'width'     => '220px',
-            'renderer' => 'Magestore_Campaign_Block_Adminhtml_Banner_Grid_Renderer_InWidgets',
-            'filter_condition_callback' => array($this, '_filterInWidgets'),
+        $this->addColumn('click_url', array(
+            'header' => Mage::helper('campaign')->__('URL'),
+            'align' => 'left',
+            'index' => 'click_url',
         ));
 
-        $this->addColumn('in_campaign', array(
-            'header'    => Mage::helper('campaign')->__('In Campaign'),
-            'index'     => 'campaign_name',
-            'width'     => '220px',
-            'filter_condition_callback' => array($this, '_filterInCampaign'),
+        $this->addColumn('bannerslider_title', array(
+            'header' => Mage::helper('campaign')->__('Slider'),
+            'align' => 'left',
+            'filter_index' => 'table_alias.title',
+            'index' => 'bannerslider_title',
         ));
+
+        $this->addColumn('start_time', array(
+            'header' => Mage::helper('campaign')->__('Start Date'),
+            'align' => 'left',
+            'type' => 'datetime',
+            'index' => 'start_time',
+        ));
+
+        $this->addColumn('end_time', array(
+            'header' => Mage::helper('campaign')->__('End Date'),
+            'align' => 'left',
+            'type' => 'datetime',
+            'index' => 'end_time',
+        ));
+
 
         $this->addColumn('status', array(
-            'header'    => Mage::helper('campaign')->__('Status'),
-            'align'     => 'left',
-            'width'     => '80px',
-            'index'     => 'status',
-            'filter_index'=>'main_table.status',
-            'type'        => 'options',
-            'options'     => array(
-                1 => 'Enabled',
-                0 => 'Disabled',
+            'header' => Mage::helper('campaign')->__('Status'),
+            'align' => 'left',
+            'width' => '80px',
+            'filter_index' => 'main_table.status',
+            'index' => 'status',
+            'type' => 'options',
+            'options' => array(
+                0 => 'Enabled',
+                1 => 'Disabled',
             ),
         ));
 
-        $this->addColumn('action',
-            array(
-                'header'    =>    Mage::helper('campaign')->__('Action'),
-                'width'        => '100',
-                'type'        => 'action',
-                'getter'    => 'getId',
-                'actions'    => array(
-                    array(
-                        'caption'    => Mage::helper('campaign')->__('Edit'),
-                        'url'        => array('base'=> '*/*/edit'),
-                        'field'        => 'id'
-                    )),
-                'filter'    => false,
-                'sortable'    => false,
-                'index'        => 'stores',
-                'is_system'    => true,
+        $this->addColumn('action', array(
+            'header' => Mage::helper('campaign')->__('Action'),
+            'width' => '50px',
+            'type' => 'action',
+            'getter' => 'getId',
+            'actions' => array(
+                array(
+                    'caption' => Mage::helper('campaign')->__('Edit'),
+                    'url' => array('base' => '*/*/edit'),
+                    'field' => 'id'
+                )
+            ),
+            'filter' => false,
+            'sortable' => false,
+            'index' => 'stores',
+            'is_system' => true,
+        ));
+        $this->addColumn('imagename', array(
+            'header' => Mage::helper('campaign')->__('Image'),
+            'align' => 'center',
+            'width' => '70px',
+            'index' => 'imagename',
+            'renderer' => 'campaign/adminhtml_renderer_imagebanner'
         ));
 
         $this->addExportType('*/*/exportCsv', Mage::helper('campaign')->__('CSV'));
@@ -129,71 +135,42 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Grid extends Mage_Adminhtml_Bloc
         return parent::_prepareColumns();
     }
 
-    protected function _filterInWidgets($collection, $column){
-        $field = ( $column->getFilterIndex() ) ? $column->getFilterIndex() : $column->getIndex();
-        $cond = $column->getFilter()->getCondition();
-        if ($field && isset($cond)) {
-            $widgets = Mage::getModel('campaign/widget')->getCollection();
-            $widgets->addFieldToFilter('title', $cond);
-            $widget_id_cond = array('');
-            foreach($widgets as $w){
-                $widget_id_cond[] = array('like'=>'%'.$w->getWidgetId().'%');
-            }
-            $collection->addFieldToFilter('widget_selected_ids', $widget_id_cond);
-        }
-        return $this;
-    }
+    protected function _prepareMassaction() {
 
-    protected function _filterInCampaign($collection, $column){
-        $field = ( $column->getFilterIndex() ) ? $column->getFilterIndex() : $column->getIndex();
-        $cond = $column->getFilter()->getCondition();
-        if ($field && isset($cond)) {
-            $collection->addFieldToFilter('campaign.name' , $cond);
-        }
-        return $this;
-    }
-    
-    /**
-     * prepare mass action for this grid
-     *
-     * @return Magestore_Campaign_Block_Adminhtml_Widget_Grid
-     */
-    protected function _prepareMassaction()
-    {
-        $this->setMassactionIdField('mass_id');
-        $this->getMassactionBlock()->setFormFieldName('mass_ids');
+        $this->setMassactionIdField('id');
+        $this->getMassactionBlock()->setFormFieldName('banner');
 
         $this->getMassactionBlock()->addItem('delete', array(
-            'label'        => Mage::helper('campaign')->__('Delete'),
-            'url'        => $this->getUrl('*/*/massDelete'),
-            'confirm'    => Mage::helper('campaign')->__('Are you sure?')
+            'label' => Mage::helper('campaign')->__('Delete'),
+            'url' => $this->getUrl('*/*/massDelete'),
+            'confirm' => Mage::helper('campaign')->__('Are you sure?')
         ));
 
         $statuses = Mage::getSingleton('campaign/status')->getOptionArray();
 
-        array_unshift($statuses, array('label'=>'', 'value'=>''));
+        array_unshift($statuses, array('label' => '', 'value' => ''));
         $this->getMassactionBlock()->addItem('status', array(
-            'label'=> Mage::helper('campaign')->__('Change status'),
-            'url'    => $this->getUrl('*/*/massStatus', array('_current'=>true)),
+            'label' => Mage::helper('campaign')->__('Change status'),
+            'url' => $this->getUrl('*/*/massStatus', array('_current' => true)),
             'additional' => array(
                 'visibility' => array(
-                    'name'    => 'status',
-                    'type'    => 'select',
-                    'class'    => 'required-entry',
-                    'label'    => Mage::helper('campaign')->__('Status'),
-                    'values'=> $statuses
-                ))
+                    'name' => 'status',
+                    'type' => 'select',
+                    'class' => 'required-entry',
+                    'label' => Mage::helper('campaign')->__('Status'),
+                    'values' => array(
+                        0 => 'Enabled',
+                        1 => 'Disabled',
+                    )
+                )
+            )
         ));
         return $this;
     }
-    
-    /**
-     * get url for each row in grid
-     *
-     * @return string
-     */
-    public function getRowUrl($row)
-    {
-        return $this->getUrl('*/*/edit', array('id' => $row->getId()));
+
+    public function getRowUrl($row) {
+
+        return $this->getUrl('*/*/edit', array('id' => $row->getId(), 'store' => $this->getRequest()->getParam('store')));
     }
+
 }

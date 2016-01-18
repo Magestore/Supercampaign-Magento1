@@ -43,15 +43,12 @@ class Magestore_Campaign_Adminhtml_BannerController extends Mage_Adminhtml_Contr
             );
         return $this;
     }
- 
+
     /**
      * index action
      */
-    public function indexAction()
-    {
-        $widgetBlock = $this->getLayout()->createBlock('campaign/adminhtml_banner');
+    public function indexAction() {
         $this->_initAction()
-            ->_addContent($widgetBlock)
             ->renderLayout();
     }
 
@@ -60,28 +57,30 @@ class Magestore_Campaign_Adminhtml_BannerController extends Mage_Adminhtml_Contr
      */
     public function editAction()
     {
-        $widgetId     = $this->getRequest()->getParam('id');
-        $model  = Mage::getModel('campaign/widget_banner')->load($widgetId);
-        if ($model->getId() || $widgetId == 0) {
+        $id = $this->getRequest()->getParam('id');
+        $store = $this->getRequest()->getParam('store');
+        $model = Mage::getModel('campaign/banner')->setStoreId($store)->load($id);
+
+        if ($model->getId() || $id == 0) {
             $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
-            if (!empty($data)) {
+            if (!empty($data))
                 $model->setData($data);
-            }
-            Mage::register('widget_banner_data', $model);
-            /**
-             * footer controller
-             */
+
+            Mage::register('banner_data', $model);
+
             $this->loadLayout();
-            $this->_setActiveMenu('campaign/banner_new');
+            $this->_setActiveMenu('campaign/bannerslider');
+
+            $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item Manager'), Mage::helper('adminhtml')->__('Item Manager'));
+            $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item News'), Mage::helper('adminhtml')->__('Item News'));
 
             $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
             $this->_addContent($this->getLayout()->createBlock('campaign/adminhtml_banner_edit'))
                 ->_addLeft($this->getLayout()->createBlock('campaign/adminhtml_banner_edit_tabs'));
+
             $this->renderLayout();
         } else {
-            Mage::getSingleton('adminhtml/session')->addError(
-                Mage::helper('campaign')->__('Widget does not exist')
-            );
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('campaign')->__('Item does not exist'));
             $this->_redirect('*/*/');
         }
     }
@@ -90,36 +89,77 @@ class Magestore_Campaign_Adminhtml_BannerController extends Mage_Adminhtml_Contr
     {
         $this->_forward('edit');
     }
- 
+
+    public function addinAction() {
+
+        $id = $this->getRequest()->getParam('id');
+        $store = $this->getRequest()->getParam('store');
+        $model = Mage::getModel('campaign/banner')->setStoreId($store)->load($id);
+
+        if ($model->getId() || $id == 0) {
+            $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
+            if (!empty($data))
+                $model->setData($data);
+
+            Mage::register('banner_data', $model);
+        }
+        $this->loadLayout();
+        $this->_setActiveMenu('campaign/bannerslider');
+
+        $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item Manager'), Mage::helper('adminhtml')->__('Item Manager'));
+        $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item News'), Mage::helper('adminhtml')->__('Item News'));
+        $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
+        $this->_addContent($this->getLayout()->createBlock('campaign/adminhtml_banner_edit'))
+            ->_addLeft($this->getLayout()->createBlock('campaign/adminhtml_banner_edit_tabs'));
+
+        $this->renderLayout();
+    }
+
     /**
      * save item action
      */
     public function saveAction()
     {
         if ($data = $this->getRequest()->getPost()) {
-            if(isset($data[Magestore_Campaign_Model_Widget_Banner::PREFIX_DATA])){
-                $data = $data[Magestore_Campaign_Model_Widget_Banner::PREFIX_DATA];
+            //Zend_debug::dump($data);die();
+            $store = $this->getRequest()->getParam('store');
+            $model = Mage::getModel('campaign/banner');
+            if (isset($data['image']['delete'])) {
+                Mage::helper('campaign')->deleteImageFile($data['image']['value']);
             }
-            $model = Mage::getModel('campaign/widget_banner');
-            $id = $this->getRequest()->getParam('id');
-            if($id){
-                $model->load($id);
-                $model->addData($data)->setId($id);
-            }else{
-                $model->setData($data);
+            $image = Mage::helper('campaign')->uploadBannerImage();
+            if ($image || (isset($data['image']['delete']) && $data['image']['delete'])) {
+                $data['image'] = $image;
+            } else {
+                unset($data['image']);
             }
-            try {
-                $model->save();
-                /**
-                 * footer controller
-                 */
-                Mage::getSingleton('adminhtml/session')->addSuccess(
-                    Mage::helper('campaign')->__('Banner was successfully saved')
-                );
-                Mage::getSingleton('adminhtml/session')->setFormData(false);
 
+            $data = $this->_filterDateTime($data,array('start_time','end_time'));
+            try {
+                $data['start_time']=date('Y-m-d H:i:s',Mage::getModel('core/date')->gmtTimestamp(strtotime($data['start_time'])));
+                $data['end_time']=date('Y-m-d H:i:s',Mage::getModel('core/date')->gmtTimestamp(strtotime($data['end_time'])));
+            } catch (Exception $e) {}
+            $model->setOrderBanner("7");
+            $model->setData($data)
+                ->setStoreId($store)
+                ->setData('banner_id', $this->getRequest()->getParam('id'));
+            try {
+
+
+                $model->save();
+                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('campaign')->__('Banner was successfully saved'));
+                Mage::getSingleton('adminhtml/session')->setFormData(false);
+                //Zend_debug::dump($this->getRequest()->getParam('slider'));die();
+                if($this->getRequest()->getParam('slider') == 'check'){
+                    $this->_redirect('*/*/addin', array('id' => $model->getId()));
+                    return;
+                }
                 if ($this->getRequest()->getParam('back')) {
-                    $this->_redirect('*/*/edit', array('id' => $model->getId()));
+                    $this->_redirect('*/*/edit', array('id' => $model->getId(), 'store' => $this->getRequest()->getParam("store")));
+                    return;
+                }
+                if ($this->getRequest()->getParam('addin')) {
+                    $this->_redirect('*/*/addin', array('id' => $model->getId(), 'store' => $this->getRequest()->getParam("store")));
                     return;
                 }
                 $this->_redirect('*/*/');
@@ -131,10 +171,9 @@ class Magestore_Campaign_Adminhtml_BannerController extends Mage_Adminhtml_Contr
                 return;
             }
         }
-        Mage::getSingleton('adminhtml/session')->addError(
-            Mage::helper('campaign')->__('Unable to find item to save')
-        );
+        Mage::getSingleton('adminhtml/session')->addError(Mage::helper('campaign')->__('Unable to find banner to save'));
         $this->_redirect('*/*/');
+
     }
 
     /**
@@ -144,16 +183,14 @@ class Magestore_Campaign_Adminhtml_BannerController extends Mage_Adminhtml_Contr
     {
         if ($this->getRequest()->getParam('id') > 0) {
             try {
-                $model = Mage::getModel('campaign/campaign');
+                $model = Mage::getModel('campaign/banner');
                 $model->setId($this->getRequest()->getParam('id'))
                     ->delete();
-                Mage::getSingleton('adminhtml/session')->addSuccess(
-                    Mage::helper('adminhtml')->__('Item was successfully deleted')
-                );
+                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Banner was successfully deleted'));
                 $this->_redirect('*/*/');
             } catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-                $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
+                $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id'), 'store' => $this->getRequest()->getParam("store")));
             }
         }
         $this->_redirect('*/*/');
@@ -164,24 +201,22 @@ class Magestore_Campaign_Adminhtml_BannerController extends Mage_Adminhtml_Contr
      */
     public function massDeleteAction()
     {
-        $massIds = $this->getRequest()->getParam('mass_ids');
-        if (!is_array($massIds)) {
+        $bannersliderIds = $this->getRequest()->getParam('banner');
+        if (!is_array($bannersliderIds)) {
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Please select item(s)'));
         } else {
             try {
-                foreach ($massIds as $id) {
-                    $campaign = Mage::getModel('campaign/widget_banner')->load($id);
-                    $campaign->delete();
+                foreach ($bannersliderIds as $bannersliderId) {
+                    $bannerslider = Mage::getModel('bannerslider/banner')->load($bannersliderId);
+                    $bannerslider->delete();
                 }
-                Mage::getSingleton('adminhtml/session')->addSuccess(
-                    Mage::helper('adminhtml')->__('Total of %d record(s) were successfully deleted',
-                    count($massIds))
-                );
+                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Total of %d record(s) were successfully deleted', count($bannersliderIds)));
             } catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
             }
         }
-        $this->_redirect('*/*/index');
+        $this->_redirect('*/*/index', array('store' => $this->getRequest()->getParam("store")));
+
     }
     
     /**
@@ -189,92 +224,51 @@ class Magestore_Campaign_Adminhtml_BannerController extends Mage_Adminhtml_Contr
      */
     public function massStatusAction()
     {
-        $massIds = $this->getRequest()->getParam('mass_ids');
-        if (!is_array($massIds)) {
+
+        $bannerIds = $this->getRequest()->getParam('banner');
+        if (!is_array($bannerIds)) {
             Mage::getSingleton('adminhtml/session')->addError($this->__('Please select item(s)'));
         } else {
             try {
-                foreach ($massIds as $id) {
-                    Mage::getSingleton('campaign/widget_banner')
-                        ->load($id)
+                foreach ($bannerIds as $bannerId) {
+                    $banner = Mage::getSingleton('bannerslider/banner')
+                        ->load($bannerId)
                         ->setStatus($this->getRequest()->getParam('status'))
                         ->setIsMassupdate(true)
                         ->save();
                 }
                 $this->_getSession()->addSuccess(
-                    $this->__('Total of %d record(s) were successfully updated', count($massIds))
+                    $this->__('Total of %d record(s) were successfully updated', count($bannerIds))
                 );
             } catch (Exception $e) {
                 $this->_getSession()->addError($e->getMessage());
             }
         }
-        $this->_redirect('*/*/index');
+        $this->_redirect('*/*/index', array('store' => $this->getRequest()->getParam("store")));
+
     }
 
 
     /**
      * export grid item to CSV type
      */
-    public function exportCsvAction()
-    {
-        $fileName   = 'widget.csv';
-        $content    = $this->getLayout()
-           ->createBlock('campaign/adminhtml_banner_grid')
-           ->getCsv();
+    public function exportCsvAction() {
+        $fileName = 'banner.csv';
+        $content = $this->getLayout()->createBlock('campaign/adminhtml_banner_grid')->getCsv();
         $this->_prepareDownloadResponse($fileName, $content);
     }
 
     /**
      * export grid item to XML type
      */
-    public function exportXmlAction()
-    {
-        $fileName   = 'widget.xml';
-        $content    = $this->getLayout()
-           ->createBlock('campaign/adminhtml_banner_grid')
-           ->getXml();
+    public function exportXmlAction() {
+        $fileName = 'banner.xml';
+        $content = $this->getLayout()->createBlock('campaign/adminhtml_banner_grid')->getXml();
         $this->_prepareDownloadResponse($fileName, $content);
     }
-    
-    protected function _isAllowed()
-    {
-        return Mage::getSingleton('admin/session')->isAllowed('banner');
+
+    protected function _isAllowed() {
+        return Mage::getSingleton('admin/session')->isAllowed('campaign');
     }
 
-    public function ajaxGridAction(){
-        //get params
-        Mage::register('widget_reloaded_ids', $this->getRequest()->getPost('widget_reloaded_ids'));
-        $grid = $this->getLayout()->createBlock('campaign/adminhtml_banner_edit_tab_widgetgrid');
-        $this->getResponse()->setBody($grid->toHtml());
-        $this->renderLayout();
-        $this->getResponse()->sendResponse();
-        exit;
-    }
-
-    /**
-     * get grid in campaign edit widget banner tab
-     */
-    public function getGridTabAction(){
-        //get params
-        Mage::register('banner_reloaded_ids', $this->getRequest()->getPost('banner_reloaded_ids'));
-        $grid = $this->getLayout()->createBlock('campaign/adminhtml_campaign_edit_tab_bannergrid');
-        $serialer = Mage::getModel('core/layout')->createBlock('adminhtml/widget_grid_serializer');
-        $serialer->initSerializerBlock($grid, 'getSerializeData', 'banner_ids', 'banner_reloaded_ids');
-        $js = '<script type="text/javascript"></script>';
-        $this->getResponse()->setBody($grid->toHtml().$serialer->toHtml());
-        $this->renderLayout();
-        $this->getResponse()->sendResponse();
-        exit;
-    }
-
-    public function getBannerGridAction(){
-        //get params
-        Mage::register('filter', $this->getRequest()->getParam('filter'));
-        Mage::register('banner_reloaded_ids', $this->getRequest()->getPost('banner_reloaded_ids'));
-        $grid = $this->getLayout()->createBlock('campaign/adminhtml_campaign_edit_tab_bannergrid');
-        $this->getResponse()->setBody($grid->toHtml());
-        $this->renderLayout();
-        $this->getResponse()->sendResponse();
-        exit;
-    }
 }

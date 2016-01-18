@@ -33,7 +33,7 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Edit_Tabs extends Mage_Adminhtml
         parent::__construct();
         $this->setId('banner_tabs');
         $this->setDestElementId('edit_form');
-        $this->setTitle(Mage::helper('campaign')->__('Widget Banner Tabs'));
+        $this->setTitle(Mage::helper('campaign')->__('Banner Tabs'));
     }
     
     /**

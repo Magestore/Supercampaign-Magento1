@@ -38,9 +38,14 @@
                 </widget>
                 <banner module="campaign" translate="title">
                     <title>Manage Banner</title>
-                    <sort_order>15</sort_order>
+                    <sort_order>10</sort_order>
                     <action>campaignadmin/adminhtml_banner</action>
                 </banner>
+                <bannerslider module="campaign" translate="title">
+                    <title>Manage Bannerslider</title>
+                    <sort_order>15</sort_order>
+                    <action>campaignadmin/adminhtml_bannerslider</action>
+                </bannerslider>
                 <maillist module="campaign" translate="title">
                     <title>Email Campaign</title>
                     <sort_order>20</sort_order>
@@ -85,9 +90,17 @@
                                 <title>Manage Widget</title>
                                 <sort_order>5</sort_order>
                             </widget>
+                            <banner module="campaign" translate="title">
+                                <title>Manage Banner</title>
+                                <sort_order>10</sort_order>
+                            </banner>
+                            <bannerslider module="campaign" translate="title">
+                                <title>Manage Bannerslider</title>
+                                <sort_order>15</sort_order>
+                            </bannerslider>
                             <maillist module="campaign" translate="title">
                                 <title>Email Campaign</title>
-                                <sort_order>10</sort_order>
+                                <sort_order>20</sort_order>
                             </maillist>
                             <settings module="campaign" translate="title">
                                 <title>Settings</title>

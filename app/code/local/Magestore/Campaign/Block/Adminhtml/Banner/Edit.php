@@ -37,7 +37,7 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Edit extends Mage_Adminhtml_Bloc
         $this->_controller = 'adminhtml_banner';
         
         $this->_updateButton('save', 'label', Mage::helper('campaign')->__('Save and exit'));
-        $this->_updateButton('delete', 'label', Mage::helper('campaign')->__('Delete Widget'));
+        $this->_updateButton('delete', 'label', Mage::helper('campaign')->__('Delete Banner'));
         
         $this->_addButton('saveandcontinue', array(
             'label'        => Mage::helper('adminhtml')->__('Save and continute edit'),
@@ -141,13 +141,11 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Edit extends Mage_Adminhtml_Bloc
      */
     public function getHeaderText()
     {
-        if (Mage::registry('widget_banner_data')
-            && Mage::registry('widget_banner_data')->getId()
-        ) {
-            return Mage::helper('campaign')->__("Edit banner '%s'",
-                $this->htmlEscape(Mage::registry('widget_banner_data')->getTitle())
-            );
+        if( Mage::registry('banner_data') && Mage::registry('banner_data')->getId() ) {
+            return Mage::helper('campaign')->__("Edit Banner '%s'", $this->htmlEscape(Mage::registry('banner_data')->getName()));
+        } else {
+            return Mage::helper('campaign')->__('Add Banner');
         }
-        return Mage::helper('campaign')->__('Add new Banner');
     }
+
 }
