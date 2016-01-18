@@ -1,0 +1,322 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Campaign
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Magestore_Campaign>
+            <version>0.2.2</version>
+        </Magestore_Campaign>
+    </modules>
+    <frontend>
+        <routers>
+            <campaign>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_Campaign</module>
+                    <frontName>campaign</frontName>
+                </args>
+            </campaign>
+        </routers>
+        <layout>
+            <updates>
+                <campaign>
+                    <file>campaign.xml</file>
+                </campaign>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Campaign>
+                    <files>
+                        <default>Magestore_Campaign.csv</default>
+                    </files>
+                </Magestore_Campaign>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <campaignadmin>
+                <use>admin</use>
+                <args>
+                    <module>Magestore_Campaign</module>
+                    <frontName>campaignadmin</frontName>
+                </args>
+            </campaignadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <campaign>
+                    <file>campaign.xml</file>
+                </campaign>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Campaign>
+                    <files>
+                        <default>Magestore_Campaign.csv</default>
+                    </files>
+                </Magestore_Campaign>
+            </modules>
+        </translate>
+        <Magestore_Campaign>
+            <templates>
+                <sidebar title="Sidebar">
+                    <link title="Sidebar Link">
+                        <title>Sidebar Link</title>
+                        <file>sidebar_link.phtml</file>
+                        <image>overview.png</image>
+                    </link>
+                    <popup title="Sidebar Popup title attr">
+                        <title>Sidebar Popup</title>
+                        <file>sidebar_popup.phtml</file>
+                        <image>overview.png</image>
+                    </popup>
+                </sidebar>
+                <widget title="Widget Banner">
+                    <text title="Text">
+                        <title>Header text</title>
+                        <file>widget_text.phtml</file>
+                        <image>overview.png</image>
+                    </text>
+                    <image title="Image">
+                        <title>Images link</title>
+                        <file>widget_image.phtml</file>
+                        <image>overview.png</image>
+                    </image>
+                </widget>
+                <popup title="Popup">
+                    <static title="Static">
+                        <title>Normal Static</title>
+                        <file>normal_form.phtml</file>
+                        <image>overview.png</image>
+                    </static>
+                    <form title="Form">
+                        <step1 title="Normal Form Step 1">
+                            <title>Normal Form</title>
+                            <file>normal_form1.phtml</file>
+                            <image>overview.png</image>
+                        </step1>
+                        <step2 title="Normal Form Step 2">
+                            <title>Normal Form</title>
+                            <file>normal_form2.phtml</file>
+                            <image>overview.png</image>
+                        </step2>
+                    </form>
+                    <game title="Game">
+                        <step1 title="Step 1">
+                            <halloween title="Halloween Game">
+                                <title>Halloween Game</title>
+                                <file>halloween1.phtml</file>
+                                <image>overview.png</image>
+                            </halloween>
+                            <christmas title="Christmas Game">
+                                <title>Christmas Game</title>
+                                <file>christmas1.phtml</file>
+                                <image>overview.png</image>
+                            </christmas>
+                        </step1>
+                        <step2 title="Step 2">
+                            <halloween title="Halloween Game">
+                                <title>Halloween Game</title>
+                                <file>halloween2.phtml</file>
+                                <image>overview.png</image>
+                            </halloween>
+                            <christmas title="Christmas Game">
+                                <title>Christmas Game</title>
+                                <file>christmas2.phtml</file>
+                                <image>overview.png</image>
+                            </christmas>
+                        </step2>
+                        <step3 title="Step 3">
+                            <halloween title="Halloween Game">
+                                <title>Halloween Game</title>
+                                <file>halloween3.phtml</file>
+                                <image>overview.png</image>
+                            </halloween>
+                            <christmas title="Christmas Game">
+                                <title>Christmas Game</title>
+                                <file>christmas3.phtml</file>
+                                <image>overview.png</image>
+                            </christmas>
+                        </step3>
+                    </game>
+                </popup>
+            </templates>
+        </Magestore_Campaign>
+    </adminhtml>
+    <global>
+        <models>
+            <campaign>
+                <class>Magestore_Campaign_Model</class>
+                <resourceModel>campaign_resource</resourceModel>
+            </campaign>
+            <campaign_resource><!-- is folder Campaign/Model/Mysql4 -->
+                <class>Magestore_Campaign_Model_Resource</class>
+                <!--If this config is not defined then use Mage_Campaign_Mysql4_Model for default resource folder -->
+                <entities>
+                    <campaign>
+                        <table>magestore_campaign</table>
+                    </campaign>
+                    <template>
+                        <table>magestore_campaign_template</table>
+                    </template>
+                    <sidebar>
+                        <table>magestore_campaign_sidebar</table>
+                    </sidebar>
+                    <popup>
+                        <table>magestore_campaign_popup</table>
+                    </popup>
+                    <popup_type_static>
+                        <table>magestore_campaign_popup_static</table>
+                    </popup_type_static>
+                    <popup_type_form>
+                        <table>magestore_campaign_popup_form</table>
+                    </popup_type_form>
+                    <popup_type_game>
+                        <table>magestore_campaign_popup_game</table>
+                    </popup_type_game>
+                    <popup_type_game_halloween>
+                        <table>magestore_campaign_popup_game_halloween</table>
+                    </popup_type_game_halloween>
+                    <popup_type_game_player>
+                        <table>magestore_campaign_popup_game_player</table>
+                    </popup_type_game_player>
+                    <headertext>
+                        <table>magestore_campaign_headertext</table>
+                    </headertext>
+                    <bannerlistpage>
+                        <table>magestore_campaign_bannerlistpage</table>
+                    </bannerlistpage>
+                    <bannermenu>
+                        <table>magestore_campaign_bannermenu</table>
+                    </bannermenu>
+                    <bannerhomepage>
+                        <table>magestore_campaign_bannerhomepage</table>
+                    </bannerhomepage>
+                    <maillist>
+                        <table>magestore_campaign_maillist</table>
+                    </maillist>
+                    <countdown>
+                        <table>magestore_campaign_countdown</table>
+                    </countdown>
+                    <widget>
+                        <table>magestore_campaign_widget</table>
+                    </widget>
+                    <widget_banner>
+                        <table>magestore_campaign_widget_banner</table>
+                    </widget_banner>
+                </entities>
+            </campaign_resource>
+        </models>
+        <resources>
+            <campaign_setup>
+                <setup>
+                    <module>Magestore_Campaign</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </campaign_setup>
+            <campaign_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </campaign_write>
+            <campaign_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </campaign_read>
+        </resources>
+        <blocks>
+            <campaign>
+                <class>Magestore_Campaign_Block</class>
+            </campaign>
+        </blocks>
+        <helpers>
+            <campaign>
+                <class>Magestore_Campaign_Helper</class>
+            </campaign>
+        </helpers>
+        <events>
+            <!--<controller_action_predispatch>
+                <observers>
+                    <campaign_observers>
+                        <class>campaign/observer</class>
+                        <method>controllerActionPredispatch</method>
+                    </campaign_observers>
+                </observers>
+            </controller_action_predispatch>-->
+            <catalog_product_get_final_price>
+                <observers>
+                    <campaign_observers>
+                        <class>campaign/observer</class>
+                        <method>catalogGetFinalPrice</method>
+                    </campaign_observers>
+                </observers>
+            </catalog_product_get_final_price>
+
+            <catalog_block_product_list_collection>
+                <observers>
+                    <campaign_observers>
+                        <class>campaign/observer</class>
+                        <method>catalogBlockProductListCollection</method>
+                    </campaign_observers>
+                </observers>
+            </catalog_block_product_list_collection>
+        </events>
+
+        <!--add rewardpoints action-->
+        <rewardpoints>
+            <actions>
+                <!-- Games - Change by Halloween Game -->
+                <halloween_game>campaign/rewardPoints_action_halloween</halloween_game>
+            </actions>
+        </rewardpoints>
+
+        <template>
+            <email>
+                <campaign_email_old_customer>
+                    <label>Template send Halloween email to old Customer</label>
+                    <file>campaign_email_old_customer.html</file>
+                    <type>html</type>
+                </campaign_email_old_customer>
+                <campaign_email_new_customer>
+                    <label>Template send Halloween email to new Customer</label>
+                    <file>campaign_email_new_customer.html</file>
+                    <type>html</type>
+                </campaign_email_new_customer>
+            </email>
+        </template>
+    </global>
+    <default>
+        <campaign>
+            <email>
+                <enabled>1</enabled>
+            </email>
+        </campaign>
+    </default>
+</config>

@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="image-left col-lg-6 col-md-6 col-sm-6 col-xs-12"><img src="{{skin url='images/campaign/img-left.png'}}" alt="Summer holiday" width="100%" height="100%" /></div>
+    <div class="content-right col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <h3 class="heading-title-ss">Splash! Here is your coupon code</h3>
+        <div>{{block type="campaign/popup" template="campaign/coupon-popup.phtml"}}</div>
+        <div class="note-campaign"><span>Paste this code on the checkout page to get <strong>10% OFF</strong> on your favourite extensions</span></div>
+        <p>{{block type="campaign/countdown" locate="popup"}}</p>
+        <div class="actions"><a {{block type="campaign/popup" template="campaign/gapopup/ga_btnsuccess.phtml"}} id="submit-info" class="button button-submit" type="submit"><span><span>View all updates</span></span></a> <span class="loading-result" style="display: none;"> <img src="{{skin url='images/campaign/loading.gif'}}" alt="" width="20" height="20" /> </span></div>
+    </div>
+</div>

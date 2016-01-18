@@ -1,0 +1,22 @@
+<?php
+$canAddJquery = true;
+$canAddOwl = true;
+if($head = $this->getLayout()->getBlock('head')) {
+    foreach ($head->getData('items') as $js => $item) {
+        if (strpos($js, 'jquery') != false) {
+            $canAddJquery = false;
+        }
+        if (preg_match('#.*owl\.carousel.*\.js$#', $js)) {
+            $canAddOwl = false;
+        }
+    }
+}
+?>
+<!--Start Magestore Supercampaign js-->
+    <?php if($canAddJquery): ?>
+        <script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>magestore/campaign/jquery-1.10.1.min.js"></script>
+    <?php endif; ?>
+    <?php if($canAddOwl): ?>
+        <script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>magestore/campaign/owl.carousel.min.js"></script>
+    <?php endif; ?>
+<!--End Magestore Supercampaign js-->

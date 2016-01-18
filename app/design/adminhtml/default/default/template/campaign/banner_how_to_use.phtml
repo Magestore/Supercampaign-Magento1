@@ -1,0 +1,62 @@
+<?php 
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Campaign
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Campaign template
+ * 
+ * @see Magestore_Campaign_Block_Campaign
+ */
+?>
+
+<div class="grid">
+    <div class="hor-scroll">
+        <table cellspacing="0" class="data" id="countdown-how-to-use">
+            <tbody>
+            <tr class="even">
+                <td class="empty-text a-center" colspan="3" style="text-align: left!important;float: left;width: calc(100% - 30px);">
+                    <span>To use countdown please insert code below into your template file or static block content</span>
+                    <br/>
+                    <span>+ For static block use:</span>
+                    <br/>
+                    <ul class="messages">
+                        <li class="notice-msg">
+                            <strong>{{block type="campaign/banner"}}</strong>
+                        </li>
+                    </ul>
+                    <br/>
+                    <span>+ For template file use:</span><br/>
+                    <ul class="messages">
+                        <li class="notice-msg">
+                            <strong>&lt;?php echo $this->getLayout()->createBlock("campaign/banner")->toHtml(); ?&gt;</strong>
+                        </li>
+                    </ul>
+                    <!--<span>Values:</span><br/>
+                    <span>- style="short|medium|long|text"</span><br/>
+                    <span>- product="number"</span><br/>
+                    <span>- locate="header|sidebar|popup|product"</span><br/>
+                    <span>- $_product is number or Object</span>-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

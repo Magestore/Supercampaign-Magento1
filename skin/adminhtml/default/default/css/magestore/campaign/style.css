@@ -1,0 +1,80 @@
+.template-selector{
+    max-width: 520px;
+}
+.template-selector .note {
+    margin-left: 40px!important;
+}
+.template-selector .owl-theme{
+    height: 98px;
+    margin-left: 40px;
+    border: 1px solid #9CB500;
+    position: relative;
+}
+.template-selector .owl-theme.owl-no-control {
+    margin-left: 0px;
+}
+.template-selector .owl-theme.owl-no-control~.note {
+    margin-left: 0px!important;
+}
+.template-selector .owl-item {
+    width: 130px;
+}
+.template-selector .item {
+    width: 120px;
+    height: 88px;
+    text-align: center;
+    margin: 5px;
+    cursor: pointer;
+}
+.template-selector .item img {
+    min-width: 110px;
+    max-width: 120px;
+    max-height: 88px;
+}
+.template-selector .owl-theme .owl-controls .owl-pagination {
+    display: none;
+}
+.template-selector .owl-theme .owl-controls .owl-buttons .owl-prev {
+    position: absolute;
+    z-index: 99;
+    top: 38px;
+    left: -26px;
+    text-indent: -1000px;
+    overflow: hidden;
+    width: 11px;
+    height: 17px;
+    padding: 0;
+    background: url(../../../images/magestore/campaign/icon/prev.png);
+}
+.template-selector .owl-theme .owl-controls .owl-buttons .owl-next {
+    position: absolute;
+    z-index: 99;
+    top: 38px;
+    right: -28px;
+    text-indent: -1000px;
+    overflow: hidden;
+    width: 11px;
+    height: 17px;
+    padding: 0;
+    background: url(../../../images/magestore/campaign/icon/next.png) no-repeat;
+}
+/*other*/
+.break-line{
+    border-top: 1px solid #6b6969;
+}
+.break-line-top-1{
+    border-top: 1px solid #6b6969;
+    height: 10px;
+}
+.break-line-top-2{
+    border-top: 1px solid #6b6969;
+    height: 28px;
+}
+.break-line-bottom-1{
+    border-bottom: 1px solid #6b6969;
+    height: 10px;
+}
+.break-line-bottom-2{
+    border-bottom: 1px solid #6b6969;
+    height: 28px;
+}

@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Campaign
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <menu>
+        <campaign module="campaign" translate="title">
+            <title>Super Campaign</title>
+            <sort_order>71</sort_order>
+            <children>
+                <campaign module="campaign" translate="title">
+                    <title>Manage Campaign</title>
+                    <sort_order>0</sort_order>
+                    <action>campaignadmin/adminhtml_campaign</action>
+                </campaign>
+                <widget module="campaign" translate="title">
+                    <title>Manage Widget</title>
+                    <sort_order>5</sort_order>
+                    <action>campaignadmin/adminhtml_widget</action>
+                </widget>
+                <banner module="campaign" translate="title">
+                    <title>Manage Banner</title>
+                    <sort_order>15</sort_order>
+                    <action>campaignadmin/adminhtml_banner</action>
+                </banner>
+                <maillist module="campaign" translate="title">
+                    <title>Email Campaign</title>
+                    <sort_order>20</sort_order>
+                    <action>campaignadmin/adminhtml_maillist</action>
+                </maillist>
+                <settings module="campaign" translate="title">
+                    <title>Settings</title>
+                    <sort_order>1000</sort_order>
+                    <action>adminhtml/system_config/edit/section/campaign</action>
+                </settings>
+            </children>
+        </campaign>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <campaign module="campaign" translate="title">
+                                        <title>Super Campaign</title>
+                                        <sort_order>71</sort_order>
+                                    </campaign>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <campaign module="campaign" translate="title">
+                        <title>Super Campaign</title>
+                        <sort_order>71</sort_order>
+                        <children>
+                            <campaign module="campaign" translate="title">
+                                <title>Manage Campaign</title>
+                                <sort_order>0</sort_order>
+                            </campaign>
+                            <widget module="campaign" translate="title">
+                                <title>Manage Widget</title>
+                                <sort_order>5</sort_order>
+                            </widget>
+                            <maillist module="campaign" translate="title">
+                                <title>Email Campaign</title>
+                                <sort_order>10</sort_order>
+                            </maillist>
+                            <settings module="campaign" translate="title">
+                                <title>Settings</title>
+                                <sort_order>1000</sort_order>
+                            </settings>
+                        </children>
+                    </campaign>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

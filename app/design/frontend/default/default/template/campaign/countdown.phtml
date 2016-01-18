@@ -1,0 +1,24 @@
+<?php
+//$this->setLocateView('product');
+//$this->setProduct($currentProduct);
+$htmlId = $this->getHtmlId();
+if($this->isActive()): ?>
+    <!--SuperCampaign Countdown file: template/campaign/countdown.phtml-->
+    <div class="countdown-<?php echo $this->getStyle(); ?> super-campaign-parent-<?php echo $htmlId; ?>">
+        <span class="countdown-wrap">
+            <span id="<?php echo $htmlId; ?>" class="<?php echo $this->getStyle(); ?>">&nbsp;</span>
+        </span>
+    </div>
+
+    <script type="text/javascript">
+        var countdown_<?php echo str_replace('-', '_', $htmlId); ?> = new Countdown({
+            year: <?php echo $this->getYear(); ?>,
+            month: <?php echo $this->getMonth(); ?>,
+            day: <?php echo $this->getDay(); ?>,
+            hour: <?php echo $this->getHour(); ?>,
+            mins: <?php echo $this->getMinute(); ?>,
+            tz: <?php echo $this->getTimezone(); ?>,
+            type: '<?php echo $this->getStyle(); ?>'
+        }, '<?php echo $htmlId; ?>', '<?php echo $this->getCallBackFunc(); ?>');
+    </script>
+<?php endif; ?>

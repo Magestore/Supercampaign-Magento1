@@ -1,0 +1,15 @@
+<?php if ($this->isActive()): ?>
+    <div class="sidebar-left-campaign <?php echo ($this->getSidebarType()=='popup')? 'coundown':''; ?>">
+        <?php echo $this->getHtml(); ?>
+        <div class="close-left-campaign">x</div>
+    </div>
+    <script type="text/javascript">
+        var $j = jQuery.noConflict();
+        $j(document).ready(function () {
+            $j('.sidebar-left-campaign').removeClass('hide-campaign');
+            $j(".close-left-campaign").click(function (e) {
+                $j('.sidebar-left-campaign').addClass('hide-campaign');
+            });
+        });
+    </script>
+<?php endif ?>

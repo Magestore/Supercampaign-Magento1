@@ -1,0 +1,147 @@
+<!--campaign/popup/default.phtml-->
+<?php if($this->isActive()): ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/campaign/popup/default.css'); ?>">
+    <div id="campaign-popup" class="modal fade pupop-normal" style="display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0 col-xs-12">
+                    <div class="modal-dialog">
+                        <div id="modal-content" class="modal-content">
+                            <?php echo $this->getHtml(); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="normal-popup-success-form" class="modal fade pupop-normal"  style="display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0 col-xs-12">
+                    <div class="modal-dialog">
+                        <div id="modal-content" class="modal-content">
+                            <div id="content-success" class="content-success-popup"></div>
+                            <?php //echo $this->getLayout()->createBlock('campaign/popup')->getHtml(2); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var $j = jQuery.noConflict();
+        var $idpopup = <?php echo $this->getPopup()->getId() ?>;
+        //auto add close btn
+        $j('#campaign-popup').on('shown.bs.modal', function () {
+            if(!$j('#campaign-popup #modal-content > #close-popup').length){
+                $j('#campaign-popup #modal-content')
+                    .prepend('<div id="close-popup" class="close-popup" data-dismiss="modal"\
+                    <?php echo $this->getGaCloseForm(); ?>>x</div>');
+            }
+            if($j('#campaign-popup .modal-backdrop.fade.in').length){
+                $j('#campaign-popup .modal-backdrop.fade.in').attr('onclick', '<?php echo $this->getGaBg(); ?>');
+            }
+        });
+        $j('#normal-popup-success-form').on('shown.bs.modal', function () {
+            if(!$j('#normal-popup-success-form #modal-content > #close-popup').length){
+                $j('#normal-popup-success-form #modal-content')
+                    .prepend('<div id="close-popup" class="close-popup" data-dismiss="modal"\
+                    <?php echo $this->getGaCloseSuccess();?>>x</div>');
+            }
+        });
+
+        <?php if($this->isShowFirstTime()== 1):?>
+        $j(document).ready(function () {
+            if (typeof(Storage) !== "undefined") {
+                popup = localStorage.getItem("popup<?php echo $this->getPopup()->getId() ?>");
+                if (popup == null || popup == "null"){
+                    setTimeout(function(){ $j('#campaign-popup').modal('show');}, 1000);
+                    $j('#campaign-popup').on('hidden.bs.modal', function () {
+                        localStorage.setItem("popup<?php echo $this->getPopup()->getId() ?>", $idpopup);
+                    });
+                    $j(".close-popup-campaign").click(function (e) {
+                        localStorage.setItem("popup<?php echo $this->getPopup()->getId() ?>", $idpopup);
+                    });
+                }else{
+                    if (popup == $idpopup){
+
+                    }
+                    else{
+                        setTimeout(function(){ $j('#campaign-popup').modal('show');}, 1000);
+                        $j('#campaign-popup').on('hidden.bs.modal', function () {
+                            localStorage.setItem("popup<?php echo $this->getPopup()->getId() ?>", $idpopup);
+                        });
+                        $j(".close-popup-campaign").click(function (e) {
+                            localStorage.setItem("popup<?php echo $this->getPopup()->getId() ?>", $idpopup);
+                        });
+                    }
+                }
+
+            } else {
+                document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+            }
+        });
+        <?php else: ?>
+            setTimeout(function(){ $j('#campaign-popup').modal('show');}, 1000);
+        <?php endif;?>
+
+
+        $j('#email-campaign-summer').submit(function(){
+            var valueinput = new VarienForm('email-campaign-summer', true);
+            if(valueinput.validator &&  valueinput.validator.validate()){
+                var campaign = document.URL;
+                if(campaign.match('http://') && !campaign.match('https://')){
+                    var url = '<?php echo $this->getUrl('campaign/popup/start', array('campaign_id'=>$this->getCampaignId()))?>';
+                } else {
+                    var url = '<?php echo $this->getUrl('campaign/popup/start', array('campaign_id'=>$this->getCampaignId(), '_secure'=>true))?>';
+                }
+
+                $j('.loading').show();
+                $j('#submit-info').attr('disabled','disabled');
+
+                new Ajax.Request(url, {
+                    method:'post'
+                    , parameters: $j('#email-campaign-summer').serialize()
+                    , requestHeaders: {Accept: 'application/json'},
+                    onSuccess: function(transport) {
+                        response = transport.responseText.evalJSON();
+                        $j('.loading').hide();
+                        $j('#submit-info').removeAttr('disabled');
+                        if(response.check){
+                            $j('#normal-popup-success-form #content-success').html(response.html);
+                            // success
+                            $j('#name-customer').val('');
+                            $j('#email-customer').val('');
+                            $j('#campaign-popup').modal('hide');
+                            $j('#normal-popup-success-form').modal('show');
+                        } else {
+                            $j('.error-message').html(response.msg);
+                            $j('.error-message').slideDown('slow').delay(3000).slideUp('slow');
+                        }
+                    },
+                    onComplete: function(){
+                    }
+                });
+            }
+            return false;
+        });
+
+        if($j('#name-customer').length){
+            var nameForm = new Varien.searchForm('email-campaign-summer', 'name-customer', '<?php echo $this->__('Name') ?>');
+        }
+        if($j('#email-customer').length){
+            var emailForm = new Varien.searchForm('email-campaign-summer', 'email-customer', '<?php echo $this->__('Email') ?>');
+        }
+
+        function copyToClipboard(element) {
+            var $temp = $j("<input>");
+            $j("body").append($temp);
+            $temp.val($j(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+    </script>
+<?php endif; ?>

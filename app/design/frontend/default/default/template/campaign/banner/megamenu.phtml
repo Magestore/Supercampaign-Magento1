@@ -1,0 +1,26 @@
+<!--bnmenu phuong-->
+<?php
+$getbannermenu = $this->getBannermenuactive();
+$getNamebanner = $getbannermenu->getInputBannermenu();
+$getstatus = $getbannermenu->getStatus();
+
+$getLink_attached = $getbannermenu->getLinkAttached();
+/*Tit edit*/
+if(strpos($getLink_attached, 'www.') === 0){
+    $getLink_attached = '//'.$getLink_attached;
+}
+/*end Tit*/
+?>
+<?php if ($getLink_attached != ''): ?>
+    <a class="view-popup" title="banner_menu" href= "<?php echo $getLink_attached; ?>" target="_blank">
+        <?php if($getstatus == 1): ?>
+        <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$getNamebanner; ?>" alt="" width="350" />
+        <?php endif; ?>
+    </a>
+<?php else: ?>
+    <a class="view-popup" title="banner_menu" href="#" data-toggle="modal" data-target="#campaign-popup">
+        <?php if($getstatus == 1): ?>
+            <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$getNamebanner; ?>" alt="" width="350" />
+        <?php endif; ?>
+    </a>
+<?php endif; ?>

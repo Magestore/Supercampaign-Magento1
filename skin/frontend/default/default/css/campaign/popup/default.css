@@ -1,0 +1,80 @@
+/*@import url(//fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700,800); uncomment to use font Open Sans*/
+.modal{font-family:"Open Sans"}
+.modal *,.modal{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.modal :before,.modal :after,.modal:before,.modal:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+@media (min-width: 768px) {
+    .modal-dialog{width:100%!important;margin:27% auto!important}
+}
+.modal .modal-dialog{margin-top:30%}
+.modal .modal-dialog .content-right{padding:29px 40px 20px 0;text-align:center}
+.modal .modal-dialog .content-right .heading-title{color:#944669;font-size:16px;font-weight:400}
+.modal .modal-dialog .content-right .sub-title{margin-top:0;font-weight:400;margin-bottom:5px;padding:0}
+.modal .modal-dialog .content-right .sub-title .number-percent{color:#ff8b03;font-size:46px;font-weight:bolder}
+.modal .modal-dialog .content-right .sub-title .text-percent{color:#0ea7e6;font-size:25px;font-weight:700}
+.modal .email-campaign .input-box{width:100%}
+.modal .email-campaign .actions{margin-top:10px}
+.modal .email-campaign .input-box input{color:#575757;height:32px;line-height:32px;width:100%;background:#ebebeb;border-radius:3px;border:0 none;padding:3px 10px;margin-bottom:12px}
+.content-success-popup .button-submit,.modal .email-campaign .button-submit{line-height:34px;background:#ff8b03!important;height:34px;border-top-left-radius:3px;border-bottom-left-radius:3px}
+.content-success-popup .button-submit:hover,.modal .email-campaign .button-submit:hover{background:#da7804}
+.content-success-popup .button-submit:after,.modal .email-campaign .button-submit:after{border-top-right-radius:3px;border-bottom-right-radius:3px;background:url(../../../images/campaign/arrow.png) no-repeat center center;background-color:#008cc5;display:inline-block;text-indent:-999em;content:'submit';overflow:hidden;width:30px;height:34px}
+.content-success-popup .button span span,.modal .email-campaign .button.button span span{line-height:35px;text-transform:uppercase;font-size:15px;font-weight:100}
+.modal .close-popup{z-index:999;position:absolute;right:10px;top:10px;background:#bcbcbc;width:16px;height:16px;color:#fff;text-align:center;line-height:15px;border-radius:50%;font-weight:600;font-size:13px;cursor:pointer}
+
+.modal .modal-dialog .content-right .heading-title-ss{color:#4a4a4a;font-size:18px;font-weight:600;text-transform:uppercase}
+.modal .modal-dialog .coupon-campaign{border:2px dashed #5e5b57;padding:7px 10px;color:#008cc5;font-size:18px;text-transform:uppercase;font-weight:700}
+#normal-popup-success-form .sub-title{margin-top:30px}
+#normal-popup-success-form .note-campaign span{color:#787570;font-size:16px;font-style:italic}
+#normal-popup-success-form .note-campaign span strong{color:#ff8b03}
+#normal-popup-success-form .note-campaign{margin:40px 0 0;padding:0 20px;display:block}
+#normal-popup-success-form .actions{margin-top:30px!important}
+#normal-popup-success-form .button-submit{line-height:34px;background:#ff8b03;height:34px;border-top-left-radius:3px;border-bottom-left-radius:3px;display:block;width:200px;margin:0 auto;text-align:center}
+#normal-popup-success-form .button-submit:hover{background:#da7804}
+#normal-popup-success-form .button-submit:after{border-top-right-radius:3px;border-bottom-right-radius:3px;background:url(../../../images/campaign/arrow.png) no-repeat center center;background-color:#008cc5;display:inline-block;text-indent:-999em;content:'submit';overflow:hidden;width:30px;height:34px;float:right}
+#normal-popup-success-form .button.button span span{line-height:35px;text-transform:uppercase;font-size:15px;color:#fff;font-weight:500}
+#coundown-popup{color:#575757;font-size:15px;margin-bottom:10px}
+#campaign-popup .modal-content .content{padding:40px 0;background:url(../../../images/campaign/bg-popup.png) no-repeat left bottom}
+#campaign-popup .modal-content .content h2,#campaign-popup .modal-content .content h3,#campaign-popup .modal-content .content h4{margin-top:0}
+#campaign-popup .modal-content .title h4{color:#1f1f1f;font-size:18px;font-weight:600}
+#campaign-popup .modal-content .title .line{width:100px;height:1px;border-top:1px solid #f58349;margin:5px auto 20px;display:block}
+#campaign-popup .modal-content .title-small h3{margin-bottom:0;color:#f58349;font-size:24px;font-weight:600}
+#campaign-popup .modal-content .title-small .clock{color:#f58349;font-size:14px;background:url(../../../images/campaign/common.png) no-repeat;background-position:0 -142px;padding-left:20px}
+#campaign-popup .modal-content .description h5{margin:20px 0;font-weight:600;color:#1f1f1f;font-size:15px}
+#campaign-popup .modal-content .description ul{list-style:none;margin:0;padding:0}
+#campaign-popup .modal-content .description ul li{font-weight:400;margin-left:3px;text-align:left;background:url(../../../images/campaign/common.png) no-repeat;background-position:0 -97px;padding-left:20px;color:#1f1f1f;font-size:14px}
+#campaign-popup .modal-content .actions{text-align:center;margin-top:15px;padding-bottom:10px}
+#campaign-popup .modal-content .actions .button{display:inline-block;background:none transparent;border:0 none;padding:0!important}
+#campaign-popup .modal-content .actions .button a{display:block;padding:5px 0;width:148px;border-radius:3px}
+#campaign-popup .modal-content .actions .button a:hover{text-decoration:none;cursor:pointer}
+#campaign-popup .modal-content .actions .button1 a{background:#eb3549;margin-right:20px;text-decoration:none}
+#campaign-popup .modal-content .actions .button1 a:hover{background:#ff243c}
+#campaign-popup .modal-content .actions .button1 a span{color:#fff;font-size:14px}
+#campaign-popup .modal-content .actions .button2 a{background:silver;text-decoration:none}
+#campaign-popup .modal-content .actions .button2 a:hover{background:#a9a5a5}
+#campaign-popup .modal-content .actions .button2 a span{color:#5f5f5f;font-size:14px}
+#campaign-popup .close-popup{background:url(../../../images/campaign/common.png) no-repeat;background-position:-29px -65px;display:block;text-indent:-999em;overflow:hidden;width:30px;height:30px;border-radius:0;right:3px;top:3px}
+#campaign-popup .content-right{margin-top:5px}
+@media (min-width: 768px) {
+    #campaign-popup .modal-dialog{width:100%;margin:30px auto;margin-top:20%}
+}
+@media (max-width: 767px) {
+    #campaign-popup .modal-content .content{background:#fff;padding:20px 10px}
+    #campaign-popup .modal-content .actions .button1 a{margin-right:0;margin-bottom:20px}
+    .modal .modal-dialog .content-right .sub-title .number-percent,.modal .modal-dialog .content-right .sub-title .text-percent{font-size:13px}
+    .modal .modal-dialog .content-right{padding:0 30px}
+}
+.validation-advice{margin-top:0;text-align:left;margin-bottom:5px}
+.modal-open{overflow:auto}
+body.modal-open,.modal-open .navbar-fixed-top,.modal-open .navbar-fixed-bottom{padding-right:0!important}
+.modal .email-campaign .button-submit span{background-color:transparent;border:0 none;height:34px;display:inline-block;line-height:34px;vertical-align:top;padding:0 20px}
+.modal .email-campaign .button-submit span span{background-color:transparent;padding:0;height:34px;line-height:34px}
+#submit-info.button span{display:inline-block;height:34px;padding:0 10px;vertical-align:top;line-height:34px;background-color:transparent;border:0}
+#submit-info.button span span{display:inline-block;height:34px;padding:0;line-height:34px!important;background-color:transparent;border:0}
+.wrap-static-popup .title{padding-top:20px;text-align:center}
+.wrap-static-popup .title-small{text-align:center}
+.toplinks-container .left p a{color:#fff;text-decoration:underline}
+@media (max-height: 768px) {
+    #normal-popup-success-form.in{opacity:1;overflow-x:hidden;overflow-y:auto}
+}
+#coupon-campaign{}
+.modal-content .image-left img{border-bottom-left-radius: 5px;border-top-left-radius: 5px;}
+

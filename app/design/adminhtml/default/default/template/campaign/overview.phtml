@@ -1,0 +1,78 @@
+<?php 
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Campaign
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Campaign template
+ * 
+ * @see Magestore_Campaign_Block_Campaign
+ */
+?>
+
+
+<div id="overview_<?php echo $this->getId(); ?>"></div>
+<script type="text/javascript">
+    var option_images_<?php echo $this->getId() ?> = {
+        <?php foreach($this->getOptionImages() as $value => $image): ?>
+        <?php echo $value ?>: '<?php echo $image; ?>', <?php //echo $this->getSkinUrl("images/magestore/campaign/form_type_1.png"); ?>
+        <?php endforeach; ?>
+    };
+
+    <?php if(!$this->_isLoadJs()): ?>
+        <?php $this->_setIsLoadJs(); ?>
+        var PopupOverview = Class.create();
+        PopupOverview.prototype = {
+            initialize: function(id){
+                this.id = id; //ID element html
+            },
+            setImages: function(config){
+                this.images = config;
+            },
+            setViewId: function(id){
+                this.id = id; //ID element html
+            },
+            setActionOn: function(element, event){
+                var _this = this;
+                this.element = element;
+                this.event = event;
+                Event.observe($(this.element), this.event, function(){
+                    _this.show($(_this.element).getValue());
+                });
+                //show first selected
+                this.show($(this.element).getValue());
+            },
+            show: function(value){
+                if(typeof this.images[value] === 'undefined'){
+                    $(this.id).innerHTML = '';
+                }else{
+                    $(this.id).innerHTML = this.format(value);
+                }
+            },
+            format: function(type){
+                return '<div><img src="'+this.images[type]+'" alt="Type '+type+'" style="max-width: 280px; max-height: 100px;"></div>';
+            }
+        }
+    <?php endif; ?>
+    var <?php echo $this->getObject(); ?> = new PopupOverview('overview_<?php echo $this->getId(); ?>');
+    <?php echo $this->getObject(); ?>.setImages(option_images_<?php echo $this->getId() ?>);
+    <?php echo $this->getObject(); ?>.setActionOn('<?php echo $this->getId(); ?>', 'change');
+
+</script>
+

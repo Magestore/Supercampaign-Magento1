@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Campaign
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <default>
+        <!-- update layout for all frontend page -->
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/campaign/style.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/campaign/stylecampaign.css</stylesheet></action>
+            <action method="addItem"><type>skin_js</type><name>js/campaign/better-simple-slideshow.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/campaign/jquery.secret-source.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/campaign/countdown.js</name></action>
+        </reference>
+      <reference name="before_body_end">
+          <!--<block type="campaign/popup" name="popup-campaign" template="campaign/popupmodal.phtml"/>-->
+          <block type="campaign/popup" name="popup-campaign" />
+          <block type="campaign/sidebar" name="sidebar-campaign" template="campaign/sidebarleft.phtml"/>
+      </reference>
+    </default>
+    <!--install with onestepcheckout-->
+    <onestepcheckout_index_index>
+        <!--<reference name="content" after="-">
+            <block type="campaign/popup" name="popup-campaign" template="campaign/popupmodal.phtml"/>
+            <block type="campaign/sidebar" name="sidebar-campaign" template="campaign/sidebarleft.phtml"/>
+        </reference>-->
+    </onestepcheckout_index_index>
+    <campaign_index_index>
+        <reference name="content">
+            <block type="campaign/campaign" name="campaign" template="campaign/campaign.phtml" />
+        </reference>
+
+    </campaign_index_index>
+
+
+</layout>

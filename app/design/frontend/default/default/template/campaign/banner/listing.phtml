@@ -1,0 +1,33 @@
+<!--banner listpage phuong-->
+<?php
+$banner = $this->getBanner();
+if ($banner):
+    $getNamebanner = $banner->getInputBanner();
+    $getstatus = $banner->getStatus();
+    $getLink_attached = $banner->getLinkAttached();
+    /*Tit edit*/
+    if (strpos($getLink_attached, 'www.') === 0) {
+        $getLink_attached = '//' . $getLink_attached;
+    }
+    /*end Tit*/
+    ?>
+    <div>
+        <?php if ($getLink_attached != ''): ?>
+            <a href="<?php echo $getLink_attached; ?>" target="_blank">
+                <?php if ($getstatus == 1): ?>
+                    <img style="margin-top: 15px;"
+                         src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $getNamebanner; ?>"
+                         alt=""/>
+                <?php endif; ?>
+            </a>
+        <?php else: ?>
+            <a href="#" target="_blank" data-toggle="modal" data-target="#campaign-popup">
+                <?php if ($getstatus == 1): ?>
+                    <img style="margin-top: 15px;"
+                         src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $getNamebanner; ?>"
+                         alt=""/>
+                <?php endif; ?>
+            </a>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>

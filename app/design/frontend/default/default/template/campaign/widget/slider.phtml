@@ -1,0 +1,50 @@
+<?php 
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Campaign
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Campaign template
+ * 
+ * @see Magestore_Campaign_Block_Widget
+ */
+?>
+<?php if($this->isEnabled()): ?>
+    <style type="text/css">
+        <?php echo $this->getWidget()->getCss() ?>
+    </style>
+    <div id="widget" style="width: <?php echo $this->getWidget()->getWidth() ?>px;height: <?php echo $this->getWidget()->getHeight() ?>px;" class="owl-carousel widget slider">
+        <?php echo $this->getBannerHtml() ?>
+    </div>
+    <script>
+        var $j = jQuery.noConflict();
+        $j(document).ready(function() {
+            $j(".owl-carousel.widget.slider").owlCarousel({
+                navigation : true, // Show next and prev buttons
+                slideSpeed : 500,
+                paginationSpeed : 500,
+                singleItem:true,
+                autoPlay: true
+            });
+        });
+    </script>
+<?php endif; ?>
+
+
+

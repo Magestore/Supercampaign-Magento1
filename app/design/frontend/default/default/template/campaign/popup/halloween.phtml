@@ -1,0 +1,266 @@
+<!--campaign/popup_halloween.phtml-->
+<?php if($this->isActive()): ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/campaign/popup/halloween.css'); ?>">
+    <div id="campaign-popup" class="campaign-popup modal fade pupop-normal" style="display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0 col-xs-12">
+                    <div class="modal-dialog">
+                        <div id="modal-content" class="modal-content">
+                            <?php echo $this->getHtml(1); ?>
+                            <?php //echo $this->getHtml(2); ?>
+                            <?php //echo $this->getHtml(3); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="campaign-popup-step2" class="campaign-popup modal fade pupop-normal" style="display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0 col-xs-12">
+                    <div class="modal-dialog">
+                        <div id="modal-content" class="modal-content">
+                            <?php echo $this->getHtml(2); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="campaign-popup-step3" class="campaign-popup modal fade pupop-normal" style="display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0 col-xs-12">
+                    <div class="modal-dialog">
+                        <div id="modal-content" class="modal-content">
+                            <?php echo $this->getHtml(3); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var $j = jQuery.noConflict();
+        var $idpopup = <?php echo $this->getPopup()->getId() ?>;
+        //auto add close btn
+        $j('#campaign-popup').on('shown.bs.modal', function () {
+            if(!$j('#campaign-popup #modal-content > #close-popup').length){
+                $j('#campaign-popup #modal-content')
+                    .prepend('<div id="close-popup" class="close-popup" data-dismiss="modal"\
+                    <?php echo $this->getGaCloseForm(); ?>>x</div>');
+            }
+        });
+        $j('#campaign-popup-step2').on('shown.bs.modal', function () {
+            if(!$j('#campaign-popup-step2 #modal-content > #close-popup').length){
+                $j('#campaign-popup-step2 #modal-content')
+                    .prepend('<div id="close-popup" class="close-popup" data-dismiss="modal"\
+                    <?php echo $this->getGaCloseSuccess();?>>x</div>');
+            }
+        });
+        $j('#campaign-popup-step3').on('shown.bs.modal', function () {
+            if(!$j('#campaign-popup-step3 #modal-content > #close-popup').length){
+                $j('#campaign-popup-step3 #modal-content')
+                    .prepend('<div id="close-popup" class="close-popup" data-dismiss="modal"\
+                    <?php echo $this->getGaCloseSuccess();?>>x</div>');
+            }
+        });
+
+        <?php if($this->isShowFirstTime()== 1):?>
+        $j(document).ready(function () {
+            if (typeof(Storage) !== "undefined") {
+                popup = localStorage.getItem("popup<?php echo $this->getPopup()->getId() ?>");
+                if (popup == null || popup == "null"){
+                    setTimeout(function(){ $j('#campaign-popup').modal('show');}, 1000);
+                    $j('#campaign-popup').on('hidden.bs.modal', function () {
+                        localStorage.setItem("popup<?php echo $this->getPopup()->getId() ?>", $idpopup);
+                    });
+                    $j(".close-popup-campaign").click(function (e) {
+                        localStorage.setItem("popup<?php echo $this->getPopup()->getId() ?>", $idpopup);
+                    });
+                }else{
+                    if (popup == $idpopup){
+
+                    }
+                    else{
+                        setTimeout(function(){ $j('#campaign-popup').modal('show');}, 1000);
+                        $j('#campaign-popup').on('hidden.bs.modal', function () {
+                            localStorage.setItem("popup<?php echo $this->getPopup()->getId() ?>", $idpopup);
+                        });
+                        $j(".close-popup-campaign").click(function (e) {
+                            localStorage.setItem("popup<?php echo $this->getPopup()->getId() ?>", $idpopup);
+                        });
+                    }
+                }
+            } else {
+                document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+            }
+        });
+        <?php else: ?>
+            setTimeout(function(){ $j('#campaign-popup').modal('show');}, 1000);
+        <?php endif;?>
+
+        var click_door = true;
+        $j('#modal-content .charactor').on('click', function(e) {
+            if(click_door){
+                click_door = false;
+                var openDoor = $j(this);
+                var classes = $j(this).attr('class').split(' ');
+                var charID;
+                for(var i=0; i<classes.length; i++){
+                    if(classes[i].search("door") >= 0) {
+                        var door = classes[i].split('-');
+                        charID = parseInt(door[1]);
+                        break;
+                    }
+                }
+                var campaign = document.URL;
+                if(campaign.match('http://') && !campaign.match('https://')){
+                    var url = '<?php echo $this->getUrl('campaign/game_halloween/start')?>';
+                } else {
+                    var url = '<?php echo $this->getUrl('campaign/game_halloween/start', array('_secure'=>true))?>';
+                }
+                //loading animation
+                $j('#modal-content .charactor').removeClass('active');
+                $j('#modal-content .charactor').removeClass('normal');
+                $j(this).addClass('normal');
+                setTimeout(function(){
+                    var count = 0;
+                    $j('#modal-content .charactor').each(function(i){
+                        var opened = $j(this);
+                        setTimeout(function(){
+                            opened.removeClass('normal');
+                            opened.addClass('active');
+                            setTimeout(function(){
+                                opened.removeClass('active');
+                                if(count == $j('#modal-content .charactor').length - 1){
+                                    endDoorAnimation();
+                                }
+                                count++; //count end run
+                            }, 200);
+                        }, i*+200);
+                    });
+                }, 500); //delay opend st1 door after first click
+                var animationEnded = false;
+                function endDoorAnimation(){
+                    setTimeout(function(){
+                        openDoor.removeClass('normal');
+                        openDoor.addClass('active');
+                        setTimeout(function(){
+                            animationEnded = true;
+                        }, 1000); //time wait after door choose opened
+                        click_door = true;
+                    }, 400); //time wait after last door opened
+                }
+                //end Door Animation
+                new Ajax.Request(url, {
+                    method:'post'
+                    , parameters: {'charId': charID, 'campaign_id':<?php echo $this->getCampaignId() ?>}
+                    , requestHeaders: {Accept: 'application/json'},
+                    onSuccess: function(transport) {
+                        response = transport.responseText.evalJSON();
+                        if(response.check){
+                            var step2Itv = setInterval(function(){
+                                if(animationEnded){
+                                    //$j('#campaign-popup #modal-content').html(response.html);
+                                    $j('#campaign-popup').modal('hide');
+                                    $j('#campaign-popup-step2').modal('show');
+                                    clearInterval(step2Itv);
+                                }
+                            }, 200);
+                        } else {
+                            $j('.error-message').html(response.msg);
+                            $j('.error-message').slideDown('slow').delay(3000).slideUp('slow');
+                        }
+                    },
+                    onComplete: function(){
+                    }
+                });
+            }
+        });
+
+        //<![CDATA[
+        //var halloweenEmailForm = new VarienForm('halloween-email');
+        //]]>
+
+        $j('#campaign-popup-step2 form').submit(function(){
+            var thisForm = $j(this);
+            var popupform = new VarienForm($j('#campaign-popup-step2 form').attr('id'), true);
+            if(popupform.validator &&  popupform.validator.validate()){
+                var campaign = document.URL;
+                if(campaign.match('http://') && !campaign.match('https://')){
+                    var url = '<?php echo $this->getUrl('campaign/game_halloween/result', array('campaign_id'=>$this->getCampaignId()))?>';
+                } else {
+                    var url = '<?php echo $this->getUrl('campaign/game_halloween/result', array('campaign_id'=>$this->getCampaignId(), '_secure'=>true))?>';
+                }
+                //$j('.loading').show();
+                thisForm.children('.btn-submit').attr('disabled','disabled');
+                $j('.error-message').html('Please wait ...');
+                $j('.error-message').slideDown('slow');
+                new Ajax.Request(url, {
+                    method:'post'
+                    , parameters: thisForm.serialize()
+                    , requestHeaders: {Accept: 'application/json'},
+                    onSuccess: function(transport) {
+                        response = transport.responseText.evalJSON();
+                        //$j('.loading').hide();
+                        thisForm.children('.btn-submit').removeAttr('disabled');
+                        if(response.check){
+                            //$j('#campaign-popup-step2 #modal-content').html(response.html);
+                            $j('#campaign-popup-step2').modal('hide');
+                            $j('#campaign-popup-step3').modal('show');
+                            $j('.treat-game-program ul li').removeClass('active');
+                            $j('.treat-game-program ul li.miss-door-'+response.charId).addClass('active');
+                            var point = $j('.popup-treat-game .points-value').html();
+                            point = point.replace(/(\d)*/, response.points[response.charId])
+                            $j('.popup-treat-game .points-value').html(point);
+                            var money = $j('.popup-treat-game .money-value').html();
+                            money = money.replace(/[0-9]+/, response.points[response.charId]);
+                            $j('.popup-treat-game .money-value').html(money);
+                            var pointChar;
+                            for(var i in response.points){
+                                pointChar = $j('.treat-game-program ul li.miss-door-'+ i +' .points-value').html();
+                                pointChar = pointChar.replace(/(\d)*/, response.points[i]);
+                                $j('.treat-game-program ul li.miss-door-'+ i +' .points-value').html(pointChar);
+                            }
+                            $j('#campaign-popup-step3 .popup-treat-game #spend-my-points').click(function(){
+                                $j(this).addClass('disabled');
+                                window.location.href = '<?php echo $this->getUrl('customer/account') ?>';
+                            });
+                            // success
+                            thisForm.children('form input').val('');
+                            $j('.error-message').html(':)');
+                            $j('.error-message').slideUp('slow');
+                        } else {
+                            $j('.error-message').html(response.msg);
+                            $j('.error-message').slideDown('slow').delay(3000).slideUp('slow');
+                        }
+                    },
+                    onComplete: function(){
+                    }
+                });
+            }
+            return false;
+        });
+
+        if($j('#name-customer').length){
+            var nameForm = new Varien.searchForm('email-campaign-summer', 'name-customer', '<?php echo $this->__('Name') ?>');
+        }
+        if($j('#email-customer').length){
+            var emailForm = new Varien.searchForm('email-campaign-summer', 'email-customer', '<?php echo $this->__('Email') ?>');
+        }
+
+        function copyToClipboard(element) {
+            var $temp = $j("<input>");
+            $j("body").append($temp);
+            $temp.val($j(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+    </script>
+<?php endif; ?>
