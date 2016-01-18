@@ -29,6 +29,7 @@
 class Magestore_Campaign_Block_Adminhtml_Bannerslider_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
 	public function __construct(){
+
 		parent::__construct();
 		$this->setId('bannersliderGrid');
 		$this->setDefaultSort('bannerslider_id');
@@ -44,6 +45,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Grid extends Mage_Adminhtm
 	protected function _prepareCollection(){
 		$collection = Mage::getModel('campaign/bannerslider')->getCollection();
                 //Zend_debug::dump($collection);die();
+
 		$this->setCollection($collection);
 		return parent::_prepareCollection();
 	}

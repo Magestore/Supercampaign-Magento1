@@ -29,7 +29,7 @@
 class Magestore_Campaign_Block_Adminhtml_Bannerslider extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
 	public function __construct(){
-		$this->_controller = 'adminhtml_campaign';
+		$this->_controller = 'adminhtml_bannerslider';
 		$this->_blockGroup = 'campaign';
 		$this->_headerText = Mage::helper('campaign')->__('Slider Manager');
 		$this->_addButtonLabel = Mage::helper('campaign')->__('Add Slider');
