@@ -1,0 +1,2 @@
+# Supercampaign
+Internal extension
