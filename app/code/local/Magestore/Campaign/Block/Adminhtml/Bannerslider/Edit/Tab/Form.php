@@ -83,7 +83,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
         $fieldset->addField('status', 'select', array(
             'label' => Mage::helper('campaign')->__('Status'),
             'name' => 'status',
-            'values' => Mage::getSingleton('campaign/status')->getOptionHash(),
+            'values' => Mage::getSingleton('campaign/sliderstatus')->getOptionHash(),
         ));
 		
 		$fieldset->addField('style_content', 'select', array(

@@ -38,7 +38,7 @@ class Magestore_Campaign_Block_Adminhtml_Addbutton extends Mage_Core_Block_Templ
         return parent::_prepareLayout();
     }
     
-    public function getUrlAddBanner(){                        
+    public function getUrlAddBanner(){
         $url = Mage::getSingleton('adminhtml/url')->getUrl('*/adminhtml_banner/addin');
         return $url.'sliderid/'.$this->getRequest()->getParam('id');
     }

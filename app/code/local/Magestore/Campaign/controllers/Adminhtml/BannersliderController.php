@@ -179,7 +179,7 @@ class Magestore_Campaign_Adminhtml_BannersliderController extends Mage_Adminhtml
      * mass delete item(s) action
      */
     public function massDeleteAction() {
-        $bannersliderIds = $this->getRequest()->getParam('bannerslider');
+        $bannersliderIds = $this->getRequest()->getParam('campaign');
         if (!is_array($bannersliderIds)) {
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Please select item(s)'));
         } else {

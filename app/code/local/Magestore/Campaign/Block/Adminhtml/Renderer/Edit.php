@@ -7,7 +7,7 @@ class Magestore_Campaign_Block_Adminhtml_Renderer_Edit
 	{       		
 		return sprintf('
 			<a href="javascript:void(0);" onclick="%s">%s</a>',
-			"window.open('".Mage::getSingleton('adminhtml/url')->getUrl('*/campaign_banner/addin', array( 'sliderid' => $this->getRequest()->getParam('id'),'id' => $row->getId()))."','Gamekings','width=1024,height=650')",
+			"window.open('".Mage::getSingleton('adminhtml/url')->getUrl('*/adminhtml_banner/addin', array( 'sliderid' => $this->getRequest()->getParam('id'),'id' => $row->getId()))."','Gamekings','width=1024,height=650,top = 50')",
 			Mage::helper('campaign')->__('Edit')
 		);
 	}

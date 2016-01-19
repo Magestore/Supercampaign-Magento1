@@ -34,7 +34,7 @@
 		});
                 
                   function bannerClicks(id_banner,id_slider){
-		var click_url = '<?php echo $this->getUrl('bannerslider/index/click',array('_secure'=>true)); ?>';
+		var click_url = '<?php echo $this->getUrl('campaign/index/click',array('_secure'=>true)); ?>';
 		banner_id = id_banner;
 		new Ajax.Request(click_url,{
 			method: 'post',

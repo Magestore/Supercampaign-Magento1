@@ -26,6 +26,7 @@
             <action method="addCss"><stylesheet>css/magestore/campaign/owl.carousel.css</stylesheet></action>
             <action method="addCss"><stylesheet>css/magestore/campaign/owl.theme.css</stylesheet></action>
             <action method="addCss"><stylesheet>css/magestore/campaign/style.css</stylesheet></action>
+
         </reference>
     </default>
 

@@ -107,21 +107,21 @@ class Magestore_Campaign_Model_Banner extends Mage_Core_Model_Abstract {
         return $this;
     }
 
-    public function getMultiStoreValue($storeId = null) {
-        if (!$storeId) {
-            $storeId = $this->getStoreId();
-        }
-        if (!$storeId) {
-            return $this;
-        }
-        $storeValues = Mage::getModel('campaign/value')->getCollection()
-                ->addFieldToFilter('banner_id', $this->getId())
-                ->addFieldToFilter('store_id', $storeId);
-        foreach ($storeValues as $value) {
-            $this->setData($value->getAttributeCode() . '_in_store', true);
-            $this->setData($value->getAttributeCode(), $value->getValue());
-        }
-        return $this;
-    }
+//    public function getMultiStoreValue($storeId = null) {
+//        if (!$storeId) {
+//            $storeId = $this->getStoreId();
+//        }
+//        if (!$storeId) {
+//            return $this;
+//        }
+//        $storeValues = Mage::getModel('campaign/value')->getCollection()
+//                ->addFieldToFilter('banner_id', $this->getId())
+//                ->addFieldToFilter('store_id', $storeId);
+//        foreach ($storeValues as $value) {
+//            $this->setData($value->getAttributeCode() . '_in_store', true);
+//            $this->setData($value->getAttributeCode(), $value->getValue());
+//        }
+//        return $this;
+//    }
 
 }

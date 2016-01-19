@@ -21,7 +21,7 @@
 /**
  * bannerslider template
  * 
- * @see Magestore_Bannerslider_Block_Bannerslider
+ * @see Magestore_Campaign_Block_Bannerslider
  */
 ?>
 <?php
@@ -30,7 +30,7 @@ $block = $result['block'];
 $banners = $result['banners'];
 $banner_ids = array();
 $banner_note_ids = array();
-$url = $this->getUrl('bannerslider/index/impress',array('_secure'=>true));
+$url = $this->getUrl('campaign/index/impress',array('_secure'=>true));
 ?>
 <?php if (count($banners) && count($block->getData())): ?>
     <?php if ($block->getPosition() == 'pop-up'): ?>
