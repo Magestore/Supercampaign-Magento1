@@ -136,6 +136,12 @@
         </reference>
     </campaignadmin_adminhtml_bannerslider_index>
 
+    <campaignadmin_adminhtml_popup_index>
+        <reference name="content">
+            <block type="campaign/adminhtml_popup" name="popup" />
+        </reference>
+    </campaignadmin_adminhtml_popup_index>
+
     <campaignadmin_adminhtml_bannerslider_edit>
         <reference name="head">
             <action method="setCanLoadTinyMce">
