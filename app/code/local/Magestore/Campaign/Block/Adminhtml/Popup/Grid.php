@@ -30,11 +30,71 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
 			'index'	 => 'title',
 		));
 
-		$this->addColumn('content', array(
-			'header'	=> Mage::helper('campaign')->__('Item Content'),
-			'width'	 => '150px',
-			'index'	 => 'content',
+        $this->addColumn('campaign_id', array(
+            'header'	=> Mage::helper('campaign')->__('Campaign'),
+            'align'	 =>'left',
+            'index'	 => 'campaign_id',
+        ));
+
+		$this->addColumn('popup_type', array(
+			'header'	=> Mage::helper('campaign')->__('Popup Type'),
+            'align'	 =>'left',
+			'index'	 => 'popup_type',
+            'type'		=> 'options',
+            'options'	 => array(
+                0 => 'Template',
+                1 => 'Image',
+            ),
 		));
+
+        if (!Mage::app()->isSingleStoreMode()) {
+            $this->addColumn('store', array(
+                'header'        => Mage::helper('campaign')->__('Store View'),
+                'index'         => 'store',
+                'type'          => 'store',
+                'store_all'     => true,
+                'store_view'    => true,
+                'sortable'      => true,
+            ));
+        }
+
+        $this->addColumn('page_id', array(
+            'header'	=> Mage::helper('campaign')->__('Show On Page'),
+            'align'	 =>'left',
+            'index'	 => 'page_id',
+            'type'		=> 'options',
+            'options'	 => array(
+                0 => 'All Page',
+                1 => 'Home Page',
+                2 => 'Product Page',
+                3 => 'Category Page',
+                4 => 'Checkout Page',
+                5 => 'Cart Page',
+                6 => 'Other Page',
+                7 => 'Specified Url',
+            ),
+        ));
+
+        $this->addColumn('show_when', array(
+            'header'	=> Mage::helper('campaign')->__('Show when'),
+            'align'	 =>'left',
+            'index'	 => 'show_when',
+            'type'		=> 'options',
+            'options'	 => array(
+                0 => 'After Load Page',
+                1 => 'After Seconds',
+                2 => 'After Scroll',
+                3 => 'On Click',
+                4 => 'On Hover',
+                5 => 'Mouse Leave Window',
+            ),
+        ));
+
+        $this->addColumn('priority', array(
+            'header'	=> Mage::helper('campaign')->__('Priority'),
+            'align'	 =>'left',
+            'index'	 => 'priority',
+        ));
 
 		$this->addColumn('status', array(
 			'header'	=> Mage::helper('campaign')->__('Status'),
@@ -43,8 +103,8 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
 			'index'	 => 'status',
 			'type'		=> 'options',
 			'options'	 => array(
-				1 => 'Enabled',
-				2 => 'Disabled',
+				0 => 'Enabled',
+				1 => 'Disabled',
 			),
 		));
 

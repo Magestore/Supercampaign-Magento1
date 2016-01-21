@@ -14,32 +14,47 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Setting extends Mage_Adm
 
         $fieldset = $form->addFieldset('popup_form', array('legend'=>Mage::helper('campaign')->__('Setting information')));
 
-        $fieldset->addField('title', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Title'),
-            'class'		=> 'required-entry',
+        $fieldset->addField('showing_frequency', 'select', array(
+            'label'		=> Mage::helper('campaign')->__('Show Frequency:'),
             'required'	=> true,
-            'name'		=> 'title',
+            'name'		=> 'showing_frequency',
+            'note'      => "Show popup when have had customer's action .",
+            'values' => array(
+                array(
+                    'value' => 0,
+                    'label' => Mage::helper('campaign')->__('Show until user close it'),
+                ),
+                array(
+                    'value' => 1,
+                    'label' => Mage::helper('campaign')->__('Only once'),
+                ),
+                array(
+                    'value' => 2,
+                    'label' => Mage::helper('campaign')->__('Every time'),
+                ),
+            ),
         ));
 
-        $fieldset->addField('filename', 'file', array(
-            'label'		=> Mage::helper('campaign')->__('File'),
+        $fieldset->addField('cookie_time', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('Cookie Life Time:'),
+            'note'      => 'Set time for cookie to show popup.',
             'required'	=> false,
-            'name'		=> 'filename',
+            'name'		=> 'cookie_time',
         ));
 
-        $fieldset->addField('status', 'select', array(
-            'label'		=> Mage::helper('campaign')->__('Status'),
-            'name'		=> 'status',
-            'values'	=> Mage::getSingleton('campaign/status')->getOptionHash(),
+        $fieldset->addField('total_time', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('Max Time Preview:'),
+            'required'	=> false,
+            'note'      => 'Max time to show popup.',
+            'name'		=> 'total_time',
         ));
 
-        $fieldset->addField('content', 'editor', array(
-            'name'		=> 'content',
-            'label'		=> Mage::helper('campaign')->__('Content'),
-            'title'		=> Mage::helper('campaign')->__('Content'),
-            'style'		=> 'width:700px; height:500px;',
-            'wysiwyg'	=> false,
-            'required'	=> true,
+        $fieldset->addField('priority', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('Set Priority:'),
+            'class'		=> 'required-entry',
+            'note'      => 'Set priority when have many popup.',
+            'required'	=> false,
+            'name'		=> 'priority',
         ));
 
         $form->setValues($data);

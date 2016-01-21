@@ -175,7 +175,7 @@ CREATE TABLE {$this->getTable('campaign/popup')} (
   `country_id` varchar(200) NULL default '',
   `product_id` int(11) NULL,
   `referral` varchar(200) NULL default '',
-  `store_id` smallint(6) NULL default '0',
+  `store` varchar(255) NOT NULL default '',
   `corner_style` smallint(6) NULL default '0',
   `border_style` smallint(6) NULL default '0',
   `overlay_background` smallint(6) NULL default '0',
@@ -190,6 +190,8 @@ CREATE TABLE {$this->getTable('campaign/popup')} (
   `width_option` smallint(6) NULL default '0',
   `from_date` datetime NULL,
   `to_date` datetime NULL,
+  `exclude_url` varchar(255) NOT NULL default '',
+  `scrolling_show` int(11) NULL,
   INDEX(`campaign_id`),
   CONSTRAINT `popup_refer_campaign` FOREIGN KEY (`campaign_id`)
     REFERENCES {$this->getTable('campaign/campaign')} (`campaign_id`) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -249,6 +251,7 @@ CREATE TABLE {$this->getTable('campaign/template')} (
   `border_size_in_px` smallint(6) NULL default '0',
   `custom_javascript` smallint(6) NULL default '0',
   `width_option` smallint(6) NULL default '0',
+  `template_code` text NULL default '',
   INDEX(`template_id`),
   CONSTRAINT `template_refer_popup` FOREIGN KEY (`popup_id`)
     REFERENCES {$this->getTable('campaign/popup')} (`popup_id`) ON UPDATE CASCADE ON DELETE CASCADE,

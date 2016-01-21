@@ -200,52 +200,7 @@ class Magestore_Campaign_Helper_Data extends Mage_Core_Helper_Abstract
         Mage::getModel('cms/block')->load($item->getId())->delete();
     }
 
-    /**
-     * prepare collection to get
-     *
-     * @param string $popup_type
-     * @param string $form_type
-     * @return Campaign_Model_Resource_Popup_Template_Collection
-     */
-    /*public function getPopupTemplate($popup_type = '', $form_type = '')
-    {
-        $templates = Mage::getResourceModel('campaign/popup_template_collection');
-        if ($popup_type && $popup_type != 'all')
-            $templates->addFieldToFilter('popup_type', $popup_type);
-        if ($form_type && $form_type != 'all')
-            $templates->addFieldToFilter('type', $form_type);
-        return $templates;
-    }*/
 
-    /*public function popTemplateOptions($popup_type = '', $form_type = '', $blank_first = false, $title = '-- Please select template --')
-    {
-        $options = array();
-        if ($blank_first) {
-            $options[] = array(
-                'label' => $title,
-                'value' => '',
-            );
-        }
-        $collection = $this->getPopupTemplate($popup_type, $form_type);
-        foreach ($collection as $template) {
-            $options[] = array(
-                'label' => $template->getTitle(),
-                'value' => $template->getId(),
-            );
-        }
-        return $options;
-    }*/
-
-    /*public function popTemplateOverview($popup_type = '', $form_type = '')
-    {
-        $options = array();
-        $collection = $this->getPopupTemplate($popup_type, $form_type);
-        foreach ($collection as $template) {
-            if ($template->getOverview() != null)
-                $options[$template->getId()] = Mage::getBlockSingleton('campaign/adminhtml_popup_overview_template')->getSkinUrl($template->getOverview());
-        }
-        return $options;
-    }*/
 
     //Zeus Helper banner slider
 
@@ -394,6 +349,8 @@ class Magestore_Campaign_Helper_Data extends Mage_Core_Helper_Abstract
             ),
         );
     }
+
+
 
     public function getOptionSliderId() {
         $option = array();

@@ -14,32 +14,120 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
 
         $fieldset = $form->addFieldset('popup_form', array('legend'=>Mage::helper('campaign')->__('Visitorsegment information')));
 
-        $fieldset->addField('title', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Title'),
-            'class'		=> 'required-entry',
-            'required'	=> true,
-            'name'		=> 'title',
-        ));
-
-        $fieldset->addField('filename', 'file', array(
-            'label'		=> Mage::helper('campaign')->__('File'),
+        $fieldset->addField('country_id', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('Country:'),
             'required'	=> false,
-            'name'		=> 'filename',
+            'note'      => 'Show popup for country.',
+            'name'		=> 'country_id',
         ));
 
-        $fieldset->addField('status', 'select', array(
-            'label'		=> Mage::helper('campaign')->__('Status'),
-            'name'		=> 'status',
-            'values'	=> Mage::getSingleton('campaign/status')->getOptionHash(),
-        ));
-
-        $fieldset->addField('content', 'editor', array(
-            'name'		=> 'content',
-            'label'		=> Mage::helper('campaign')->__('Content'),
-            'title'		=> Mage::helper('campaign')->__('Content'),
-            'style'		=> 'width:700px; height:500px;',
-            'wysiwyg'	=> false,
+        $fieldset->addField('devices', 'multiselect', array(
+            'label'		=> Mage::helper('campaign')->__('Devices'),
             'required'	=> true,
+            'name'		=> 'devices',
+            'note'      => "Allow show popup for devices.",
+            'values' => array(
+                array(
+                    'value' => 0,
+                    'label' => Mage::helper('campaign')->__('All Devices'),
+                ),
+                array(
+                    'value' => 1,
+                    'label' => Mage::helper('campaign')->__('PC'),
+                ),
+                array(
+                    'value' => 2,
+                    'label' => Mage::helper('campaign')->__('Laptop'),
+                ),
+                array(
+                    'value' => 3,
+                    'label' => Mage::helper('campaign')->__('Tablet'),
+                ),
+                array(
+                    'value' => 4,
+                    'label' => Mage::helper('campaign')->__('Mobiphone'),
+                ),
+            ),
+        ));
+
+        $fieldset->addField('cookies_enabled', 'select', array(
+            'label'		=> Mage::helper('campaign')->__('Cookies Enabled:'),
+            'required'	=> true,
+            'name'		=> 'cookies_enabled',
+            'note'      => "Allow enable cookie to config show popup .",
+            'values' => array(
+                array(
+                    'value' => 0,
+                    'label' => Mage::helper('campaign')->__('Yes'),
+                ),
+                array(
+                    'value' => 1,
+                    'label' => Mage::helper('campaign')->__('No'),
+                ),
+            ),
+        ));
+
+        $fieldset->addField('user_login', 'multiselect', array(
+            'label'		=> Mage::helper('campaign')->__('User Login:'),
+            'required'	=> true,
+            'name'		=> 'user_login',
+            'note'      => "Show popup when user login.",
+            'values' => array(
+                array(
+                    'value' => 0,
+                    'label' => Mage::helper('campaign')->__('Mutil Registed'),
+                ),
+                array(
+                    'value' => 1,
+                    'label' => Mage::helper('campaign')->__('Login'),
+                ),
+                array(
+                    'value' => 2,
+                    'label' => Mage::helper('campaign')->__('Unloged'),
+                ),
+                array(
+                    'value' => 3,
+                    'label' => Mage::helper('campaign')->__('Unregistered'),
+                ),
+            ),
+        ));
+
+        $fieldset->addField('if_returning', 'select', array(
+            'label'		=> Mage::helper('campaign')->__('Return or new customer:'),
+            'required'	=> true,
+            'name'		=> 'if_returning',
+            'note'      => "Allow show popup for return or new customer .",
+            'values' => array(
+                array(
+                    'value' => 0,
+                    'label' => Mage::helper('campaign')->__('Return'),
+                ),
+                array(
+                    'value' => 1,
+                    'label' => Mage::helper('campaign')->__('New Customer'),
+                ),
+            ),
+        ));
+
+        $fieldset->addField('customer_group_id', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('Customer Group:'),
+            'required'	=> true,
+            'name'		=> 'customer_group_id',
+            'note'      => "Allow show popup for customer group.",
+        ));
+
+        $fieldset->addField('cart_subtotal_min', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('Cart subtotal less than:'),
+            'required'	=> false,
+            'note'      => "Show popup when customer's cart less than.",
+            'name'		=> 'cart_subtotal_min',
+        ));
+
+        $fieldset->addField('user_ip', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('User Ip:'),
+            'required'	=> false,
+            'note'      => 'Show popup for user id.',
+            'name'		=> 'user_ip',
         ));
 
         $form->setValues($data);
