@@ -33,7 +33,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tabs extends Mage_Adm
         parent::__construct();
         $this->setId('bannerslider_tabs');
         $this->setDestElementId('edit_form');
-        $this->setTitle(Mage::helper('campaign')->__('Slider Information'));
+        $this->setTitle(Mage::helper('campaign')->__('Banner Item Information'));
     }
 
     /**
@@ -43,8 +43,8 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tabs extends Mage_Adm
      */
     protected function _beforeToHtml() {
         $this->addTab('form_section', array(
-            'label' => Mage::helper('campaign')->__('Slider Information'),
-            'title' => Mage::helper('campaign')->__('Slider Information'),
+            'label' => Mage::helper('campaign')->__('Banner Item Information'),
+            'title' => Mage::helper('campaign')->__('Banner Item Information'),
             'content' => $this->getLayout()->createBlock('campaign/adminhtml_bannerslider_edit_tab_form')->toHtml(),
         ));
         if ($this->getRequest()->getParam('active_tab') == 'custom') {

@@ -367,4 +367,23 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
         return $this->_coupon_code;
     }
 
+    /**
+     * get all campaign
+     */
+    static public function getCampaignOption(){
+        $options = array();
+        $campaignCollection = Mage::getModel('campaign/campaign')->getCollection();
+        $options[] = array(
+            'value'	=> '',
+            'label'	=> Mage::helper('campaign')->__('-- Please select campaign --')
+        );
+
+        foreach ($campaignCollection as $campaign)
+            $options[] = array(
+                'value'	=> $campaign->getId(),
+                'label'	=> $campaign->getName()
+            );
+        return $options;
+    }
+
 }

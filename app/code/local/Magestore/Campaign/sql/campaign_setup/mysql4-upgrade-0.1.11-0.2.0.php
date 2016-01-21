@@ -25,11 +25,11 @@ $installer = $this;
 $installer->startSetup();
 
 $installer->run("
-    ALTER TABLE `{$this->getTable('campaign/bannerlistpage')}`
+    ALTER TABLE `{$this->getTable('campaign/countdown')}`
     ADD COLUMN `include` text NOT NULL default '' AFTER `link_attached`;
 
-    ALTER TABLE `{$this->getTable('campaign/bannerlistpage')}`
-    ADD COLUMN `exclude` text NOT NULL default '' AFTER `include`;
+    ALTER TABLE `{$this->getTable('campaign/countdown')}`
+    ADD COLUMN `exclude` text NOT NULL default '' AFTER `status`;
 ");
 
 $installer->endSetup();

@@ -31,8 +31,8 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider extends Mage_Adminhtml_Blo
 	public function __construct(){
 		$this->_controller = 'adminhtml_bannerslider';
 		$this->_blockGroup = 'campaign';
-		$this->_headerText = Mage::helper('campaign')->__('Slider Manager');
-		$this->_addButtonLabel = Mage::helper('campaign')->__('Add Slider');
+		$this->_headerText = Mage::helper('campaign')->__('Banner Manager');
+		$this->_addButtonLabel = Mage::helper('campaign')->__('Add Banner Item');
 		parent::__construct();
 	}
 }
