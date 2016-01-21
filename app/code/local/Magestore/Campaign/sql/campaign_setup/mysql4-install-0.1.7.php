@@ -42,9 +42,9 @@ CREATE TABLE {$this->getTable('campaign/campaign')} (
   `status` smallint(6) NOT NULL default '0',
   `priority` int(6) NOT NULL DEFAULT '0',
   `use_coupon` int(6) NOT NULL DEFAULT '0',
-  `gift_code_type` VARCHAR(255) NOT NULL default '',
+  `coupon_code_type` VARCHAR(255) NOT NULL default '',
   `coupon_code` VARCHAR(255) NOT NULL default '',
-  `promo_quote_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `promo_rule_id` int(10) unsigned NOT NULL DEFAULT 0,
   `start_time` datetime NULL,
   `end_time` datetime NULL,
   PRIMARY KEY (`campaign_id`)
