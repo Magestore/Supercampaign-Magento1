@@ -180,39 +180,6 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
             Mage::register('sidebar_data', new Varien_Object($sidebar_data));
 
             /**
-             * zeus edit data banner listing page
-             */
-
-            foreach ($model->getBannerlistpage()->getData() as $key => $value) {
-                $bannerlistpage_data['bannerlistpage_'.$key] = $value;
-            }
-            Mage::register('bannerlistpage_data', new Varien_Object($bannerlistpage_data));
-
-            /*zeus edit data banner listing page*/
-
-            /**
-             * zeus edit data banner menu
-             */
-            $bannermenu_data = array();
-            foreach ($model->getBannermenu()->getData() as $key => $value) {
-                $bannermenu_data['bannermenu_'.$key] = $value;
-            }
-            Mage::register('bannermenu_data', new Varien_Object($bannermenu_data));
-
-            /*zeus edit data banner menu*/
-
-            /**
-             * zeus edit data banner homepage
-             */
-            $bannerhomepage_data = array();
-            foreach ($model->getBannerhomepage()->getData() as $key => $value) {
-                $bannerhomepage_data['bannerhomepage_'.$key] = $value;
-            }
-            Mage::register('bannerhomepage_data', new Varien_Object($bannerhomepage_data));
-
-            /*zeus edit data banner homepage*/
-
-            /**
              * zeus edit data countdown
              */
             $countdown_data = array();

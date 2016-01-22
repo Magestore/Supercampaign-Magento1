@@ -648,5 +648,13 @@ class Magestore_Campaign_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     //zeus end helper slider
-
+    public function checkSegmentpopup(){
+        return true;
+    }
+    public function checkStylepopup(){
+        return true;
+    }
+    public function checkCookiepopup(){
+        return true;
+    }
 }

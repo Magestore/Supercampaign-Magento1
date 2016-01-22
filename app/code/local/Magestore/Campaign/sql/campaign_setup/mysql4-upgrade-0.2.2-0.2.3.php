@@ -192,9 +192,6 @@ CREATE TABLE {$this->getTable('campaign/popup')} (
   `to_date` datetime NULL,
   `exclude_url` varchar(255) NOT NULL default '',
   `scrolling_show` int(11) NULL,
-  INDEX(`campaign_id`),
-  CONSTRAINT `popup_refer_campaign` FOREIGN KEY (`campaign_id`)
-    REFERENCES {$this->getTable('campaign/campaign')} (`campaign_id`) ON UPDATE CASCADE ON DELETE CASCADE,
   PRIMARY KEY (`popup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
@@ -252,9 +249,6 @@ CREATE TABLE {$this->getTable('campaign/template')} (
   `custom_javascript` smallint(6) NULL default '0',
   `width_option` smallint(6) NULL default '0',
   `template_code` text NULL default '',
-  INDEX(`template_id`),
-  CONSTRAINT `template_refer_popup` FOREIGN KEY (`popup_id`)
-    REFERENCES {$this->getTable('campaign/popup')} (`popup_id`) ON UPDATE CASCADE ON DELETE CASCADE,
   PRIMARY KEY (`template_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
