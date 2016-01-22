@@ -109,11 +109,13 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
             ),
         ));
 
-        $fieldset->addField('customer_group_id', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Customer Group:'),
-            'required'	=> true,
-            'name'		=> 'customer_group_id',
-            'note'      => "Allow show popup for customer group.",
+        $fieldset->addField('customer_group_id', 'multiselect', array(
+            'label' => Mage::helper('campaign')->__('Customer groups'),
+            'title' => Mage::helper('campaign')->__('Customer groups'),
+            'name' => 'customer_group_id',
+            'required' => true,
+            'values' => Mage::getResourceModel('customer/group_collection')
+                    ->toOptionArray()
         ));
 
         $fieldset->addField('cart_subtotal_min', 'text', array(
