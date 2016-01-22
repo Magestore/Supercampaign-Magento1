@@ -104,7 +104,7 @@ CREATE TABLE {$this->getTable('campaign/value')} (
 
 CREATE TABLE {$this->getTable('campaign/popup')} (
   `popup_id` int(11) unsigned NOT NULL auto_increment,
-  `campaign_id` int(11) unsigned NOT NULL,
+  `campaign_id` int(11) NULL,
   `title` varchar(255) NOT NULL default '',
   `popup_type` smallint(6) NULL default '0',
   `width` smallint(6) NULL,
