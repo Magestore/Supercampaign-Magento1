@@ -23,7 +23,7 @@
 <config>
     <modules>
         <Magestore_Campaign>
-            <version>0.2.2</version>
+            <version>0.2.3</version>
         </Magestore_Campaign>
     </modules>
     <frontend>
@@ -186,9 +186,6 @@
                     <sidebar>
                         <table>magestore_campaign_sidebar</table>
                     </sidebar>
-                    <popup>
-                        <table>magestore_campaign_popup</table>
-                    </popup>
                     <popup_type_static>
                         <table>magestore_campaign_popup_static</table>
                     </popup_type_static>
@@ -207,15 +204,7 @@
                     <headertext>
                         <table>magestore_campaign_headertext</table>
                     </headertext>
-                    <bannerlistpage>
-                        <table>magestore_campaign_bannerlistpage</table>
-                    </bannerlistpage>
-                    <bannermenu>
-                        <table>magestore_campaign_bannermenu</table>
-                    </bannermenu>
-                    <bannerhomepage>
-                        <table>magestore_campaign_bannerhomepage</table>
-                    </bannerhomepage>
+
                     <maillist>
                         <table>magestore_campaign_maillist</table>
                     </maillist>
@@ -228,6 +217,21 @@
                     <widget_banner>
                         <table>magestore_campaign_widget_banner</table>
                     </widget_banner>
+                    <bannerslider>
+                        <table>magestore_campaign_banner_item</table>
+                    </bannerslider>
+                    <banner>
+                        <table>magestore_campaign_banner</table>
+                    </banner>
+                    <value>
+                        <table>magestore_campaign_value</table>
+                    </value>
+                    <popup>
+                        <table>magestore_campaign_popup</table>
+                    </popup>
+                    <template>
+                        <table>magestore_campaign_template</table>
+                    </template>
                 </entities>
             </campaign_resource>
         </models>

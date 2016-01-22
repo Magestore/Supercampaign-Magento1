@@ -38,6 +38,7 @@ class Magestore_Campaign_Block_Banner extends Mage_Core_Block_Template
 
     public function _prepareLayout()
     {
+
         $this->setTemplate('campaign/banner/listing.phtml');
         return parent::_prepareLayout();
     }

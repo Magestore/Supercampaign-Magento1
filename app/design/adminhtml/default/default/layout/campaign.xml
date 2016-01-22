@@ -26,6 +26,7 @@
             <action method="addCss"><stylesheet>css/magestore/campaign/owl.carousel.css</stylesheet></action>
             <action method="addCss"><stylesheet>css/magestore/campaign/owl.theme.css</stylesheet></action>
             <action method="addCss"><stylesheet>css/magestore/campaign/style.css</stylesheet></action>
+
         </reference>
     </default>
 
@@ -81,6 +82,34 @@
         </reference>
     </campaignadmin_adminhtml_maillist_index>
 
+    <!--zeus Layout banner slider-->
+    <campaignadmin_adminhtml_banner_index>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/bannerslider/tooltip.js</script>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                <action method="setUseConfirm">
+                    <params>0</params>
+                </action>
+            </block>
+            <block type="campaign/adminhtml_banner" name="banner" />
+        </reference>
+    </campaignadmin_adminhtml_banner_index>
+
+    <campaignadmin_adminhtml_banner_addin>
+        <reference name="head">
+            <action method="addJs">
+                <script>varien/form.js</script>
+            </action>
+            <action method="addJs">
+                <script>prototype/validation.js</script>
+            </action>
+        </reference>
+    </campaignadmin_adminhtml_banner_addin>
+
     <campaignadmin_adminhtml_banner_edit>
         <reference name="head">
             <action method="setCanLoadExtJs"><flag>1</flag></action>
@@ -100,4 +129,96 @@
             <block type="adminhtml/template" template="campaign/js.phtml" name="campaign.js" as="campaign_js"></block>
         </reference>
     </campaignadmin_adminhtml_banner_edit>
+
+    <campaignadmin_adminhtml_bannerslider_index>
+        <reference name="content">
+            <block type="campaign/adminhtml_bannerslider" name="bannerslider" />
+        </reference>
+    </campaignadmin_adminhtml_bannerslider_index>
+
+    <campaignadmin_adminhtml_popup_index>
+        <reference name="content">
+            <block type="campaign/adminhtml_popup" name="popup" />
+        </reference>
+    </campaignadmin_adminhtml_popup_index>
+
+    <campaignadmin_adminhtml_bannerslider_edit>
+        <reference name="head">
+            <action method="setCanLoadTinyMce">
+                <flag>1</flag>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/variables.js</script>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/wysiwyg/widget.js</script>
+            </action>
+            <action method="addJs">
+                <script>lib/flex.js</script>
+            </action>
+            <action method="addJs">
+                <script>lib/FABridge.js</script>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/flexuploader.js</script>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/browser.js</script>
+            </action>
+            <action method="addJs">
+                <script>prototype/window.js</script>
+            </action>
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/default.css</name>
+            </action>
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/magento.css</name>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>mage/adminhtml/wysiwyg/tiny_mce/setup.js</name>
+                <params/>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>tiny_mce/tiny_mce.js</name>
+                <params/>
+            </action>
+            <action method="addJs">
+                <script>magestore/bannerslider/tooltip.js</script>
+            </action>
+            <action method="addJs">
+                <script>magestore/bannerslider/prototip.js</script>
+            </action>
+        </reference>
+    </campaignadmin_adminhtml_bannerslider_edit>
+
+    <campaignadmin_adminhtml_bannerslider_custom>
+        <block type="core/text_list" name="root">
+            <block type="campaign/adminhtml_addbutton" name="bannerslider.add" template="bannerslider/addbutton.phtml"/>
+            <block type="campaign/adminhtml_bannerslider_edit_tab_custom" name="slider.edit.tab.custom"/>
+            <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>slider.edit.tab.custom</grid_block_name>
+                    <data_callback>getSelectedSliderBanners</data_callback>
+                    <hidden_input_name>slider_banner</hidden_input_name>
+                    <reload_param_name>banner</reload_param_name>
+                </action>
+                <action method="addColumnInputName">
+                    <input_name>order_banner_slider</input_name>
+                </action>
+            </block>
+        </block>
+    </campaignadmin_adminhtml_bannerslider_custom>
+
+    <campaignadmin_adminhtml_bannerslider_customgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="campaign/adminhtml_bannerslider_edit_tab_custom" name="slider.edit.tab.custom"/>
+        </block>
+    </campaignadmin_adminhtml_bannerslider_customgrid>
+    <!--zeus End layout-->
+
+
 </layout>

@@ -42,9 +42,9 @@ CREATE TABLE {$this->getTable('campaign/campaign')} (
   `status` smallint(6) NOT NULL default '0',
   `priority` int(6) NOT NULL DEFAULT '0',
   `use_coupon` int(6) NOT NULL DEFAULT '0',
-  `gift_code_type` VARCHAR(255) NOT NULL default '',
+  `coupon_code_type` VARCHAR(255) NOT NULL default '',
   `coupon_code` VARCHAR(255) NOT NULL default '',
-  `promo_quote_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `promo_rule_id` int(10) unsigned NOT NULL DEFAULT 0,
   `start_time` datetime NULL,
   `end_time` datetime NULL,
   PRIMARY KEY (`campaign_id`)
@@ -70,25 +70,6 @@ CREATE TABLE {$this->getTable('campaign/sidebar')} (
     REFERENCES {$this->getTable('campaign/campaign')} (`campaign_id`) ON UPDATE CASCADE ON DELETE CASCADE,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-DROP TABLE IF EXISTS {$this->getTable('campaign/popup')};
-
-CREATE TABLE {$this->getTable('campaign/popup')} (
-  `popup_id` int(11) unsigned NOT NULL auto_increment,
-  `campaign_id` int(11) unsigned NOT NULL,
-  `popup_type` VARCHAR(255) NOT NULL default '',
-  `is_show_coupon` smallint(6) NOT NULL default '0',
-  `is_show_first_time` smallint(6) NOT NULL default '0',
-  `include_page` text NOT NULL default '',
-  `exclude_page` text NOT NULL default '',
-  `status` smallint(6) NOT NULL default '0',
-  INDEX(`campaign_id`),
-  CONSTRAINT `popup_refer_campaign` FOREIGN KEY (`campaign_id`)
-    REFERENCES {$this->getTable('campaign/campaign')} (`campaign_id`) ON UPDATE CASCADE ON DELETE CASCADE,
-  PRIMARY KEY (`popup_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 
 DROP TABLE IF EXISTS {$this->getTable('campaign/popup_type_static')};
@@ -190,22 +171,6 @@ CREATE TABLE {$this->getTable('campaign/headertext')} (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS {$this->getTable('campaign/bannerlistpage')};
-
-CREATE TABLE {$this->getTable('campaign/bannerlistpage')} (
-  `id` int(11) unsigned NOT NULL auto_increment,
-  `campaign_id` int(11) unsigned NOT NULL,
-  `input_banner` varchar(255) NOT NULL default '' COMMENT 'Input banner image',
-  `link_attached` text NOT NULL default '',
-  `path_bannerlistpage` varchar(255) NOT NULL default '',
-  `status` smallint(6) NOT NULL default '0',
-  INDEX(`campaign_id`),
-  CONSTRAINT `bnlistpage_refer_campaign` FOREIGN KEY (`campaign_id`)
-    REFERENCES {$this->getTable('campaign/campaign')} (`campaign_id`) ON UPDATE CASCADE ON DELETE CASCADE,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 DROP TABLE IF EXISTS {$this->getTable('campaign/maillist')};
 
 CREATE TABLE {$this->getTable('campaign/maillist')} (
@@ -219,40 +184,6 @@ CREATE TABLE {$this->getTable('campaign/maillist')} (
   `expired_time` datetime NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-DROP TABLE IF EXISTS {$this->getTable('campaign/bannermenu')};
-
-CREATE TABLE {$this->getTable('campaign/bannermenu')} (
-  `id` int(11) unsigned NOT NULL auto_increment,
-  `campaign_id` int(11) unsigned NOT NULL,
-  `input_bannermenu` varchar(255) NOT NULL default '' COMMENT 'Input banner image',
-  `path_bannermenu` varchar(255) NOT NULL default '' COMMENT 'Path banner menu',
-  `link_attached` text NOT NULL default '',
-  `status` smallint(6) NOT NULL default '0',
-  INDEX(`campaign_id`),
-  CONSTRAINT `bannermenu_refer_campaign` FOREIGN KEY (`campaign_id`)
-    REFERENCES {$this->getTable('campaign/campaign')} (`campaign_id`) ON UPDATE CASCADE ON DELETE CASCADE,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-DROP TABLE IF EXISTS {$this->getTable('campaign/bannerhomepage')};
-
-CREATE TABLE {$this->getTable('campaign/bannerhomepage')} (
-  `id` int(11) unsigned NOT NULL auto_increment,
-  `campaign_id` int(11) unsigned NOT NULL,
-  `input_bannerhomepage` varchar(255) NOT NULL default '' COMMENT 'Input banner image',
-  `path_bannerhomepage` varchar(255) NOT NULL default '' COMMENT 'Path banner menu',
-  `link_attached` text NOT NULL default '',
-  `status` smallint(6) NOT NULL default '0',
-  INDEX(`campaign_id`),
-  CONSTRAINT `bannerhomepage_refer_campaign` FOREIGN KEY (`campaign_id`)
-    REFERENCES {$this->getTable('campaign/campaign')} (`campaign_id`) ON UPDATE CASCADE ON DELETE CASCADE,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 DROP TABLE IF EXISTS {$this->getTable('campaign/countdown')};
 

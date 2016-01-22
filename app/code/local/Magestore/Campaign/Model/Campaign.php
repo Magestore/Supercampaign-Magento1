@@ -93,56 +93,6 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
         return $this->_headertext;
     }
 
-    /**
-     * zeus get model banner listing page
-     * @return Magestore_Campaign_Model_Bannerlistpage
-     */
-    public function getBannerlistpage(){
-        if(!($this->_bannerlistpage instanceof Magestore_Campaign_Model_Bannerlistpage) || !$this->_bannerlistpage->getId()){
-            $this->_bannerlistpage = Mage::getModel('campaign/bannerlistpage');
-            $this->_bannerlistpage->load($this->getId(), 'campaign_id');
-        }
-        if( !($this->_bannerlistpage instanceof Magestore_Campaign_Model_Bannerlistpage) ){
-            $this->_bannerlistpage = new Magestore_Campaign_Model_Bannerlistpage();
-        }
-        $this->_bannerlistpage->setCampaign($this);
-        return $this->_bannerlistpage;
-    }
-
-    /**
-     * zeus get model banner menu
-     * @return Magestore_Campaign_Model_Bannermenu
-     */
-    public function getBannermenu(){
-        if(!($this->_bannermenu instanceof Magestore_Campaign_Model_Bannermenu) || !$this->_bannermenu->getId()){
-            $this->_bannermenu = Mage::getModel('campaign/bannermenu');
-            $this->_bannermenu->load($this->getId(), 'campaign_id');
-        }
-        if( !($this->_bannermenu instanceof Magestore_Campaign_Model_Bannermenu) ){
-            $this->_bannermenu = new Magestore_Campaign_Model_Bannermenu();
-        }
-        $this->_bannermenu->setCampaign($this);
-        return $this->_bannermenu;
-    }
-
-
-    /**
-     * zeus get model banner homepage
-     * @return Magestore_Campaign_Model_Bannerhomepage
-     */
-    public function getBannerhomepage(){
-        if(!($this->_bannerhomepage instanceof Magestore_Campaign_Model_Bannerhomepage) ||
-            !$this->_bannerhomepage->getId()){
-            $this->_bannerhomepage = Mage::getModel('campaign/bannerhomepage');
-            $this->_bannerhomepage->load($this->getId(), 'campaign_id');
-        }
-        if( !($this->_bannerhomepage instanceof Magestore_Campaign_Model_Bannerhomepage) ){
-            $this->_bannerhomepage = new Magestore_Campaign_Model_Bannerhomepage();
-        }
-        $this->_bannerhomepage->setCampaign($this);
-        return $this->_bannerhomepage;
-    }
-
 
     /**
      * zeus get model countdown
@@ -365,6 +315,25 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
             }
         }
         return $this->_coupon_code;
+    }
+
+    /**
+     * get all campaign
+     */
+    static public function getCampaignOption(){
+        $options = array();
+        $campaignCollection = Mage::getModel('campaign/campaign')->getCollection();
+        $options[] = array(
+            'value'	=> '',
+            'label'	=> Mage::helper('campaign')->__('-- Please select campaign --')
+        );
+
+        foreach ($campaignCollection as $campaign)
+            $options[] = array(
+                'value'	=> $campaign->getId(),
+                'label'	=> $campaign->getName()
+            );
+        return $options;
     }
 
 }
