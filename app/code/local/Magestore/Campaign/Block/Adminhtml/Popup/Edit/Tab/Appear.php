@@ -45,6 +45,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
             'label'		=> Mage::helper('campaign')->__('Border Color:'),
             'required'	=> false,
             'name'		=> 'border_color',
+            'class'     =>  'color',
         ));
 
 
@@ -54,21 +55,12 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
             'name'		=> 'border_size',
         ));
 
-        $fieldset->addField('background_color', 'select', array(
+        $fieldset->addField('background_color', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Overlay Background:'),
             'required'	=> true,
             'name'		=> 'background_color',
             'note'      => 'Overlay background when show popup.',
-            'values' => array(
-                array(
-                    'value' => 0,
-                    'label' => Mage::helper('campaign')->__('White'),
-                ),
-                array(
-                    'value' => 1,
-                    'label' => Mage::helper('campaign')->__('Black'),
-                ),
-            ),
+            'class'     =>  'color',
         ));
 
         $fieldset->addField('popup_background', 'text', array(
@@ -76,6 +68,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
             'required'	=> false,
             'note'      => 'Background of popup.',
             'name'		=> 'popup_background',
+            'class'     =>  'color',
         ));
 
         $fieldset->addField('padding', 'text', array(
@@ -129,27 +122,35 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
             'values' => array(
                 array(
                     'value' => 0,
-                    'label' => Mage::helper('campaign')->__('Fade In'),
+                    'label' => Mage::helper('campaign')->__('Top'),
                 ),
                 array(
                     'value' => 1,
-                    'label' => Mage::helper('campaign')->__('Fade Out'),
+                    'label' => Mage::helper('campaign')->__('Bottom'),
                 ),
                 array(
                     'value' => 2,
-                    'label' => Mage::helper('campaign')->__('Around'),
+                    'label' => Mage::helper('campaign')->__('Left'),
                 ),
                 array(
                     'value' => 3,
-                    'label' => Mage::helper('campaign')->__('Slide Up'),
+                    'label' => Mage::helper('campaign')->__('Right'),
                 ),
                 array(
                     'value' => 4,
-                    'label' => Mage::helper('campaign')->__('Slide Down'),
+                    'label' => Mage::helper('campaign')->__('Top Left'),
                 ),
                 array(
                     'value' => 5,
-                    'label' => Mage::helper('campaign')->__('Rotate Zoom'),
+                    'label' => Mage::helper('campaign')->__('Top Right'),
+                ),
+                array(
+                    'value' => 6,
+                    'label' => Mage::helper('campaign')->__('Bottom Left'),
+                ),
+                array(
+                    'value' => 7,
+                    'label' => Mage::helper('campaign')->__('Bottom Right'),
                 ),
             ),
         ));
