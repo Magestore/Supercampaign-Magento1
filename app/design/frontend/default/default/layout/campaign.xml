@@ -811,6 +811,13 @@
         </reference>
     </campaign_index_index>
 
+
+    <campaign_popup_index>
+        <reference name="content">
+            <block type="campaign/popup" name="showpopup"  />
+        </reference>
+    </campaign_popup_index>
+
     <!--zeus end layout banner slider-->
 
 </layout>

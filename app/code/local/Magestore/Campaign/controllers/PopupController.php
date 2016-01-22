@@ -37,6 +37,12 @@ class Magestore_Campaign_PopupController extends Mage_Core_Controller_Front_Acti
         $this->renderLayout();
     }
 
+    public function showpopupAction()
+    {
+        $this->loadLayout();
+        $this->renderLayout();
+    }
+
     public function startAction()
     {
         $data = $this->getRequest()->getParams();
@@ -85,5 +91,7 @@ class Magestore_Campaign_PopupController extends Mage_Core_Controller_Front_Acti
             ->setHeader('Content-Type', 'application/json')
             ->setBody($json);
     }
+
+
 }
 
