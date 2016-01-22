@@ -42,6 +42,7 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
      */
     public function _prepareLayout()
     {
+
         parent::_prepareLayout();
         $this->setTemplate('campaign/popup.phtml');
         return $this;

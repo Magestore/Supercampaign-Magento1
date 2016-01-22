@@ -45,7 +45,7 @@
                   <block_position>page-bottom</block_position>
               </action>
           </block>
-          <block type="campaign/campaign" name="msmodal1111" template="campaign/smmodal.phtml"/>
+          <block type="campaign/popup" name="msmodal1111" template="campaign/smmodal.phtml"/>
       </reference>
 
       <!--zeus banner slider add-->
