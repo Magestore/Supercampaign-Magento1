@@ -332,8 +332,8 @@
 }
 @media (min-width: 768px) {
     .modal-dialog {
-        width: 600px;
-        margin: 30px auto;
+        width: 800px;
+        margin: 100px auto 0;
     }
     .modal-content {
         -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
@@ -348,3 +348,68 @@
         width: 900px;
     }
 }
+.sc-popup03 form input {
+    height: auto;
+    padding: 9px 0 8px 5px;
+    font-size: 15px;
+    line-height:18px;
+    font-weight:bold;
+    border: 1px solid #e0dede;
+    background: #fff;
+    margin-bottom:6px;
+    text-align:center;
+}
+.sc-popup03 form button {
+    font-size:18px;
+    font-weight:bold;
+    height: 44px;
+    text-align:center;
+    padding: 0 4px;
+    cursor: pointer;
+    border:none;
+    display:block;
+}
+.dialogClose {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background: url(../../images/campaign/popup/close_white.png);
+    background-position: 5px 5px;
+    background-repeat: no-repeat;
+    height: 26px;
+    width: 26px;
+    cursor: pointer;
+    z-index: 99999995;
+}
+
+.modal.fade:not(.in).left .modal-dialog {
+    -webkit-transform: translate3d(-25%, 0, 0);
+    transform: translate3d(-25%, 0, 0);
+}
+.modal.fade:not(.in).right .modal-dialog {
+    -webkit-transform: translate3d(25%, 0, 0);
+    transform: translate3d(25%, 0, 0);
+}
+.modal.fade:not(.in).bottom .modal-dialog {
+    -webkit-transform: translate3d(0, 25%, 0);
+    transform: translate3d(0, 25%, 0);
+}
+
+/* Alternative Angles */
+.modal.fade:not(.in).top-left .modal-dialog {
+    -webkit-transform: translate3d(-25%, -25%, 0);
+    transform: translate3d(-25%, -25%, 0);
+}
+.modal.fade:not(.in).top-right .modal-dialog {
+    -webkit-transform: translate3d(25%, -25%, 0);
+    transform: translate3d(25%, -25%, 0);
+}
+.modal.fade:not(.in).bottom-left .modal-dialog {
+    -webkit-transform: translate3d(-25%, 25%, 0);
+    transform: translate3d(-25%, 25%, 0);
+}
+.modal.fade:not(.in).bottom-right .modal-dialog {
+    -webkit-transform: translate3d(25%, 25%, 0);
+    transform: translate3d(25%, 25%, 0);
+}
+.button-effect{visibility: hidden}

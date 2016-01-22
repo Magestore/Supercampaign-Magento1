@@ -1,61 +1,30 @@
+<?php
+    $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
+    $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
+    $stylepopup = Mage::helper('campaign')->checkStylepopup();
+?>
+<?php echo $this->getLayout()->createBlock('campaign/campaign')->setTemplate('campaign/popup/social/template09.phtml')->toHtml(); ?>
 
-<div id="sc-popup01" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <table
-                style="border-collapse: separate;border-spacing: 25px;background-size: contain; background-image:url(http://localhost.com/campaign/skin/frontend/base/default/images/campaign/image1.jpg); width: 100%;"
-                border="0">
-                <tbody>
-                <tr>
-                    <td style="background-color: rgba(255, 255, 255, 0.85); padding: 20px 10px;">
-                        <p style="text-align: center; font-size: 20px; margin: 0;"><span
-                                style="border-bottom: 1px solid silver; padding-bottom: 10px;">Enter your e-mail to get</span>
-                        </p>
-                        <p class="fontBig"
-                           style="text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black; font-weight: bold; font-size: 70px; color: #ffffff; text-align: center; margin-bottom: 20px;">
-                            -50% OFF</p>
-                        <div style="text-align: center;"> <?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setTemplate('campaign/form/subscribe.phtml')->toHtml(); ?></div>
-                        <div style="text-align: center;">
-                            <p style="font-size: 15px; margin-top: 20px;">Hurry up, the offer will expire in the
-                                next</p>
-
-                            <div style="text-align: center;">&nbsp;</div>
-                            <div style="text-align: center;">&nbsp;</div>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="button-effect">
+    <a class='btn btn-primary btn-effect-1' data-direction='top'>Top (default)</a>
+    <a class='btn btn-primary btn-effect-2' data-direction='left'>Left</a>
+    <a class='btn btn-primary btn-effect-3' data-direction='right'>Right</a>
+    <a class='btn btn-primary btn-effect-4' data-direction='bottom'>Bottom</a>
+    <a class='btn btn-info btn-effect-5' data-direction='top-left'>Top-Left</a>
+    <a class='btn btn-info btn-effect-6' data-direction='top-right'>Top-Right</a>
+    <a class='btn btn-info btn-effect-7' data-direction='bottom-left'>Bottom-Left</a>
+    <a class='btn btn-info btn-effect-8' data-direction='bottom-right'>Bottom-right</a>
 </div>
-<div id="sc-popup02" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <table style="background-image: url(http://localhost.com/campaign/skin/frontend/base/default/images/campaign/image-2.jpg); background-position: right; background-size:auto 100%; background-repeat: no-repeat; width: 100%;" border="0">
-            <tbody>
-            <tr>
-                <td style="padding: 30px;">
-                    <p class="fontBig" style="text-align: left; font-size: 26px; font-style: italic; margin: 0;">Hear about</p>
-                    <p class="fontBig" style="text-align: left; font-size: 70px; line-height: 1; margin: 0;">EXCLUSIVE</p>
-                    <p class="fontBig" style="text-align: left; font-size: 70px; line-height: 1; font-weight: bold; margin: 0; color: #ff1176;">SAVINGS!</p>
-                    <p class="popupSmall" style="text-align: left; font-size: 24px; line-height: 1; margin: 20px 0; font-style: italic;">Enter your e-mail and hear<br />about exclusive savings and news!</p>
-                    <div style="text-align: left;"><?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setTemplate('campaign/form/subscribe.phtml')->toHtml(); ?></div>
-                    <p class="dialogCloseCustom popupSmall" style="text-decoration: underline; text-align: left; font-size: 18px; font-style: italic; margin-top: 10px;">No thanks, I will pay full price</p>
-                    <p class="popupSmall" style="text-align: left; font-size: 16px; font-style: italic; margin: 0;">&nbsp;</p>
-                </td>
-            </tr>
-            </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
 <script type="text/javascript">
     var $j = jQuery.noConflict();
-    $j('#sc-popup02').modal('show');
+
+    $j('.btn').click(function() {
+        $j('.modal').prop('class', 'modal fade').addClass($j(this).data('direction'));
+        $j('.modal').modal('show');
+    });
+    $j(window).bind("load", function() {
+        $j('.btn-effect-1').trigger("click");
+    });
 </script>
 
 

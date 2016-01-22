@@ -25,6 +25,15 @@
         <!-- update layout for all frontend page -->
         <reference name="head">
             <action method="addCss"><stylesheet>css/campaign/msmodal.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup01.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup02.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup03.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup04.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup05.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup06.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup07.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup08.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup09.css</stylesheet></action>
             <action method="addItem"><type>skin_js</type><name>js/campaign/bootstrap.min.js</name></action>
         </reference>
       <reference name="before_body_end">
@@ -45,8 +54,5 @@
         <reference name="content">
             <block type="campaign/campaign" name="campaign" template="campaign/campaign.phtml" />
         </reference>
-
     </campaign_index_index>
-
-
 </layout>

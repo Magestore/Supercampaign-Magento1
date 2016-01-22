@@ -1,0 +1,26 @@
+
+
+<div id="sc-popup06" class="modal fade sc-popup06" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <a class="dialogClose style1 overlay2" data-dismiss="modal" data-target="#sc-popup01"></a>
+            <table style="width: 100%; height: 190px;border-spacing: 25px;border-collapse: separate;" border="0" cellspacing="0" cellpadding="10">
+                <tbody>
+                <tr>
+                    <td>
+                        <h1><span style="color: #333333;"><strong><span style="font-size: xx-large;">Subscribe to our Discount Club</span></strong></span></h1>
+                        <p>To receive exclusive offers and our most popular news, please enter your email address and press subscribe.</p>
+                        <p>Don't worry, <strong>we hate spam too</strong> and we won't share your data with anybody!</p>
+                        <p>&nbsp;</p>
+                    </td>
+                    <td>
+                        <p><img src="<?php echo $this->getSkinUrl('images/campaign/popup/norouter-magon.png')?>" alt="" width="213" height="192" /></p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="newsletter-form" style="background-color: #03a2b1;"><?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setTemplate('campaign/popup/form/subscribe-type6.phtml')->toHtml(); ?></div>
+        </div>
+    </div>
+</div>

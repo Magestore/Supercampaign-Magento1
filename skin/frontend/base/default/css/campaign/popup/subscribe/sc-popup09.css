@@ -1,0 +1,17 @@
+#sc-popup09 table {
+    border-spacing: 0 !important;
+}
+
+#sc-popup09 {
+    position: fixed;
+    left: 100px;
+    margin: 0;
+    bottom: -25px;
+}
+
+#sc-popup09 .modal-dialog {
+    position: fixed;
+    left: 50%;
+    margin-left: -412px;
+    bottom: -18px;
+}
