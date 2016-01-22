@@ -51,7 +51,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Setting extends Mage_Adm
 
         $fieldset->addField('priority', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Set Priority:'),
-            'class'		=> 'required-entry',
             'note'      => 'Set priority when have many popup.',
             'required'	=> false,
             'name'		=> 'priority',
