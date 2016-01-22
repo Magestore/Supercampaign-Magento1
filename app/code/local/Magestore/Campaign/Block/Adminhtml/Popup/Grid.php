@@ -6,7 +6,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
 		parent::__construct();
 		$this->setId('popupGrid');
 		$this->setDefaultSort('popup_id');
-		$this->setDefaultDir('ASC');
+		$this->setDefaultDir('DESC');
 		$this->setSaveParametersInSession(true);
 	}
 
