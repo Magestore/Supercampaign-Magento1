@@ -3,7 +3,16 @@
     $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
     $stylepopup = Mage::helper('campaign')->checkStylepopup();
 ?>
-<?php echo $this->getLayout()->createBlock('campaign/campaign')->setTemplate('campaign/popup/social/template09.phtml')->toHtml(); ?>
+<div id="sc-popup01" class="modal fade sc-popup01" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <a class="dialogClose style1 overlay2" data-dismiss="modal" data-target="#sc-popup01"></a>
+            <?php echo $this->getLayout()->createBlock('campaign/campaign')->setTemplate('campaign/popup/social/template09.phtml')->toHtml(); ?>
+        </div>
+    </div>
+</div>
+
 
 <div class="button-effect">
     <a class='btn btn-primary btn-effect-1' data-direction='top'>Top (default)</a>
