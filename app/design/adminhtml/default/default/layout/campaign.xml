@@ -76,6 +76,25 @@
             <block type="campaign/adminhtml_campaign_edit" name="campaign_block_edit"></block>
         </reference>-->
     </campaignadmin_adminhtml_campaign_edit>
+
+    <campaignadmin_adminhtml_popup_edit>
+        <update handle="editor" />
+        <reference name="head">
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadTinyMce"><flag>1</flag></action>
+            <action method="addJs"><script>mage/adminhtml/variables.js</script></action>
+            <action method="addJs"><script>mage/adminhtml/wysiwyg/widget.js</script></action>
+            <action method="addJs"><script>lib/flex.js</script></action>
+            <action method="addJs"><script>lib/FABridge.js</script></action>
+            <action method="addJs"><script>mage/adminhtml/flexuploader.js</script></action>
+            <action method="addJs"><script>mage/adminhtml/browser.js</script></action>
+            <action method="addJs"><script>prototype/window.js</script></action>
+            <action method="addJs"><script>prototype/prototype.js</script></action>
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+            <action method="addCss"><name>lib/prototype/windows/themes/magento.css</name></action>
+        </reference>
+    </campaignadmin_adminhtml_popup_edit>
+
     <campaignadmin_adminhtml_maillist_index>
         <reference name="content">
             <block type="campaign/adminhtml_maillist" name="maillist" />
