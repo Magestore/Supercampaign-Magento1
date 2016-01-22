@@ -69,7 +69,7 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
      * get Popup model by search available
      * @return object | bool
      */
-    public function getPopup()
+   /* public function getPopup()
     {
         if (!is_object($this->_popup)) {
             if(Mage::registry('campaign_popup')){
@@ -90,7 +90,7 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
             }
         }
         return $this->_popup;
-    }
+    }*/
 
     /**
      * get popup has accepted by includes - excludes and is active
@@ -98,5 +98,18 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
      */
     public function getAvailable(){
         return Mage::getModel('campaign/popup')->getAvailable();
+    }
+
+
+    public function getData(){
+        return array(
+
+            'devices' => 'desktop,mobile, tablet, all'
+        );
+    }
+
+    public function getPopup(){
+
+        return new Varien_Object($this->getData());
     }
 }
