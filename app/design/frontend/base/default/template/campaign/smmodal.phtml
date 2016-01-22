@@ -1,17 +1,19 @@
 <?php
-
+    $popup = $this->getAllDataPopupActive();
+    //$popup->getData();
+    Zend_debug::dump($popup->getData());
     $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
     $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
     $stylepopup = Mage::helper('campaign')->checkStylepopup();
 ?>
 
-<div class="promotion">
-    <div id="sc-popup09" class="modal fade sc-popup09" role="dialog">
+<div class="static">
+    <div id="sc-popup01" class="modal fade sc-popup01" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
-                <a class="dialogClose style1 overlay2" data-dismiss="modal" data-target="#sc-popup09"></a>
-                <?php echo $this->getLayout()->createBlock('campaign/campaign')->setTemplate('campaign/popup/social/template09.phtml')->toHtml(); ?>
+                <a class="dialogClose style1 overlay2" data-dismiss="modal" data-target="#sc-popup01"></a>
+                <?php echo $popup->getData('popup_content'); ?>
             </div>
         </div>
     </div>
