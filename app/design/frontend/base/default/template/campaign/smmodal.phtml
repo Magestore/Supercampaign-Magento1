@@ -1,7 +1,7 @@
 <?php
     $popup = $this->getAllDataPopupActive();
     //$popup->getData();
-    //Zend_debug::dump($popup->getData());
+    Zend_debug::dump($popup->getData());
     $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
     $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
     $stylepopup = Mage::helper('campaign')->checkStylepopup();
@@ -18,18 +18,9 @@
         </div>
     </div>
 </div>
-<!--
-
-<div class="button-effect">
-    <a class='btn btn-primary btn-effect-1' data-direction='top'>Top (default)</a>
-    <a class='btn btn-primary btn-effect-2' data-direction='left'>Left</a>
-    <a class='btn btn-primary btn-effect-3' data-direction='right'>Right</a>
-    <a class='btn btn-primary btn-effect-4' data-direction='bottom'>Bottom</a>
-    <a class='btn btn-info btn-effect-5' data-direction='top-left'>Top-Left</a>
-    <a class='btn btn-info btn-effect-6' data-direction='top-right'>Top-Right</a>
-    <a class='btn btn-info btn-effect-7' data-direction='bottom-left'>Bottom-Left</a>
-    <a class='btn btn-info btn-effect-8' data-direction='bottom-right'>Bottom-right</a>
-</div>-->
+<?php
+     $style = "#sc-popup0".$popup->getData('popup_type')."  .modal-content{width:".$popup->getData('width')."px}";
+?>
 <script type="text/javascript">
     var $j = jQuery.noConflict();
     switch(<?php echo $popup->getData('appear_effect')?>) {
@@ -60,15 +51,11 @@
         default:
             $j('.modal').prop('class', 'modal fade').addClass('top');
     }
-    $j('.modal').modal('show');
-
-    /*$j('.btn').click(function() {
-        $j('.modal').prop('class', 'modal fade').addClass($j(this).data('direction'));
+    $j(window).bind("load", function() {
+        var string = "<style type=\"text/css\"><?php echo $style?></style>"
+        $j('head').append(string);
         $j('.modal').modal('show');
     });
-    $j(window).bind("load", function() {
-        $j('.btn-effect-4').trigger("click");
-    });*/
 </script>
 
 
