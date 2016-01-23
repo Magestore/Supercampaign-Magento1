@@ -61,7 +61,32 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
         if ($data = $this->getRequest()->getPost()) {
             //zend_debug::dump($data); die('ccc');
 
-            $login_user = $data['login-user'];
+            //save store
+            if(isset($data['store']) && is_array($data['store'])){
+                $store = implode(',', $data['store']);
+                $data['store'] = $store.','; //fix store view in grid
+            }
+
+            //save login user
+            if(isset($data['login_users']) && is_array($data['login_users'])){
+                $store = implode(',', $data['login_users']);
+                $data['login_users'] = $store.','; //fix store view in grid
+            }
+
+            //save customer group
+            if(isset($data['customer_group_ids']) && is_array($data['customer_group_ids'])){
+                $store = implode(',', $data['customer_group_ids']);
+                $data['customer_group_ids'] = $store.','; //fix store view in grid
+            }
+
+            //save devices
+            if(isset($data['devices']) && is_array($data['devices'])){
+                $store = implode(',', $data['devices']);
+                $data['devices'] = $store.','; //fix store view in grid
+            }
+
+
+
 
             $model = Mage::getModel('campaign/popup');
             $model->setData($data)

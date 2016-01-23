@@ -113,7 +113,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
 
         if (!Mage::app()->isSingleStoreMode()) {
             $field = $fieldset->addField('store', 'multiselect', array(
-                'name'      => 'stores[]',
+                'name'      => 'store[]',
                 'label'     => $this->__('Store View'),
                 'title'     => $this->__('Store View'),
                 'required'  => true,
@@ -125,7 +125,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         }
         else {
             $fieldset->addField('store', 'hidden', array(
-                'name'      => 'stores[]',
+                'name'      => 'store[]',
                 'value'     => Mage::app()->getStore(true)->getId()
             ));
             $data['store'] = Mage::app()->getStore(true)->getId();
