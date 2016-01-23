@@ -25,7 +25,26 @@
     $border_color = "border-color:#".$popup->getData('border_color');
     $border_size = "border-size:".$popup->getData('border_size_in_px')."px";
     $padding_size = "padding:".$popup->getData('padding')."px";
-
+    $styleshadow = $popup->getData('popup_shadow');
+    $height = "";
+    if($popup->getData('height') !=  "0"){
+        $height = "height:".$popup->getData('height');
+    }
+    $width = "";
+    if($popup->getData('width') !=  "0"){
+        $width = "width:".$popup->getData('width');
+    }
+    $maxwidth = "";
+    if($popup->getData('max_width') !=  ""){
+        $maxwidth = "max-width:".$popup->getData('max_width');
+    }
+    $boxshowdow = "";
+    if($styleshadow == "0")
+    {
+        $boxshowdow = "-webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);box-shadow: 0 5px 15px rgba(0, 0, 0, .5);";
+    }else{
+        $boxshowdow = "-webkit-box-shadow: 0 0 0;box-shadow: 0 0 0;";
+    }
 
     $close_path = $popup->getData('close_icon_style');
     $close_icon = "";
@@ -53,8 +72,10 @@
             $style_plus = "border-radius:50%";
             break;
         }
-    $stylecontent = "#sc-popup0".$popup->getData('popup_id')."  .modal-content{width:".$popup->getData('width')."px;background-color:#".$popup->getData('popup_background').";".$style_plus.";".$border_color.";".$border_size.";".$padding_size."}";
+    $stylecontent = "#sc-popup0".$popup->getData('popup_id')."  .modal-content{".$width." ".$height.";background-color:#".$popup->getData('popup_background').";".$style_plus.";".$border_color.";".$border_size.";".$padding_size.";".$boxshowdow.";".$maxwidth.";}";
     $styleoverbg = "#sc-popup0".$popup->getData('popup_id')."  .modal-backdrop{background-color:#".$popup->getData('overlay_background')."}";
+    $customcss = $popup->getData('custom_css');
+
 ?>
 <script type="text/javascript">
     var $j = jQuery.noConflict();
@@ -89,7 +110,7 @@
             $j('.modal').prop('class', 'modal fade').addClass('top');
     }
     $j(window).bind("load", function() {
-        var string = "<style type=\"text/css\"><?php echo $stylecontent." ".$styleoverbg." ".$close_icon ?></style>"
+        var string = "<style type=\"text/css\"><?php echo $stylecontent." ".$styleoverbg." ".$close_icon." ".$customcss?></style>"
         $j('head').append(string);
         $j('.modal').modal('show');
     });
