@@ -644,13 +644,13 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
         $this->_redirect('*/*/index');
     }
 
-    public function countdownGridAction(){
+    /*public function countdownGridAction(){
         Mage::register('reset_search_product', 1);
         $grid = $this->getLayout()->createBlock('campaign/adminhtml_campaign_edit_tab_countdown_grid')->toHtml();
         $this->getResponse()
             ->setBody($grid);
         return;
-    }
+    }*/
 
     /**
      * export grid item to CSV type
@@ -675,6 +675,46 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
                            ->getXml();
         $this->_prepareDownloadResponse($fileName, $content);
     }
+
+
+    //Tit banner ajax grid
+    /*public function ajaxGridAction(){
+        //get params
+        Mage::register('widget_reloaded_ids', $this->getRequest()->getPost('widget_reloaded_ids'));
+        $grid = $this->getLayout()->createBlock('campaign/adminhtml_banner_edit_tab_widgetgrid');
+        $this->getResponse()->setBody($grid->toHtml());
+        $this->renderLayout();
+        $this->getResponse()->sendResponse();
+        exit;
+    }*/
+
+    /**
+     * get grid in campaign edit widget banner tab
+     */
+    public function getBannerGridTabAction(){
+        //get params
+        Mage::register('banner_reloaded_ids', $this->getRequest()->getPost('banner_reloaded_ids'));
+        $grid = $this->getLayout()->createBlock('campaign/adminhtml_campaign_edit_tab_banner_grid');
+        $serialer = Mage::getModel('core/layout')->createBlock('adminhtml/widget_grid_serializer');
+        $serialer->initSerializerBlock($grid, 'getSerializeData', 'banner_ids', 'banner_reloaded_ids');
+        $js = '<script type="text/javascript"></script>';
+        $this->getResponse()->setBody($grid->toHtml().$serialer->toHtml());
+        $this->renderLayout();
+        $this->getResponse()->sendResponse();
+        exit;
+    }
+
+    public function getBannerGridAjaxAction(){
+        //get params
+        Mage::register('filter', $this->getRequest()->getParam('filter'));
+        Mage::register('banner_reloaded_ids', $this->getRequest()->getPost('banner_reloaded_ids'));
+        $grid = $this->getLayout()->createBlock('campaign/adminhtml_campaign_edit_tab_banner_grid');
+        $this->getResponse()->setBody($grid->toHtml());
+        $this->renderLayout();
+        $this->getResponse()->sendResponse();
+        exit;
+    }
+
     
     protected function _isAllowed()
     {
