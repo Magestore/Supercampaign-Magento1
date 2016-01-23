@@ -242,22 +242,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                     'value' => 1,
                     'label' => Mage::helper('campaign')->__('After Seconds'),
                 ),
-                array(
-                    'value' => 2,
-                    'label' => Mage::helper('campaign')->__('After Scroll'),
-                ),
-                array(
-                    'value' => 3,
-                    'label' => Mage::helper('campaign')->__('On Click'),
-                ),
-                array(
-                    'value' => 4,
-                    'label' => Mage::helper('campaign')->__('On Hover'),
-                ),
-                array(
-                    'value' => 5,
-                    'label' => Mage::helper('campaign')->__('Mouse Leave Window'),
-                ),
             ),
         ));
 
