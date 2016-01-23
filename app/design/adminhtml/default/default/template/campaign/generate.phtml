@@ -1,0 +1,33 @@
+
+<div class="content-header">
+    <a href="#" onclick="TINY.box.hide();"></a>
+    <h3>
+        <?php echo $this->__("Copy and paste this into your HTML code wherever you want the widget to appear on your page.") ?>
+    </h3>
+</div>
+<textarea id="clipboard-text" name="clipboard-text" onclick="this.focus(); this.select();" style="width:650px; height:170px;">
+</textarea>
+<div id="messages">
+    <ul class="messages" id="copied" style="display: none">
+        <li class="success-msg">
+            <span><?php echo $this->__('The code has been copied to your clipboard.') ?></span>
+        </li>
+    </ul>
+    <button id="copy-button" data-clipboard-text="Copy Me!" title="Click to copy me.">Copy to Clipboard</button>
+</div>
+<div class="userguide">
+    <h4><span></span> <?php echo $this->__("You can adjust the value of data-width and data-height for each widget.") ?></h4>
+    <h4><span></span> <?php echo $this->__('You can also place many widgets in a same page.') ?></h4>
+</div>
+<style>
+    #tinycontent .content-header a{
+        background-image: url("<?php echo $this->getSkinUrl('css/magestore/bannerslider/images/ui-icons_888888_256x240.png') ?>");
+        background-repeat: no-repeat;
+        background-position: -94px -127px;
+        display: inline-block;width: 20px; height: 20px;
+    }
+    #tinycontent .userguide{
+        margin: 10px 0px;
+    }
+    #tinycontent #copy-button{padding: 3px;}
+</style>

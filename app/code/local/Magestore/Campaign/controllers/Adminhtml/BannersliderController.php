@@ -49,6 +49,17 @@ class Magestore_Campaign_Adminhtml_BannersliderController extends Mage_Adminhtml
                 ->renderLayout();
     }
 
+
+    /**
+    *generate code banner slider
+     */
+    public function showGenerateCodeAction() {
+        $params = $this->getRequest()->getParams();
+        $block = $this->getLayout()->createBlock('campaign/adminhtml_bannerslider_generate')
+            ->setData('bannerslider_id', $params['id']);
+        $this->getResponse()->setBody($block->toHtml());
+    }
+
     /**
      * view and edit item action
      */
