@@ -28,8 +28,8 @@
  */
 class Magestore_Campaign_Model_Sliderstatus extends Varien_Object
 {
-	const STATUS_ENABLED	= 0;
-	const STATUS_DISABLED	= 1;
+	const STATUS_ENABLED	= 1;
+	const STATUS_DISABLED	= 0;
 	
 	/**
 	 * get model option as array

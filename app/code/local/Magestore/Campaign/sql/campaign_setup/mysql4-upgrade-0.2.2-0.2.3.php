@@ -85,7 +85,7 @@ CREATE TABLE {$this->getTable('campaign/banner')} (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
-
+/*
 CREATE TABLE {$this->getTable('campaign/value')} (
   `value_id` int(10) unsigned NOT NULL auto_increment,
   `banner_id` int(11) unsigned NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE {$this->getTable('campaign/value')} (
   FOREIGN KEY (`banner_id`) REFERENCES {$this->getTable('campaign/banner')} (`banner_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`store_id`) REFERENCES {$this->getTable('core/store')} (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   PRIMARY KEY (`value_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;*/
 
 
 

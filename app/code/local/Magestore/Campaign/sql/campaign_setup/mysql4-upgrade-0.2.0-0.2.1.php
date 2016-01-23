@@ -25,7 +25,7 @@ $installer = $this;
 $installer->startSetup();
 
 $installer->run("
-    DROP TABLE IF EXISTS {$this->getTable('campaign/widget')};
+/*    DROP TABLE IF EXISTS {$this->getTable('campaign/widget')};
     CREATE TABLE {$this->getTable('campaign/widget')} (
       `widget_id` int(11) unsigned NOT NULL auto_increment,
       `title` varchar(255) NOT NULL DEFAULT '',
@@ -36,7 +36,7 @@ $installer->run("
       `css` text NOT NULL DEFAULT '',
       `status` smallint(6) NOT NULL default '0',
       PRIMARY KEY (`widget_id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;*/
 ");
 
 

@@ -161,7 +161,7 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
 
     //auto convert timezone
     protected function _afterLoad(){
-        if($this->getEndTime() == null && $this->getId() == null){
+        if($this->getEndTime() == $this->getStartTime() && $this->getId() == null){
             $timestamp = Mage::getModel('core/date')->gmtTimestamp();
             $date = date('Y-m-d H:i:s', $timestamp + 24*60*59);
             $this->setEndTime($date);

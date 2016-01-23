@@ -57,6 +57,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Popup_Grid extends Ma
             'header'	=> Mage::helper('campaign')->__('Added to Campaign'),
             'align'	 =>'left',
             'index'	 => 'campaign_name',
+			'filter' => false,
         ));
 
         if (!Mage::app()->isSingleStoreMode()) {
@@ -100,8 +101,8 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Popup_Grid extends Ma
 			'index'	 => 'status',
 			'type'		=> 'options',
 			'options'	 => array(
-				0 => 'Enabled',
-				1 => 'Disabled',
+				1 => 'Enabled',
+				0 => 'Disabled',
 			),
 		));
 

@@ -31,13 +31,13 @@ $installer->startSetup();
     DROP FOREIGN KEY `popup_game_player_refer_maillist`;*/
 
 $installer->run("
-
+/*
 ALTER TABLE `{$this->getTable('campaign/popup_type_game_player')}`
     DROP FOREIGN KEY `popup_game_player_refer_maillist`;
 
 ALTER TABLE `{$this->getTable('campaign/popup_type_game_player')}`
     ADD CONSTRAINT `popup_game_player_refer_maillist`
-        FOREIGN KEY (`maillist_id`) REFERENCES `{$this->getTable('campaign/maillist')}` (`id`) ON UPDATE CASCADE ON DELETE CASCADE;
+        FOREIGN KEY (`maillist_id`) REFERENCES `{$this->getTable('campaign/maillist')}` (`id`) ON UPDATE CASCADE ON DELETE CASCADE;*/
 
 ");
 

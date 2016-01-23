@@ -31,8 +31,8 @@ $installer->startSetup();
 
 $installer->run("
 
-ALTER TABLE {$this->getTable('campaign/countdown')}
-    MODIFY COLUMN `product_id` varchar(255) NOT NULL default '';
+/*ALTER TABLE {$this->getTable('campaign/countdown')}
+    MODIFY COLUMN `product_id` varchar(255) NOT NULL default '';*/
 
 ");
 

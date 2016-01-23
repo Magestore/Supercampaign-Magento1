@@ -65,6 +65,7 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
             if (!empty($data)) {
                 $model->setData($data);
             }
+
             /*set start date, end date to UTC timezone*/
             //$model->setStartTime($model->toLocaleTimezone($model->getStartTime()));
             //$model->setEndTime($model->toLocaleTimezone($model->getEndTime()));
@@ -73,19 +74,19 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
 
             //forms data array
             $popup_data = array();
-            $sidebar_data = array();
+            //$sidebar_data = array();
             $bannerlistpage_data = array();
 
             //get childs model
-            $popup = $model->getPopup();
-            $sidebar = $model->getSidebar();
-            $headertext = $model->getHeadertext();
+//            $popup = $model->getPopup();
+            //$sidebar = $model->getSidebar();
+            //$headertext = $model->getHeadertext();
 
             //append prefix all data popup type to array
-            $_data = $popup->getAllData();
-            foreach ($_data as $key => $value) {
-                $popup_data['popup_'.$key] = $value;
-            }
+//            $_data = $popup->getAllData();
+//            foreach ($_data as $key => $value) {
+//                $popup_data['popup_'.$key] = $value;
+//            }
 
             Mage::register('campaign_data', $model);
 
@@ -94,73 +95,73 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
              */
             if(!$campaignId){
                 /*get default popup template content*/
-                $templates = Mage::getModel('campaign/template')->getOptions(
-                    Magestore_Campaign_Model_Popup_Type_Static::TEMPLATE_GROUP,
-                    Magestore_Campaign_Model_Popup_Type_Static::TEMPLATE_TYPE);
-                if(count($templates)){
-                    $popup_data['popup_static_template_id'] = $templates[0]['value']; //templateId
-                    $template = Mage::getModel('campaign/template')->load($templates[0]['value']);
-                    $popup_data['popup_static_content'] = $template->getContent();
-                }
-                $templates_form_1 = Mage::getModel('campaign/template')->getOptions(
-                    Magestore_Campaign_Model_Popup_Type_Form::TEMPLATE_GROUP,
-                    Magestore_Campaign_Model_Popup_Type_Form::TEMPLATE_TYPE_STEP_1);
-                if(count($templates_form_1)){
-                    $popup_data['popup_form_template_id_one'] = $templates_form_1[0]['value'];//templateId
-                    $template = Mage::getModel('campaign/template')->load($templates_form_1[0]['value']);
-                    $popup_data['popup_form_content_step_one'] = $template->getContent();
-                }
-                $templates_form_2 = Mage::getModel('campaign/template')->getOptions(
-                    Magestore_Campaign_Model_Popup_Type_Form::TEMPLATE_GROUP,
-                    Magestore_Campaign_Model_Popup_Type_Form::TEMPLATE_TYPE_STEP_2);
-                if(count($templates_form_2)){
-                    $popup_data['popup_form_template_id_two'] = $templates_form_2[0]['value'];//templateId
-                    $template = Mage::getModel('campaign/template')->load($templates_form_2[0]['value']);
-                    $popup_data['popup_form_content_step_two'] = $template->getContent();
-                }
-                /*get default popup game template content*/
-                $options= Mage::getModel('campaign/template')->getOptions(
-                    Magestore_Campaign_Model_Popup_Type_Game_Halloween::TEMPLATE_GROUP,
-                    Magestore_Campaign_Model_Popup_Type_Game_Halloween::TEMPLATE_TYPE_STEP_1);
-                if(count($options)){
-                    $popup_data['popup_game_halloween_template_step_1'] = $options[0]['value'];//templateId
-                    $template = Mage::getModel('campaign/template')->load($options[0]['value']);
-                    $popup_data['popup_game_halloween_content_step_1'] = $template->getContent();
-                }
-                $options= Mage::getModel('campaign/template')->getOptions(
-                    Magestore_Campaign_Model_Popup_Type_Game_Halloween::TEMPLATE_GROUP,
-                    Magestore_Campaign_Model_Popup_Type_Game_Halloween::TEMPLATE_TYPE_STEP_2);
-                if(count($options)){
-                    $popup_data['popup_game_halloween_template_step_2'] = $options[0]['value'];//templateId
-                    $template = Mage::getModel('campaign/template')->load($options[0]['value']);
-                    $popup_data['popup_game_halloween_content_step_2'] = $template->getContent();
-                }
-                $options= Mage::getModel('campaign/template')->getOptions(
-                    Magestore_Campaign_Model_Popup_Type_Game_Halloween::TEMPLATE_GROUP,
-                    Magestore_Campaign_Model_Popup_Type_Game_Halloween::TEMPLATE_TYPE_STEP_3);
-                if(count($options)){
-                    $popup_data['popup_game_halloween_template_step_3'] = $options[0]['value'];//templateId
-                    $template = Mage::getModel('campaign/template')->load($options[0]['value']);
-                    $popup_data['popup_game_halloween_content_step_3'] = $template->getContent();
-                }
+//                $templates = Mage::getModel('campaign/template')->getOptions(
+//                    Magestore_Campaign_Model_Popup_Type_Static::TEMPLATE_GROUP,
+//                    Magestore_Campaign_Model_Popup_Type_Static::TEMPLATE_TYPE);
+//                if(count($templates)){
+//                    $popup_data['popup_static_template_id'] = $templates[0]['value']; //templateId
+//                    $template = Mage::getModel('campaign/template')->load($templates[0]['value']);
+//                    $popup_data['popup_static_content'] = $template->getContent();
+//                }
+//                $templates_form_1 = Mage::getModel('campaign/template')->getOptions(
+//                    Magestore_Campaign_Model_Popup_Type_Form::TEMPLATE_GROUP,
+//                    Magestore_Campaign_Model_Popup_Type_Form::TEMPLATE_TYPE_STEP_1);
+//                if(count($templates_form_1)){
+//                    $popup_data['popup_form_template_id_one'] = $templates_form_1[0]['value'];//templateId
+//                    $template = Mage::getModel('campaign/template')->load($templates_form_1[0]['value']);
+//                    $popup_data['popup_form_content_step_one'] = $template->getContent();
+//                }
+//                $templates_form_2 = Mage::getModel('campaign/template')->getOptions(
+//                    Magestore_Campaign_Model_Popup_Type_Form::TEMPLATE_GROUP,
+//                    Magestore_Campaign_Model_Popup_Type_Form::TEMPLATE_TYPE_STEP_2);
+//                if(count($templates_form_2)){
+//                    $popup_data['popup_form_template_id_two'] = $templates_form_2[0]['value'];//templateId
+//                    $template = Mage::getModel('campaign/template')->load($templates_form_2[0]['value']);
+//                    $popup_data['popup_form_content_step_two'] = $template->getContent();
+//                }
+//                /*get default popup game template content*/
+//                $options= Mage::getModel('campaign/template')->getOptions(
+//                    Magestore_Campaign_Model_Popup_Type_Game_Halloween::TEMPLATE_GROUP,
+//                    Magestore_Campaign_Model_Popup_Type_Game_Halloween::TEMPLATE_TYPE_STEP_1);
+//                if(count($options)){
+//                    $popup_data['popup_game_halloween_template_step_1'] = $options[0]['value'];//templateId
+//                    $template = Mage::getModel('campaign/template')->load($options[0]['value']);
+//                    $popup_data['popup_game_halloween_content_step_1'] = $template->getContent();
+//                }
+//                $options= Mage::getModel('campaign/template')->getOptions(
+//                    Magestore_Campaign_Model_Popup_Type_Game_Halloween::TEMPLATE_GROUP,
+//                    Magestore_Campaign_Model_Popup_Type_Game_Halloween::TEMPLATE_TYPE_STEP_2);
+//                if(count($options)){
+//                    $popup_data['popup_game_halloween_template_step_2'] = $options[0]['value'];//templateId
+//                    $template = Mage::getModel('campaign/template')->load($options[0]['value']);
+//                    $popup_data['popup_game_halloween_content_step_2'] = $template->getContent();
+//                }
+//                $options= Mage::getModel('campaign/template')->getOptions(
+//                    Magestore_Campaign_Model_Popup_Type_Game_Halloween::TEMPLATE_GROUP,
+//                    Magestore_Campaign_Model_Popup_Type_Game_Halloween::TEMPLATE_TYPE_STEP_3);
+//                if(count($options)){
+//                    $popup_data['popup_game_halloween_template_step_3'] = $options[0]['value'];//templateId
+//                    $template = Mage::getModel('campaign/template')->load($options[0]['value']);
+//                    $popup_data['popup_game_halloween_content_step_3'] = $template->getContent();
+//                }
                 /*get default sidebar template content*/
-                $templates = Mage::getModel('campaign/template')->getOptions(
-                    Magestore_Campaign_Model_Sidebar::TEMPLATE_GROUP);
-                if(count($templates)){
-                    $sidebar_data['sidebar_template_id'] = $templates[0]['value']; //templateId
-                    $template = Mage::getModel('campaign/template')->load($templates[0]['value']);
-                    $sidebar_data['sidebar_content'] = $template->getContent();
-                }
+//                $templates = Mage::getModel('campaign/template')->getOptions(
+//                    Magestore_Campaign_Model_Sidebar::TEMPLATE_GROUP);
+//                if(count($templates)){
+//                    $sidebar_data['sidebar_template_id'] = $templates[0]['value']; //templateId
+//                    $template = Mage::getModel('campaign/template')->load($templates[0]['value']);
+//                    $sidebar_data['sidebar_content'] = $template->getContent();
+//                }
                 /*get default headertext template content*/
-                $templates = Mage::getModel('campaign/template')->getOptions(
-                    Magestore_Campaign_Model_Headertext::TEMPLATE_GROUP);
-                if(count($templates)){
-                    $headertext->setData('template_id', $templates[0]['value']); //templateId
-                    $template = Mage::getModel('campaign/template')->load($templates[0]['value']);
-                    $headertext->setData('content', $template->getContent());
-                }
+//                $templates = Mage::getModel('campaign/template')->getOptions(
+//                    Magestore_Campaign_Model_Headertext::TEMPLATE_GROUP);
+//                if(count($templates)){
+//                    $headertext->setData('template_id', $templates[0]['value']); //templateId
+//                    $template = Mage::getModel('campaign/template')->load($templates[0]['value']);
+//                    $headertext->setData('content', $template->getContent());
+//                }
             }
-            Mage::register('popup_data', new Varien_Object($popup_data));
+//            Mage::register('popup_data', new Varien_Object($popup_data));
 
             /**
              * edit data header text
@@ -169,24 +170,24 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
             foreach ($model->getHeadertext()->getData() as $key => $value) {
                 $headertext_data['headertext_'.$key] = $value;
             }*/
-            Mage::register('headertext_data', new Varien_Object($headertext->getData()));
+           // Mage::register('headertext_data', new Varien_Object($headertext->getData()));
 
             /**
              * edit data sidebar
              */
-            foreach ($sidebar->getData() as $key => $value) {
-                $sidebar_data[Magestore_Campaign_Model_Sidebar::PREFIX.$key] = $value;
-            }
-            Mage::register('sidebar_data', new Varien_Object($sidebar_data));
+//            foreach ($sidebar->getData() as $key => $value) {
+//                $sidebar_data[Magestore_Campaign_Model_Sidebar::PREFIX.$key] = $value;
+//            }
+//            Mage::register('sidebar_data', new Varien_Object($sidebar_data));
 
             /**
              * zeus edit data countdown
              */
-            $countdown_data = array();
-            foreach ($model->getCountdown()->getData() as $key => $value) {
-                $countdown_data['countdown_'.$key] = $value;
-            }
-            Mage::register('countdown_data', new Varien_Object($countdown_data));
+//            $countdown_data = array();
+//            foreach ($model->getCountdown()->getData() as $key => $value) {
+//                $countdown_data['countdown_'.$key] = $value;
+//            }
+//            Mage::register('countdown_data', new Varien_Object($countdown_data));
 
             /*zeus edit data countdown*/
 
@@ -223,7 +224,7 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
             /* save campaign model */
 
             $model = Mage::getModel('campaign/campaign');
-
+//zend_debug::dump($data);die;
             //save store
             if(isset($data['stores']) && is_array($data['stores'])){
                 $store = implode(',', $data['stores']);
@@ -238,74 +239,50 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
             $model->setEndTime($model->toUTCTimezone($campaignData->getEndTime()));
 
             //add data for widget banner
-            if(isset($data[Magestore_Campaign_Model_Widget_Banner::PREFIX_DATA])){
-                if($model->getWidgetBannerId()){
-
-                }
-            }
+//            if(isset($data[Magestore_Campaign_Model_Widget_Banner::PREFIX_DATA])){
+//                if($model->getWidgetBannerId()){
+//
+//                }
+//            }
 
             //get data for popup have prefix popup_
-            $popup_data = array();
+//            $popup_data = array();
             //$headertext_data = array();
-            $sidebar_data = array();
+//            $sidebar_data = array();
 //            $bannerlistpage_data = array();
 //            $bannermenu_data = array();
 //            $bannerhomepage_data = array();
-            $countdown_data = array();
+//            $countdown_data = array();
 
-            foreach($data as $key => $value){
-                //get popup data
-                if(strpos($key, 'popup_') === 0){
-                    $name = substr($key, strlen('popup_')); //remove prefix string
-                    $popup_data[$name] = $value;
-                }
-                //get header text data
-                /*if(strpos($key, 'headertext_') === 0){
-                    $name = substr($key, strlen('headertext_')); //remove prefix string
-                    $headertext_data[$name] = $value;
-                }*/
-                //get left sidebar data
-                if(strpos($key, 'sidebar_') === 0){
-                    $name = substr($key, strlen('sidebar_')); //remove prefix string
-                    $sidebar_data[$name] = $value;
-                }
-
-//                //zeus get bannerlistpage data
-//                if(strpos($key, 'bannerlistpage_') === 0){
-//                    $name = substr($key, strlen('bannerlistpage_')); //remove prefix string
-//                    $bannerlistpage_data[$name] = $value;
-//                }
-//
-//                //zeus get bannermenu data
-//                if(strpos($key, 'bannermenu_') === 0){
-//                    $name = substr($key, strlen('bannermenu_')); //remove prefix string
-//                    $bannermenu_data[$name] = $value;
-//                }
-//
-//                //zeus get bannermenu data
-//                if(strpos($key, 'bannerhomepage_') === 0){
-//                    $name = substr($key, strlen('bannerhomepage_')); //remove prefix string
-//                    $bannerhomepage_data[$name] = $value;
-//                }
-
-                //zeus get countdown data
-                if(strpos($key, 'countdown_') === 0){
-                    $name = substr($key, strlen('countdown_')); //remove prefix string
-                    $countdown_data[$name] = $value;
-                }
-
-            }
-            $popup_data = new Varien_Object($popup_data); //convert array to model
-            $sidebar_data = new Varien_Object($sidebar_data); //convert array to model
+//            $popup_data = new Varien_Object($popup_data); //convert array to model
+//            $sidebar_data = new Varien_Object($sidebar_data); //convert array to model
             //$headertext_data = new Varien_Object($data[Magestore_Campaign_Model_Headertext::PREFIX]); //convert array to model
 //            $bannerlistpage_data = new Varien_Object($bannerlistpage_data); //convert array to model
 //            $bannermenu_data = new Varien_Object($bannermenu_data); //convert array to model
 //            $bannerhomepage_data = new Varien_Object($bannerhomepage_data); //convert array to model
-            $countdown_data = new Varien_Object($countdown_data); //convert array to model
+//            $countdown_data = new Varien_Object($countdown_data); //convert array to model
 
             try {
 
                 $model->save();
+
+                /*get all added popups to this campaign*/
+                /*saving campaign_id top popups*/
+                $popupIds = array();
+                if(isset($data['popup_ids'])){
+                    $popupIds = explode('&', $data['popup_ids']);
+                }
+                $popups = Mage::getModel('campaign/popup')->getCollection();
+                $popups->addFieldToFilter(array('campaign_id', 'popup_id'),
+                    array($model->getId(), array('in'=>$popupIds)));
+                foreach($popups as $popup){
+                    if(in_array($popup->getId(), $popupIds)){
+                        $popup->setCampaignId($model->getId());//set campaign id
+                    }else{
+                        $popup->setCampaignId('');//set no campaign id (delete old)
+                    }
+                    $popup->save();
+                }
 
 
                 /*get all added banner to this campaign*/
@@ -314,8 +291,8 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
                 if(isset($data['banner_ids'])){
                     $banner_ids = explode('&', $data['banner_ids']);
                 }
-                $banners = Mage::getModel('campaign/widget_banner')->getCollection();
-                $banners->addFieldToFilter(array('campaign_id', 'widget_banner_id'),
+                $banners = Mage::getModel('campaign/bannerslider')->getCollection();
+                $banners->addFieldToFilter(array('campaign_id', 'bannerslider_id'),
                     array($model->getId(), array('in'=>$banner_ids)));
                 foreach($banners as $banner){
                     if(in_array($banner->getId(), $banner_ids)){
@@ -329,15 +306,15 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
                 /**
                  * save popup
                  */
-                $popup = $model->getPopup($popup_data->getPopupType()); //must set type to load exactily type model
-                if($popup->getId()){
-                    $popup->addData($popup_data->getData());
-                }else{
-                    $popup->setData($popup_data->getData());
-                }
-                $popup->setPopupType($popup_data->getPopupType());
-                $popup->setCampaignId($model->getId());
-                $popup->save();
+//                $popup = $model->getPopup($popup_data->getPopupType()); //must set type to load exactily type model
+//                if($popup->getId()){
+//                    $popup->addData($popup_data->getData());
+//                }else{
+//                    $popup->setData($popup_data->getData());
+//                }
+//                $popup->setPopupType($popup_data->getPopupType());
+//                $popup->setCampaignId($model->getId());
+//                $popup->save();
 
                 /**
                  * save header text
@@ -354,14 +331,14 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
                 /**
                  * save sidebar
                  */
-                $sidebar = $model->getSidebar();
-                if($sidebar->getId()){
-                    $sidebar->addData($sidebar_data->getData());
-                }else{
-                    $sidebar->setData($sidebar_data->getData());
-                }
-                $sidebar->setCampaignId($model->getId());
-                $sidebar->save();
+//                $sidebar = $model->getSidebar();
+//                if($sidebar->getId()){
+//                    $sidebar->addData($sidebar_data->getData());
+//                }else{
+//                    $sidebar->setData($sidebar_data->getData());
+//                }
+//                $sidebar->setCampaignId($model->getId());
+//                $sidebar->save();
 
 
                 /* zeus save inmage banner listpage*/
@@ -505,42 +482,42 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
                 /**
                  * zeus save countdown data
                  */
-                $countdown = $model->getCountdown();
-                if(is_array($countdown_data->getData('showcountdown'))){
-                    $locates = $countdown_data->getData('showcountdown');
-                    $countdown_locate = implode(',', $locates);
-                    $countdown_data->setShowcountdown($countdown_locate);
-                }else{
-                    $countdown_data->setShowcountdown('');
-                }
-                //save product selected to productId field
-                if(is_array($countdown_data->getData('selected_products'))){
-                    $productsSelected = $countdown_data->getData('selected_products');
-                    if($productsSelected[0] == 'on' || $productsSelected[0] == 'no'){
-                        array_shift($productsSelected);
-                    }
-                    $showcountdown = implode(',', $productsSelected);
-                    $countdown_data->setProductId($showcountdown);
-                }
-                if($data['end_time'] != ''){
-                    $endtime = $data['end_time'];
-                    $endtimex = substr($endtime,8,10);
-                    $epint = intval($endtimex);
-                    $countdown_data->setDayCountdown($epint);
-                }
-                if($data['end_time'] != ''){
-                    $endtimet = $data['end_time'];
-                    $endtimexm = substr($endtimet,5,8);
-                    $epintk = intval($endtimexm);
-                    $countdown_data->setMonthCountdown($epintk);
-                }
-                if($countdown->getId()){
-                    $countdown->addData($countdown_data->getData());
-                }else{
-                    $countdown->setData($countdown_data->getData());
-                }
-                $countdown->setCampaignId($model->getId());
-                $countdown->save();
+//                $countdown = $model->getCountdown();
+//                if(is_array($countdown_data->getData('showcountdown'))){
+//                    $locates = $countdown_data->getData('showcountdown');
+//                    $countdown_locate = implode(',', $locates);
+//                    $countdown_data->setShowcountdown($countdown_locate);
+//                }else{
+//                    $countdown_data->setShowcountdown('');
+//                }
+//                //save product selected to productId field
+//                if(is_array($countdown_data->getData('selected_products'))){
+//                    $productsSelected = $countdown_data->getData('selected_products');
+//                    if($productsSelected[0] == 'on' || $productsSelected[0] == 'no'){
+//                        array_shift($productsSelected);
+//                    }
+//                    $showcountdown = implode(',', $productsSelected);
+//                    $countdown_data->setProductId($showcountdown);
+//                }
+//                if($data['end_time'] != ''){
+//                    $endtime = $data['end_time'];
+//                    $endtimex = substr($endtime,8,10);
+//                    $epint = intval($endtimex);
+//                    $countdown_data->setDayCountdown($epint);
+//                }
+//                if($data['end_time'] != ''){
+//                    $endtimet = $data['end_time'];
+//                    $endtimexm = substr($endtimet,5,8);
+//                    $epintk = intval($endtimexm);
+//                    $countdown_data->setMonthCountdown($epintk);
+//                }
+//                if($countdown->getId()){
+//                    $countdown->addData($countdown_data->getData());
+//                }else{
+//                    $countdown->setData($countdown_data->getData());
+//                }
+//                $countdown->setCampaignId($model->getId());
+//                $countdown->save();
 
 
                 /**

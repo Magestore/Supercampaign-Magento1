@@ -55,6 +55,13 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
             'required'    => true,
         ));
 
+        if(!isset($data['status'])) $data['status'] = 1; //set default value
+        $fieldset->addField('status', 'select', array(
+            'name'         => 'status',
+            'label'        => Mage::helper('campaign')->__('Status:'),
+            'values'       => Mage::getSingleton('campaign/status')->getOptionHash(),
+        ));
+
 
         //convert timezone
         $time_zone      = $this->__('Time Zone (UTC): %s', Mage::getStoreConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_TIMEZONE));
@@ -119,7 +126,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
             'note'     => $time_zone,
         ));
 
-         $fieldset->addField('use_coupon', 'select', array(
+        $use_coupon = $fieldset->addField('use_coupon', 'select', array(
             'name'         => 'use_coupon',
             'label'        => Mage::helper('campaign')->__('Use Coupon Code:'),
             //'class'        => 'required-entry',
@@ -128,32 +135,34 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
             'value'        => array(1),
         ));
 
-        $fieldset->addField('coupon_code_type', 'select', array(
+        $coupon_code_type = $fieldset->addField('coupon_code_type', 'select', array(
             'name'         => 'coupon_code_type',
             'label'        => Mage::helper('campaign')->__('Choose Coupon Code type:'),
             'class'        => 'required-entry',
             'required'     => true,
-            'values'       => array(array('label'=>'Manual', 'value'=> 1), array('label'=>'Promotion', 'value'=> 2)),
-            'value'        => array(1),
+            'values'       => array(
+                array('label'=>'Static', 'value'=> Magestore_Campaign_Model_Giftcode::GIFT_CODE_TYPE_STATIC),
+                array('label'=>'Promotion', 'value'=> Magestore_Campaign_Model_Giftcode::GIFT_CODE_TYPE_PROMOTION)
+            ),
+            'value'        => array(Magestore_Campaign_Model_Giftcode::GIFT_CODE_TYPE_STATIC),
         ));
 
-        $fieldset->addField('promo_rule_id', 'text', array(
+        $promo_quote = $fieldset->addField('promo_rule_id', 'select', array(
             'name'        => 'promo_rule_id',
             'label'        => Mage::helper('campaign')->__('Select Promotion Shopping Cart Rule:'),
             'required'    => true,
+            'values'       => Mage::getModel('campaign/giftcode')->getShoppingCartPriceRuleSelectOption(),
+            'note'   => Mage::helper('campaign')->__('If you can not find your Promotion please %s for status must enabled and date expire is later current date.', '<a href="'
+                .$this->getUrl('adminhtml/promo_quote/index/')
+                .'" alt="check Promotion" target="_blank">check it here</a>'),
         ));
 
-        $fieldset->addField('coupon_code', 'text', array(
-            'name'        => 'coupon_code',
-            'label'        => Mage::helper('campaign')->__('Coupon Code:'),
-            'required'    => false,
-        ));
-
-        if(!isset($data['status'])) $data['status'] = 1; //set default value
-        $fieldset->addField('status', 'select', array(
-            'name'         => 'status',
-            'label'        => Mage::helper('campaign')->__('Status:'),
-            'values'       => Mage::getSingleton('campaign/status')->getOptionHash(),
+        $coupon_code = $fieldset->addField('coupon_code', 'text', array(
+            'name'         => 'coupon_code',
+            'label'        => Mage::helper('campaign')->__('Coupon Code'),
+            //'class'        => 'required-entry',
+            'note'   => Mage::helper('campaign')->__('Paste your text code here.'),
+            'required'     => true,
         ));
 
         $fieldset->addField('countdown_type', 'select', array(
@@ -176,24 +185,40 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
             'label'        => Mage::helper('campaign')->__('Countdown On/Off:'),
             'class'        => 'required-entry',
             'required'     => true,
-            'values'       => array(array('label'=>'On', 'value'=> 1), array('label'=>'Off', 'value'=> 2)),
-            'value'        => array(1),
+            'values'       => array(array('label'=>'On', 'value'=> 1), array('label'=>'Off', 'value'=> 0)),
+            'value'        => array(0),
         ));
+
+        // field dependencies
+        $this->setChild('form_after', $this->getLayout()->createBlock('adminhtml/widget_form_element_dependence')
+            ->addFieldMap($use_coupon->getHtmlId(), $use_coupon->getName())
+            ->addFieldMap($coupon_code_type->getHtmlId(), $coupon_code_type->getName())
+            ->addFieldMap($coupon_code->getHtmlId(), $coupon_code->getName())
+            ->addFieldMap($promo_quote->getHtmlId(), $promo_quote->getName())
+            ->addFieldDependence(
+                $coupon_code_type->getName(),
+                $use_coupon->getName(),
+                1)
+            ->addFieldDependence(
+                $coupon_code->getName(),
+                $coupon_code_type->getName(),
+                Magestore_Campaign_Model_Giftcode::GIFT_CODE_TYPE_STATIC)
+            ->addFieldDependence(
+                $coupon_code->getName(),
+                $use_coupon->getName(),
+                1)
+            ->addFieldDependence(
+                $promo_quote->getName(),
+                $coupon_code_type->getName(),
+                Magestore_Campaign_Model_Giftcode::GIFT_CODE_TYPE_PROMOTION)
+            ->addFieldDependence(
+                $promo_quote->getName(),
+                $use_coupon->getName(),
+                1)
+        );
 
         $form->setValues($data);
         return parent::_prepareForm();
     }
 
-    private function _convertToTimezone($date, $locale = null, $format = null){
-        $datetime = new Zend_Date($date);
-        if($locale == null){
-            $locale = Mage::getStoreConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_LOCALE);
-        }
-        if($format == null){
-            $format = 'y-MM-dd HH:mm:00';
-        }
-        $datetime->setLocale($locale)
-            ->setTimezone(Mage::getStoreConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_TIMEZONE));
-        return $datetime->get($format);
-    }
 }

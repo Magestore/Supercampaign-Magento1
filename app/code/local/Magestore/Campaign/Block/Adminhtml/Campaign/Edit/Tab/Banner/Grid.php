@@ -103,14 +103,14 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Banner_Grid extends M
             //'width'     => '220px',
             'renderer' => 'Magestore_Campaign_Block_Adminhtml_Banner_Grid_Renderer_InWidgets',
             'filter_condition_callback' => array($this, '_filterInWidgets'),
-        ));
+        ));*/
 
         $this->addColumn('in_campaign', array(
-            'header'    => Mage::helper('campaign')->__('In Campaign'),
+            'header'    => Mage::helper('campaign')->__('Added to Campaign'),
             'index'     => 'campaign_name',
             'width'     => '220px',
             'filter_condition_callback' => array($this, '_filterInCampaign'),
-        ));*/
+        ));
 
         $this->addColumn('status', array(
             'header'    => Mage::helper('campaign')->__('Status'),
@@ -134,7 +134,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Banner_Grid extends M
                 'actions'    => array(
                     array(
                         'caption'    => Mage::helper('campaign')->__('Edit'),
-                        'url'        => array('base'=> '*/*/edit'),
+                        'url'        => array('base'=> '*/adminhtml_bannerslider/edit'),
                         //'onclick' => 'return saveAndContinueEdit();',
                         'field'        => 'id'
                     )),
@@ -163,7 +163,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Banner_Grid extends M
             $collection->addFieldToFilter('widget_selected_ids', $widget_id_cond);
         }
         return $this;
-    }
+    }*/
 
     protected function _filterInCampaign($collection, $column){
         $field = ( $column->getFilterIndex() ) ? $column->getFilterIndex() : $column->getIndex();
@@ -172,7 +172,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Banner_Grid extends M
             $collection->addFieldToFilter('campaign.name' , $cond);
         }
         return $this;
-    }*/
+    }
 
     /**
      * prepare mass action for this grid
