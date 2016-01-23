@@ -32,14 +32,43 @@
 </div>
 <script type="text/javascript">
     var $j = jQuery.noConflict();
+    switch(<?php echo $popup->getData('appear_effect')?>) {
+        case 0:
+            $j('.modal').prop('class', 'modal fade').addClass('top');
+            break;
+        case 1:
+            $j('.modal').prop('class', 'modal fade').addClass('left');
+            break;
+        case 2:
+            $j('.modal').prop('class', 'modal fade').addClass('right');
+            break;
+        case 3:
+            $j('.modal').prop('class', 'modal fade').addClass('bottom');
+            break;
+        case 4:
+            $j('.modal').prop('class', 'modal fade').addClass('top-left');
+            break;
+        case 5:
+            $j('.modal').prop('class', 'modal fade').addClass('top-right');
+            break;
+        case 6:
+            $j('.modal').prop('class', 'modal fade').addClass('bottom-left');
+            break;
+        case 7:
+            $j('.modal').prop('class', 'modal fade').addClass('bottom-right');
+            break;
+        default:
+            $j('.modal').prop('class', 'modal fade').addClass('top');
+    }
+    $j('.modal').modal('show');
 
-    $j('.btn').click(function() {
+    /*$j('.btn').click(function() {
         $j('.modal').prop('class', 'modal fade').addClass($j(this).data('direction'));
         $j('.modal').modal('show');
     });
     $j(window).bind("load", function() {
         $j('.btn-effect-4').trigger("click");
-    });
+    });*/
 </script>
 
 
