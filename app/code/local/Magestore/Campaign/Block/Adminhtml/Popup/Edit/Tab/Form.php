@@ -61,13 +61,35 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             $this->getLayout()->getBlock('head')->setCanLoadTinyMce(true);
         }
 
+//        $fieldset->addField('popup_content', 'editor', array(
+//            'name'		=> 'popup_content',
+//            'label'		=> Mage::helper('campaign')->__('Content:'),
+//            'title'		=> Mage::helper('campaign')->__('Content:'),
+//            'style'		=> 'width:800px; height:350px;',
+//            'wysiwyg'	=> true,
+//            'config'    => Mage::getSingleton('cms/wysiwyg_config')->getConfig(),
+//            'required'	=> true,
+//        ));
+
+        $wysiwygConfig = Mage::getSingleton('cms/wysiwyg_config')->getConfig(
+            array(
+                'hidden'=>false,
+                'add_variables' => true,
+                'add_widgets' => true,
+                'add_images'=>true,
+                'widget_window_url'	=> Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/widget/index'),
+                'directives_url'	=> Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg/directive'),
+                'directives_url_quoted'	=> preg_quote(Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg/directive')),
+                'files_browser_window_url'	=> Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg_images/index')
+            )
+        );
         $fieldset->addField('popup_content', 'editor', array(
-            'name'		=> 'popup_content',
-            'label'		=> Mage::helper('campaign')->__('Content:'),
-            'title'		=> Mage::helper('campaign')->__('Content:'),
+            'label' => Mage::helper('campaign')->__('Content:'),
+            'title' => Mage::helper('campaign')->__('Content:'),
             'style'		=> 'width:800px; height:350px;',
-            'wysiwyg'	=> true,
-            'config'    => Mage::getSingleton('cms/wysiwyg_config')->getConfig(),
+            'name' => 'popup_content',
+            'wysiwyg' => true,
+            'config'        =>$wysiwygConfig,
             'required'	=> true,
         ));
 
@@ -150,10 +172,10 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             ),
         ));
 
-        $fieldset->addField('category_id', 'text', array(
+        $fieldset->addField('categories', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Category Ids:'),
             'required'	=> false,
-            'name'		=> 'category_id',
+            'name'		=> 'categories',
             'note'      => 'Show popup for categories have selected.',
         ));
 
@@ -170,11 +192,41 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'note'      => "Don't show popup when open page have url like exclude url.",
         ));
 
-        $fieldset->addField('product_id', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Product Ids:'),
-            'required'	=> false,
-            'name'		=> 'product_id',
-            'note'      => 'Show popup for products detail page have selected.',
+//        $fieldset->addField('product_id', 'text', array(
+//            'label'		=> Mage::helper('campaign')->__('Product Ids:'),
+//            'required'	=> false,
+//            'name'		=> 'product_id',
+//            'note'      => 'Show popup for products detail page have selected.',
+//        ));
+
+        $productIds = implode(", ", Mage::getResourceModel('catalog/product_collection')->getAllIds());
+        $fieldset->addField('products', 'text', array(
+            'label' => Mage::helper('campaign')->__('Products'),
+            'name' => 'products',
+            'class' => 'rule-param',
+            'after_element_html' => '<a id="product_link" href="javascript:void(0)" onclick="toggleMainProducts()"><img src="' . $this->getSkinUrl('images/rule_chooser_trigger.gif') . '" alt="" class="v-middle rule-chooser-trigger" title="Select Products"></a><input type="hidden" value="'.$productIds.'" id="product_all_ids"/><div id="main_products_select" style="display:none;width:640px"></div>
+                <script type="text/javascript">
+                    function toggleMainProducts(){
+                        if($("main_products_select").style.display == "none"){
+                            var url = "' . $this->getUrl('campaignadmin/adminhtml_popup/chooserMainProducts') . '";
+                            var params = $("products").value.split(", ");
+                            var parameters = {"form_key": FORM_KEY,"selected[]":params };
+                            var request = new Ajax.Request(url,
+                            {
+                                evalScripts: true,
+                                parameters: parameters,
+                                onComplete:function(transport){
+                                    $("main_products_select").update(transport.responseText);
+                                    $("main_products_select").style.display = "block";
+                                }
+                            });
+                        }else{
+                            $("main_products_select").style.display = "none";
+                        }
+                    };
+
+
+                </script>'
         ));
 
         $fieldset->addField('show_when', 'select', array(
