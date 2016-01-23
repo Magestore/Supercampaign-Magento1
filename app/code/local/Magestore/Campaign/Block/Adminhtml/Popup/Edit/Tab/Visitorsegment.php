@@ -67,10 +67,10 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
             ),
         ));
 
-        $fieldset->addField('user_login', 'multiselect', array(
+        $fieldset->addField('login_users', 'multiselect', array(
             'label'		=> Mage::helper('campaign')->__('User Login:'),
             'required'	=> true,
-            'name'		=> 'user_login',
+            'name'		=> 'login_users',
             'note'      => "Show popup when user login.",
             'values' => array(
                 array(
@@ -109,10 +109,10 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
             ),
         ));
 
-        $fieldset->addField('customer_group_id', 'multiselect', array(
+        $fieldset->addField('customer_group_ids', 'multiselect', array(
             'label' => Mage::helper('campaign')->__('Customer groups'),
             'title' => Mage::helper('campaign')->__('Customer groups'),
-            'name' => 'customer_group_id',
+            'name' => 'customer_group_ids',
             'required' => true,
             'values' => Mage::getResourceModel('customer/group_collection')
                     ->toOptionArray()
