@@ -1,22 +1,24 @@
 <?php
-    
+    $popup = $this->getAllDataPopupActive();
+    //$popup->getData();
+    //Zend_debug::dump($popup->getData());
     $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
     $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
     $stylepopup = Mage::helper('campaign')->checkStylepopup();
 ?>
 
-<div class="promotion">
-    <div id="sc-popup09" class="modal fade sc-popup09" role="dialog">
+<div class="static">
+    <div id="sc-popup01" class="modal fade sc-popup01" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
-                <a class="dialogClose style1 overlay2" data-dismiss="modal" data-target="#sc-popup09"></a>
-                <?php echo $this->getLayout()->createBlock('campaign/campaign')->setTemplate('campaign/popup/social/template09.phtml')->toHtml(); ?>
+                <a class="dialogClose style1 overlay2" data-dismiss="modal" data-target="#sc-popup01"></a>
+                <?php echo $popup->getData('popup_content'); ?>
             </div>
         </div>
     </div>
 </div>
-
+<!--
 
 <div class="button-effect">
     <a class='btn btn-primary btn-effect-1' data-direction='top'>Top (default)</a>
@@ -27,17 +29,46 @@
     <a class='btn btn-info btn-effect-6' data-direction='top-right'>Top-Right</a>
     <a class='btn btn-info btn-effect-7' data-direction='bottom-left'>Bottom-Left</a>
     <a class='btn btn-info btn-effect-8' data-direction='bottom-right'>Bottom-right</a>
-</div>
+</div>-->
 <script type="text/javascript">
     var $j = jQuery.noConflict();
+    switch(<?php echo $popup->getData('appear_effect')?>) {
+        case 0:
+            $j('.modal').prop('class', 'modal fade').addClass('top');
+            break;
+        case 1:
+            $j('.modal').prop('class', 'modal fade').addClass('left');
+            break;
+        case 2:
+            $j('.modal').prop('class', 'modal fade').addClass('right');
+            break;
+        case 3:
+            $j('.modal').prop('class', 'modal fade').addClass('bottom');
+            break;
+        case 4:
+            $j('.modal').prop('class', 'modal fade').addClass('top-left');
+            break;
+        case 5:
+            $j('.modal').prop('class', 'modal fade').addClass('top-right');
+            break;
+        case 6:
+            $j('.modal').prop('class', 'modal fade').addClass('bottom-left');
+            break;
+        case 7:
+            $j('.modal').prop('class', 'modal fade').addClass('bottom-right');
+            break;
+        default:
+            $j('.modal').prop('class', 'modal fade').addClass('top');
+    }
+    $j('.modal').modal('show');
 
-    $j('.btn').click(function() {
+    /*$j('.btn').click(function() {
         $j('.modal').prop('class', 'modal fade').addClass($j(this).data('direction'));
         $j('.modal').modal('show');
     });
     $j(window).bind("load", function() {
         $j('.btn-effect-4').trigger("click");
-    });
+    });*/
 </script>
 
 

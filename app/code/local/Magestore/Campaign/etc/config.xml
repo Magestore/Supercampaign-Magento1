@@ -218,10 +218,10 @@
                         <table>magestore_campaign_widget_banner</table>
                     </widget_banner>
                     <bannerslider>
-                        <table>magestore_campaign_banner_item</table>
+                        <table>magestore_campaign_banner</table>
                     </bannerslider>
                     <banner>
-                        <table>magestore_campaign_banner</table>
+                        <table>magestore_campaign_banner_item</table>
                     </banner>
                     <value>
                         <table>magestore_campaign_value</table>

@@ -42,11 +42,11 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
      */
     public function _prepareLayout()
     {
-
-        parent::_prepareLayout();
         $this->setTemplate('campaign/popup.phtml');
+        parent::_prepareLayout();
         return $this;
     }
+
 
     /*protected function _toHtml(){
 
@@ -63,51 +63,17 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
         return '';
     }
 
-    /**
-     * get Popup model by search available
-     * @return object | bool
-     */
-   /* public function getPopup()
-    {
-        if (!is_object($this->_popup)) {
-            if(Mage::registry('campaign_popup')){
-                $this->_popup = Mage::registry('campaign_popup');
-            }else{
-                $pop = $this->getAvailable();
-                if(is_object($pop)){
-                    $this->_popup = $pop;
-                    if($this->_popup->getId() == null){
-                        return false;
-                    }
-                }else{
-                    return false;
-                }
-            }
-            if(!Mage::registry('campaign_popup')){
-                Mage::register('campaign_popup', $this->_popup);
-            }
-        }
-        return $this->_popup;
-    }*/
-
-    /**
-     * get popup has accepted by includes - excludes and is active
-     * @return array
-     */
-    public function getAvailable(){
-        return Mage::getModel('campaign/popup')->getAvailable();
-    }
-
-
-    public function getData(){
-        return array(
-
-            'devices' => 'desktop,mobile, tablet, all'
-        );
-    }
 
     public function getPopup(){
 
         return new Varien_Object($this->getData());
+    }
+
+    public function getAllDataPopupActive(){
+        $model = Mage::getModel('campaign/popup')->getCollection();
+        $model->addFieldToFilter('status', 0)->getFirstItem(); // enabled
+        //zend_debug::dump($model->getData()); die('xxx');
+        $othermodel = $model->getFirstItem();
+        return $othermodel;
     }
 }
