@@ -8,11 +8,11 @@
 ?>
 
 <div class="static">
-    <div id="sc-popup0<?php echo $popup->getData('popup_id') ?>" class="modal fade sc-popup01" role="dialog">
+    <div id="sc-popup<?php echo $popup->getData('template_code') ?>" class="modal fade sc-popup01" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
-                <a class="dialogClose style1 overlay2" data-dismiss="modal" data-target="#sc-popup01"></a>
+                <a class="dialogClose style1 overlay2" data-dismiss="modal" data-target="#sc-popup<?php echo $popup->getData('template_code') ?>"></a>
                 <?php echo $popup->getData('popup_content'); ?>
             </div>
         </div>
