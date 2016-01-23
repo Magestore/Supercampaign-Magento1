@@ -105,11 +105,11 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
             'values' => array(
                 array(
                     'value' => 0,
-                    'label' => Mage::helper('campaign')->__('No'),
+                    'label' => Mage::helper('campaign')->__('Yes'),
                 ),
                 array(
                     'value' => 1,
-                    'label' => Mage::helper('campaign')->__('Yes'),
+                    'label' => Mage::helper('campaign')->__('No'),
                 ),
             ),
         ));
