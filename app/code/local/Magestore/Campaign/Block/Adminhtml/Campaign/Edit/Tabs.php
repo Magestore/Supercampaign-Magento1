@@ -51,6 +51,24 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tabs extends Mage_Adminht
                                 ->toHtml(),
         ));
 
+        $this->addTab('popup', array(
+            'label'     => Mage::helper('campaign')->__('Select Popups'),
+            'title'     => Mage::helper('campaign')->__('Select Popups'),
+            'url' => $this->getUrl('*/adminhtml_campaign/getGridTab', array('_current' => true,'id' => $this->getRequest()->getParam('id'))),
+            'class' => 'ajax'
+        ));
+
+        $this->addTab('banner', array(
+            'label'     => $this->__('Select Banners'),
+            'title'     => $this->__('Select Banners'),
+            'url' => $this->getUrl('*/adminhtml_campaign/getBannerGridTab', array('_current' => true,'id' => $this->getRequest()->getParam('id'))),
+            'class' => 'ajax'
+        ));
+
+        //$this->addTab('countdown', 'campaign/adminhtml_campaign_edit_tab_countdown');
+
+
+
         return parent::_beforeToHtml();
     }
 }
