@@ -46,32 +46,22 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
         $this->_forward('edit');
     }
 
+    public function chooserMainProductsAction() {
+        $request = $this->getRequest();
+        $block = $this->getLayout()->createBlock(
+            'campaign/adminhtml_popup_edit_tab_content_maincontent_grid', 'promo_widget_chooser_sku', array('input' =>'products','grid_url_call'=>'chooserMainProducts','id'=>'productGrid','js_form_object' => $request->getParam('form'),
+        ));
+
+        if ($block) {
+            $this->getResponse()->setBody($block->toHtml());
+        }
+    }
+
     public function saveAction() {
         if ($data = $this->getRequest()->getPost()) {
-            if(isset($_FILES['filename']['name']) && $_FILES['filename']['name'] != '') {
-                try {
-                    /* Starting upload */
-                    $uploader = new Varien_File_Uploader('filename');
+            //zend_debug::dump($data); die('ccc');
 
-                    // Any extention would work
-                    $uploader->setAllowedExtensions(array('jpg','jpeg','gif','png'));
-                    $uploader->setAllowRenameFiles(false);
-
-                    // Set the file upload mode
-                    // false -> get the file directly in the specified folder
-                    // true -> get the file in the product like folders
-                    //	(file.jpg will go in something like /media/f/i/file.jpg)
-                    $uploader->setFilesDispersion(false);
-
-                    // We set media as the upload dir
-                    $path = Mage::getBaseDir('media') . DS ;
-                    $uploader->save($path, $_FILES['filename']['name'] );
-
-                } catch (Exception $e) {}
-
-                //this way the name is saved in DB
-                $data['filename'] = $_FILES['filename']['name'];
-            }
+            $login_user = $data['login-user'];
 
             $model = Mage::getModel('campaign/popup');
             $model->setData($data)
