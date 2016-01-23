@@ -678,15 +678,28 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
 
 
     //Tit banner ajax grid
-    /*public function ajaxGridAction(){
+    public function getPopupGridTabAction(){
         //get params
-        Mage::register('widget_reloaded_ids', $this->getRequest()->getPost('widget_reloaded_ids'));
-        $grid = $this->getLayout()->createBlock('campaign/adminhtml_banner_edit_tab_widgetgrid');
+        Mage::register('popup_reloaded_ids', $this->getRequest()->getPost('popup_reloaded_ids'));
+        $grid = $this->getLayout()->createBlock('campaign/adminhtml_campaign_edit_tab_popup_grid');
+        $serialer = Mage::getModel('core/layout')->createBlock('adminhtml/widget_grid_serializer');
+        $serialer->initSerializerBlock($grid, 'getSerializeData', 'popup_ids', 'popup_reloaded_ids');
+        $this->getResponse()->setBody($grid->toHtml().$serialer->toHtml());
+        $this->renderLayout();
+        $this->getResponse()->sendResponse();
+        exit;
+    }
+
+    public function getPopupGridAjaxAction(){
+        //get params
+        Mage::register('filter', $this->getRequest()->getParam('filter'));
+        Mage::register('popup_reloaded_ids', $this->getRequest()->getPost('popup_reloaded_ids'));
+        $grid = $this->getLayout()->createBlock('campaign/adminhtml_campaign_edit_tab_popup_grid');
         $this->getResponse()->setBody($grid->toHtml());
         $this->renderLayout();
         $this->getResponse()->sendResponse();
         exit;
-    }*/
+    }
 
     /**
      * get grid in campaign edit widget banner tab

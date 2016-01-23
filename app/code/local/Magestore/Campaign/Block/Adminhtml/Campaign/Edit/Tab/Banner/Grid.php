@@ -135,7 +135,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Banner_Grid extends M
                     array(
                         'caption'    => Mage::helper('campaign')->__('Edit'),
                         'url'        => array('base'=> '*/*/edit'),
-                        'onclick' => 'return saveAndContinueEdit();',
+                        //'onclick' => 'return saveAndContinueEdit();',
                         'field'        => 'id'
                     )),
                 'filter'    => false,

@@ -54,7 +54,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tabs extends Mage_Adminht
         $this->addTab('popup', array(
             'label'     => Mage::helper('campaign')->__('Select Popups'),
             'title'     => Mage::helper('campaign')->__('Select Popups'),
-            'url' => $this->getUrl('*/adminhtml_campaign/getGridTab', array('_current' => true,'id' => $this->getRequest()->getParam('id'))),
+            'url' => $this->getUrl('*/adminhtml_campaign/getPopupGridTab', array('_current' => true,'id' => $this->getRequest()->getParam('id'))),
             'class' => 'ajax'
         ));
 
