@@ -1,9 +1,9 @@
-.sc-popup02 form {
+#sc-popup02 form {
     /*height: 38px;*/
     width:55%;
 }
 
-.sc-popup02 form input {
+#sc-popup02 form input {
     font-size: 22px;
     text-align:center;
     padding-left:10px;
@@ -22,7 +22,7 @@
     width:100%;
 }
 
-.sc-popup02 form button {
+#sc-popup02 form button {
     box-sizing:border-box;
     border:none;
     outline: none;
