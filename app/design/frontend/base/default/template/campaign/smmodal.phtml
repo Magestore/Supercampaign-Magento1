@@ -1,14 +1,14 @@
 <?php
     $popup = $this->getAllDataPopupActive();
     //$popup->getData();
-    //Zend_debug::dump($popup->getData());
+    Zend_debug::dump($popup->getData());
     $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
     $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
     $stylepopup = Mage::helper('campaign')->checkStylepopup();
 ?>
 
 <div class="static">
-    <div id="sc-popup01" class="modal fade sc-popup01" role="dialog">
+    <div id="sc-popup0<?php echo $popup->getData('popup_id') ?>" class="modal fade sc-popup01" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
@@ -18,20 +18,48 @@
         </div>
     </div>
 </div>
-<!--
+<?php
 
-<div class="button-effect">
-    <a class='btn btn-primary btn-effect-1' data-direction='top'>Top (default)</a>
-    <a class='btn btn-primary btn-effect-2' data-direction='left'>Left</a>
-    <a class='btn btn-primary btn-effect-3' data-direction='right'>Right</a>
-    <a class='btn btn-primary btn-effect-4' data-direction='bottom'>Bottom</a>
-    <a class='btn btn-info btn-effect-5' data-direction='top-left'>Top-Left</a>
-    <a class='btn btn-info btn-effect-6' data-direction='top-right'>Top-Right</a>
-    <a class='btn btn-info btn-effect-7' data-direction='bottom-left'>Bottom-Left</a>
-    <a class='btn btn-info btn-effect-8' data-direction='bottom-right'>Bottom-right</a>
-</div>-->
+    $style_plus ="";
+    $border_color = $popup->getData('border_color');
+    $border_color = "border-color:#".$popup->getData('border_color');
+    $border_size = "border-size:".$popup->getData('border_size_in_px')."px";
+    $padding_size = "padding:".$popup->getData('padding')."px";
+
+
+    $close_path = $popup->getData('close_icon_style');
+    $close_icon = "";
+    switch($close_path) {
+        case 0:
+            $close_icon = ".dialogClose{background:url(".$this->getSkinUrl('images/campaign/popup/close_white.png').") no-repeat 5px 5px}";
+            break;
+        case 1:
+            $close_icon = ".dialogClose{background:url(".$this->getSkinUrl('images/campaign/popup/close_promotion.png').") no-repeat 5px -20px}";
+            break;
+        case 2:
+            $close_icon = ".dialogClose{background:none transparent}";
+            break;
+    }
+
+    $corner_style = $popup->getData('corner_style');
+        switch($corner_style) {
+            case 0:
+            $style_plus = "border-radius:".$popup->getData('border_style')."px";
+            break;
+            case 1:
+            $style_plus = "border-radius:0px";
+            break;
+            case 2:
+            $style_plus = "border-radius:50%";
+            break;
+        }
+    $stylecontent = "#sc-popup0".$popup->getData('popup_id')."  .modal-content{width:".$popup->getData('width')."px;background-color:#".$popup->getData('popup_background').";".$style_plus.";".$border_color.";".$border_size.";".$padding_size."}";
+    $styleoverbg = "#sc-popup0".$popup->getData('popup_id')."  .modal-backdrop{background-color:#".$popup->getData('overlay_background')."}";
+?>
 <script type="text/javascript">
     var $j = jQuery.noConflict();
+
+
     switch(<?php echo $popup->getData('appear_effect')?>) {
         case 0:
             $j('.modal').prop('class', 'modal fade').addClass('top');
@@ -60,15 +88,11 @@
         default:
             $j('.modal').prop('class', 'modal fade').addClass('top');
     }
-    $j('.modal').modal('show');
-
-    /*$j('.btn').click(function() {
-        $j('.modal').prop('class', 'modal fade').addClass($j(this).data('direction'));
+    $j(window).bind("load", function() {
+        var string = "<style type=\"text/css\"><?php echo $stylecontent." ".$styleoverbg." ".$close_icon ?></style>"
+        $j('head').append(string);
         $j('.modal').modal('show');
     });
-    $j(window).bind("load", function() {
-        $j('.btn-effect-4').trigger("click");
-    });*/
 </script>
 
 

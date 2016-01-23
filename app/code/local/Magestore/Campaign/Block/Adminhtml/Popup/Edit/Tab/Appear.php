@@ -77,10 +77,10 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
             'name'		=> 'padding',
         ));
 
-        $fieldset->addField('close_style', 'select', array(
+        $fieldset->addField('close_icon_style', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Close Icon Style:'),
             'required'	=> true,
-            'name'		=> 'close_style',
+            'name'		=> 'close_icon_style',
             'note'      => 'Type of effect close popup.',
             'values' => array(
                 array(
