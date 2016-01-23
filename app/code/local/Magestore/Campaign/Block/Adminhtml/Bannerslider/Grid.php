@@ -120,11 +120,68 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Grid extends Mage_Adminhtm
 				'is_system'	=> true,
 		));
 
+        //zeus add generate code
+        $this->addColumn('generate', array(
+            'header' => Mage::helper('campaign')->__('Generate Code'),
+            'width' => '100',
+            'type' => 'action',
+            'getter' => 'getId',
+            'actions' => array(
+                array(
+                    'caption' => Mage::helper('campaign')->__('Generate'),
+                    'onclick' => 'return showGenerateCode(this);',
+                    'field' => 'id'
+                )),
+            'filter' => false,
+            'sortable' => false,
+            'index' => 'stores',
+            'is_system' => true,
+        ));
+        //end zeus add generate code
+
 		$this->addExportType('*/*/exportCsv', Mage::helper('campaign')->__('CSV'));
 		$this->addExportType('*/*/exportXml', Mage::helper('campaign')->__('XML'));
 
 		return parent::_prepareColumns();
 	}
+
+    protected function _afterToHtml($html) {
+        $url = $this->getUrl('*/*/showGenerateCode');
+        $html .= "<script>
+            var hasFlash = false;
+            try {
+                hasFlash = Boolean(new ActiveXObject('ShockwaveFlash.ShockwaveFlash'));
+            } catch(exception) {
+                hasFlash = ('undefined' != typeof navigator.mimeTypes['application/x-shockwave-flash']);
+            }
+            var showGenerateCode = function(e){
+                var id = e.up('tr').down().down().value;
+                new Ajax.Request('$url',{
+                    method : 'post',
+                    parameters : {
+                        form_key : FORM_KEY,
+                        id : id
+                    },
+                    onComplete: function(xhr){
+                        TINY.box.show('');
+                        $('tinycontent').innerHTML = xhr.responseText;
+                        // clipboard text, click to save, click save. copy button.
+                        $('copy-button').dataset.clipboardText= $('clipboard-text').value;
+                        var client = new ZeroClipboard(document.getElementById('copy-button'));
+                        client.on('ready',function(){
+                            client.on('aftercopy',function(){
+                                j('#copied').fadeIn();
+                                j('#copy-button').text('Copied to clipboard');
+                            });
+                        });
+                        if(!hasFlash)
+                            j('#copy-button').hide();
+                    }
+                });
+            };
+        </script>";
+        return parent::_afterToHtml($html);
+    }
 	
 	/**
 	 * prepare mass action for this grid
