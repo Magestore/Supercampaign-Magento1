@@ -38,10 +38,10 @@ class Magestore_Campaign_Model_Supercampaign extends Mage_Core_Model_Abstract
         $collection = Mage::getModel('campaign/campaign')->getCollection();
         $current_date = Mage::getModel('core/date')->gmtDate();
         $collection->addFieldToFilter('status', '1')
-            ->addFieldToFilter('start_time', array('from'=>$current_date))
-            ->addFieldToFilter('end_time', array('to'=>$current_date))
+            ->addFieldToFilter('start_time', array('to'=>$current_date))
+            ->addFieldToFilter('end_time', array('from'=>$current_date))
             ->getSelect()
-            ->order('priority DESC')
+            ->order('priority ASC')
             ->order('end_time ASC')
         ;
         return $collection;
@@ -51,7 +51,10 @@ class Magestore_Campaign_Model_Supercampaign extends Mage_Core_Model_Abstract
         $popups = array();
         $campaigns = $this->getCampaigns();
         foreach ($campaigns as $campaign) {
-            $popups[] = $campaign->getPopupsAvailable();
+            $popupsTemp = $campaign->getPopupsAvailable();
+            foreach ($popupsTemp as $item) {
+                $popups[] = $item;
+            }
         }
         return $popups;
     }

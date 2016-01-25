@@ -191,13 +191,13 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
     }
 
     protected function _beforeDelete(){
-        $this->getPopup()->delete(); //delete relationship models
-        $this->getHeadertext()->delete();
-        $this->getCountdown()->delete();
-        $this->getSidebar()->delete();
-        $this->getBannerhomepage()->delete();
-        $this->getBannerlistpage()->delete();
-        $this->getBannermenu()->delete();
+//        $this->getPopup()->delete(); //delete relationship models
+//        $this->getHeadertext()->delete();
+//        $this->getCountdown()->delete();
+//        $this->getSidebar()->delete();
+//        $this->getBannerhomepage()->delete();
+//        $this->getBannerlistpage()->delete();
+//        $this->getBannermenu()->delete();
     }
 
     //return false = co email roi
@@ -286,16 +286,17 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
         foreach ($collection as $item) {
             //priority from highest to lowest
             if($item->checkUserIP()){
-                $popups[$item->getId()] = $item;
+                $popups[] = $item;
                 continue;
             }
             if($item->checkUrl() && $item->checkProducts() && $item->checkDevices()
                 && $item->checkCountry() && $item->checkUserLogin() && $item->checkReturnCustomer()
                 && $item->checkCustomerGroup() && $item->checkCartSubtotalLessThan()
             ){
-                $popups[$item->getId()] = $item;
+                $popups[] = $item;
                 continue;
             }
+
         }
         return $popups;
     }
@@ -309,7 +310,7 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
         $collection->addFieldToFilter('status', Magestore_Campaign_Model_Popup::STATUS_ENABLE);
         $collection->addFieldToFilter(array('store','store'), array(array('finset'=>$store->getId()),array('finset'=>0)));
         $collection->getSelect()
-            ->order('priority DESC');
+            ->order('priority ASC');
         return $collection;
     }
 

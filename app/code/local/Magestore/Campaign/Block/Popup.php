@@ -69,6 +69,10 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
         return new Varien_Object($this->getData());
     }
 
+    /**
+     * get single popup, first item
+     * @return mixed
+     */
     public function getAllDataPopupActive(){
         $pops = $this->getAllPopupAvailable();
         foreach($pops as $pop){
@@ -76,6 +80,10 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
         }
     }
 
+    /**
+     * get all popup through all campaigns
+     * @return mixed
+     */
     public function getAllPopupAvailable(){
         return Mage::getModel('campaign/supercampaign')->getPopups();
     }

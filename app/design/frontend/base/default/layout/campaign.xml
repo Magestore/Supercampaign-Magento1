@@ -39,7 +39,7 @@
       <reference name="before_body_end">
           <!--<block type="campaign/popup" name="popup-campaign" template="campaign/popupmodal.phtml"/>-->
           <block type="campaign/popup" name="popup-campaign" />
-          <block type="campaign/sidebar" name="sidebar-campaign" template="campaign/sidebarleft.phtml"/>
+          <!--<block type="campaign/sidebar" name="sidebar-campaign" template="campaign/sidebarleft.phtml"/>-->
           <block type="campaign/bannerslider" name="page.bottom" >
               <action method="setBlockPosition">
                   <block_position>page-bottom</block_position>

@@ -9,17 +9,17 @@ if(count($headertext) > 0): ?>
          </div>
          <?php endforeach; ?>
     </div>
+    <script>
+        var $j = jQuery.noConflict();
+        $j(document).ready(function() {
+            $j("#header-campaign-slide").owlCarousel({
+                navigation : true, // Show next and prev buttons
+                slideSpeed : 500,
+                paginationSpeed : 500,
+                singleItem:true,
+                autoPlay: true
+            });
+        });
+    </script>
 <?php endif;?>
 
-<script>
-    var $j = jQuery.noConflict();
-    $j(document).ready(function() {
-        $j("#header-campaign-slide").owlCarousel({
-            navigation : true, // Show next and prev buttons
-            slideSpeed : 500,
-            paginationSpeed : 500,
-            singleItem:true,
-            autoPlay: true
-        });
-    });
-</script>

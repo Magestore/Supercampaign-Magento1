@@ -1,13 +1,20 @@
+<!--campaign/smmodal.phtml-->
+
+<?php $popups = $this->getAllPopupAvailable(); ?>
+<?php foreach($popups as $popup): ?>
+
 <?php
-    $popup = $this->getAllDataPopupActive();
+
+    //zend_debug::dump($popup);die;
+
     //$popup->getData();
-    Zend_debug::dump($popup->getData());
+    //Zend_debug::dump($popup->getData());
     $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
     $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
     $stylepopup = Mage::helper('campaign')->checkStylepopup();
 ?>
 
-<div class="static">
+<div class="<?php echo $popup->getPopupType() ?>">
     <div id="sc-popup<?php echo $popup->getData('template_code') ?>" class="modal fade sc-popup<?php echo $popup->getData('template_code') ?>" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -105,5 +112,5 @@
         $j('.modal').modal('show');
     });
 </script>
-
+<?php endforeach; ?>
 

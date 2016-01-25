@@ -36,6 +36,8 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
     protected function _prepareForm()
     {
         $form = new Varien_Data_Form();
+        $form->setHtmlIdPrefix('general');
+        $form->setFieldNameSuffix('general');
         $this->setForm($form);
         
         if (Mage::getSingleton('adminhtml/session')->getCampaignData()) {
