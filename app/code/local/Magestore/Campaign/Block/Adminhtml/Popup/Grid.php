@@ -56,7 +56,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
             ),
 		));
 
-		//TODO: dang lam sao khong filter duoc store
         if (!Mage::app()->isSingleStoreMode()) {
             $this->addColumn('store', array(
                 'header'        => Mage::helper('campaign')->__('Store View'),
@@ -95,7 +94,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
             'options'	 => array(
                 0 => 'After Load Page',
                 1 => 'After Seconds',
-
             ),
         ));
 

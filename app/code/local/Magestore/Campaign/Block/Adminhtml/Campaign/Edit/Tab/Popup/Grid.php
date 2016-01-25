@@ -68,6 +68,8 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Popup_Grid extends Ma
                 'store_all'     => true,
                 'store_view'    => true,
                 'sortable'      => true,
+				'filter_index'	=> 'main_table.store',
+				'filter_condition_callback' => array($this, '_filterStore'),
             ));
         }
 
@@ -123,6 +125,27 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Popup_Grid extends Ma
 			));
 
 		return parent::_prepareColumns();
+	}
+
+	protected function _filterInCampaign($collection, $column){
+		$field = ( $column->getFilterIndex() ) ? $column->getFilterIndex() : $column->getIndex();
+		$cond = $column->getFilter()->getCondition();
+		if ($field && isset($cond)) {
+			$collection->addFieldToFilter('campaign.name' , $cond);
+		}
+		return $this;
+	}
+
+	protected function _filterStore($collection, $column){
+		$field = ( $column->getFilterIndex() ) ? $column->getFilterIndex() : $column->getIndex();
+		$cond = $column->getFilter()->getCondition();
+		if($column->getFilter()->getValue() == '0' && $field){
+
+		}else
+			if($field && isset($cond)){
+				$collection->addFieldToFilter('main_table.store', array('finset'=>$column->getFilter()->getValue()));
+			}
+		return $this;
 	}
 
 	public function getGridUrl() {
