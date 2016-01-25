@@ -66,7 +66,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
         //convert timezone
         $time_zone      = $this->__('Time Zone (UTC): %s', Mage::getStoreConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_TIMEZONE));
 
-        if (!Mage::app()->isSingleStoreMode()) {
+        /*if (!Mage::app()->isSingleStoreMode()) {
             $field = $fieldset->addField('store', 'multiselect', array(
                 'name'      => 'stores[]',
                 'label'     => $this->__('Store View:'),
@@ -84,7 +84,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
                 'value'     => Mage::app()->getStore(true)->getId()
             ));
             $data['store'] = Mage::app()->getStore(true)->getId();
-        }
+        }*/
 
         $fieldset->addField('priority', 'text', array(
             'name'        => 'priority',
