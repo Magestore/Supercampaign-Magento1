@@ -1,5 +1,5 @@
 
-.sc-popup04 form {
+#sc-popup4 form {
     width: 90%;
     -moz-box-sizing:    border-box;
     -webkit-box-sizing: border-box;
@@ -7,20 +7,20 @@
 
 }
 
-.sc-popup04 button {
+#sc-popup4 button {
     background-color: #D83C3C;
     color:#FFFFFF;
 }
-.sc-popup04 button:before { /* left arrow */
+#sc-popup4 button:before { /* left arrow */
     border-color: transparent #D83C3C transparent;
     content:' '
 }
 
-.sc-popup04 form table{
+#sc-popup4 form table{
     border-spacing:0 !important;
 }
 
-.sc-popup04 form input {
+#sc-popup4 form input {
     padding: 10px 5px;
     float: left;
     font-size: 15px;
@@ -36,13 +36,13 @@
     box-shadow: 1px 0 2px 0 rgba(0,0,0,0.3) inset;
 }
 
-.sc-popup04 form input:focus {
+#sc-popup4 form input:focus {
     outline: 0;
     background: #fff;
     box-shadow: 1px 0 2px rgba(0,0,0,0.4) inset;
 }
 
-.sc-popup04 form button {
+#sc-popup4 form button {
     height:40px;
     overflow: visible;
     position: relative;
@@ -62,7 +62,7 @@
     line-height:19px;
 }
 
-.sc-popup04 button:before { /* left arrow */
+#sc-popup4 button:before { /* left arrow */
     content: '';
     position: absolute;
     border-width: 8px 8px 8px 0;
@@ -71,16 +71,16 @@
     left: -7px;
 }
 
-.sc-popup04 form table, .sc-popup04 form input {
+#sc-popup4 form table, .sc-popup04 form input {
     width:100%;
     height:40px;
 }
 
-.sc-popup04 form button {
+#sc-popup4 form button {
     width:auto;
 }
 
-.sc-popup04 form button:hover{
+#sc-popup4 form button:hover{
     background-color: #D83C3C;
     color:#FFFFFF;
     cursor: pointer;
@@ -91,4 +91,4 @@
     opacity: 1;
     text-shadow: 0 -1px 0 rgba(0, 0 ,0, 0.9);
 }
-.sc-popup04 .modal-dialog .modal-content{padding:20px;}
+#sc-popup4 .modal-dialog .modal-content{padding:20px;}

@@ -71,7 +71,7 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
 
     public function getAllDataPopupActive(){
         $model = Mage::getModel('campaign/popup')->getCollection();
-        $model->addFieldToFilter('status', 0)->getFirstItem(); // enabled
+        $model->addFieldToFilter('status', 1)->getFirstItem(); // enabled
         //zend_debug::dump($model->getData()); die('xxx');
         $othermodel = $model->getFirstItem();
         return $othermodel;

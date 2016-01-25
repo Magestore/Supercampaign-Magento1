@@ -111,16 +111,25 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'name'		=> 'width',
         ));
 
-        $fieldset->addField('height', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Height:'),
-            'required'	=> false,
-            'name'		=> 'height',
-        ));
+//        $fieldset->addField('height', 'text', array(
+//            'label'		=> Mage::helper('campaign')->__('Height:'),
+//            'required'	=> false,
+//            'name'		=> 'height',
+//        ));
 
 		$fieldset->addField('status', 'select', array(
 			'label'		=> Mage::helper('campaign')->__('Status:'),
 			'name'		=> 'status',
-			'values'	=> Mage::getSingleton('campaign/sliderstatus')->getOptionHash(),
+			'values'	=>array(
+                array(
+                    'value' => 1,
+                    'label' => Mage::helper('campaign')->__('Enabled'),
+                ),
+                array(
+                    'value' => 0,
+                    'label' => Mage::helper('campaign')->__('Disabled'),
+                ),
+            ),
 		));
 
         if (!Mage::app()->isSingleStoreMode()) {
