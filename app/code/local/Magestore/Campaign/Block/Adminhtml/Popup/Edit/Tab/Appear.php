@@ -55,12 +55,24 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
             'name'		=> 'border_size',
         ));
 
-        $fieldset->addField('overlay_color', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Overlay Background:'),
-            'required'	=> true,
+        $fieldset->addField('overlay_color', 'select', array(
+            'label'		=> Mage::helper('campaign')->__('Overlay Color:'),
             'name'		=> 'overlay_color',
-            'note'      => 'Overlay background when show popup.',
-            'class'     =>  'color',
+            'note'      => 'Overlay color of popup.',
+            'values' => array(
+                array(
+                    'value' => 'white',
+                    'label' => Mage::helper('campaign')->__('White'),
+                ),
+                array(
+                    'value' => 'dark',
+                    'label' => Mage::helper('campaign')->__('Dark'),
+                ),
+                array(
+                    'value' => 'no_background',
+                    'label' => Mage::helper('campaign')->__('No Background '),
+                ),
+            ),
         ));
 
         $fieldset->addField('popup_background', 'text', array(
