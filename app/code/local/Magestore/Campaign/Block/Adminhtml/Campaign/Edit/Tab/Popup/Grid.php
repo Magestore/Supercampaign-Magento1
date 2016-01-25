@@ -100,10 +100,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Popup_Grid extends Ma
 			'width'	 => '80px',
 			'index'	 => 'status',
 			'type'		=> 'options',
-			'options'	 => array(
-				1 => 'Enabled',
-				0 => 'Disabled',
-			),
+			'options'	 => Magestore_Campaign_Model_Status::getOptionArray(),
 		));
 
 		$this->addColumn('action',

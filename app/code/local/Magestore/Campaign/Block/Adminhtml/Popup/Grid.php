@@ -12,6 +12,11 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
 
 	protected function _prepareCollection(){
 		$collection = Mage::getModel('campaign/popup')->getCollection();
+		$collection->getSelect()
+			->joinLeft(array('campaign'=>$collection->getTable('campaign/campaign')),
+				'main_table.campaign_id = campaign.campaign_id', '')
+			->columns(array('campaign_name'=>'campaign.name'))
+			->group('main_table.popup_id');
 		$this->setCollection($collection);
 		return parent::_prepareCollection();
 	}
@@ -30,10 +35,11 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
 			'index'	 => 'title',
 		));
 
-        $this->addColumn('campaign_id', array(
-            'header'	=> Mage::helper('campaign')->__('Campaign'),
+        $this->addColumn('campaign_name', array(
+            'header'	=> Mage::helper('campaign')->__('Added to Campaign'),
             'align'	 =>'left',
-            'index'	 => 'campaign_id',
+            'index'	 => 'campaign_name',
+			'filter_condition_callback' => array($this, '_filterInCampaign'),
         ));
 
 		$this->addColumn('popup_type', array(
@@ -50,6 +56,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
             ),
 		));
 
+		//TODO: dang lam sao khong filter duoc store
         if (!Mage::app()->isSingleStoreMode()) {
             $this->addColumn('store', array(
                 'header'        => Mage::helper('campaign')->__('Store View'),
@@ -58,6 +65,8 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
                 'store_all'     => true,
                 'store_view'    => true,
                 'sortable'      => true,
+				'filter_index'	=> 'main_table.store',
+				'filter_condition_callback' => array($this, '_filterStore'),
             ));
         }
 
@@ -102,10 +111,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
 			'width'	 => '80px',
 			'index'	 => 'status',
 			'type'		=> 'options',
-			'options'	 => array(
-				1 => 'Enabled',
-				0 => 'Disabled',
-			),
+			'options'	 => Mage::getSingleton('campaign/status')->getOptionArray(),
 		));
 
 		$this->addColumn('action',
@@ -132,6 +138,27 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
 		return parent::_prepareColumns();
 	}
 
+	protected function _filterInCampaign($collection, $column){
+		$field = ( $column->getFilterIndex() ) ? $column->getFilterIndex() : $column->getIndex();
+		$cond = $column->getFilter()->getCondition();
+		if ($field && isset($cond)) {
+			$collection->addFieldToFilter('campaign.name' , $cond);
+		}
+		return $this;
+	}
+
+	protected function _filterStore($collection, $column){
+		$field = ( $column->getFilterIndex() ) ? $column->getFilterIndex() : $column->getIndex();
+		$cond = $column->getFilter()->getCondition();
+		if($column->getFilter()->getValue() == '0' && $field){
+
+		}else
+		if($field && isset($cond)){
+			$collection->addFieldToFilter('main_table.store', array('finset'=>$column->getFilter()->getValue()));
+		}
+		return $this;
+	}
+
 	protected function _prepareMassaction(){
 		$this->setMassactionIdField('popup_id');
 		$this->getMassactionBlock()->setFormFieldName('popup');
@@ -142,8 +169,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
 			'confirm'	=> Mage::helper('campaign')->__('Are you sure?')
 		));
 
-		$statuses = Mage::getSingleton('campaign/status')->getOptionArray();
-
+		$statuses = Mage::getSingleton('campaign/status')->getOptionHash();
 		array_unshift($statuses, array('label'=>'', 'value'=>''));
 		$this->getMassactionBlock()->addItem('status', array(
 			'label'=> Mage::helper('campaign')->__('Change status'),
