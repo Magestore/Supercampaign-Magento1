@@ -33,13 +33,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
 			'name'		=> 'title',
 		));
 
-//        $fieldset->addField('campaign_id', 'select', array(
-//            'label' => Mage::helper('campaign')->__('Campaign'),
-//            'name' => 'campaign_id',
-//            'required' => true,
-//            'values' => Mage::getSingleton('campaign/campaign')->getCampaignOption(),
-//        ));
-
 		$fieldset->addField('popup_type', 'select', array(
 			'label'		=> Mage::helper('campaign')->__('Popup Content Type:'),
 			'required'	=> true,
@@ -73,16 +66,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             $this->getLayout()->getBlock('head')->setCanLoadTinyMce(true);
         }
 
-//        $fieldset->addField('popup_content', 'editor', array(
-//            'name'		=> 'popup_content',
-//            'label'		=> Mage::helper('campaign')->__('Content:'),
-//            'title'		=> Mage::helper('campaign')->__('Content:'),
-//            'style'		=> 'width:800px; height:350px;',
-//            'wysiwyg'	=> true,
-//            'config'    => Mage::getSingleton('cms/wysiwyg_config')->getConfig(),
-//            'required'	=> true,
-//        ));
-
         $wysiwygConfig = Mage::getSingleton('cms/wysiwyg_config')->getConfig(
             array(
                 'hidden'=>false,
@@ -110,12 +93,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'required'	=> false,
             'name'		=> 'width',
         ));
-
-//        $fieldset->addField('height', 'text', array(
-//            'label'		=> Mage::helper('campaign')->__('Height:'),
-//            'required'	=> false,
-//            'name'		=> 'height',
-//        ));
 
 		$fieldset->addField('status', 'select', array(
 			'label'		=> Mage::helper('campaign')->__('Status:'),
@@ -213,13 +190,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'note'      => "Don't show popup when open page have url like exclude url.",
         ));
 
-//        $fieldset->addField('product_id', 'text', array(
-//            'label'		=> Mage::helper('campaign')->__('Product Ids:'),
-//            'required'	=> false,
-//            'name'		=> 'product_id',
-//            'note'      => 'Show popup for products detail page have selected.',
-//        ));
-
         $productIds = implode(", ", Mage::getResourceModel('catalog/product_collection')->getAllIds());
         $fieldset->addField('products', 'text', array(
             'label' => Mage::helper('campaign')->__('Products'),
@@ -273,66 +243,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'note'      => 'Seconds to show popup.',
         ));
 
-        $seconds_number1 = $fieldset->addField('scrolling_show', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Scrolling Px:'),
-            'required'	=> false,
-            'name'		=> 'scrolling_show',
-            'note'      => 'Position scrolling to show popup.',
-        ));
-
-        $seconds_number2 = $fieldset->addField('selector_show', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Selector:'),
-            'required'	=> false,
-            'name'		=> 'selector_show',
-            'note'      => 'Show popup when click or hover into id and class selected.',
-        ));
-
-        $seconds_number3 = $fieldset->addField('close_on_hoverout', 'select', array(
-            'label'		=> Mage::helper('campaign')->__('Close on hover out:'),
-            'required'	=> true,
-            'name'		=> 'close_on_hoverout',
-            'values' => array(
-                array(
-                    'value' => 0,
-                    'label' => Mage::helper('campaign')->__('No'),
-                ),
-                array(
-                    'value' => 1,
-                    'label' => Mage::helper('campaign')->__('Yes'),
-                ),
-            ),
-        ));
-
-        $fieldset->addField('position_to', 'select', array(
-            'label'		=> Mage::helper('campaign')->__('Position to:'),
-            'required'	=> true,
-            'name'		=> 'position_to',
-            'values' => array(
-                array(
-                    'value' => 'top',
-                    'label' => Mage::helper('campaign')->__('Top'),
-                ),
-                array(
-                    'value' => 'right',
-                    'label' => Mage::helper('campaign')->__('Right'),
-                ),
-                array(
-                    'value' => 'bottom',
-                    'label' => Mage::helper('campaign')->__('Bottom'),
-                ),
-                array(
-                    'value' => 'left',
-                    'label' => Mage::helper('campaign')->__('Left'),
-                ),
-            ),
-        ));
-
-        $fieldset->addField('position_px', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('How many px:'),
-            'required'	=> false,
-            'name'		=> 'position_px',
-        ));
-
         $fieldset->addField('template_code', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Template code:'),
             'required'	=> false,
@@ -345,26 +255,8 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         $this->setChild('form_after', $this->getLayout()->createBlock('adminhtml/widget_form_element_dependence')
                 ->addFieldMap($show_when->getHtmlId(), $show_when->getName())
                 ->addFieldMap($seconds_number0->getHtmlId(), $seconds_number0->getName())
-                ->addFieldMap($seconds_number1->getHtmlId(), $seconds_number1->getName())
-                ->addFieldMap($seconds_number2->getHtmlId(), $seconds_number2->getName())
-                ->addFieldMap($seconds_number3->getHtmlId(), $seconds_number3->getName())
                 ->addFieldDependence(
                     $seconds_number0->getName(),
-                    $show_when->getName(),
-                    'after_seconds'
-                )
-                ->addFieldDependence(
-                    $seconds_number1->getName(),
-                    $show_when->getName(),
-                    'after_seconds'
-                )
-                ->addFieldDependence(
-                    $seconds_number2->getName(),
-                    $show_when->getName(),
-                    'after_seconds'
-                )
-                ->addFieldDependence(
-                    $seconds_number3->getName(),
                     $show_when->getName(),
                     'after_seconds'
                 )

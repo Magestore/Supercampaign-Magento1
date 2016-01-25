@@ -14,7 +14,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Position extends Mage_Ad
 
         $fieldset = $form->addFieldset('popup_form', array('legend'=>Mage::helper('campaign')->__('Position Popup')));
 
-        $fieldset->addField('horizontal_position', 'select', array(
+        $horizontal = $fieldset->addField('horizontal_position', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Horizontal position:'),
             'required'	=> true,
             'name'		=> 'horizontal_position',
@@ -35,7 +35,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Position extends Mage_Ad
             ),
         ));
 
-        $fieldset->addField('horizontal_px', 'text', array(
+        $horizontal_px = $fieldset->addField('horizontal_px', 'text', array(
             'label'		=> Mage::helper('campaign')->__('How many horizontal px:'),
             'required'	=> false,
             'name'		=> 'horizontal_px',
@@ -51,11 +51,11 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Position extends Mage_Ad
             'values' => array(
                 array(
                     'value' => 'top',
-                    'label' => Mage::helper('campaign')->__('Left'),
+                    'label' => Mage::helper('campaign')->__('Top'),
                 ),
                 array(
                     'value' => 'bottom',
-                    'label' => Mage::helper('campaign')->__('Center'),
+                    'label' => Mage::helper('campaign')->__('Bottom'),
                 ),
             ),
         ));
@@ -68,6 +68,18 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Position extends Mage_Ad
         ));
 
         $form->setValues($data);
+
+        $this->setForm($form);
+        $this->setChild('form_after', $this->getLayout()->createBlock('adminhtml/widget_form_element_dependence')
+                ->addFieldMap($horizontal->getHtmlId(), $horizontal->getName())
+                ->addFieldMap($horizontal_px->getHtmlId(), $horizontal_px->getName())
+                ->addFieldDependence(
+                    $horizontal_px->getName(),
+                    $horizontal->getName(),
+                    'center'
+                )
+        );
+
         return parent::_prepareForm();
     }
 }
