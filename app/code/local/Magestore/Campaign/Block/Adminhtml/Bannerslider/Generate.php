@@ -38,23 +38,9 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Generate extends Mage_Admi
     	$this->setTemplate('campaign/generate.phtml');
     }
 
-//    public function getWidget(){
-//        if(!$this->getData('widget')){
-//            $this->setData('widget',Mage::getModel('productwidget/widget')->load($this->getWidgetId()));
-//        }
-//        return $this->getData('widget');
-//    }
-//
-//    public function getJsUrl(){
-//    	$url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS);
-//    	return Mage::helper('productwidget')->removeProtocol($url);
-//    }
-//
-//    public function getEncodedId(){
-//        return Mage::helper('productwidget')->encode($this->getWidgetId());
-//    }
-
-    
+    public function getSliderID(){
+        return $this->getBannersliderId();
+    }
 
 
 }
