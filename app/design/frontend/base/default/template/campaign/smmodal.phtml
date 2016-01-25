@@ -8,11 +8,11 @@
 ?>
 
 <div class="static">
-    <div id="sc-popup0<?php echo $popup->getData('popup_id') ?>" class="modal fade sc-popup01" role="dialog">
+    <div id="sc-popup<?php echo $popup->getData('template_code') ?>" class="modal fade sc-popup<?php echo $popup->getData('template_code') ?>" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
-                <a class="dialogClose style1 overlay2" data-dismiss="modal" data-target="#sc-popup01"></a>
+                <a class="dialogClose style1 overlay2" data-dismiss="modal" data-target="#sc-popup<?php echo $popup->getData('template_code') ?>"></a>
                 <?php echo $popup->getData('popup_content'); ?>
             </div>
         </div>
@@ -21,29 +21,19 @@
 <?php
 
     $style_plus ="";
-    $border_color = $popup->getData('border_color');
-    $border_color = "border-color:#".$popup->getData('border_color');
-    $border_size = "border-size:".$popup->getData('border_size_in_px')."px";
-    $padding_size = "padding:".$popup->getData('padding')."px";
-    $styleshadow = $popup->getData('popup_shadow');
-    $height = "";
-    if($popup->getData('height') !=  "0"){
-        $height = "height:".$popup->getData('height');
-    }
+    $border_color = "border-color:#".$popup->getData('border_color').";";
+    $border_size = "border-width:".$popup->getData('border_size')."px;";
+    $padding_size = "padding:".$popup->getData('padding')."px;";
+
+    $backgroundcolor = "background-color:#".$popup->getData('popup_background').";";
+
     $width = "";
     if($popup->getData('width') !=  "0"){
-        $width = "width:".$popup->getData('width');
+        $width = "width:".$popup->getData('width')."px;";
     }
     $maxwidth = "";
     if($popup->getData('max_width') !=  ""){
-        $maxwidth = "max-width:".$popup->getData('max_width');
-    }
-    $boxshowdow = "";
-    if($styleshadow == "0")
-    {
-        $boxshowdow = "-webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);box-shadow: 0 5px 15px rgba(0, 0, 0, .5);";
-    }else{
-        $boxshowdow = "-webkit-box-shadow: 0 0 0;box-shadow: 0 0 0;";
+        $maxwidth = "max-width:".$popup->getData('max_width')."px;";
     }
 
     $close_path = $popup->getData('close_icon_style');
@@ -63,17 +53,17 @@
     $corner_style = $popup->getData('corner_style');
         switch($corner_style) {
             case 0:
-            $style_plus = "border-radius:".$popup->getData('border_style')."px";
+            $style_plus = "border-radius:".$popup->getData('border_radius')."px;";
             break;
             case 1:
-            $style_plus = "border-radius:0px";
+            $style_plus = "border-radius:0px;";
             break;
             case 2:
-            $style_plus = "border-radius:50%";
+            $style_plus = "border-radius:50%;overflow:hidden;";
             break;
         }
-    $stylecontent = "#sc-popup0".$popup->getData('popup_id')."  .modal-content{".$width." ".$height.";background-color:#".$popup->getData('popup_background').";".$style_plus.";".$border_color.";".$border_size.";".$padding_size.";".$boxshowdow.";".$maxwidth.";}";
-    $styleoverbg = "#sc-popup0".$popup->getData('popup_id')."  .modal-backdrop{background-color:#".$popup->getData('overlay_background')."}";
+    $stylecontent = "#sc-popup".$popup->getData('template_code')."  .modal-content{".$width." ".$backgroundcolor." ".$style_plus." ".$border_color." ".$border_size." ".$padding_size." ".$maxwidth."}";
+    $styleoverbg = "#sc-popup".$popup->getData('template_code')."  .modal-backdrop{background-color:#".$popup->getData('overlay_background')."}";
     $customcss = $popup->getData('custom_css');
 
 ?>

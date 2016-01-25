@@ -42,12 +42,12 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Setting extends Mage_Adm
             'name'		=> 'cookie_time',
         ));
 
-        $fieldset->addField('total_time', 'text', array(
+       /* $fieldset->addField('total_time', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Max Time Preview:'),
             'required'	=> false,
             'note'      => 'Max time to show popup.',
             'name'		=> 'total_time',
-        ));
+        ));*/
 
         $fieldset->addField('priority', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Set Priority:'),

@@ -1,4 +1,4 @@
-.sc-popup03 form input {
+#sc-popup3 form input {
     height: auto;
     padding: 9px 0 8px 5px;
     font-size: 15px;
@@ -9,7 +9,7 @@
     margin-bottom:6px;
     text-align:center;
 }
-.sc-popup03 form button {
+#sc-popup3 form button {
     font-size:18px;
     font-weight:bold;
     height: 44px;
@@ -20,18 +20,18 @@
     display:block;
     width: 100%;
 }
-.sc-popup03 form {
+#sc-popup3 form {
     width: 100%;
 }
 
-.sc-popup03 form input{
+#sc-popup3 form input{
     width:100%;
     -moz-box-sizing:    border-box;
     -webkit-box-sizing: border-box;
     box-sizing:        border-box;
 }
 
-.sc-popup03 button {
+#sc-popup3 button {
     background-color: #3694D2;
     color:#FFFFFF;
     -moz-box-sizing:    border-box;

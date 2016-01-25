@@ -47,12 +47,24 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'note'      => 'Type of popup.',
             'values' => array(
                 array(
-                    'value' => 0,
-                    'label' => Mage::helper('campaign')->__('Template'),
+                    'value' => 'static',
+                    'label' => Mage::helper('campaign')->__('Static'),
                 ),
                 array(
-                    'value' => 1,
-                    'label' => Mage::helper('campaign')->__('Image'),
+                    'value' => 'video',
+                    'label' => Mage::helper('campaign')->__('Video'),
+                ),
+                array(
+                    'value' => 'sticker',
+                    'label' => Mage::helper('campaign')->__('Sticker'),
+                ),
+                array(
+                    'value' => 'subscribe',
+                    'label' => Mage::helper('campaign')->__('Subscribe'),
+                ),
+                array(
+                    'value' => 'register',
+                    'label' => Mage::helper('campaign')->__('Register'),
                 ),
             ),
 		));
@@ -99,16 +111,25 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'name'		=> 'width',
         ));
 
-        $fieldset->addField('height', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Height:'),
-            'required'	=> false,
-            'name'		=> 'height',
-        ));
+//        $fieldset->addField('height', 'text', array(
+//            'label'		=> Mage::helper('campaign')->__('Height:'),
+//            'required'	=> false,
+//            'name'		=> 'height',
+//        ));
 
 		$fieldset->addField('status', 'select', array(
 			'label'		=> Mage::helper('campaign')->__('Status:'),
 			'name'		=> 'status',
-			'values'	=> Mage::getSingleton('campaign/sliderstatus')->getOptionHash(),
+			'values'	=>array(
+                array(
+                    'value' => 1,
+                    'label' => Mage::helper('campaign')->__('Enabled'),
+                ),
+                array(
+                    'value' => 0,
+                    'label' => Mage::helper('campaign')->__('Disabled'),
+                ),
+            ),
 		));
 
         if (!Mage::app()->isSingleStoreMode()) {
@@ -243,6 +264,42 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                     'label' => Mage::helper('campaign')->__('After Seconds'),
                 ),
             ),
+        ));
+
+        $fieldset->addField('position_to', 'select', array(
+            'label'		=> Mage::helper('campaign')->__('Position to:'),
+            'required'	=> true,
+            'name'		=> 'position_to',
+            'values' => array(
+                array(
+                    'value' => 0,
+                    'label' => Mage::helper('campaign')->__('Top'),
+                ),
+                array(
+                    'value' => 1,
+                    'label' => Mage::helper('campaign')->__('Right'),
+                ),
+                array(
+                    'value' => 2,
+                    'label' => Mage::helper('campaign')->__('Bottom'),
+                ),
+                array(
+                    'value' => 3,
+                    'label' => Mage::helper('campaign')->__('Left'),
+                ),
+            ),
+        ));
+
+        $fieldset->addField('position_px', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('How many px:'),
+            'required'	=> false,
+            'name'		=> 'position_px',
+        ));
+
+        $fieldset->addField('template_code', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('Template code:'),
+            'required'	=> false,
+            'name'		=> 'template_code',
         ));
 
         $fieldset->addField('second_show', 'text', array(

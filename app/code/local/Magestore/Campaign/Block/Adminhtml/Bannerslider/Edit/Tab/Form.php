@@ -82,7 +82,6 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
         /*$fieldset->addField('campaign_id', 'select', array(
             'label' => Mage::helper('campaign')->__('Campaign'),
             'name' => 'campaign_id',
-            'required' => true,
             'values' => Mage::getSingleton('campaign/campaign')->getCampaignOption(),
         ));*/
 
