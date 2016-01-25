@@ -28,69 +28,10 @@
  */
 class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
 {
-    const CMS_PREFIX = 'super_campaign';
-
     public function _construct()
     {
         parent::_construct();
         $this->_init('campaign/campaign');
-        $this->_headertext = Mage::getModel('campaign/headertext')
-            ->load($this->getId(), 'campaign_id');
-    }
-
-    public function getCmsPrefix(){
-        return self::CMS_PREFIX;
-    }
-
-    /**
-     * get model popup
-     * @param string $type
-     * @return Magestore_Campaign_Model_Popup
-     */
-    public function getPopup($type = ''){
-        if($this->getId() == null){ //if create new campaign
-            $this->_popup = new Magestore_Campaign_Model_Popup();
-        }
-        if(!$this->_popup){
-            $this->_popup = Mage::getModel('campaign/popup');
-            $this->_popup->load($this->getId(), 'campaign_id');
-            if($type){
-                $this->_popup->reloadModelType($type);
-            }
-        }
-        if( !($this->_popup instanceof Magestore_Campaign_Model_Popup) ){
-            $this->_popup = new Magestore_Campaign_Model_Popup();
-        }
-        $this->_popup->setCampaign($this);
-        return $this->_popup;
-    }
-
-    public function getSidebar(){
-        if(!$this->_sidebar){
-            $this->_sidebar = Mage::getModel('campaign/sidebar');
-            $this->_sidebar->load($this->getId(), 'campaign_id');
-        }
-        if( !($this->_sidebar instanceof Magestore_Campaign_Model_Sidebar) ){
-            $this->_sidebar = new Magestore_Campaign_Model_Sidebar();
-        }
-        $this->_sidebar->setCampaign($this);
-        return $this->_sidebar;
-    }
-
-    /**
-     * get model header text
-     * @return Magestore_Campaign_Model_Headertext
-     */
-    public function getHeadertext(){
-        if(!($this->_headertext instanceof Magestore_Campaign_Model_Headertext) || !$this->_headertext->getId()){
-            $this->_headertext = Mage::getModel('campaign/headertext');
-            $this->_headertext->load($this->getId(), 'campaign_id');
-        }
-        if( !($this->_headertext instanceof Magestore_Campaign_Model_Headertext) ){
-            $this->_headertext = new Magestore_Campaign_Model_Headertext();
-        }
-        $this->_headertext->setCampaign($this);
-        return $this->_headertext;
     }
 
 
@@ -98,7 +39,7 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
      * zeus get model countdown
      * @return Magestore_Campaign_Model_Countdown
      */
-    public function getCountdown(){
+    /*public function getCountdown(){
         if(!($this->_countdown instanceof Magestore_Campaign_Model_Countdown) || !$this->_countdown->getId()){
             $this->_countdown = Mage::getModel('campaign/countdown');
             $this->_countdown->load($this->getId(), 'campaign_id');
@@ -108,7 +49,7 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
         }
         $this->_countdown->setCampaign($this);
         return $this->_countdown;
-    }
+    }*/
 
 
 
@@ -335,5 +276,43 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
             );
         return $options;
     }
+
+    /**
+     * get all popup can show of this campaign
+     */
+    public function getPopupsAvailable(){
+        $popups = array();
+        $collection = $this->getPopupCollection();
+        foreach ($collection as $item) {
+            //priority from highest to lowest
+            if($item->checkUserIP()){
+                $popups[$item->getId()] = $item;
+                continue;
+            }
+            if($item->checkUrl() && $item->checkProducts() && $item->checkDevices()
+                && $item->checkCountry() && $item->checkUserLogin() && $item->checkReturnCustomer()
+                && $item->checkCustomerGroup() && $item->checkCartSubtotalLessThan()
+            ){
+                $popups[$item->getId()] = $item;
+                continue;
+            }
+        }
+        return $popups;
+    }
+    /**
+     * get all popup as collection, filter by status and store
+     */
+    public function getPopupCollection(){
+        $store = Mage::app()->getStore();
+        $collection = Mage::getModel('campaign/popup')->getCollection();
+        $collection->addFieldToFilter('campaign_id', $this->getId());
+        $collection->addFieldToFilter('status', Magestore_Campaign_Model_Popup::STATUS_ENABLE);
+        $collection->addFieldToFilter(array('store','store'), array(array('finset'=>$store->getId()),array('finset'=>0)));
+        $collection->getSelect()
+            ->order('priority DESC');
+        return $collection;
+    }
+
+
 
 }
