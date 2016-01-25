@@ -8,7 +8,7 @@
 ?>
 
 <div class="static">
-    <div id="sc-popup<?php echo $popup->getData('template_code') ?>" class="modal fade sc-popup01" role="dialog">
+    <div id="sc-popup<?php echo $popup->getData('template_code') ?>" class="modal fade sc-popup<?php echo $popup->getData('template_code') ?>" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
@@ -26,13 +26,14 @@
     $border_size = "border-size:".$popup->getData('border_size_in_px')."px";
     $padding_size = "padding:".$popup->getData('padding')."px";
     $styleshadow = $popup->getData('popup_shadow');
+    $backgroundcolor = "background-color:#".$popup->getData('popup_background');
     $height = "";
     if($popup->getData('height') !=  "0"){
-        $height = "height:".$popup->getData('height');
+        $height = "height:".$popup->getData('height')."px";
     }
     $width = "";
     if($popup->getData('width') !=  "0"){
-        $width = "width:".$popup->getData('width');
+        $width = "width:".$popup->getData('width')."px";
     }
     $maxwidth = "";
     if($popup->getData('max_width') !=  ""){
@@ -72,8 +73,8 @@
             $style_plus = "border-radius:50%";
             break;
         }
-    $stylecontent = "#sc-popup0".$popup->getData('popup_id')."  .modal-content{".$width." ".$height.";background-color:#".$popup->getData('popup_background').";".$style_plus.";".$border_color.";".$border_size.";".$padding_size.";".$boxshowdow.";".$maxwidth.";}";
-    $styleoverbg = "#sc-popup0".$popup->getData('popup_id')."  .modal-backdrop{background-color:#".$popup->getData('overlay_background')."}";
+    $stylecontent = "#sc-popup".$popup->getData('template_code')."  .modal-content{".$width.";".$height." ".$backgroundcolor.";".$style_plus.";".$border_color.";".$border_size.";".$padding_size.";".$boxshowdow."".$maxwidth."}";
+    $styleoverbg = "#sc-popup".$popup->getData('template_code')."  .modal-backdrop{background-color:#".$popup->getData('overlay_background')."}";
     $customcss = $popup->getData('custom_css');
 
 ?>

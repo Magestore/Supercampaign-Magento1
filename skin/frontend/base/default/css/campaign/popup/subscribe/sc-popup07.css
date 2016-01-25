@@ -12,8 +12,8 @@
     color:#000000;
     padding: 5px;
 }
-#sc-popup07 .modal-content{border:2px solid #FFFFFF;;padding:10px;}
-#sc-popup07 .modal-content{border-radius: 16px; -webkit-border-radius:16px; -moz-border-radius: 16px; -o-border-radius: 16px;}
-#sc-popup07 .modal-content{background-color: #26292a;}
-#sc-popup07 table{border-spacing:0 !important;}
-#sc-popup07 .modal-dialog{position:fixed;left:50%;margin-left:-412px;bottom:-18px;}
+#sc-popup7 .modal-content{border:2px solid #FFFFFF;;padding:10px;}
+#sc-popup7 .modal-content{border-radius: 16px; -webkit-border-radius:16px; -moz-border-radius: 16px; -o-border-radius: 16px;}
+#sc-popup7 .modal-content{background-color: #26292a;}
+#sc-popup7 table{border-spacing:0 !important;}
+#sc-popup7 .modal-dialog{position:fixed;left:50%;margin-left:-412px;bottom:-18px;}
