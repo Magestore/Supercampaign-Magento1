@@ -33,7 +33,13 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
 			'name'		=> 'title',
 		));
 
-		$fieldset->addField('popup_type', 'select', array(
+        $fieldset->addField('status', 'select', array(
+            'label'		=> Mage::helper('campaign')->__('Status:'),
+            'name'		=> 'status',
+            'values'	=> Magestore_Campaign_Model_Status::getOptionHash(),
+        ));
+
+		/*$fieldset->addField('popup_type', 'select', array(
 			'label'		=> Mage::helper('campaign')->__('Popup Content Type:'),
 			'required'	=> true,
 			'name'		=> 'popup_type',
@@ -60,7 +66,21 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                     'label' => Mage::helper('campaign')->__('Register'),
                 ),
             ),
-		));
+		));*/
+
+        $fieldset->addField('template_code', 'hidden', array(
+            'name'		=> 'template_code',
+            'label'		=> Mage::helper('campaign')->__('Template code:'),
+            'required'	=> false,
+        ));
+
+        $fieldset->addField('load_template', 'label', array(
+            'label'		=> Mage::helper('campaign')->__(''),
+            'after_element_html' => '<button id="" type="button" class="scalable add" style="" alt="Load template"
+ title="Load template" onclick="window.open(\''.$this->getUrl('campaignadmin/adminhtml_popup/index').'\', \'_blank\', \'scrollbars=yes, resizable=yes,width=1000,height=800, top = 50\');" href="javascript:void(0);" <span="">'.$this->__('Create popup using predefined templates').'
+        </button>',
+        ));
+
 
         if (Mage::getSingleton('cms/wysiwyg_config')->isEnabled()) {
             $this->getLayout()->getBlock('head')->setCanLoadTinyMce(true);
@@ -93,21 +113,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'required'	=> false,
             'name'		=> 'width',
         ));
-
-		$fieldset->addField('status', 'select', array(
-			'label'		=> Mage::helper('campaign')->__('Status:'),
-			'name'		=> 'status',
-			'values'	=>array(
-                array(
-                    'value' => 1,
-                    'label' => Mage::helper('campaign')->__('Enabled'),
-                ),
-                array(
-                    'value' => 0,
-                    'label' => Mage::helper('campaign')->__('Disabled'),
-                ),
-            ),
-		));
 
         if (!Mage::app()->isSingleStoreMode()) {
             $field = $fieldset->addField('store', 'multiselect', array(
@@ -241,12 +246,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'required'	=> false,
             'name'		=> 'second_show',
             'note'      => 'Seconds to show popup.',
-        ));
-
-        $fieldset->addField('template_code', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Template code:'),
-            'required'	=> false,
-            'name'		=> 'template_code',
         ));
 
 		$form->setValues($data);
