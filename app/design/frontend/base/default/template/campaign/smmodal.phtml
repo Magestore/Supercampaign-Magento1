@@ -24,11 +24,16 @@
     $border_color = "border-color:#".$popup->getData('border_color').";";
     $border_size = "border-width:".$popup->getData('border_size')."px;";
     $padding_size = "padding:".$popup->getData('padding')."px;";
-
+    $position = $popup->getData('position_to');
+    $position_px = $popup->getData('position_px');
+    $position_to = "";
+    if($position_px != ""){
+        $position_to = $position.":".$position_px."px;";
+    }
     $backgroundcolor = "background-color:#".$popup->getData('popup_background').";";
 
     $width = "";
-    if($popup->getData('width') !=  "0"){
+    if($popup->getData('width') !=  "0" && $popup->getData('width') !=  ""){
         $width = "width:".$popup->getData('width')."px;";
     }
     $maxwidth = "";
@@ -63,7 +68,8 @@
             break;
         }
     $stylecontent = "#sc-popup".$popup->getData('template_code')."  .modal-content{".$width." ".$backgroundcolor." ".$style_plus." ".$border_color." ".$border_size." ".$padding_size." ".$maxwidth."}";
-    $styleoverbg = "#sc-popup".$popup->getData('template_code')."  .modal-backdrop{background-color:#".$popup->getData('overlay_background')."}";
+    $styleoverbg = "#sc-popup".$popup->getData('template_code')."  .modal-backdrop{background-color:#".$popup->getData('overlay_color')."}";
+    $styledialog = "#sc-popup".$popup->getData('template_code')."  .modal-dialog{".$position_to."}";
     $customcss = $popup->getData('custom_css');
 
 ?>
@@ -100,7 +106,7 @@
             $j('.modal').prop('class', 'modal fade').addClass('top');
     }
     $j(window).bind("load", function() {
-        var string = "<style type=\"text/css\"><?php echo $stylecontent." ".$styleoverbg." ".$close_icon." ".$customcss?></style>"
+        var string = "<style type=\"text/css\"><?php echo $stylecontent." ".$styledialog." ".$styleoverbg." ".$close_icon." ".$customcss?></style>"
         $j('head').append(string);
         $j('.modal').modal('show');
     });
