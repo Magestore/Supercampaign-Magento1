@@ -26,6 +26,8 @@
             <action method="addCss"><stylesheet>css/magestore/campaign/owl.carousel.css</stylesheet></action>
             <action method="addCss"><stylesheet>css/magestore/campaign/owl.theme.css</stylesheet></action>
             <action method="addCss"><stylesheet>css/magestore/campaign/style.css</stylesheet></action>
+            <action method="addJs"><script>tinybox/tinybox.js</script></action>
+            <action method="addCss"><stylesheet>css/tinybox/style.css</stylesheet></action>
 
         </reference>
     </default>
@@ -90,6 +92,7 @@
             <action method="addJs"><script>mage/adminhtml/browser.js</script></action>
             <action method="addJs"><script>prototype/window.js</script></action>
             <action method="addJs"><script>prototype/prototype.js</script></action>
+            <action method="addJs"><script>tinybox/tinybox.js</script></action>
             <action method="addJs">
                 <script>magestore/campaign/jscolor/jscolor.js</script>
             </action>

@@ -168,6 +168,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Grid extends Mage_Adminhtm
                     },
                     onComplete: function(xhr){
                         TINY.box.show('');
+                        $('loading-mask').hide();
                         $('tinycontent').innerHTML = xhr.responseText;
                         // clipboard text, click to save, click save. copy button.
                         $('copy-button').dataset.clipboardText= $('clipboard-text').value;
