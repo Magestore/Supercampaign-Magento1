@@ -67,10 +67,10 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
             ),
         ));
 
-        $fieldset->addField('login_users', 'multiselect', array(
+        $fieldset->addField('login_user', 'multiselect', array(
             'label'		=> Mage::helper('campaign')->__('User Login:'),
             'required'	=> true,
-            'name'		=> 'login_users',
+            'name'		=> 'login_user',
             'note'      => "Show popup when user login.",
             'values' => array(
                 array(
