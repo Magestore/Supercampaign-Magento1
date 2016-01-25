@@ -42,8 +42,11 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
 			'index'	 => 'popup_type',
             'type'		=> 'options',
             'options'	 => array(
-                0 => 'Template',
-                1 => 'Image',
+                'static' => 'Static',
+                'video' => 'Video',
+                'sticker' => 'Sticker',
+                'subscribe' => 'Subscribe',
+                'register' => 'Register',
             ),
 		));
 
