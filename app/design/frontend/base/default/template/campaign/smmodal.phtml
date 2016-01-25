@@ -8,7 +8,7 @@
     //zend_debug::dump($popup);die;
 
     //$popup->getData();
-    //Zend_debug::dump($popup->getData());
+    Zend_debug::dump($popup->getData());
     $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
     $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
     $stylepopup = Mage::helper('campaign')->checkStylepopup();
@@ -34,7 +34,7 @@
     $position = $popup->getData('position_to');
     $position_px = $popup->getData('position_px');
     $position_to = "";
-    if($position_px != ""){
+    if($position_px != " "){
         $position_to = $position.":".$position_px."px;";
     }
     $backgroundcolor = "background-color:#".$popup->getData('popup_background').";";
