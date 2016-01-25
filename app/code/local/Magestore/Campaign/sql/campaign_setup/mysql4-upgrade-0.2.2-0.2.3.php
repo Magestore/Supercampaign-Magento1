@@ -57,9 +57,6 @@ CREATE TABLE {$this->getTable('campaign/bannerslider')} (
   `url_view` varchar(255) NULL,
   `min_item` int(11) NULL,
   `max_item` int(11) NULL,
-  INDEX(`campaign_id`),
-  CONSTRAINT `bannerslider_refer_campaign` FOREIGN KEY (`campaign_id`)
-    REFERENCES {$this->getTable('campaign/campaign')} (`campaign_id`) ON UPDATE CASCADE ON DELETE CASCADE,
   PRIMARY KEY (`bannerslider_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
