@@ -31,13 +31,25 @@
     $border_color = "border-color:#".$popup->getData('border_color').";";
     $border_size = "border-width:".$popup->getData('border_size')."px;";
     $padding_size = "padding:".$popup->getData('padding')."px;";
+    $backgroundcolor = $popup->getData('popup_background');
+    switch($backgroundcolor) {
+        case 'white':
+            $bg_overlay = "#sc-popup".$popup->getData('template_code')."  .modal-backdrop{background-color:#fff;}";
+            break;
+        case 'back':
+            $bg_overlay = "#sc-popup".$popup->getData('template_code')."  .modal-backdrop{background-color:#000;}";
+            break;
+        case 'no_background':
+            $bg_overlay = "#sc-popup".$popup->getData('template_code')."  .modal-backdrop{display:none}";
+            break;
+    }
     $position = $popup->getData('position_to');
     $position_px = $popup->getData('position_px');
     $position_to = "";
-    if($position_px != ""){
-        $position_to = $position.":".$position_px."px;";
+    if($position_px != "0"){
+        $position_to = $position.":".$position_px."px; position: fixed;";
     }
-    $backgroundcolor = "background-color:#".$popup->getData('popup_background').";";
+
 
     $width = "";
     if($popup->getData('width') !=  "0" && $popup->getData('width') !=  ""){
