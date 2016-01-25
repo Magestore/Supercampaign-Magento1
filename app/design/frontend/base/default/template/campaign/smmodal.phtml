@@ -8,7 +8,7 @@
     //zend_debug::dump($popup);die;
 
     //$popup->getData();
-    //Zend_debug::dump($popup->getData());
+    Zend_debug::dump($popup->getData());
     $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
     $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
     $stylepopup = Mage::helper('campaign')->checkStylepopup();
@@ -32,24 +32,65 @@
     $border_size = "border-width:".$popup->getData('border_size')."px;";
     $padding_size = "padding:".$popup->getData('padding')."px;";
     $backgroundcolor = $popup->getData('popup_background');
-    switch($backgroundcolor) {
+    $overlay_color = $popup->getData('overlay_color');
+    switch($overlay_color) {
         case 'white':
-            $bg_overlay = "#sc-popup".$popup->getData('template_code')."  .modal-backdrop{background-color:#fff;}";
+            $bg_overlay = "background-color:#fff;";
             break;
         case 'back':
-            $bg_overlay = "#sc-popup".$popup->getData('template_code')."  .modal-backdrop{background-color:#000;}";
+            $bg_overlay = "background-color:#000;";
             break;
         case 'no_background':
-            $bg_overlay = "#sc-popup".$popup->getData('template_code')."  .modal-backdrop{display:none}";
+            $bg_overlay = "display:none";
             break;
     }
-    $position = $popup->getData('position_to');
-    $position_px = $popup->getData('position_px');
-    $position_to = "";
-    if($position_px != "0"){
-        $position_to = $position.":".$position_px."px; position: fixed;";
+    $horizontal_position = $popup->getData('horizontal_position');
+    $vertical_position = $popup->getData('vertical_position');
+    $horizontal_px = $popup->getData('horizontal_px');
+    $horizontalpx = "";
+    $vertical_px = $popup->getData('vertical_px');
+    $verticalpx = "";
+    if($horizontal_px != "0") {
+        switch ($horizontal_position) {
+            case 'left':
+                if ($overlay_color = 'no_background') {
+                     $horizontalpx = ".modal{position: fixed;left:" . $horizontal_px . "px;}";
+                }
+                else{
+                    $horizontalpx = ".modal-dialog{position: fixed;left:" . $horizontal_px . "px;}";
+                }
+                break;
+            case 'center':
+                $horizontalpx = "";
+                break;
+            case 'right':
+                if ($overlay_color = 'no_background') {
+                    $horizontalpx = ".modal{position: fixed;right:".$horizontal_px."px;}";
+                }
+                else{
+                    $horizontalpx = ".modal-dialog{position: fixed;right:" . $horizontal_px . "px;}";
+                }
+                break;
+        }
     }
-
+    if($vertical_px != "0") {
+        switch ($vertical_position) {
+            case 'top':
+                if ($overlay_color = 'no_background') {
+                    $verticalpx = ".modal{position: fixed;margin-top:" . $vertical_px . "px;}";
+                }else{
+                    $verticalpx = ".modal-dialog{position: fixed;margin-top:" . $vertical_px . "px;}";
+                }
+                break;
+            case 'bottom':
+                if ($overlay_color = 'no_background') {
+                    $verticalpx = "position: fixed;margin-bottom:" . $vertical_px . "px;";
+                }else{
+                    $verticalpx = ".modal-dialog{position: fixed;margin-bottom:" . $vertical_px . "px;}";
+                }
+                break;
+        }
+    }
 
     $width = "";
     if($popup->getData('width') !=  "0" && $popup->getData('width') !=  ""){
@@ -60,18 +101,26 @@
         $maxwidth = "max-width:".$popup->getData('max_width')."px;";
     }
 
-    $close_path = $popup->getData('close_icon_style');
+    $close_path = $popup->getData('close_style');
     $close_icon = "";
     switch($close_path) {
-        case 0:
-            $close_icon = ".dialogClose{background:url(".$this->getSkinUrl('images/campaign/popup/close_white.png').") no-repeat 5px 5px}";
+        case 'circle':
+            if($overlay_color == 'white') {
+                $close_icon = ".dialogClose{background:url(" . $this->getSkinUrl('images/campaign/popup/close_dark.png') . ") no-repeat 5px 5px}";
+            }else{
+                if($overlay_color == 'dark'){
+                    $close_icon = ".dialogClose{background:url(" . $this->getSkinUrl('images/campaign/popup/close_white.png') . ") no-repeat 5px 5px}";
+                }
+            }
             break;
-        case 1:
+        case 'simple':
             $close_icon = ".dialogClose{background:url(".$this->getSkinUrl('images/campaign/popup/close_promotion.png').") no-repeat 5px -20px}";
             break;
-        case 2:
+        case 'none':
             $close_icon = ".dialogClose{background:none transparent}";
             break;
+        default:
+            $close_icon = ".dialogClose{background:url(".$this->getSkinUrl('images/campaign/popup/close_promotion.png').") no-repeat 5px -20px}";
     }
 
     $corner_style = $popup->getData('corner_style');
@@ -87,8 +136,8 @@
             break;
         }
     $stylecontent = "#sc-popup".$popup->getData('template_code')."  .modal-content{".$width." ".$backgroundcolor." ".$style_plus." ".$border_color." ".$border_size." ".$padding_size." ".$maxwidth."}";
-    $styleoverbg = "#sc-popup".$popup->getData('template_code')."  .modal-backdrop{background-color:#".$popup->getData('overlay_color')."}";
-    $styledialog = "#sc-popup".$popup->getData('template_code')."  .modal-dialog{".$position_to."}";
+    $styleoverbg = "#sc-popup".$popup->getData('template_code')."  .modal-backdrop{".$bg_overlay."}";
+    //$styledialog = "#sc-popup".$popup->getData('template_code')."  .modal-dialog{".$horizontalpx." ".$verticalpx."}";
     $customcss = $popup->getData('custom_css');
 
 ?>
@@ -125,7 +174,7 @@
             $j('.modal').prop('class', 'modal fade').addClass('top');
     }
     $j(window).bind("load", function() {
-        var string = "<style type=\"text/css\"><?php echo $stylecontent." ".$styledialog." ".$styleoverbg." ".$close_icon." ".$customcss?></style>"
+        var string = "<style type=\"text/css\"><?php echo $horizontalpx." ".$verticalpx." ".$stylecontent." ".$styledialog." ".$styleoverbg." ".$close_icon." ".$customcss ?></style>"
         $j('head').append(string);
         $j('.modal').modal('show');
     });
