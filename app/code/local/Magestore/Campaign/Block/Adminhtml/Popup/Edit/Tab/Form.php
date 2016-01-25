@@ -250,44 +250,44 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                 </script>'
         ));
 
-        $fieldset->addField('show_when', 'select', array(
+        $show_when = $fieldset->addField('show_when', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Show When:'),
             'required'	=> true,
             'name'		=> 'show_when',
             'values' => array(
                 array(
-                    'value' => 0,
+                    'value' => 'after_load_page',
                     'label' => Mage::helper('campaign')->__('After Load Page'),
                 ),
                 array(
-                    'value' => 1,
+                    'value' => 'after_seconds',
                     'label' => Mage::helper('campaign')->__('After Seconds'),
                 ),
             ),
         ));
 
-        $fieldset->addField('second_show', 'text', array(
+        $seconds_number0 = $fieldset->addField('second_show', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Seconds:'),
             'required'	=> false,
             'name'		=> 'second_show',
             'note'      => 'Seconds to show popup.',
         ));
 
-        $fieldset->addField('scrolling_show', 'text', array(
+        $seconds_number1 = $fieldset->addField('scrolling_show', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Scrolling Px:'),
             'required'	=> false,
             'name'		=> 'scrolling_show',
             'note'      => 'Position scrolling to show popup.',
         ));
 
-        $fieldset->addField('selector_show', 'text', array(
+        $seconds_number2 = $fieldset->addField('selector_show', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Selector:'),
             'required'	=> false,
             'name'		=> 'selector_show',
             'note'      => 'Show popup when click or hover into id and class selected.',
         ));
 
-        $fieldset->addField('close_on_hoverout', 'select', array(
+        $seconds_number3 = $fieldset->addField('close_on_hoverout', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Close on hover out:'),
             'required'	=> true,
             'name'		=> 'close_on_hoverout',
@@ -340,6 +340,36 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         ));
 
 		$form->setValues($data);
+
+        $this->setForm($form);
+        $this->setChild('form_after', $this->getLayout()->createBlock('adminhtml/widget_form_element_dependence')
+                ->addFieldMap($show_when->getHtmlId(), $show_when->getName())
+                ->addFieldMap($seconds_number0->getHtmlId(), $seconds_number0->getName())
+                ->addFieldMap($seconds_number1->getHtmlId(), $seconds_number1->getName())
+                ->addFieldMap($seconds_number2->getHtmlId(), $seconds_number2->getName())
+                ->addFieldMap($seconds_number3->getHtmlId(), $seconds_number3->getName())
+                ->addFieldDependence(
+                    $seconds_number0->getName(),
+                    $show_when->getName(),
+                    'after_seconds'
+                )
+                ->addFieldDependence(
+                    $seconds_number1->getName(),
+                    $show_when->getName(),
+                    'after_seconds'
+                )
+                ->addFieldDependence(
+                    $seconds_number2->getName(),
+                    $show_when->getName(),
+                    'after_seconds'
+                )
+                ->addFieldDependence(
+                    $seconds_number3->getName(),
+                    $show_when->getName(),
+                    'after_seconds'
+                )
+        );
+
 		return parent::_prepareForm();
 	}
 }
