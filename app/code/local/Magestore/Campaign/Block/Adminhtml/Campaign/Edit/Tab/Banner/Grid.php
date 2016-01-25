@@ -120,8 +120,8 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Banner_Grid extends M
             'filter_index'=>'main_table.status',
             'type'        => 'options',
             'options'     => array(
-                1 => 'Enabled',
-                0 => 'Disabled',
+                Magestore_Campaign_Model_Sliderstatus::STATUS_ENABLED => 'Enabled',
+                Magestore_Campaign_Model_Sliderstatus::STATUS_DISABLED => 'Disabled',
             ),
         ));
 
