@@ -139,25 +139,25 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Edit_Tab_Form extends Mage_Admin
         }
 
         $note = $this->__('The current server time is').': '.$this->formatTime(now(),Mage_Core_Model_Locale::FORMAT_TYPE_SHORT,true);
-        $fieldset->addField('start_time', 'date', array(
-            'label'     => Mage::helper('campaign')->__('Start time'),
-            'name'      => 'start_time',
-            'input_format'  => Varien_Date::DATETIME_INTERNAL_FORMAT,
-            'image' => $image_calendar,
-            'format'    =>Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
-            'time' => true,
-            'required'  => true,
-        ));
-        $fieldset->addField('end_time', 'date', array(
-            'label'     => Mage::helper('campaign')->__('End time'),
-            'name'      => 'end_time',
-            'input_format'  => Varien_Date::DATETIME_INTERNAL_FORMAT,
-            'image' => $image_calendar,
-            'format'    =>Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
-            'time' => true,
-            'required'  => true,
-            'note'=>$note,
-        ));
+//        $fieldset->addField('start_time', 'date', array(
+//            'label'     => Mage::helper('campaign')->__('Start time'),
+//            'name'      => 'start_time',
+//            'input_format'  => Varien_Date::DATETIME_INTERNAL_FORMAT,
+//            'image' => $image_calendar,
+//            'format'    =>Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
+//            'time' => true,
+//            'required'  => true,
+//        ));
+//        $fieldset->addField('end_time', 'date', array(
+//            'label'     => Mage::helper('campaign')->__('End time'),
+//            'name'      => 'end_time',
+//            'input_format'  => Varien_Date::DATETIME_INTERNAL_FORMAT,
+//            'image' => $image_calendar,
+//            'format'    =>Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
+//            'time' => true,
+//            'required'  => true,
+//            'note'=>$note,
+//        ));
 
 
         $fieldset->addField('tartget', 'select', array(

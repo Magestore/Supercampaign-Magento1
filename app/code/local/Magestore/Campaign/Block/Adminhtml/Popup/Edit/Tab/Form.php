@@ -266,42 +266,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             ),
         ));
 
-        $fieldset->addField('position_to', 'select', array(
-            'label'		=> Mage::helper('campaign')->__('Position to:'),
-            'required'	=> true,
-            'name'		=> 'position_to',
-            'values' => array(
-                array(
-                    'value' => 0,
-                    'label' => Mage::helper('campaign')->__('Top'),
-                ),
-                array(
-                    'value' => 1,
-                    'label' => Mage::helper('campaign')->__('Right'),
-                ),
-                array(
-                    'value' => 2,
-                    'label' => Mage::helper('campaign')->__('Bottom'),
-                ),
-                array(
-                    'value' => 3,
-                    'label' => Mage::helper('campaign')->__('Left'),
-                ),
-            ),
-        ));
-
-        $fieldset->addField('position_px', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('How many px:'),
-            'required'	=> false,
-            'name'		=> 'position_px',
-        ));
-
-        $fieldset->addField('template_code', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Template code:'),
-            'required'	=> false,
-            'name'		=> 'template_code',
-        ));
-
         $fieldset->addField('second_show', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Seconds:'),
             'required'	=> false,
@@ -337,6 +301,42 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                     'label' => Mage::helper('campaign')->__('Yes'),
                 ),
             ),
+        ));
+
+        $fieldset->addField('position_to', 'select', array(
+            'label'		=> Mage::helper('campaign')->__('Position to:'),
+            'required'	=> true,
+            'name'		=> 'position_to',
+            'values' => array(
+                array(
+                    'value' => 'top',
+                    'label' => Mage::helper('campaign')->__('Top'),
+                ),
+                array(
+                    'value' => 'right',
+                    'label' => Mage::helper('campaign')->__('Right'),
+                ),
+                array(
+                    'value' => 'bottom',
+                    'label' => Mage::helper('campaign')->__('Bottom'),
+                ),
+                array(
+                    'value' => 'left',
+                    'label' => Mage::helper('campaign')->__('Left'),
+                ),
+            ),
+        ));
+
+        $fieldset->addField('position_px', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('How many px:'),
+            'required'	=> false,
+            'name'		=> 'position_px',
+        ));
+
+        $fieldset->addField('template_code', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('Template code:'),
+            'required'	=> false,
+            'name'		=> 'template_code',
         ));
 
 		$form->setValues($data);
