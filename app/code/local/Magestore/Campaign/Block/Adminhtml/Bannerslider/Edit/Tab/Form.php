@@ -69,22 +69,22 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
             'name' => 'show_title',
             'values' => array(
                 array(
-                    'value' => 1,
+                    'value' => 0,
                     'label' => Mage::helper('campaign')->__('Enabled'),
                 ),
                 array(
-                    'value' => 0,
+                    'value' => 1,
                     'label' => Mage::helper('campaign')->__('Disabled'),
                 ),
             ),
         ));
 
-        $fieldset->addField('campaign_id', 'select', array(
+        /*$fieldset->addField('campaign_id', 'select', array(
             'label' => Mage::helper('campaign')->__('Campaign'),
             'name' => 'campaign_id',
             'required' => true,
             'values' => Mage::getSingleton('campaign/campaign')->getCampaignOption(),
-        ));
+        ));*/
 
         $fieldset->addField('status', 'select', array(
             'label' => Mage::helper('campaign')->__('Status'),
