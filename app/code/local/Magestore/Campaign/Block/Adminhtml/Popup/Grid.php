@@ -86,10 +86,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
             'options'	 => array(
                 0 => 'After Load Page',
                 1 => 'After Seconds',
-                2 => 'After Scroll',
-                3 => 'On Click',
-                4 => 'On Hover',
-                5 => 'Mouse Leave Window',
+
             ),
         ));
 
@@ -106,8 +103,8 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
 			'index'	 => 'status',
 			'type'		=> 'options',
 			'options'	 => array(
-				0 => 'Enabled',
-				1 => 'Disabled',
+				1 => 'Enabled',
+				0 => 'Disabled',
 			),
 		));
 

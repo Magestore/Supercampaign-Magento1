@@ -14,11 +14,11 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
 
         $fieldset = $form->addFieldset('popup_form', array('legend'=>Mage::helper('campaign')->__('Visitorsegment information')));
 
-        $fieldset->addField('country_id', 'text', array(
+        $fieldset->addField('country', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Country:'),
             'required'	=> false,
             'note'      => 'Show popup for country.',
-            'name'		=> 'country_id',
+            'name'		=> 'country',
         ));
 
         $fieldset->addField('devices', 'multiselect', array(
@@ -118,12 +118,12 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
                     ->toOptionArray()
         ));
 
-        $fieldset->addField('cart_subtotal_min', 'text', array(
+       /* $fieldset->addField('cart_subtotal_min', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Cart subtotal less than:'),
             'required'	=> false,
             'note'      => "Show popup when customer's cart less than.",
             'name'		=> 'cart_subtotal_min',
-        ));
+        ));*/
 
         $fieldset->addField('user_ip', 'text', array(
             'label'		=> Mage::helper('campaign')->__('User Ip:'),

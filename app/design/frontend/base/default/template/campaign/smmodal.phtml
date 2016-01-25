@@ -24,12 +24,9 @@
     $border_color = "border-color:#".$popup->getData('border_color').";";
     $border_size = "border-width:".$popup->getData('border_size')."px;";
     $padding_size = "padding:".$popup->getData('padding')."px;";
-    $styleshadow = $popup->getData('popup_shadow').";";
+
     $backgroundcolor = "background-color:#".$popup->getData('popup_background').";";
-    $height = "";
-    if($popup->getData('height') !=  "0"){
-        $height = "height:".$popup->getData('height')."px;";
-    }
+
     $width = "";
     if($popup->getData('width') !=  "0"){
         $width = "width:".$popup->getData('width')."px;";
@@ -37,13 +34,6 @@
     $maxwidth = "";
     if($popup->getData('max_width') !=  ""){
         $maxwidth = "max-width:".$popup->getData('max_width')."px;";
-    }
-    $boxshowdow = "";
-    if($styleshadow == "0")
-    {
-        $boxshowdow = "-webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);box-shadow: 0 5px 15px rgba(0, 0, 0, .5);";
-    }else{
-        $boxshowdow = "-webkit-box-shadow: 0 0 0;box-shadow: 0 0 0;";
     }
 
     $close_path = $popup->getData('close_icon_style');
@@ -72,7 +62,7 @@
             $style_plus = "border-radius:50%;overflow:hidden;";
             break;
         }
-    $stylecontent = "#sc-popup".$popup->getData('template_code')."  .modal-content{".$width." ".$height." ".$backgroundcolor." ".$style_plus." ".$border_color." ".$border_size." ".$padding_size." ".$boxshowdow." ".$maxwidth."}";
+    $stylecontent = "#sc-popup".$popup->getData('template_code')."  .modal-content{".$width." ".$backgroundcolor." ".$style_plus." ".$border_color." ".$border_size." ".$padding_size." ".$maxwidth."}";
     $styleoverbg = "#sc-popup".$popup->getData('template_code')."  .modal-backdrop{background-color:#".$popup->getData('overlay_background')."}";
     $customcss = $popup->getData('custom_css');
 

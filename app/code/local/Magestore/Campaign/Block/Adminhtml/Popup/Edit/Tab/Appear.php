@@ -55,10 +55,10 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
             'name'		=> 'border_size',
         ));
 
-        $fieldset->addField('overlay_background', 'text', array(
+        $fieldset->addField('overlay_color', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Overlay Background:'),
             'required'	=> true,
-            'name'		=> 'overlay_background',
+            'name'		=> 'overlay_color',
             'note'      => 'Overlay background when show popup.',
             'class'     =>  'color',
         ));
@@ -98,7 +98,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
             ),
         ));
 
-        $fieldset->addField('popup_shadow', 'select', array(
+        /*$fieldset->addField('popup_shadow', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Popup Box Shadow:'),
             'required'	=> true,
             'name'		=> 'popup_shadow',
@@ -112,7 +112,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
                     'label' => Mage::helper('campaign')->__('No'),
                 ),
             ),
-        ));
+        ));*/
 
         $fieldset->addField('appear_effect', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Appear Effect:'),
@@ -155,7 +155,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
             ),
         ));
 
-
+/*
         $fieldset->addField('close_effect', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Popup Close Effect:'),
             'required'	=> true,
@@ -171,7 +171,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
                     'label' => Mage::helper('campaign')->__('Disapear'),
                 ),
             ),
-        ));
+        ));*/
 
         $fieldset->addField('custom_css', 'editor', array(
             'label'		=> Mage::helper('campaign')->__('Custom css style:'),
