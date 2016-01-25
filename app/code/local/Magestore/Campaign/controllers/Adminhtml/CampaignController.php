@@ -96,6 +96,21 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
     {
         $this->_forward('edit');
     }
+
+    /**
+     * show cowdown with products
+     */
+    public function chooserMainProductsAction() {
+        die('123');
+        $request = $this->getRequest();
+        $block = $this->getLayout()->createBlock(
+            'campaign/adminhtml_campaign_edit_tab_content_maincontent_grid', 'campaign_chooser_sku', array('input' =>'countdown_products','grid_url_call'=>'chooserMainProducts','id'=>'productGrid','js_form_object' => $request->getParam('form'),
+        ));
+
+        if ($block) {
+            $this->getResponse()->setBody($block->toHtml());
+        }
+    }
  
     /**
      * save item action
