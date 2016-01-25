@@ -14,28 +14,28 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
 
         $fieldset = $form->addFieldset('popup_form', array('legend'=>Mage::helper('campaign')->__('Appear information')));
 
-        $fieldset->addField('corner_style', 'select', array(
+        $corner_style = $fieldset->addField('corner_style', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Popup Corners Style:'),
             'required'	=> true,
             'name'		=> 'corner_style',
             'note'      => 'Type of corner for popup.',
             'values' => array(
                 array(
-                    'value' => 0,
+                    'value' => 'rounded',
                     'label' => Mage::helper('campaign')->__('Rounded'),
                 ),
                 array(
-                    'value' => 1,
+                    'value' => 'shapr',
                     'label' => Mage::helper('campaign')->__('Shapr'),
                 ),
                 array(
-                    'value' => 2,
+                    'value' => 'circle',
                     'label' => Mage::helper('campaign')->__('Circle'),
                 ),
             ),
         ));
 
-        $fieldset->addField('border_radius', 'text', array(
+        $border_px = $fieldset->addField('border_radius', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Border Radius In Px:'),
             'required'	=> false,
             'name'		=> 'border_radius',
@@ -55,12 +55,24 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
             'name'		=> 'border_size',
         ));
 
-        $fieldset->addField('overlay_color', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Overlay Background:'),
-            'required'	=> true,
+        $fieldset->addField('overlay_color', 'select', array(
+            'label'		=> Mage::helper('campaign')->__('Overlay Color:'),
             'name'		=> 'overlay_color',
-            'note'      => 'Overlay background when show popup.',
-            'class'     =>  'color',
+            'note'      => 'Overlay color of popup.',
+            'values' => array(
+                array(
+                    'value' => 'white',
+                    'label' => Mage::helper('campaign')->__('White'),
+                ),
+                array(
+                    'value' => 'dark',
+                    'label' => Mage::helper('campaign')->__('Dark'),
+                ),
+                array(
+                    'value' => 'no_background',
+                    'label' => Mage::helper('campaign')->__('No Background '),
+                ),
+            ),
         ));
 
         $fieldset->addField('popup_background', 'text', array(
@@ -182,6 +194,18 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
 
 
         $form->setValues($data);
+
+        $this->setForm($form);
+        $this->setChild('form_after', $this->getLayout()->createBlock('adminhtml/widget_form_element_dependence')
+                ->addFieldMap($corner_style->getHtmlId(), $corner_style->getName())
+                ->addFieldMap($border_px->getHtmlId(), $border_px->getName())
+                ->addFieldDependence(
+                    $border_px->getName(),
+                    $corner_style->getName(),
+                    'rounded'
+                )
+        );
+
         return parent::_prepareForm();
     }
 }
