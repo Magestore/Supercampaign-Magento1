@@ -137,7 +137,7 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
     }
 
     public function massDeleteAction() {
-        $popupIds = $this->getRequest()->getParam('campaign');
+        $popupIds = $this->getRequest()->getParam('popup');
         if(!is_array($popupIds)){
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Please select item(s)'));
         }else{
@@ -155,7 +155,7 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
     }
 
     public function massStatusAction() {
-        $popupIds = $this->getRequest()->getParam('campaign');
+        $popupIds = $this->getRequest()->getParam('popup');
         if(!is_array($popupIds)) {
             Mage::getSingleton('adminhtml/session')->addError($this->__('Please select item(s)'));
         } else {
@@ -187,5 +187,29 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
         $fileName   = 'popup.xml';
         $content	= $this->getLayout()->createBlock('campaign/adminhtml_popup_grid')->getXml();
         $this->_prepareDownloadResponse($fileName,$content);
+    }
+
+    /*
+     * popup load template
+     */
+    public function loadTemplateAction(){
+        $this->loadLayout();
+        $this->renderLayout();
+    }
+
+    /**
+     * load template data
+     */
+    public function newFromTemplateAction(){
+        $templateId = $this->getRequest()->getParam('template_id');
+        $template = Mage::getModel('campaign/template')->load($templateId);
+        if($template->getId()){
+            $data = $template->getData();
+            $data['popup_content'] = $template->getTemplateContentHtml();
+            Mage::getSingleton('adminhtml/session')->setFormData($data);
+        }else{
+            Mage::getSingleton('adminhtml/session')->addError('Can\' load template.');
+        }
+        $this->_forward('edit');
     }
 }

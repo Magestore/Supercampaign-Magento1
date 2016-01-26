@@ -1,4 +1,4 @@
-<?php
+<?php 
 /**
  * Magestore
  * 
@@ -20,16 +20,15 @@
  */
 
 /**
- * Campaign Resource Model
+ * Campaign template
  * 
- * @category    Magestore
- * @package     Magestore_Campaign
- * @author      Magestore Developer
+ * @see Magestore_Campaign_Block_Campaign
  */
-class Magestore_Campaign_Model_Resource_Template extends Mage_Core_Model_Mysql4_Abstract
-{
-    public function _construct()
-    {
-        $this->_init('campaign/template', 'template_id');
+?>
+<script type="text/javascript">
+    function closePopup(val){
+        document.getElementById('template_id').value = val;
+        window.close();
     }
-}
+</script>
+<input id="template_id" name="template_id" value="" type="hidden">

@@ -12,11 +12,12 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Popup_Grid extends Ma
 	}
 
 	protected function _prepareCollection(){
+		$currentCampaign = Mage::getSingleton('adminhtml/session')->getCurrentCampaign();
 		$collection = Mage::getModel('campaign/popup')->getCollection();
 		$collection->getSelect()
 			->joinLeft(array('campaign'=>$collection->getTable('campaign/campaign')),
 				'main_table.campaign_id = campaign.campaign_id', '')
-			->columns(array('campaign_name'=>'campaign.name'))
+			->columns(array('campaign_name'=>'IF(main_table.campaign_id = "'.$currentCampaign->getId().'", "Current", campaign.name)'))
 			->group('main_table.popup_id');
 		$filter = Mage::registry('popup_reloaded_ids');
 		if(!isset($filter)){//if reset no filter
@@ -68,6 +69,8 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Popup_Grid extends Ma
                 'store_all'     => true,
                 'store_view'    => true,
                 'sortable'      => true,
+				'filter_index'	=> 'main_table.store',
+				'filter_condition_callback' => array($this, '_filterStore'),
             ));
         }
 
@@ -100,10 +103,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Popup_Grid extends Ma
 			'width'	 => '80px',
 			'index'	 => 'status',
 			'type'		=> 'options',
-			'options'	 => array(
-				1 => 'Enabled',
-				0 => 'Disabled',
-			),
+			'options'	 => Magestore_Campaign_Model_Status::getOptionArray(),
 		));
 
 		$this->addColumn('action',
@@ -126,6 +126,27 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Popup_Grid extends Ma
 			));
 
 		return parent::_prepareColumns();
+	}
+
+	protected function _filterInCampaign($collection, $column){
+		$field = ( $column->getFilterIndex() ) ? $column->getFilterIndex() : $column->getIndex();
+		$cond = $column->getFilter()->getCondition();
+		if ($field && isset($cond)) {
+			$collection->addFieldToFilter('campaign.name' , $cond);
+		}
+		return $this;
+	}
+
+	protected function _filterStore($collection, $column){
+		$field = ( $column->getFilterIndex() ) ? $column->getFilterIndex() : $column->getIndex();
+		$cond = $column->getFilter()->getCondition();
+		if($column->getFilter()->getValue() == '0' && $field){
+
+		}else
+			if($field && isset($cond)){
+				$collection->addFieldToFilter('main_table.store', array('finset'=>$column->getFilter()->getValue()));
+			}
+		return $this;
 	}
 
 	public function getGridUrl() {

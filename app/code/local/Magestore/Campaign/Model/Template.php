@@ -35,9 +35,12 @@ class Magestore_Campaign_Model_Template extends Mage_Core_Model_Abstract
         $this->_init('campaign/template');
     }
 
-    /**
-     * install abstract get cms block identifier
-     * @return mixed
-     */
+    public function getTemplateContentHtml(){
+        $html = Mage::app()->getLayout()->createBlock('campaign/popup')
+            ->setArea('frontend')
+            ->setTemplate($this->getTemplateFile())
+            ->toHtml();
+        return $html;
+    }
 }
 
