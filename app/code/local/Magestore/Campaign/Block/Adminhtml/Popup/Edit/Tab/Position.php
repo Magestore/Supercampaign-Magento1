@@ -64,9 +64,12 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Position extends Mage_Ad
             'label'		=> Mage::helper('campaign')->__('How many vertical px:'),
             'required'	=> false,
             'name'		=> 'vertical_px',
+            'value'     => '100',
             'note'      => 'Fill px number vertical.',
         ));
-
+        if($data['vertical_px'] == NULL){$data['vertical_px'] = 100;}
+        if($data['horizontal_px'] == NULL){$data['horizontal_px'] = 100;}
+            //var_dump($data); die('ddd');
         $form->setValues($data);
 
         $this->setForm($form);
