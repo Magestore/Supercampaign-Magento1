@@ -50,7 +50,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_GridTemplate extends Mage_Ad
 					'caption' => Mage::helper('campaign')->__('Preview'),
 					//'url' => array('*/*/newfromtemplate', array('template_id'=>999)),
 					'name' => 'template_id',
-					'onclick' => "alert('Preview action')",
+					'onclick' => "alert('Comming soon!')",
 				),
 				array(
 					'caption' => Mage::helper('campaign')->__('Apply'),
