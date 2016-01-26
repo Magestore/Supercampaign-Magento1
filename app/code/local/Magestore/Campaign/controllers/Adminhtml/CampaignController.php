@@ -96,6 +96,21 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
     {
         $this->_forward('edit');
     }
+
+    /**
+     * show cowdown with products
+     */
+    public function chooserMainProductsAction() {
+        die('vao day di controller campaign-campaigncontroller');
+        $request = $this->getRequest();
+        $block = $this->getLayout()->createBlock(
+            'campaign/adminhtml_campaign_edit_tab_content_maincontent_grid', 'campaign_chooser_sku', array('input' =>'countdown_products','grid_url_call'=>'chooserMainProducts','id'=>'productGrid','js_form_object' => $request->getParam('form'),
+        ));
+
+        if ($block) {
+            $this->getResponse()->setBody($block->toHtml());
+        }
+    }
  
     /**
      * save item action
@@ -172,6 +187,10 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
                 $banners->addFieldToFilter(array('campaign_id', 'bannerslider_id'),
                     array($model->getId(), array('in'=>$banner_ids)));
 
+//                zend_debug::dump($campaignData->getStartTime());
+//                zend_debug::dump($campaignData->getEndTime());
+//                die('ooo');
+
                 foreach($banners as $banner){
 
                     if(in_array($banner->getId(), $banner_ids)){
@@ -183,10 +202,16 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
                         //-------------------
                         foreach($sub_banner as $subbn){
                             if(in_array($subbn->getId(), $banner_ids)){
-                                $subbn->setStartTime($campaignData->getStartTime());
-                                $subbn->setEndTime($campaignData->getEndTime());
+
+                                //zend_debug::dump($campaignData->getStartTime());
+                                //zend_debug::dump($campaignData->getEndTime());
+
+                                $subbn->setData('start_time', $campaignData->getStartTime());
+                                //$subbn->setStartTime($campaignData->getStartTime());
+                                //$subbn->setEndTime($campaignData->getEndTime());
                             }
                         }
+                        //die('uuuu');
                         //----------------------
 
                     }else{

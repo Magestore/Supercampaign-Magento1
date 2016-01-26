@@ -97,16 +97,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
 		$fieldset->addField('status', 'select', array(
 			'label'		=> Mage::helper('campaign')->__('Status:'),
 			'name'		=> 'status',
-			'values'	=>array(
-                array(
-                    'value' => 1,
-                    'label' => Mage::helper('campaign')->__('Enabled'),
-                ),
-                array(
-                    'value' => 0,
-                    'label' => Mage::helper('campaign')->__('Disabled'),
-                ),
-            ),
+			'values'	=> Mage::getSingleton('campaign/popupstatus')->getOptionHash(),
 		));
 
         if (!Mage::app()->isSingleStoreMode()) {

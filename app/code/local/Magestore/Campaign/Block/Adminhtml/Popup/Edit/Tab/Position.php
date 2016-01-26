@@ -35,7 +35,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Position extends Mage_Ad
             ),
         ));
 
-        $horizontal_px = $fieldset->addField('horizontal_px', 'text', array(
+         $horizontal_px = $fieldset->addField('horizontal_px', 'text', array(
             'label'		=> Mage::helper('campaign')->__('How many horizontal px:'),
             'required'	=> false,
             'name'		=> 'horizontal_px',
@@ -76,7 +76,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Position extends Mage_Ad
                 ->addFieldDependence(
                     $horizontal_px->getName(),
                     $horizontal->getName(),
-                    'center'
+                    array('left','right')
                 )
         );
 

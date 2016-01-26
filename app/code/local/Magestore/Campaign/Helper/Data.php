@@ -383,7 +383,7 @@ class Magestore_Campaign_Helper_Data extends Mage_Core_Helper_Abstract
             return;
         }
         $name = $this->reImageName($image);
-        $banner_image_path = Mage::getBaseUrl('media') . DS . 'bannerslider' . DS . $name;
+        $banner_image_path = Mage::getBaseUrl('media') . DS . 'bannercampaign' . DS . $name;
         if (!file_exists($banner_image_path)) {
             return;
         }
@@ -396,7 +396,7 @@ class Magestore_Campaign_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     public static function uploadBannerImage() {
-        $banner_image_path = Mage::getBaseDir('media') . DS . 'bannerslider';
+        $banner_image_path = Mage::getBaseDir('media') . DS . 'bannercampaign';
         $image = "";
         if (isset($_FILES['image']['name']) && $_FILES['image']['name'] != '') {
             try {
@@ -511,7 +511,7 @@ class Magestore_Campaign_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function getBannerImage($image) {
         $name = $this->reImageName($image);
-        return Mage::getBaseUrl('media') . 'bannerslider' . '/' . $name;
+        return Mage::getBaseUrl('media') . 'bannercampaign' . '/' . $name;
     }
 
     public function getPreviewSlider() {
@@ -520,7 +520,7 @@ class Magestore_Campaign_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function getPathImageForBanner($image) {
         $name = $this->reImageName($image);
-        return 'bannerslider' . '/' . $name;
+        return 'bannercampaign' . '/' . $name;
     }
 
     public function getOptionGridSlider() {

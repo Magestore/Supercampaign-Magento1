@@ -4,18 +4,18 @@ $blocks = $block_data['block'];
 $banners = $block_data['banners'];
 $click_url = $this->getUrl('bannerslider/index/click',array('_secure'=>true));
 ?>
-<script type="text/javascript" src="<?php echo $this->getJsUrl('magestore/bannerslider/jquery-1.7.min.js')?>"></script>
-<script type="text/javascript" src="<?php echo $this->getJsUrl('magestore/bannerslider/jquery.ads.note.js') ?>"></script>
-<script type="text/javascript" src="<?php echo $this->getJsUrl('magestore/bannerslider/slider1/jquery.slider.min.js') ?>"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo $this->getJsUrl('magestore/bannerslider/jquery.ads.note.css') ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/magestore/bannerslider/slider3.css') ?>">
+<script type="text/javascript" src="<?php echo $this->getJsUrl('magestore/bannercampaign/jquery-1.7.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->getJsUrl('magestore/bannercampaign/jquery.ads.note.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getJsUrl('magestore/bannercampaign/slider1/jquery.slider.min.js') ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getJsUrl('magestore/bannercampaign/jquery.ads.note.css') ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/magestore/bannercampaign/slider3.css') ?>">
 
 <script type="text/javascript">
     var jnote = jQuery.noConflict();
     jnote(document).ready(function($) {
         jnote("#ads-note-<?php echo $blocks['bannerslider_id'] ?>").adsNote({
 		  bgcolor:"<?php echo $blocks['note_color'] ?>", //23b8ff  
-		  position:"<?php echo Mage::helper('bannerslider')->getVaulePosition($blocks['position_note']) ?>"
+		  position:"<?php echo Mage::helper('campaign')->getVaulePosition($blocks['position_note']) ?>"
 	  });
         jnote(".slider2-note-<?php echo $blocks['bannerslider_id'] ?>").slideshow({
             width      : 300,

@@ -42,7 +42,7 @@ class Magestore_Campaign_Block_Bannerslider extends Mage_Core_Block_Template {
                 ));
         foreach ($collection as $item) {
             $block = $this->getLayout()->createBlock('campaign/default')
-                            ->setTemplate('bannerslider/bannerslider.phtml')->setSliderData($item);
+                            ->setTemplate('bannercampaign/bannerslider.phtml')->setSliderData($item);
             $banners[] = $block->renderView();
         }
         return implode('', $banners);

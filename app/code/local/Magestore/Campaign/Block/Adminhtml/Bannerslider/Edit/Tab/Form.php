@@ -386,32 +386,32 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
                                $(\'position-tip-3\').hide();
                                $(\'position-tip-2\').hide();
                                $(\'position-tip-1\').show();
-                                new Tooltip("position-tip-1", "'.Mage::getBaseUrl('media').'bannerslider/bannerslider-ex1.png");
+                                new Tooltip("position-tip-1", "'.Mage::getBaseUrl('media').'bannercampaign/bannerslider-ex1.png");
                             }
                             else if (checkposition == "checkout-content-top"){                                                          
                                  $(\'position-tip-3\').hide();
                                  $(\'position-tip-1\').hide();
                                  $(\'position-tip-2\').show();
-                                 new Tooltip("position-tip-2", "'.Mage::getBaseUrl('media').'bannerslider/bannerslider-ex2.png");
+                                 new Tooltip("position-tip-2", "'.Mage::getBaseUrl('media').'bannercampaign/bannerslider-ex2.png");
                             }else if(checkposition == "note-allsite"){                                                              
                                  $(\'position-tip-3\').hide();
                                  $(\'position-tip-1\').hide();
                                  $(\'position-tip-2\').hide();                                 
                                 
-                                 new Tooltip("position-tip-4", "'.Mage::getBaseUrl('media').'bannerslider/bannerslider-ex4.PNG");
+                                 new Tooltip("position-tip-4", "'.Mage::getBaseUrl('media').'bannercampaign/bannerslider-ex4.PNG");
                             }else if(checkposition == "pop-up"){                                                                     
                                  $(\'position-tip-3\').hide();
                                  $(\'position-tip-1\').hide();
                                  $(\'position-tip-2\').hide();                                 
                                 
-                                 new Tooltip("position-tip-5", "'.Mage::getBaseUrl('media').'bannerslider/bannerslider-ex5.PNG");
+                                 new Tooltip("position-tip-5", "'.Mage::getBaseUrl('media').'bannercampaign/bannerslider-ex5.PNG");
                             }
                             else{
                                                                
                                 $(\'position-tip-2\').hide();
                                 $(\'position-tip-1\').hide();
                                 $(\'position-tip-3\').show();
-                                new Tooltip("position-tip-3", "'.Mage::getBaseUrl('media').'bannerslider/bannerslider-ex3.png");
+                                new Tooltip("position-tip-3", "'.Mage::getBaseUrl('media').'bannercampaign/bannerslider-ex3.png");
                             }
                             
                             var category = checkposition.split("-");
