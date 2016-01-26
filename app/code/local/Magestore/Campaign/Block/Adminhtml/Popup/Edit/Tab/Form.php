@@ -136,12 +136,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'name'		=> 'width',
         ));
 
-		$fieldset->addField('status', 'select', array(
-			'label'		=> Mage::helper('campaign')->__('Status:'),
-			'name'		=> 'status',
-			'values'	=> Mage::getSingleton('campaign/popupstatus')->getOptionHash(),
-		));
-
+		
         if (!Mage::app()->isSingleStoreMode()) {
             $field = $fieldset->addField('store', 'multiselect', array(
                 'name'      => 'store[]',
