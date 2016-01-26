@@ -128,13 +128,13 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
             'note'     => $time_zone,
         ));
 
+        if(!isset($data['use_coupon'])) $data['use_coupon'] = 2;
         $use_coupon = $fieldset->addField('use_coupon', 'select', array(
             'name'         => 'use_coupon',
             'label'        => Mage::helper('campaign')->__('Use Coupon Code:'),
             //'class'        => 'required-entry',
             'required'     => true,
             'values'       => array(array('label'=>'Yes', 'value'=> 1), array('label'=>'No', 'value'=> 2)),
-            'value'        => array(1),
         ));
 
         $coupon_code_type = $fieldset->addField('coupon_code_type', 'select', array(
