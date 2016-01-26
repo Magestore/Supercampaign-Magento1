@@ -73,7 +73,7 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
             $model->setEndTime($model->getEndTime());
 
             Mage::register('campaign_data', $model);
-
+            Mage::getSingleton('adminhtml/session')->setCurrentCampaign($model);
             /**
              * footer controller
              */

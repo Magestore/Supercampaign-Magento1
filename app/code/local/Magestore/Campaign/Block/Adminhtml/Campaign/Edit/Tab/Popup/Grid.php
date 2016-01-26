@@ -12,11 +12,12 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Popup_Grid extends Ma
 	}
 
 	protected function _prepareCollection(){
+		$currentCampaign = Mage::getSingleton('adminhtml/session')->getCurrentCampaign();
 		$collection = Mage::getModel('campaign/popup')->getCollection();
 		$collection->getSelect()
 			->joinLeft(array('campaign'=>$collection->getTable('campaign/campaign')),
 				'main_table.campaign_id = campaign.campaign_id', '')
-			->columns(array('campaign_name'=>'campaign.name'))
+			->columns(array('campaign_name'=>'IF(main_table.campaign_id = "'.$currentCampaign->getId().'", "Current", campaign.name)'))
 			->group('main_table.popup_id');
 		$filter = Mage::registry('popup_reloaded_ids');
 		if(!isset($filter)){//if reset no filter

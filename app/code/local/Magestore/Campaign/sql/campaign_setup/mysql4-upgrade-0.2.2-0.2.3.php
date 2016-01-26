@@ -153,7 +153,8 @@ CREATE TABLE {$this->getTable('campaign/popup')} (
 
 CREATE TABLE {$this->getTable('campaign/template')} (
   `template_id` int(11) unsigned NOT NULL auto_increment,
-  `popup_type` smallint(6) NULL default 0,
+  `title` text NULL default '',
+  `popup_type` varchar(6) NULL default '0',
   `template_code` varchar(20) NOT NULL default '',
   `template_file` text NULL default '',
   `preview_image` text NULL default '',
