@@ -59,40 +59,40 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
         $html = '';
         switch ($style) {
             case "1":
-                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannerslider/slider1.phtml')->toHtml();
+                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannercampaign/slider1.phtml')->toHtml();
                 break;
             case "2":
-                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannerslider/slider2.phtml')->toHtml();
+                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannercampaign/slider2.phtml')->toHtml();
                 break;
             case "3":
-                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannerslider/slider3.phtml')->toHtml();
+                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannercampaign/slider3.phtml')->toHtml();
                 break;
             case "4":
-                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannerslider/slider4.phtml')->toHtml();
+                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannercampaign/slider4.phtml')->toHtml();
                 break;
             case "5":
-                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannerslider/slider5.phtml')->toHtml();
+                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannercampaign/slider5.phtml')->toHtml();
                 break;
             case "6":
-                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannerslider/slider6.phtml')->toHtml();
+                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannercampaign/slider6.phtml')->toHtml();
                 break;
             case "7":
-                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannerslider/slider7.phtml')->toHtml();
+                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannercampaign/slider7.phtml')->toHtml();
                 break;
             case "8":
-                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannerslider/slider8.phtml')->toHtml();
+                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannercampaign/slider8.phtml')->toHtml();
                 break;
             case "9":
-                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannerslider/slider9.phtml')->toHtml();
+                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannercampaign/slider9.phtml')->toHtml();
                 break;
             case "10":
-                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannerslider/slider10.phtml')->toHtml();
+                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannercampaign/slider10.phtml')->toHtml();
                 break;
             case "11":
-                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannerslider/popup.phtml')->toHtml();
+                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannercampaign/popup.phtml')->toHtml();
                 break;
             case "12":
-                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannerslider/note.phtml')->toHtml();
+                $html = $this->getLayout()->createBlock('campaign/default')->setBlockData($result)->setTemplate('bannercampaign/note.phtml')->toHtml();
                 break;
             default :
                 $html = '';

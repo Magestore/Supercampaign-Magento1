@@ -111,7 +111,7 @@
     <campaignadmin_adminhtml_banner_index>
         <reference name="head">
             <action method="addJs">
-                <script>magestore/bannerslider/tooltip.js</script>
+                <script>magestore/bannercampaign/tooltip.js</script>
             </action>
         </reference>
         <reference name="content">
@@ -212,10 +212,10 @@
                 <params/>
             </action>
             <action method="addJs">
-                <script>magestore/bannerslider/tooltip.js</script>
+                <script>magestore/bannercampaign/tooltip.js</script>
             </action>
             <action method="addJs">
-                <script>magestore/bannerslider/prototip.js</script>
+                <script>magestore/bannercampaign/prototip.js</script>
             </action>
         </reference>
     </campaignadmin_adminhtml_bannerslider_edit>
