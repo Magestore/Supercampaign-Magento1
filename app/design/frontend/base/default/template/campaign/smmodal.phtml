@@ -32,6 +32,7 @@
     if ($popup->getData('width') != "0" && $popup->getData('width') != "") {
         $width = "width:" . $popup->getData('width') . "px;";
     }
+    $widthcenter = (int)$width * 0.5;
     $maxwidth = "";
     if ($popup->getData('max_width') != "") {
         $maxwidth = "max-width:" . $popup->getData('max_width') . "px;";
@@ -42,14 +43,14 @@
         case 'white':
             $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{top:0;left:0;right:0;bottom:0;position:fixed;} .sc-popup".$popup->getData('template_code')." .modal-backdrop{background-color:#fff;}.sc-popup".$popup->getData('template_code')." .modal-dialog{".$width."}";
             break;
-        case 'back':
+        case 'dark':
             $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{top:0;left:0;right:0;bottom:0;position:fixed;} .sc-popup".$popup->getData('template_code')." .modal-backdrop{background-color:#000;}.sc-popup".$popup->getData('template_code')." .modal-dialog{".$width."}";
             break;
         case 'no_bg_fix_popup':
-            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{".$width.";position:fixed;} .sc-popup".$popup->getData('template_code')." .modal-backdrop{display:none} .sc-popup".$popup->getData('template_code')." .modal-dialog{".$width."margin:0}";
+            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{".$width.";position:fixed;} .sc-popup".$popup->getData('template_code')." .modal-backdrop{display:none} .sc-popup".$popup->getData('template_code')." .modal-dialog{margin:0;".$width."}";
             break;
         case 'no_bg_absoulute_popup':
-            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{".$width.";position:absolute} .sc-popup".$popup->getData('template_code')." .modal-backdrop{display:none} .sc-popup".$popup->getData('template_code')." .modal-dialog{".$width."margin:0}";
+            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{".$width.";} .sc-popup".$popup->getData('template_code')." .modal-backdrop{display:none} .sc-popup".$popup->getData('template_code')." .modal-dialog{position:absolute;margin:0;".$width."}";
             break;
     }
     $horizontal_position = $popup->getData('horizontal_position');
@@ -61,17 +62,17 @@
     if ($horizontal_px != NULL) {
         switch ($horizontal_position) {
             case 'left':
-                if ($overlay_color = 'no_bg_fix_popup' || $overlay_color = 'no_bg_absoulute_popup') {
+                if ($overlay_color == 'no_bg_fix_popup' || $overlay_color == 'no_bg_absoulute_popup') {
                     $horizontalpx = ".sc-popup".$popup->getData('template_code')." .modal{left:" . $horizontal_px . "px;}";
                 } else {
                     $horizontalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{left:" . $horizontal_px . "px;}";
                 }
                 break;
             case 'center':
-                $horizontalpx = "";
+                $horizontalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{left:50%;margin-left:-" . $widthcenter . "px;}";
                 break;
             case 'right':
-                if ($overlay_color = 'no_bg_fix_popup' || $overlay_color = 'no_bg_absoulute_popup') {
+                if ($overlay_color == 'no_bg_fix_popup' || $overlay_color == 'no_bg_absoulute_popup') {
                     $horizontalpx = ".sc-popup".$popup->getData('template_code')." .modal{right:" . $horizontal_px . "px;}";
                 } else {
                     $horizontalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{right:" . $horizontal_px . "px;}";
@@ -82,17 +83,17 @@
     if ($vertical_px != NULL) {
         switch ($vertical_position) {
             case 'top':
-                if ($overlay_color = 'no_bg_fix_popup' || $overlay_color = 'no_bg_absoulute_popup') {
-                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal{margin-top:" . $vertical_px . "px;}";
+                if ($overlay_color == 'no_bg_fix_popup' || $overlay_color == 'no_bg_absoulute_popup') {
+                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal{top:" . $vertical_px . "px;}";
                 } else {
                     $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{margin-top:" . $vertical_px . "px;}";
                 }
                 break;
             case 'bottom':
-                if ($overlay_color = 'no_bg_fix_popup' || $overlay_color = 'no_bg_absoulute_popup') {
-                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal{margin-bottom:" . $vertical_px . "px;";
+                if ($overlay_color == 'no_bg_fix_popup' || $overlay_color == 'no_bg_absoulute_popup') {
+                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal{bottom:" . $vertical_px . "px;";
                 } else {
-                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{margin-bottom:" . $vertical_px . "px;}";
+                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{bottom:" . $vertical_px . "px;}";
                 }
                 break;
         }
@@ -172,7 +173,7 @@
                 $j('.modal').prop('class', 'modal fade').addClass('top');
         }
         $j(window).bind("load", function () {
-            var string = "<style type=\"text/css\"><?php echo $bg_overlay." ".$horizontalpx . " " .$verticalpx . " " .$stylecontent . " " .$styledialog . " " .$styleoverbg . " " .$close_icon . " " . $customcss ?></style>"
+            var string = "<style type=\"text/css\"><?php echo $horizontalpx . " " .$verticalpx . " " .$stylecontent . " " .$bg_overlay . " " .$close_icon . " " . $customcss ?></style>"
             $j('head').append(string);
             <?php
             $show_when = $popup->getData('show_when');
