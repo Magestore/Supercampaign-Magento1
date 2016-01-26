@@ -184,7 +184,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
             'required'     => false,
         ));
 
-        $productIds = implode(", ", Mage::getResourceModel('catalog/product_collection')->getAllIds());
+        /*$productIds = implode(", ", Mage::getResourceModel('catalog/product_collection')->getAllIds());
         $fieldset->addField('countdown_products', 'text', array(
             'label' => Mage::helper('campaign')->__('Countdown With Products:'),
             'name' => 'countdown_products',
@@ -212,7 +212,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
 
 
                 </script>'
-        ));
+        ));*/
 
         $fieldset->addField('countdown_onoff', 'select', array(
             'name'         => 'countdown_onoff',
