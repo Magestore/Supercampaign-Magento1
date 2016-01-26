@@ -117,7 +117,7 @@ CREATE TABLE {$this->getTable('campaign/popup')} (
   `exclude_url` text NULL default '',
   `products` varchar(255) NOT NULL default '',
   `show_when` varchar(255) NOT NULL default '',
-  `seconds_delay` smallint(6) NULL default '0',
+  `seconds_delay` smallint(6) NULL default 0,
   `corner_style` varchar(255) NOT NULL default '',
   `corner_radius` smallint(6) NULL DEFAULT 0,
   `border_color` varchar(255) NULL default '',
