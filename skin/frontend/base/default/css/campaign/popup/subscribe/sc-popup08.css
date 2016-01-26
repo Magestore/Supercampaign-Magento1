@@ -1,15 +1,15 @@
-#sc-popup8 table {
+.sc-popup8 table {
     border-spacing: 0 !important;
 }
 
-#sc-popup8 .modal-dialog {
+.sc-popup8 .modal-dialog {
     position: fixed;
     left: 50%;
     margin-left: -412px;
     bottom: -18px;
 }
 
-#sc-popup8 .modal-dialog .modal-content {
+.sc-popup8 .modal-dialog .modal-content {
     padding: 20px 20px 30px;
     width:300px
 }

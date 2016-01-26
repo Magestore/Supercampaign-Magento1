@@ -1,5 +1,5 @@
 
-#sc-popup5 .modal-dialog .modal-content{
+.sc-popup5 .modal-dialog .modal-content{
     border-radius: 50%;
     height: 420px;
     width: 420px;
@@ -7,7 +7,7 @@
     margin: 0 auto;
     background:#4A4848;
 }
-#sc-popup5 form input{
+.sc-popup5 form input{
     display:block;
     border:0;
     outline:0;
@@ -26,7 +26,7 @@
     height:auto;
     text-align:center;
 }
-#sc-popup5 button {
+.sc-popup5 button {
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     -o-border-radius: 2px;
@@ -45,7 +45,7 @@
     display:block;
 }
 
-#sc-popup5 .dialogClose.style1 {
+.sc-popup5 .dialogClose.style1 {
     background: url(../../../../images/campaign/popup/close_white.png);
     background-position: 5px 5px;
     background-repeat: no-repeat;

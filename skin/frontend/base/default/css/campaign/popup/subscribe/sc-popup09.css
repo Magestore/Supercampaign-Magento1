@@ -1,16 +1,15 @@
-#sc-popup9 table {
+.sc-popup9 table {
     border-spacing: 0 !important;
 }
 
-#sc-popup9 .modal-dialog {
+.sc-popup9 .modal-dialog {
     position: fixed;
     left: 5%;
     bottom: -18px;
 }
 
-#sc-popup9 .modal-dialog .modal-content {
+.sc-popup9 .modal-dialog .modal-content {
     padding: 20px 20px 30px;
-    width:300px
 }
 .promotion .modal-backdrop{display:none}
 .promotion .dialogClose{background: url(../../../../images/campaign/popup/close_promotion.png) no-repeat 4px 4px;top:0;right: 0; }
