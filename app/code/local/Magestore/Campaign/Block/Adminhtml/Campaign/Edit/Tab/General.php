@@ -181,7 +181,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
             'label'        => Mage::helper('campaign')->__('Countdown With Products:'),
             //'class'        => 'required-entry',
             'note'   => Mage::helper('campaign')->__('Show countdown for products.'),
-            'required'     => true,
+            'required'     => false,
         ));
 
 //        $productIds = implode(", ", Mage::getResourceModel('catalog/product_collection')->getAllIds());
