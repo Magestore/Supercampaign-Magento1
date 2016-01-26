@@ -69,8 +69,12 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
                     'label' => Mage::helper('campaign')->__('Dark'),
                 ),
                 array(
-                    'value' => 'no_background',
-                    'label' => Mage::helper('campaign')->__('No Background '),
+                    'value' => 'no_bg_fix_popup',
+                    'label' => Mage::helper('campaign')->__('No background, Popup fixed positioned'),
+                ),
+                array(
+                    'value' => 'no_bg_absoulute_popup',
+                    'label' => Mage::helper('campaign')->__('No background, Popup absolute positioned'),
                 ),
             ),
         ));
@@ -109,22 +113,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
                 ),
             ),
         ));
-
-        /*$fieldset->addField('popup_shadow', 'select', array(
-            'label'		=> Mage::helper('campaign')->__('Popup Box Shadow:'),
-            'required'	=> true,
-            'name'		=> 'popup_shadow',
-            'values' => array(
-                array(
-                    'value' => 0,
-                    'label' => Mage::helper('campaign')->__('Yes'),
-                ),
-                array(
-                    'value' => 1,
-                    'label' => Mage::helper('campaign')->__('No'),
-                ),
-            ),
-        ));*/
 
         $fieldset->addField('appear_effect', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Appear Effect:'),
@@ -166,24 +154,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
                 ),
             ),
         ));
-
-/*
-        $fieldset->addField('close_effect', 'select', array(
-            'label'		=> Mage::helper('campaign')->__('Popup Close Effect:'),
-            'required'	=> true,
-            'name'		=> 'close_effect',
-            'note'      => 'Effect when close popup on page.',
-            'values' => array(
-                array(
-                    'value' => 0,
-                    'label' => Mage::helper('campaign')->__('Fade Out'),
-                ),
-                array(
-                    'value' => 1,
-                    'label' => Mage::helper('campaign')->__('Disapear'),
-                ),
-            ),
-        ));*/
 
         $fieldset->addField('custom_css', 'editor', array(
             'label'		=> Mage::helper('campaign')->__('Custom css style:'),
