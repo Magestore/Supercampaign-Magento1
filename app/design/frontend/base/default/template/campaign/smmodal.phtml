@@ -40,16 +40,16 @@
     $overlay_color = $popup->getData('overlay_color');
     switch ($overlay_color) {
         case 'white':
-            $bg_overlay = "background-color:#fff;";
+            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{top:0;left:0;right:0;bottom:0;position:fixed;} .sc-popup".$popup->getData('template_code')." .modal-backdrop{background-color:#fff;}.sc-popup".$popup->getData('template_code')." .modal-dialog{".$width."}";
             break;
         case 'back':
-            $bg_overlay = "background-color:#000;";
+            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{top:0;left:0;right:0;bottom:0;position:fixed;} .sc-popup".$popup->getData('template_code')." .modal-backdrop{background-color:#000;}.sc-popup".$popup->getData('template_code')." .modal-dialog{".$width."}";
             break;
         case 'no_bg_fix_popup':
-            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{".$width.";position:fixed;} .sc-popup".$popup->getData('template_code')." .modal-backdrop{display:none}.sc-popup".$popup->getData('template_code')." .modal-dialog{".$width."}";
+            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{".$width.";position:fixed;} .sc-popup".$popup->getData('template_code')." .modal-backdrop{display:none} .sc-popup".$popup->getData('template_code')." .modal-dialog{".$width."margin:0}";
             break;
         case 'no_bg_absoulute_popup':
-            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{".$width.";position:absolute} .sc-popup".$popup->getData('template_code')." .modal-backdrop{display:none}";
+            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{".$width.";position:absolute} .sc-popup".$popup->getData('template_code')." .modal-backdrop{display:none} .sc-popup".$popup->getData('template_code')." .modal-dialog{".$width."margin:0}";
             break;
     }
     $horizontal_position = $popup->getData('horizontal_position');
@@ -61,20 +61,20 @@
     if ($horizontal_px != NULL) {
         switch ($horizontal_position) {
             case 'left':
-                if ($overlay_color = 'no_background') {
-                    $horizontalpx = ".modal{position: fixed;left:" . $horizontal_px . "px;}";
+                if ($overlay_color = 'no_bg_fix_popup' || $overlay_color = 'no_bg_absoulute_popup') {
+                    $horizontalpx = ".sc-popup".$popup->getData('template_code')." .modal{left:" . $horizontal_px . "px;}";
                 } else {
-                    $horizontalpx = ".modal-dialog{position: fixed;left:" . $horizontal_px . "px;}";
+                    $horizontalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{left:" . $horizontal_px . "px;}";
                 }
                 break;
             case 'center':
                 $horizontalpx = "";
                 break;
             case 'right':
-                if ($overlay_color = 'no_background') {
-                    $horizontalpx = ".modal{position: fixed;right:" . $horizontal_px . "px;}";
+                if ($overlay_color = 'no_bg_fix_popup' || $overlay_color = 'no_bg_absoulute_popup') {
+                    $horizontalpx = ".sc-popup".$popup->getData('template_code')." .modal{right:" . $horizontal_px . "px;}";
                 } else {
-                    $horizontalpx = ".modal-dialog{position: fixed;right:" . $horizontal_px . "px;}";
+                    $horizontalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{right:" . $horizontal_px . "px;}";
                 }
                 break;
         }
@@ -82,17 +82,17 @@
     if ($vertical_px != NULL) {
         switch ($vertical_position) {
             case 'top':
-                if ($overlay_color = 'no_background') {
-                    $verticalpx = ".modal{position: fixed;margin-top:" . $vertical_px . "px;}";
+                if ($overlay_color = 'no_bg_fix_popup' || $overlay_color = 'no_bg_absoulute_popup') {
+                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal{margin-top:" . $vertical_px . "px;}";
                 } else {
-                    $verticalpx = ".modal-dialog{position: fixed;margin-top:" . $vertical_px . "px;}";
+                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{margin-top:" . $vertical_px . "px;}";
                 }
                 break;
             case 'bottom':
-                if ($overlay_color = 'no_background') {
-                    $verticalpx = "position: fixed;margin-bottom:" . $vertical_px . "px;";
+                if ($overlay_color = 'no_bg_fix_popup' || $overlay_color = 'no_bg_absoulute_popup') {
+                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal{margin-bottom:" . $vertical_px . "px;";
                 } else {
-                    $verticalpx = ".modal-dialog{position: fixed;margin-bottom:" . $vertical_px . "px;}";
+                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{margin-bottom:" . $vertical_px . "px;}";
                 }
                 break;
         }
@@ -109,6 +109,8 @@
             } else {
                 if ($overlay_color == 'dark') {
                     $close_icon = ".dialogClose{background:url(" . $this->getSkinUrl('images/campaign/popup/close_white.png') . ") no-repeat 5px 5px}";
+                }else{
+                    $close_icon = ".dialogClose{background:url(" . $this->getSkinUrl('images/campaign/popup/close_promotion.png') . ") no-repeat 5px -20px;top:5px;right:5px;}";
                 }
             }
             break;
@@ -119,7 +121,7 @@
             $close_icon = ".dialogClose{background:none transparent}";
             break;
         default:
-            $close_icon = ".dialogClose{background:url(" . $this->getSkinUrl('images/campaign/popup/close_promotion.png') . ") no-repeat 5px -20px}";
+            $close_icon = ".dialogClose{background:url(" . $this->getSkinUrl('images/campaign/popup/close_promotion.png') . ") no-repeat 5px -20px;top:5px;right:5px;}";
     }
 
     $corner_style = $popup->getData('corner_style');
@@ -170,7 +172,7 @@
                 $j('.modal').prop('class', 'modal fade').addClass('top');
         }
         $j(window).bind("load", function () {
-            var string = "<style type=\"text/css\"><?php echo $bg_overlay." ".$horizontalpx . " " . $verticalpx . " " . $stylecontent . " " . $styledialog . " " . $styleoverbg . " " . $close_icon . " " . $customcss ?></style>"
+            var string = "<style type=\"text/css\"><?php echo $bg_overlay." ".$horizontalpx . " " .$verticalpx . " " .$stylecontent . " " .$styledialog . " " .$styleoverbg . " " .$close_icon . " " . $customcss ?></style>"
             $j('head').append(string);
             <?php
             $show_when = $popup->getData('show_when');
