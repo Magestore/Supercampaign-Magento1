@@ -26,6 +26,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_GridTemplate extends Mage_Ad
 		$this->addColumn('preview_image', array(
 			'header'	=> Mage::helper('campaign')->__('Image'),
 			'align'	 => 'left',
+			'width'	 => '300px',
 			'index'	 => 'preview_image',
 			'alt'	=> 'template_code',
 			'renderer'	=> 'Magestore_Campaign_Block_Adminhtml_Renderer_Image',
