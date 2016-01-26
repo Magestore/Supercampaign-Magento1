@@ -176,7 +176,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
             'value'        => array(1),
         ));
 
-        $coupon_code = $fieldset->addField('countdown_products', 'text', array(
+        $countdown_products = $fieldset->addField('countdown_products', 'text', array(
             'name'         => 'countdown_products',
             'label'        => Mage::helper('campaign')->__('Countdown With Products:'),
             //'class'        => 'required-entry',
