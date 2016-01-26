@@ -809,7 +809,7 @@
 
     <campaign_index_index>
         <reference name="content">
-            <block type="campaign/bannerslider" name="bannerslider" template="bannerslider/bannerslider.phtml" />
+            <block type="campaign/bannerslider" name="bannerslider" template="bannercampaign/bannerslider.phtml" />
         </reference>
     </campaign_index_index>
 

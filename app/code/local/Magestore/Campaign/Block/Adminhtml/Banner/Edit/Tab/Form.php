@@ -124,7 +124,7 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Edit_Tab_Form extends Mage_Admin
         // ));  	
         if (isset($data['image']) && $data['image']) {
             $imageName = Mage::helper('campaign')->reImageName($data['image']);
-            $data['image'] = 'bannerslider' . '/' . $imageName;
+            $data['image'] = 'bannercampaign' . '/' . $imageName;
         }
         $fieldset->addField('image', 'image', array(
             'label' => Mage::helper('campaign')->__('Banner Image'),

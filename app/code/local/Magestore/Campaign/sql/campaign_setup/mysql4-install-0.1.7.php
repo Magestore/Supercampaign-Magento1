@@ -181,7 +181,7 @@ CREATE TABLE {$this->getTable('campaign/maillist')} (
   `campaign_id` int(11) unsigned NOT NULL,
   `email` varchar(255) NOT NULL default '',
   `name` varchar(255) NOT NULL default '',
-  `used_coupon` smallint(6) NOT NULL default '0',
+  `used_coupon` smallint(6) NOT NULL default 0,
   `coupon_code` varchar(255) NOT NULL default '',
   `start_time` datetime NULL,
   `expired_time` datetime NULL,

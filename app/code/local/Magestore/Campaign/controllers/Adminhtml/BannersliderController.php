@@ -237,7 +237,7 @@ class Magestore_Campaign_Adminhtml_BannersliderController extends Mage_Adminhtml
      * export grid item to CSV type
      */
     public function exportCsvAction() {
-        $fileName = 'bannerslider.csv';
+        $fileName = 'bannercampaign.csv';
         $content = $this->getLayout()->createBlock('campaign/adminhtml_bannerslider_grid')->getCsv();
         $this->_prepareDownloadResponse($fileName, $content);
     }
@@ -246,7 +246,7 @@ class Magestore_Campaign_Adminhtml_BannersliderController extends Mage_Adminhtml
      * export grid item to XML type
      */
     public function exportXmlAction() {
-        $fileName = 'bannerslider.xml';
+        $fileName = 'bannercampaign.xml';
         $content = $this->getLayout()->createBlock('campaign/adminhtml_bannerslider_grid')->getXml();
         $this->_prepareDownloadResponse($fileName, $content);
     }
