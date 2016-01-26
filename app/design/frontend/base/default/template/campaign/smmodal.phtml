@@ -32,11 +32,12 @@
     if ($popup->getData('width') != "0" && $popup->getData('width') != "") {
         $width = "width:" . $popup->getData('width') . "px;";
     }
-    $widthcenter = (int)$width * 0.5;
+
     $maxwidth = "";
     if ($popup->getData('max_width') != "") {
         $maxwidth = "max-width:" . $popup->getData('max_width') . "px;";
     }
+    
     $backgroundcolor = $popup->getData('popup_background');
     $overlay_color = $popup->getData('overlay_color');
     switch ($overlay_color) {
