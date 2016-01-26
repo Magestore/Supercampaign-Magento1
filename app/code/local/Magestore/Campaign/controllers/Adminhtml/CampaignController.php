@@ -101,10 +101,9 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
      * show cowdown with products
      */
     public function chooserMainProductsAction() {
-        die('vao day di controller campaign-campaigncontroller');
         $request = $this->getRequest();
         $block = $this->getLayout()->createBlock(
-            'campaign/adminhtml_campaign_edit_tab_content_maincontent_grid', 'campaign_chooser_sku', array('input' =>'countdown_products','grid_url_call'=>'chooserMainProducts','id'=>'productGrid','js_form_object' => $request->getParam('form'),
+            'campaign/adminhtml_campaign_edit_tab_content_maincontent_grid', 'campaign_chooser_sku', array('input' =>'generalcountdown_products','grid_url_call'=>'chooserMainProducts','id'=>'productGrid','js_form_object' => $request->getParam('form'),
         ));
 
         if ($block) {
