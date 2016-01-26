@@ -236,10 +236,10 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             ),
         ));
 
-        $seconds_number0 = $fieldset->addField('second_show', 'text', array(
+        $seconds_number0 = $fieldset->addField('seconds_delay', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Seconds:'),
             'required'	=> false,
-            'name'		=> 'second_show',
+            'name'		=> 'seconds_delay',
             'note'      => 'Seconds to show popup.',
         ));
 
