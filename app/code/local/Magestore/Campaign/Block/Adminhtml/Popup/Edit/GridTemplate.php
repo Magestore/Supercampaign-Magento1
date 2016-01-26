@@ -57,12 +57,11 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_GridTemplate extends Mage_Ad
 					//'url' => array('http://www.magestore.com/', array('id'=>'666')),
 					'name' => 'template_id',
 					//'onclick' => "alert('456')",
-					'callback' => "function(val){
-						closePopup(val);
-					}",
+					'callback' => "closePopup", //function(val){}
 				)
 			),
 			'filter'	=> false,
+			//'after_element_html' => '<script>function applyTemplate(val){closePopup(val);}</script>',
 		));
 
 
