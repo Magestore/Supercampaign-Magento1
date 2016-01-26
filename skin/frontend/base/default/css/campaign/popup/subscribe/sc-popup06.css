@@ -1,11 +1,11 @@
 
 @media (max-width: 540px) {
-    #sc-popup6 table{border-spacing:12px !important}
-    #sc-popup6 table{width:100% !important;}
-    #sc-popup6 p{font-size:15px !important;}
-    #sc-popup6 td{display:block;}
-    #sc-popup6 .newsletter-form td input{margin:10px 0;width:100%}
-    #sc-popup6 .newsletter-form td button{margin:0;}
-    #sc-popup6 .newsletter-form .dialogClose{right:-6px;top:-25px;}
+    .sc-popup6 table{border-spacing:12px !important}
+    .sc-popup6 table{width:100% !important;}
+    .sc-popup6 p{font-size:15px !important;}
+    .sc-popup6 td{display:block;}
+    .sc-popup6 .newsletter-form td input{margin:10px 0;width:100%}
+    .sc-popup6 .newsletter-form td button{margin:0;}
+    .sc-popup6 .newsletter-form .dialogClose{right:-6px;top:-25px;}
 
 }

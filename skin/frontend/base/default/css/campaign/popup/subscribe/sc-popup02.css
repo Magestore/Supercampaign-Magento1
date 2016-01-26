@@ -22,7 +22,7 @@
     width:100%;
 }
 
-#sc-popup2 form button {
+.sc-popup2 form button {
     box-sizing:border-box;
     border:none;
     outline: none;

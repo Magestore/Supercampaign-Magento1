@@ -10,14 +10,14 @@
     $stylepopup = Mage::helper('campaign')->checkStylepopup();
     ?>
 
-    <div class="<?php echo $popup->getPopupType() ?>">
-        <div id="sc-popup<?php echo $popup->getData('template_code') ?>"
+    <div class="<?php echo $popup->getPopupType() ?> sc-popup<?php echo $popup->getData('template_code') ?>">
+        <div id="sc-popup<?php echo $popup->getData('popup_id') ?>"
              class="modal fade sc-popup<?php echo $popup->getData('template_code') ?>" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
                     <a class="dialogClose style1 overlay2" data-dismiss="modal"
-                       data-target="#sc-popup<?php echo $popup->getData('template_code') ?>"></a>
+                       data-target=".sc-popup<?php echo $popup->getData('template_code') ?>"></a>
                     <?php echo $popup->getData('popup_content'); ?>
                 </div>
             </div>
@@ -28,6 +28,14 @@
     $border_color = "border-color:#" . $popup->getData('border_color') . ";";
     $border_size = "border-width:" . $popup->getData('border_size') . "px;";
     $padding_size = "padding:" . $popup->getData('padding') . "px;";
+    $width = "";
+    if ($popup->getData('width') != "0" && $popup->getData('width') != "") {
+        $width = "width:" . $popup->getData('width') . "px;";
+    }
+    $maxwidth = "";
+    if ($popup->getData('max_width') != "") {
+        $maxwidth = "max-width:" . $popup->getData('max_width') . "px;";
+    }
     $backgroundcolor = $popup->getData('popup_background');
     $overlay_color = $popup->getData('overlay_color');
     switch ($overlay_color) {
@@ -37,8 +45,11 @@
         case 'back':
             $bg_overlay = "background-color:#000;";
             break;
-        case 'no_background':
-            $bg_overlay = "display:none";
+        case 'no_bg_fix_popup':
+            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{".$width.";position:fixed;} .sc-popup".$popup->getData('template_code')." .modal-backdrop{display:none}.sc-popup".$popup->getData('template_code')." .modal-dialog{".$width."}";
+            break;
+        case 'no_bg_absoulute_popup':
+            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{".$width.";position:absolute} .sc-popup".$popup->getData('template_code')." .modal-backdrop{display:none}";
             break;
     }
     $horizontal_position = $popup->getData('horizontal_position');
@@ -47,7 +58,7 @@
     $horizontalpx = "";
     $vertical_px = $popup->getData('vertical_px');
     $verticalpx = "";
-    if ($horizontal_px != "0") {
+    if ($horizontal_px != NULL) {
         switch ($horizontal_position) {
             case 'left':
                 if ($overlay_color = 'no_background') {
@@ -68,7 +79,7 @@
                 break;
         }
     }
-    if ($vertical_px != "0") {
+    if ($vertical_px != NULL) {
         switch ($vertical_position) {
             case 'top':
                 if ($overlay_color = 'no_background') {
@@ -87,14 +98,7 @@
         }
     }
 
-    $width = "";
-    if ($popup->getData('width') != "0" && $popup->getData('width') != "") {
-        $width = "width:" . $popup->getData('width') . "px;";
-    }
-    $maxwidth = "";
-    if ($popup->getData('max_width') != "") {
-        $maxwidth = "max-width:" . $popup->getData('max_width') . "px;";
-    }
+
 
     $close_path = $popup->getData('close_style');
     $close_icon = "";
@@ -130,9 +134,9 @@
             $style_plus = "border-radius:50%;overflow:hidden;";
             break;
     }
-    $stylecontent = "#sc-popup" . $popup->getData('template_code') . "  .modal-content{" . $width . " " . $backgroundcolor . " " . $style_plus . " " . $border_color . " " . $border_size . " " . $padding_size . " " . $maxwidth . "}";
-    $styleoverbg = "#sc-popup" . $popup->getData('template_code') . "  .modal-backdrop{" . $bg_overlay . "}";
-    //$styledialog = "#sc-popup".$popup->getData('template_code')."  .modal-dialog{".$horizontalpx." ".$verticalpx."}";
+    $stylecontent = ".sc-popup" . $popup->getData('template_code') . "  .modal-content{" . $width . " " . $backgroundcolor . " " . $style_plus . " " . $border_color . " " . $border_size . " " . $padding_size . " " . $maxwidth . "}";
+   // $styleoverbg = ".sc-popup" . $popup->getData('template_code') . "  .modal-backdrop{" . $bg_overlay . "}";
+    //$styledialog = ".sc-popup".$popup->getData('template_code')."  .modal-dialog{".$horizontalpx." ".$verticalpx."}";
     $customcss = $popup->getData('custom_css');
     ?>
     <script type="text/javascript">
@@ -166,7 +170,7 @@
                 $j('.modal').prop('class', 'modal fade').addClass('top');
         }
         $j(window).bind("load", function () {
-            var string = "<style type=\"text/css\"><?php echo $horizontalpx . " " . $verticalpx . " " . $stylecontent . " " . $styledialog . " " . $styleoverbg . " " . $close_icon . " " . $customcss ?></style>"
+            var string = "<style type=\"text/css\"><?php echo $bg_overlay." ".$horizontalpx . " " . $verticalpx . " " . $stylecontent . " " . $styledialog . " " . $styleoverbg . " " . $close_icon . " " . $customcss ?></style>"
             $j('head').append(string);
             <?php
             $show_when = $popup->getData('show_when');
@@ -177,12 +181,12 @@
             if (showwhen == 'after_seconds') {
                 secondsdelay = 1000 * <?php echo $popup->getData('seconds_delay')?>;
                 setTimeout(function () {
-                    $j('.modal').modal('show');
+                    $j('.sc-popup<?php echo $popup->getData('template_code') ?> .modal').modal('show');
                 }, secondsdelay);
                 console.log(secondsdelay);
             }
             if (showwhen == 'after_load_page') {
-                $j('.modal').modal('show');
+                $j('.sc-popup<?php echo $popup->getData('template_code') ?> .modal').modal('show');
             }
         });
     </script>
