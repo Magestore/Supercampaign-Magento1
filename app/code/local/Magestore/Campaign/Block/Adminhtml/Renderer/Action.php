@@ -34,8 +34,7 @@ class Magestore_Campaign_Block_Adminhtml_Renderer_Action
             $caption = (isset($option['caption']))? $option['caption']:'';
             $callback = (isset($option['callback']))? $option['callback']:'';
             if($callback){
-                $html .= '<script>function callback(func){func(\''.$valueIndex.'\');}</script>';
-                $html .= '<a href="#" onclick="'.$onclick.'; return callback('.$callback.');">'.$caption.'</a> | ';
+                $html .= '<a href="#" onclick="'.$onclick.'; return '.$callback.'('.$valueIndex.');">'.$caption.'</a> | ';
             }elseif($onclick){
                 $html .= '<a href="#" onclick="'.$onclick.'">'.$caption.'</a> | ';
             }else{

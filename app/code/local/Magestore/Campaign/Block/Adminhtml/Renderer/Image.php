@@ -13,7 +13,8 @@ class Magestore_Campaign_Block_Adminhtml_Renderer_Image
     public function render(Varien_Object $row)
     {
         $html = '<img src="'.$this->getSkinUrl($row->getData($this->getColumn()->getIndex()),
-                array('_area'=>'frontend')).'" alt="'.$row->getData($this->getColumn()->getAlt()).'"/>';
+                array('_area'=>'frontend')).'" alt="'.$row->getData($this->getColumn()->getAlt()).'"
+                width="'.$this->getColumn()->getWidth().'" />';
         return $html;
     }
 

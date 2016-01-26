@@ -26,6 +26,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_GridTemplate extends Mage_Ad
 		$this->addColumn('preview_image', array(
 			'header'	=> Mage::helper('campaign')->__('Image'),
 			'align'	 => 'left',
+			'width'	 => '300px',
 			'index'	 => 'preview_image',
 			'alt'	=> 'template_code',
 			'renderer'	=> 'Magestore_Campaign_Block_Adminhtml_Renderer_Image',
@@ -49,19 +50,18 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_GridTemplate extends Mage_Ad
 					'caption' => Mage::helper('campaign')->__('Preview'),
 					//'url' => array('*/*/newfromtemplate', array('template_id'=>999)),
 					'name' => 'template_id',
-					'onclick' => "alert('Preview action')",
+					'onclick' => "alert('Comming soon!')",
 				),
 				array(
 					'caption' => Mage::helper('campaign')->__('Apply'),
 					//'url' => array('http://www.magestore.com/', array('id'=>'666')),
 					'name' => 'template_id',
 					//'onclick' => "alert('456')",
-					'callback' => "function(val){
-						closePopup(val);
-					}",
+					'callback' => "closePopup", //function(val){}
 				)
 			),
 			'filter'	=> false,
+			//'after_element_html' => '<script>function applyTemplate(val){closePopup(val);}</script>',
 		));
 
 
