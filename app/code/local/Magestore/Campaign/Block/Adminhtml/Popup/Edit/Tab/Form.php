@@ -33,11 +33,11 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
 			'name'		=> 'title',
 		));
 
-        $fieldset->addField('status', 'select', array(
-            'label'		=> Mage::helper('campaign')->__('Status:'),
-            'name'		=> 'status',
-            'values'	=> Magestore_Campaign_Model_Status::getOptionHash(),
-        ));
+//        $fieldset->addField('status', 'select', array(
+//            'label'		=> Mage::helper('campaign')->__('Status:'),
+//            'name'		=> 'status',
+//            'values'	=> Magestore_Campaign_Model_Status::getOptionHash(),
+//        ));
 
 		/*$fieldset->addField('popup_type', 'select', array(
 			'label'		=> Mage::helper('campaign')->__('Popup Content Type:'),
