@@ -29,9 +29,6 @@
 class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
 {
     public function _construct(){
-        if($this->getPopup()){
-            $this->setBlockType($this->getPopup()->getBlockType());
-        }
         return parent::_construct();
     }
 
@@ -42,32 +39,10 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
      */
     public function _prepareLayout()
     {
-        $this->setTemplate('campaign/popup.phtml');
         parent::_prepareLayout();
         return $this;
     }
 
-
-    /*protected function _toHtml(){
-
-    }*/
-
-    public function getPopHtml(){
-        $block = $this->getBlockType();
-        if($block){
-            $blockObject = $this->getLayout()->createBlock($block);
-            if($blockObject){
-                return $blockObject->toHtml();
-            }
-        }
-        return '';
-    }
-
-
-    public function getPopup(){
-
-        return new Varien_Object($this->getData());
-    }
 
     /**
      * get single popup, first item

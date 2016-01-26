@@ -46,12 +46,12 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Banner_Grid extends M
      */
     protected function _prepareCollection()
     {
-        $campaign_id = $this->getRequest()->getParam('id');
+        $currentCampaign = Mage::getSingleton('adminhtml/session')->getCurrentCampaign();
         $collection = Mage::getModel('campaign/bannerslider')->getCollection();
         $collection->getSelect()
             ->joinLeft(array('campaign'=>$collection->getTable('campaign/campaign')),
                 'main_table.campaign_id = campaign.campaign_id', '')
-            ->columns(array('campaign_name'=>'campaign.name'))
+            ->columns(array('campaign_name'=>'IF(main_table.campaign_id = "'.$currentCampaign->getId().'", "Current", campaign.name)'))
             ->group('main_table.bannerslider_id');
         $filter = Mage::registry('banner_reloaded_ids');
         if(!isset($filter)){//if reset no filter

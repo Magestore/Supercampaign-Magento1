@@ -188,4 +188,28 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
         $content	= $this->getLayout()->createBlock('campaign/adminhtml_popup_grid')->getXml();
         $this->_prepareDownloadResponse($fileName,$content);
     }
+
+    /*
+     * popup load template
+     */
+    public function loadTemplateAction(){
+        $this->loadLayout();
+        $this->renderLayout();
+    }
+
+    /**
+     * load template data
+     */
+    public function newFromTemplateAction(){
+        $templateId = $this->getRequest()->getParam('template_id');
+        $template = Mage::getModel('campaign/template')->load($templateId);
+        if($template->getId()){
+            $data = $template->getData();
+            $data['popup_content'] = $template->getTemplateContentHtml();
+            Mage::getSingleton('adminhtml/session')->setFormData($data);
+        }else{
+            Mage::getSingleton('adminhtml/session')->addError('Can\' load template.');
+        }
+        $this->_forward('edit');
+    }
 }

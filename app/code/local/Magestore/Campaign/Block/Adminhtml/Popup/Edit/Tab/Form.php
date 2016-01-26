@@ -77,8 +77,30 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         $fieldset->addField('load_template', 'label', array(
             'label'		=> Mage::helper('campaign')->__(''),
             'after_element_html' => '<button id="" type="button" class="scalable add" style="" alt="Load template"
- title="Load template" onclick="window.open(\''.$this->getUrl('campaignadmin/adminhtml_popup/index').'\', \'_blank\', \'scrollbars=yes, resizable=yes,width=1000,height=800, top = 50\');" href="javascript:void(0);" <span="">'.$this->__('Create popup using predefined templates').'
-        </button>',
+ title="Load template" onclick="popupwindow(\''.$this->getUrl('campaignadmin/adminhtml_popup/loadTemplate').'\', \'_blank\', 1000, 500);" href="javascript:void(0);" <span="">'.$this->__('Create popup using predefined templates').'
+        </button>
+        <script type="text/javascript">
+        var popupLoadTemplate;
+        function popupwindow(url, title, w, h) {
+  var left = (screen.width/2)-(w/2);
+  var top = (screen.height/2)-(h/2);
+  wLoad = window.open(url, title, \'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, copyhistory=no, width=\'+w+\', height=\'+h+\', top=\'+top+\', left=\'+left);
+  //load after window close
+  wLoad.onunload = function(e){
+    if (wLoad.closed) {
+        //window closed
+        var template_id = wLoad.document.getElementById(\'template_id\').value;
+        window.location.href = "'.$this->getUrl('campaignadmin/adminhtml_popup/newfromtemplate/').'template_id/"+template_id;
+        console.log(wLoad.document.getElementById(\'template_id\').value);
+    }else{
+       //just refreshed
+    }
+  }
+  return popupLoadTemplate;
+}
+
+
+</script>',
         ));
 
 
