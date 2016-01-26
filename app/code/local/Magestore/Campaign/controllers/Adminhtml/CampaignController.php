@@ -187,10 +187,6 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
                 $banners->addFieldToFilter(array('campaign_id', 'bannerslider_id'),
                     array($model->getId(), array('in'=>$banner_ids)));
 
-//                zend_debug::dump($campaignData->getStartTime());
-//                zend_debug::dump($campaignData->getEndTime());
-//                die('ooo');
-
                 foreach($banners as $banner){
 
                     if(in_array($banner->getId(), $banner_ids)){
@@ -202,22 +198,17 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
                         //-------------------
                         foreach($sub_banner as $subbn){
                             if(in_array($subbn->getId(), $banner_ids)){
-
-                                //zend_debug::dump($campaignData->getStartTime());
-                                //zend_debug::dump($campaignData->getEndTime());
-
-                                $subbn->setData('start_time', $campaignData->getStartTime());
-                                //$subbn->setStartTime($campaignData->getStartTime());
-                                //$subbn->setEndTime($campaignData->getEndTime());
+                                $subbn->setStartTime($campaignData->getStartTime());
+                                $subbn->setEndTime($campaignData->getEndTime());
+                                $subbn->save();
                             }
                         }
-                        //die('uuuu');
-                        //----------------------
+                        //-------------------
 
                     }else{
                         $banner_ids = explode('&', $data['banner_ids']);//set no campaign id to banners
                     }
-                    $subbn->save();
+
                 }
 
                 /**
