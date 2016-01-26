@@ -4,7 +4,7 @@
 <?php foreach ($popups as $popup): ?>
 
     <?php
-    Zend_debug::dump($popup->getData());
+    //Zend_debug::dump($popup->getData());
     $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
     $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
     $stylepopup = Mage::helper('campaign')->checkStylepopup();
@@ -37,7 +37,7 @@
     if ($popup->getData('max_width') != "") {
         $maxwidth = "max-width:" . $popup->getData('max_width') . "px;";
     }
-    
+    $widthcenter = $popup->getData('width') * 0.5;
     $backgroundcolor = $popup->getData('popup_background');
     $overlay_color = $popup->getData('overlay_color');
     switch ($overlay_color) {
@@ -70,7 +70,11 @@
                 }
                 break;
             case 'center':
-                $horizontalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{left:50%;margin-left:-" . $widthcenter . "px;}";
+                if ($overlay_color == 'no_bg_fix_popup' || $overlay_color == 'no_bg_absoulute_popup') {
+                    $horizontalpx = ".sc-popup" . $popup->getData('template_code') . " .modal{left:50%;margin-left:-" . $widthcenter . "px;}";
+                }else{
+                    $horizontalpx = ".sc-popup" . $popup->getData('template_code') . " .modal-dialog{left:50%;margin-left:-" . $widthcenter . "px;}";
+                }
                 break;
             case 'right':
                 if ($overlay_color == 'no_bg_fix_popup' || $overlay_color == 'no_bg_absoulute_popup') {
@@ -92,7 +96,7 @@
                 break;
             case 'bottom':
                 if ($overlay_color == 'no_bg_fix_popup' || $overlay_color == 'no_bg_absoulute_popup') {
-                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal{bottom:" . $vertical_px . "px;";
+                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal{bottom:" . $vertical_px . "px;}";
                 } else {
                     $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{bottom:" . $vertical_px . "px;}";
                 }

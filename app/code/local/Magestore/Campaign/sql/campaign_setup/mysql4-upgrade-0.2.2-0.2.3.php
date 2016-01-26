@@ -107,7 +107,7 @@ CREATE TABLE {$this->getTable('campaign/popup')} (
   `show_next_popup` varchar(255) NOT NULL default '',
   `connect_with` varchar(255) NOT NULL default '',
   `popup_content` text NOT NULL default '',
-  `width` smallint(6) NULL,
+  `width` smallint(6) default 600,
   `width_unit` smallint(6) NULL default 0,
   `status` smallint(6) NULL default 0,
   `store` varchar(255) NOT NULL default '',
