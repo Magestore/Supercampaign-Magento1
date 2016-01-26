@@ -196,14 +196,17 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
                             array($banner->getId(), array('in'=>$banner_ids)));
 
                         //-------------------
+
                         foreach($sub_banner as $subbn){
-                            if(in_array($subbn->getId(), $banner_ids)){
+
+                            if(in_array($subbn->getBannersliderId(), $banner_ids)){
+
                                 $subbn->setStartTime($campaignData->getStartTime());
                                 $subbn->setEndTime($campaignData->getEndTime());
                                 $subbn->save();
                             }
                         }
-                        //-------------------
+                        //----------------------
 
                     }else{
                         $banner_ids = explode('&', $data['banner_ids']);//set no campaign id to banners

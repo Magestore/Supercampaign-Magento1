@@ -184,35 +184,35 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
             'required'     => false,
         ));
 
-//        $productIds = implode(", ", Mage::getResourceModel('catalog/product_collection')->getAllIds());
-//        $fieldset->addField('countdown_products', 'text', array(
-//            'label' => Mage::helper('campaign')->__('Countdown With Products:'),
-//            'name' => 'countdown_products',
-//            'class' => 'rule-param',
-//            'after_element_html' => '<a id="product_link" href="javascript:void(0)" onclick="toggleMainProducts()"><img src="' . $this->getSkinUrl('images/rule_chooser_trigger.gif') . '" alt="" class="v-middle rule-chooser-trigger" title="Select Products"></a><input type="hidden" value="'.$productIds.'" id="product_all_ids"/><div id="main_products_select" style="display:none;width:640px"></div>
-//                <script type="text/javascript">
-//                    function toggleMainProducts(){
-//                        if($("main_products_select").style.display == "none"){
-//                            var url = "' . $this->getUrl('campaignadmin/adminhtml_campaign/chooserMainProducts') . '";
-//                            var params = $("countdown_products").value.split(", ");
-//                            var parameters = {"form_key": FORM_KEY,"selected[]":params };
-//                            var request = new Ajax.Request(url,
-//                            {
-//                                evalScripts: true,
-//                                parameters: parameters,
-//                                onComplete:function(transport){
-//                                    $("main_products_select").update(transport.responseText);
-//                                    $("main_products_select").style.display = "block";
-//                                }
-//                            });
-//                        }else{
-//                            $("main_products_select").style.display = "none";
-//                        }
-//                    };
-//
-//
-//                </script>'
-//        ));
+        $productIds = implode(", ", Mage::getResourceModel('catalog/product_collection')->getAllIds());
+        $fieldset->addField('countdown_products', 'text', array(
+            'label' => Mage::helper('campaign')->__('Countdown With Products:'),
+            'name' => 'countdown_products',
+            'class' => 'rule-param',
+            'after_element_html' => '<a id="product_link" href="javascript:void(0)" onclick="toggleMainProducts()"><img src="' . $this->getSkinUrl('images/rule_chooser_trigger.gif') . '" alt="" class="v-middle rule-chooser-trigger" title="Select Products"></a><input type="hidden" value="'.$productIds.'" id="product_all_ids"/><div id="main_products_select" style="display:none;width:640px"></div>
+                <script type="text/javascript">
+                    function toggleMainProducts(){
+                        if($("main_products_select").style.display == "none"){
+                            var url = "' . $this->getUrl('campaignadmin/adminhtml_campaign/chooserMainProducts') . '";
+                            var params = $("countdown_products").value.split(", ");
+                            var parameters = {"form_key": FORM_KEY,"selected[]":params };
+                            var request = new Ajax.Request(url,
+                            {
+                                evalScripts: true,
+                                parameters: parameters,
+                                onComplete:function(transport){
+                                    $("main_products_select").update(transport.responseText);
+                                    $("main_products_select").style.display = "block";
+                                }
+                            });
+                        }else{
+                            $("main_products_select").style.display = "none";
+                        }
+                    };
+
+
+                </script>'
+        ));
 
         $fieldset->addField('countdown_onoff', 'select', array(
             'name'         => 'countdown_onoff',

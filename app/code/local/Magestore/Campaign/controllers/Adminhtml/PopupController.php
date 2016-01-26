@@ -137,7 +137,7 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
     }
 
     public function massDeleteAction() {
-        $popupIds = $this->getRequest()->getParam('campaign');
+        $popupIds = $this->getRequest()->getParam('popup');
         if(!is_array($popupIds)){
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Please select item(s)'));
         }else{
@@ -155,7 +155,7 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
     }
 
     public function massStatusAction() {
-        $popupIds = $this->getRequest()->getParam('campaign');
+        $popupIds = $this->getRequest()->getParam('popup');
         if(!is_array($popupIds)) {
             Mage::getSingleton('adminhtml/session')->addError($this->__('Please select item(s)'));
         } else {
