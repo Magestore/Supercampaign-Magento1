@@ -108,6 +108,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
 			'align'	 => 'left',
 			'width'	 => '80px',
 			'index'	 => 'status',
+			'filter_index' => 'main_table.status',
 			'type'		=> 'options',
 			'options'	 => Mage::getSingleton('campaign/status')->getOptionArray(),
 		));
