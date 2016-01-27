@@ -46,11 +46,11 @@
                     <sort_order>15</sort_order>
                     <action>campaignadmin/adminhtml_bannerslider</action>
                 </bannerslider>
-                <maillist module="campaign" translate="title">
+                <!--<maillist module="campaign" translate="title">
                     <title>Email Campaign</title>
                     <sort_order>20</sort_order>
                     <action>campaignadmin/adminhtml_maillist</action>
-                </maillist>
+                </maillist>-->
                 <settings module="campaign" translate="title">
                     <title>Settings</title>
                     <sort_order>1000</sort_order>
@@ -98,10 +98,10 @@
                                 <title>Manage Banners</title>
                                 <sort_order>15</sort_order>
                             </bannerslider>
-                            <maillist module="campaign" translate="title">
+                            <!--<maillist module="campaign" translate="title">
                                 <title>Email Campaign</title>
                                 <sort_order>20</sort_order>
-                            </maillist>
+                            </maillist>-->
                             <settings module="campaign" translate="title">
                                 <title>Settings</title>
                                 <sort_order>1000</sort_order>
