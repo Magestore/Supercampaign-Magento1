@@ -288,7 +288,7 @@
 
     <campaignadmin_adminhtml_bannerslider_custom>
         <block type="core/text_list" name="root">
-            <block type="campaign/adminhtml_addbutton" name="bannerslider.add" template="bannerslider/addbutton.phtml"/>
+            <block type="campaign/adminhtml_addbutton" name="bannerslider.add" template="bannercampaign/addbutton.phtml"/>
             <block type="campaign/adminhtml_bannerslider_edit_tab_custom" name="slider.edit.tab.custom"/>
             <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
                 <action method="initSerializerBlock">
