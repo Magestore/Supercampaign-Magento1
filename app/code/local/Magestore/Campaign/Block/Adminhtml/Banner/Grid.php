@@ -76,19 +76,19 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Grid extends Mage_Adminhtml_Bloc
             'index' => 'bannerslider_title',
         ));
 
-        $this->addColumn('start_time', array(
-            'header' => Mage::helper('campaign')->__('Start Date'),
-            'align' => 'left',
-            'type' => 'datetime',
-            'index' => 'start_time',
-        ));
-
-        $this->addColumn('end_time', array(
-            'header' => Mage::helper('campaign')->__('End Date'),
-            'align' => 'left',
-            'type' => 'datetime',
-            'index' => 'end_time',
-        ));
+//        $this->addColumn('start_time', array(
+//            'header' => Mage::helper('campaign')->__('Start Date'),
+//            'align' => 'left',
+//            'type' => 'datetime',
+//            'index' => 'start_time',
+//        ));
+//
+//        $this->addColumn('end_time', array(
+//            'header' => Mage::helper('campaign')->__('End Date'),
+//            'align' => 'left',
+//            'type' => 'datetime',
+//            'index' => 'end_time',
+//        ));
 
 
         $this->addColumn('status', array(
@@ -124,7 +124,7 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Grid extends Mage_Adminhtml_Bloc
         $this->addColumn('imagename', array(
             'header' => Mage::helper('campaign')->__('Image'),
             'align' => 'center',
-            'width' => '70px',
+            'width' => '200px',
             'index' => 'imagename',
             'renderer' => 'campaign/adminhtml_renderer_imagebanner'
         ));

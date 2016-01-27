@@ -116,9 +116,18 @@ class Magestore_Campaign_Adminhtml_BannersliderController extends Mage_Adminhtml
             $model->setData($data)
                     ->setId($this->getRequest()->getParam('id'));
             //Zend_debug::dump($model->getData());die();
+
             try {
 
                 $model->save();
+
+                //Zend_debug::dump($model->data());die('oewe');
+                //z save add more banner for slider
+                //code campaign
+                //$campaign = Mage::getModel('campaign/campaign')->getCollection();
+                //$campaign->addFieldToFilter('campaign_id',$data['campaign_id']);
+                //end z save add more banner for slider
+
                 if (isset($data['slider_banner'])) {
                     $bannerIds = array();
                     $bannerOrders = array();
