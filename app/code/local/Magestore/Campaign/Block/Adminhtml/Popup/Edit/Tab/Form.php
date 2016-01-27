@@ -33,6 +33,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
 			'name'		=> 'title',
 		));
 
+        if(!isset($data['status'])) $data['status'] = Magestore_Campaign_Model_Status::STATUS_ENABLED;
         $fieldset->addField('status', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Status:'),
             'name'		=> 'status',
