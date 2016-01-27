@@ -169,8 +169,17 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
             'label' => Mage::helper('campaign')->__('Animation Effect'),
             'name' => 'animationA',
             'values' => Mage::helper('campaign')->getAnimationA(),
-        ));  
-		
+        ));
+
+        $slider_id = $this->getRequest()->getParam('id');
+        if($slider_id){
+            $fieldset->addField('sliderid', 'hidden', array(
+                'label' => Mage::helper('campaign')->__('Alt Text'),
+                'name' => 'sliderid',
+            ));
+            $data['sliderid'] = $slider_id;
+        }
+
         $fieldset->addField('slider_speed', 'text', array(
             'label' => Mage::helper('campaign')->__('Speed'),
             'name' => 'slider_speed',
