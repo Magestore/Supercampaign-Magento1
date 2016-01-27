@@ -1,0 +1,3 @@
+function addStylemodal(name, age) {
+
+}
