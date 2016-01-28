@@ -33,7 +33,7 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Edit_Tabs extends Mage_Adminhtml
         parent::__construct();
         $this->setId('banner_tabs');
         $this->setDestElementId('edit_form');
-        $this->setTitle(Mage::helper('campaign')->__('Item Tabs'));
+        $this->setTitle(Mage::helper('campaign')->__('Banner Item'));
     }
     
     /**
@@ -44,8 +44,8 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Edit_Tabs extends Mage_Adminhtml
     protected function _beforeToHtml()
     {
         $this->addTab('general', array(
-            'label'     => Mage::helper('campaign')->__('Item'),
-            'title'     => Mage::helper('campaign')->__('Item infomation'),
+            'label'     => Mage::helper('campaign')->__('Banner Item infomation'),
+            'title'     => Mage::helper('campaign')->__('Banner Item infomation'),
             'content'   => $this->getLayout()
                 ->createBlock('campaign/adminhtml_banner_edit_tab_form')
                 ->toHtml(),
