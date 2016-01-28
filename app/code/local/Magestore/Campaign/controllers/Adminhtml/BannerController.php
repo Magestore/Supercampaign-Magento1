@@ -134,10 +134,23 @@ class Magestore_Campaign_Adminhtml_BannerController extends Mage_Adminhtml_Contr
                 unset($data['image']);
             }
 
+
             $data = $this->_filterDateTime($data,array('start_time','end_time'));
             try {
+
+                //set time slider for banner item
+                if($data['sliderid']){
+                    $slider_id = $data['sliderid'];
+                }
+                if($data['sliderid']){
+                    $slidermd = Mage::getModel('campaign/bannerslider')->load($slider_id);
+                    $data['start_time']= $slidermd->getStartTime();
+                    $data['end_time']= $slidermd->getEndTime();
+                }else{
                 $data['start_time']=date('Y-m-d H:i:s',Mage::getModel('core/date')->gmtTimestamp(strtotime($data['start_time'])));
                 $data['end_time']=date('Y-m-d H:i:s',Mage::getModel('core/date')->gmtTimestamp(strtotime($data['end_time'])));
+                }
+                //end set time
             } catch (Exception $e) {}
             $model->setOrderBanner("7");
             $model->setData($data)
@@ -149,7 +162,7 @@ class Magestore_Campaign_Adminhtml_BannerController extends Mage_Adminhtml_Contr
                 $model->save();
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('campaign')->__('Banner was successfully saved'));
                 Mage::getSingleton('adminhtml/session')->setFormData(false);
-                //Zend_debug::dump($this->getRequest()->getParam('slider'));die();
+
                 if($this->getRequest()->getParam('slider') == 'check'){
                     $this->_redirect('*/*/addin', array('id' => $model->getId()));
                     return;

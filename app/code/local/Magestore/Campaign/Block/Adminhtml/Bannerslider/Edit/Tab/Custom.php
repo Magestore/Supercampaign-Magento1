@@ -96,18 +96,28 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Custom extends Ma
             'options' => Mage::getSingleton('campaign/select')->getOptionHash(),
         ));
 
-        $this->addColumn('start_time', array(
-            'header' => Mage::helper('campaign')->__('Start Date'),
-            'type' => 'datetime',
-            //'format' => 'yyyy-MM-dd H:m:s',
-            'index' => 'start_time'
+//        $this->addColumn('start_time', array(
+//            'header' => Mage::helper('campaign')->__('Start Date'),
+//            'type' => 'datetime',
+//            //'format' => 'yyyy-MM-dd H:m:s',
+//            'index' => 'start_time'
+//        ));
+//
+//        $this->addColumn('end_time', array(
+//            'header' => Mage::helper('campaign')->__('End Date'),
+//            'type' => 'datetime',
+//            //'format' => 'yyyy-MM-dd H:m:s',
+//            'index' => 'end_time'
+//        ));
+
+        $this->addColumn('click_url', array(
+            'header' => Mage::helper('campaign')->__('Image Url'),
+            'index' => 'click_url'
         ));
 
-        $this->addColumn('end_time', array(
-            'header' => Mage::helper('campaign')->__('End Date'),
-            'type' => 'datetime',
-            //'format' => 'yyyy-MM-dd H:m:s',
-            'index' => 'end_time'
+        $this->addColumn('image_alt', array(
+            'header' => Mage::helper('campaign')->__('Image Alt'),
+            'index' => 'image_alt'
         ));
 
         $this->addColumn('action_banner', array(
@@ -121,7 +131,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Custom extends Ma
             'name' => 'order_banner_slider',
             'index' => 'order_banner_slider',
             'width' => 0,
-            'editable' => true,            
+            'editable' => true,
         ));
 
         return parent::_prepareColumns();

@@ -121,12 +121,26 @@ class Magestore_Campaign_Adminhtml_BannersliderController extends Mage_Adminhtml
 
                 $model->save();
 
-                //Zend_debug::dump($model->data());die('oewe');
-                //z save add more banner for slider
-                //code campaign
-                //$campaign = Mage::getModel('campaign/campaign')->getCollection();
-                //$campaign->addFieldToFilter('campaign_id',$data['campaign_id']);
-                //end z save add more banner for slider
+                //z set time for banner follow slider
+                if(isset($data['sliderid'])){
+                    //banner
+                    $bannermd = Mage::getModel('campaign/banner')->getCollection();
+                    $bannermd->addFieldToFilter('bannerslider_id', $data['sliderid']);
+
+                    //slider
+                    $slidermd = Mage::getModel('campaign/bannerslider')->load($data['sliderid']);
+                    $startslider= $slidermd->getStartTime();
+                    $endtime= $slidermd->getEndTime();
+
+                    foreach($bannermd as $bannerid){
+
+                        $bannerid->setStartTime($startslider);
+                        $bannerid->setEndTime($endtime);
+                        $bannerid->save();
+                    }
+
+                }
+                //z end set time for banner slider
 
                 if (isset($data['slider_banner'])) {
                     $bannerIds = array();

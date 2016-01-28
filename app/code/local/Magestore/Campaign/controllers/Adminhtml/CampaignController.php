@@ -170,6 +170,9 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
                 foreach($banners as $banner){
                     if(in_array($banner->getId(), $banner_ids)){
                         $banner->setCampaignId($model->getId());//set campaign id to banners
+
+                        $banner->setStartTime($campaignData->getStartTime());
+                        $banner->setEndTime($campaignData->getEndTime());
                     }else{
                         $banner->setCampaignId('');//set no campaign id to banners
                     }
