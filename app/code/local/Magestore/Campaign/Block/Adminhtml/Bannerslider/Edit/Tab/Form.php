@@ -169,8 +169,17 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
             'label' => Mage::helper('campaign')->__('Animation Effect'),
             'name' => 'animationA',
             'values' => Mage::helper('campaign')->getAnimationA(),
-        ));  
-		
+        ));
+
+        $slider_id = $this->getRequest()->getParam('id');
+        if($slider_id){
+            $fieldset->addField('sliderid', 'hidden', array(
+                'label' => Mage::helper('campaign')->__('Alt Text'),
+                'name' => 'sliderid',
+            ));
+            $data['sliderid'] = $slider_id;
+        }
+
         $fieldset->addField('slider_speed', 'text', array(
             'label' => Mage::helper('campaign')->__('Speed'),
             'name' => 'slider_speed',
@@ -493,7 +502,79 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
                         </script>',     
         ));
 
+        //Generate code for banner slider
+//        if($this->getRequest()->getParam('id')){
+//        $genertate_code = $fieldset->addField('show_code', 'select', array(
+//            'label' => Mage::helper('campaign')->__('Generate Code:'),
+//            'name' => 'show_code',
+//            'values' => array(
+//                array(
+//                    'value' => 'no',
+//                    'label' => Mage::helper('campaign')->__('No'),
+//                ),
+//                array(
+//                    'value' => 'yes',
+//                    'label' => Mage::helper('campaign')->__('Yes'),
+//                ),
+//            ),
+//        ));
+//
+//        $template_code = $fieldset->addField('template_code', 'textarea', array(
+//            'label' => Mage::helper('campaign')->__('Code for template:'),
+//            'name' => 'template_code',
+//            'width' =>'1000',
+//            'height'=>'800',
+//        ));
+//        $block_code = $fieldset->addField('block_code', 'textarea', array(
+//            'label' => Mage::helper('campaign')->__('Code for block:'),
+//            'name' => 'block_code',
+//        ));
+//
+//            $xml_code = $fieldset->addField('xml_code', 'textarea', array(
+//                'label' => Mage::helper('campaign')->__('Code for xml:'),
+//                'name' => 'xml_code',
+//            ));
+//
+//
+//        $layout_code = $fieldset->addField('layout_code', 'textarea', array(
+//            'label' => Mage::helper('campaign')->__('Code for layout'),
+//            'name' => 'layout_code',
+//            'value'  => '<b>phuong<b/>',
+//        ));
+//
+//            //$this->setForm($form);
+//            $this->setChild('form_after', $this->getLayout()->createBlock('adminhtml/widget_form_element_dependence')
+//                    ->addFieldMap($genertate_code->getHtmlId(), $genertate_code->getName())
+//                    ->addFieldMap($template_code->getHtmlId(), $template_code->getName())
+//                    ->addFieldMap($block_code->getHtmlId(), $block_code->getName())
+//                    ->addFieldMap($xml_code->getHtmlId(), $xml_code->getName())
+//                    ->addFieldMap($layout_code->getHtmlId(), $layout_code->getName())
+//                    ->addFieldDependence(
+//                        $template_code->getName(),
+//                        $genertate_code->getName(),
+//                        'yes'
+//                    )
+//                    ->addFieldDependence(
+//                        $block_code->getName(),
+//                        $genertate_code->getName(),
+//                        'yes'
+//                    )
+//                    ->addFieldDependence(
+//                        $xml_code->getName(),
+//                        $genertate_code->getName(),
+//                        'yes'
+//                    )
+//                    ->addFieldDependence(
+//                        $layout_code->getName(),
+//                        $genertate_code->getName(),
+//                        'yes'
+//                    )
+//            );
+//        }
+        //end if Generate code for banner slider
+
         $form->setValues($data);
+
         return parent::_prepareForm();
     }
 

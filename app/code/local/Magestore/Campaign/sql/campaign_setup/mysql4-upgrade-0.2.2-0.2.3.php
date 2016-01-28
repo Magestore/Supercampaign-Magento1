@@ -55,6 +55,8 @@ CREATE TABLE {$this->getTable('campaign/bannerslider')} (
   `position_note` int (11) NULL default '1',
   `slider_speed` float (10) NULL,
   `url_view` varchar(255) NULL,
+  `start_time` datetime NULL,
+  `end_time` datetime NULL,
   `min_item` int(11) NULL,
   `max_item` int(11) NULL,
   PRIMARY KEY (`bannerslider_id`)

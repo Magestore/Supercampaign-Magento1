@@ -81,13 +81,24 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Edit_Tab_Form extends Mage_Admin
                         ' : '</td><td class="scope-label">
                                       [' . $scopeLabel . ']',
         ));
-        if ($this->getRequest()->getParam('id') || count(Mage::helper('campaign')->getOptionSliderId()) > 1){
-            $fieldset->addField('bannerslider_id', 'select', array(
-                'label' => Mage::helper('campaign')->__('Slider'),
-                'name' => 'bannerslider_id',
-                'values' => Mage::helper('campaign')->getOptionSliderId(),
-            ));
+//        if ($this->getRequest()->getParam('id') || count(Mage::helper('campaign')->getOptionSliderId()) > 1){
+//            $fieldset->addField('bannerslider_id', 'select', array(
+//                'label' => Mage::helper('campaign')->__('Slider'),
+//                'name' => 'bannerslider_id',
+//                'values' => Mage::helper('campaign')->getOptionSliderId(),
+//            ));
+//        }
+
+        $slider_id = $this->getRequest()->getParam('sliderid');
+
+        $fieldset->addField('sliderid', 'hidden', array(
+            'label' => Mage::helper('campaign')->__('Alt Text'),
+            'name' => 'sliderid',
+        ));
+        if($slider_id){
+            $data['sliderid'] = $slider_id;
         }
+
 
         $fieldset->addField('image_alt', 'text', array(
             'label' => Mage::helper('campaign')->__('Alt Text'),
