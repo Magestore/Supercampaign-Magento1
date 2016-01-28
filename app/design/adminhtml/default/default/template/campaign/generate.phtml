@@ -8,15 +8,15 @@
 <div class="content">
     <p>- Add code below to a template file</p>
     <textarea style="width:650px; height:32px;">
-    $this->getLayout()->createBlock(bannerslider/default)->setTemplate(bannerslider/bannerslider.phtml)->setBannersliderId('<?php echo $idslider; ?>')->toHtml();
+     $this->getLayout()->createBlock('campaign/default')->setTemplate('bannercampaign/bannerslider.phtml')->setBannersliderId(<?php echo $idslider; ?>)->toHtml();
     </textarea>
     <p>- You can put a banner slider on a cms page. Below is an example which we put a banner slider with bannerslider_id is your_bannerslider_id on a cms page</p>
     <textarea style="width:650px; height:32px;">
-    {{block type="bannerslider/default" name="bannerslider.bannerslider" template="bannerslider/bannerslider.phtml" bannerslider_id="<?php echo $idslider; ?>"}}
+    {{block type="campaign/default" name="bannerslider.bannerslider" template="bannercampaign/bannerslider.phtml" bannerslider_id="<?php echo $idslider; ?>"}}
     </textarea>
     <p>- Please copy and paste the code below on one of xml layout files where you want to show the banner. Please replace the your_bannerslider_ids variable with your own bannerslider Id</p>
     <textarea style="width:650px; height:55px;">
-    <block type="bannerslider/default" name="bannerslider.bannerslider" template="bannerslider/bannerslider.phtml">
+    <block type="campaign/default" name="campaign.bannerslider" template="bannercampaign/bannerslider.phtml">
         <action method="setBannersliderId"><bannerslider_id><?php echo $idslider; ?></bannerslider_id></action>
     </block>
     </textarea>
@@ -27,7 +27,7 @@
             <catalog_category_default>
                 <reference name="left">
                     <block type="catalog/navigation" name="catalog.leftnav" after="currency" template="catalog/navigation/left.phtml"/>
-                    <block type="bannerslider/default" name="bannerslider.block" template="bannerslider/bannerslider.phtml">
+                    <block type="campaign/default" name="campaign.block" template="bannercampaign/bannerslider.phtml">
                         <action method="setBannersliderId"><bannerslider_id><?php echo $idslider; ?></bannerslider_id></action>
                     </block>
                 </reference>
@@ -49,7 +49,7 @@
 </div>
 <style>
     #tinycontent .content-header a{
-        background-image: url("<?php echo $this->getSkinUrl('css/magestore/bannerslider/images/ui-icons_888888_256x240.png') ?>");
+        background-image: url("<?php echo $this->getSkinUrl('css/magestore/bannercampaign/images/ui-icons_888888_256x240.png') ?>");
         background-repeat: no-repeat;
         background-position: -94px -127px;
         display: inline-block;width: 20px; height: 20px;

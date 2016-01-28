@@ -80,7 +80,7 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
                 break;
             }
         }
-        if(!empty($productIds) && !$isInArray){
+        if(!empty($productIds) && !$isInArray && $this->getProducts() != ''){
             return false;
         }else{
             return true;
@@ -96,6 +96,10 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     }
 
     public function checkUserLogin(){
+        return true;
+    }
+
+    public function showOnPage(){
         return true;
     }
 

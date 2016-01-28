@@ -33,6 +33,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
 			'name'		=> 'title',
 		));
 
+        if(!isset($data['status'])) $data['status'] = Magestore_Campaign_Model_Status::STATUS_ENABLED;
         $fieldset->addField('status', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Status:'),
             'name'		=> 'status',
@@ -157,61 +158,61 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             $data['store'] = Mage::app()->getStore(true)->getId();
         }
 
-        $fieldset->addField('page_id', 'select', array(
+        $show_on_page = $fieldset->addField('show_on_page', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Show On Page:'),
             'required'	=> true,
-            'name'		=> 'page_id',
+            'name'		=> 'show_on_page',
             'note'      => 'Show popup when with page selectd.',
             'values' => array(
                 array(
-                    'value' => 0,
+                    'value' => 'all_page',
                     'label' => Mage::helper('campaign')->__('All Page'),
                 ),
                 array(
-                    'value' => 1,
+                    'value' => 'home_page',
                     'label' => Mage::helper('campaign')->__('Home Page'),
                 ),
                 array(
-                    'value' => 2,
-                    'label' => Mage::helper('campaign')->__('Product Page'),
+                    'value' => 'product',
+                    'label' => Mage::helper('campaign')->__('Product Detail Page'),
                 ),
                 array(
-                    'value' => 3,
-                    'label' => Mage::helper('campaign')->__('Category Page'),
+                    'value' => 'category',
+                    'label' => Mage::helper('campaign')->__('Category'),
                 ),
                 array(
-                    'value' => 4,
+                    'value' => 'checkout_page',
                     'label' => Mage::helper('campaign')->__('Checkout Page'),
                 ),
                 array(
-                    'value' => 5,
+                    'value' => 'cart_page',
                     'label' => Mage::helper('campaign')->__('Cart Page'),
                 ),
                 array(
-                    'value' => 6,
-                    'label' => Mage::helper('campaign')->__('Other Page'),
+                    'value' => 'specified_url',
+                    'label' => Mage::helper('campaign')->__('Specified Url'),
                 ),
                 array(
-                    'value' => 7,
-                    'label' => Mage::helper('campaign')->__('Specified Url'),
+                    'value' => 'other_page',
+                    'label' => Mage::helper('campaign')->__('Other Page'),
                 ),
             ),
         ));
 
-        $fieldset->addField('categories', 'text', array(
+        $categories = $fieldset->addField('categories', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Category Ids:'),
             'required'	=> false,
             'name'		=> 'categories',
             'note'      => 'Show popup for categories have selected.',
         ));
 
-        $fieldset->addField('specified_url', 'text', array(
+        $specified_url = $fieldset->addField('specified_url', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Specified Url:'),
             'required'	=> false,
             'name'		=> 'specified_url',
         ));
 
-        $fieldset->addField('exclude_url', 'text', array(
+        $other_page = $fieldset->addField('exclude_url', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Exclude Url:'),
             'required'	=> false,
             'name'		=> 'exclude_url',
@@ -219,8 +220,8 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         ));
 
         $productIds = implode(", ", Mage::getResourceModel('catalog/product_collection')->getAllIds());
-        $fieldset->addField('products', 'text', array(
-            'label' => Mage::helper('campaign')->__('Products'),
+        $productidpage = $fieldset->addField('products', 'text', array(
+            'label' => Mage::helper('campaign')->__('Products Ids:'),
             'name' => 'products',
             'class' => 'rule-param',
             'after_element_html' => '<a id="product_link" href="javascript:void(0)" onclick="toggleMainProducts()"><img src="' . $this->getSkinUrl('images/rule_chooser_trigger.gif') . '" alt="" class="v-middle rule-chooser-trigger" title="Select Products"></a><input type="hidden" value="'.$productIds.'" id="product_all_ids"/><div id="main_products_select" style="display:none;width:640px"></div>
@@ -271,16 +272,40 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'note'      => 'Seconds to show popup.',
         ));
 
+        if($data['width'] < 1){$data['width'] = 300;}
+
 		$form->setValues($data);
 
         $this->setForm($form);
         $this->setChild('form_after', $this->getLayout()->createBlock('adminhtml/widget_form_element_dependence')
                 ->addFieldMap($show_when->getHtmlId(), $show_when->getName())
+                ->addFieldMap($show_on_page->getHtmlId(), $show_on_page->getName())
+                ->addFieldMap($specified_url->getHtmlId(), $specified_url->getName())
+                ->addFieldMap($other_page->getHtmlId(), $other_page->getName())
+                ->addFieldMap($categories->getHtmlId(), $categories->getName())
+                ->addFieldMap($productidpage->getHtmlId(), $productidpage->getName())
                 ->addFieldMap($seconds_number0->getHtmlId(), $seconds_number0->getName())
                 ->addFieldDependence(
                     $seconds_number0->getName(),
                     $show_when->getName(),
                     'after_seconds'
+                )
+                ->addFieldDependence(
+                    $specified_url->getName(),
+                    $show_on_page->getName(),
+                    'specified_url'
+                )->addFieldDependence(
+                    $other_page->getName(),
+                    $show_on_page->getName(),
+                    'other_page'
+                )->addFieldDependence(
+                    $categories->getName(),
+                    $show_on_page->getName(),
+                    'category'
+                )->addFieldDependence(
+                    $productidpage->getName(),
+                    $show_on_page->getName(),
+                    'product'
                 )
         );
 
