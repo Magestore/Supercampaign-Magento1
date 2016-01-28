@@ -2,202 +2,68 @@
 
 <?php $popups = $this->getAllPopupAvailable(); ?>
 <?php foreach ($popups as $key => $popup): ?>
-
     <?php
-    Zend_debug::dump($popup->getData());
+    //Zend_debug::dump($popup->getData());
     $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
     $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
     $stylepopup = Mage::helper('campaign')->checkStylepopup();
     ?>
-
-    <div class="<?php echo $popup->getPopupType() ?> sc-popup<?php echo $popup->getData('template_code') ?>">
-        <div id="sc-popup<?php echo $popup->getData('popup_id') ?>"
-             class="modal fade sc-popup<?php echo $popup->getData('template_code') ?>" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <a class="dialogClose style1 overlay2" data-dismiss="modal"
-                       data-target=".sc-popup<?php echo $popup->getData('template_code') ?>"></a>
-                    <?php echo $popup->getData('popup_content'); ?>
-                </div>
+    <div id="sc-popup<?php echo $popup->getData('popup_id') ?>"
+         class="modal fade sc-popup<?php echo $popup->getData('template_code') ?>" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <a id="close-<?php echo $popup->getData('popup_id') ?>" class="dialogClose style1 overlay2"
+                   data-dismiss="modal"
+                   data-target=".sc-popup<?php echo $popup->getData('template_code') ?>"></a>
+                <?php echo $popup->getData('popup_content'); ?>
             </div>
         </div>
     </div>
-    <?php
-    $style_plus = "";
-    $border_color = "border-color:#" . $popup->getData('border_color') . ";";
-    $border_size = "border-width:" . $popup->getData('border_size') . "px;";
-    $padding_size = "padding:" . $popup->getData('padding') . "px;";
-    $width = "";
-    if ($popup->getData('width') != "0" && $popup->getData('width') != "") {
-        $width = "width:" . $popup->getData('width') . "px;";
-    }
-
-    $maxwidth = "";
-    if ($popup->getData('max_width') != "") {
-        $maxwidth = "max-width:" . $popup->getData('max_width') . "px;";
-    }
-    $widthcenter = $popup->getData('width') * 0.5;
-    $backgroundcolor = $popup->getData('popup_background');
-    $overlay_color = $popup->getData('overlay_color');
-    switch ($overlay_color) {
-        case 'white':
-            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{top:0;left:0;right:0;bottom:0;position:fixed;} .sc-popup".$popup->getData('template_code')." .modal-backdrop{background-color:#fff;}.sc-popup".$popup->getData('template_code')." .modal-dialog{".$width."}";
-            break;
-        case 'dark':
-            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{top:0;left:0;right:0;bottom:0;position:fixed;} .sc-popup".$popup->getData('template_code')." .modal-backdrop{background-color:#000;}.sc-popup".$popup->getData('template_code')." .modal-dialog{".$width."}";
-            break;
-        case 'no_bg_fix_popup':
-            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{".$width.";position:fixed;} .sc-popup".$popup->getData('template_code')." .modal-backdrop{display:none} .sc-popup".$popup->getData('template_code')." .modal-dialog{margin:0;".$width."}";
-            break;
-        case 'no_bg_absoulute_popup':
-            $bg_overlay = ".modal-open{overflow:auto;} .sc-popup".$popup->getData('template_code')." .modal{".$width.";} .sc-popup".$popup->getData('template_code')." .modal-backdrop{display:none} .sc-popup".$popup->getData('template_code')." .modal-dialog{position:absolute;margin:0;".$width."}";
-            break;
-    }
-    $horizontal_position = $popup->getData('horizontal_position');
-    $vertical_position = $popup->getData('vertical_position');
-    $horizontal_px = $popup->getData('horizontal_px');
-    $horizontalpx = "";
-    $vertical_px = $popup->getData('vertical_px');
-    $verticalpx = "";
-    if ($horizontal_px != NULL) {
-        switch ($horizontal_position) {
-            case 'left':
-                if ($overlay_color == 'no_bg_fix_popup' || $overlay_color == 'no_bg_absoulute_popup') {
-                    $horizontalpx = ".sc-popup".$popup->getData('template_code')." .modal{left:" . $horizontal_px . "px;}";
-                } else {
-                    $horizontalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{left:" . $horizontal_px . "px;}";
-                }
-                break;
-            case 'center':
-                if ($overlay_color == 'no_bg_fix_popup' || $overlay_color == 'no_bg_absoulute_popup') {
-                    $horizontalpx = ".sc-popup" . $popup->getData('template_code') . " .modal{left:50%;margin-left:-" . $widthcenter . "px;}";
-                }else{
-                    $horizontalpx = ".sc-popup" . $popup->getData('template_code') . " .modal-dialog{left:50%;margin-left:-" . $widthcenter . "px;}";
-                }
-                break;
-            case 'right':
-                if ($overlay_color == 'no_bg_fix_popup' || $overlay_color == 'no_bg_absoulute_popup') {
-                    $horizontalpx = ".sc-popup".$popup->getData('template_code')." .modal{right:" . $horizontal_px . "px;}";
-                } else {
-                    $horizontalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{right:" . $horizontal_px . "px;}";
-                }
-                break;
-        }
-    }
-    if ($vertical_px != NULL) {
-        switch ($vertical_position) {
-            case 'top':
-                if ($overlay_color == 'no_bg_fix_popup' || $overlay_color == 'no_bg_absoulute_popup') {
-                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal{top:" . $vertical_px . "px;}";
-                } else {
-                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{margin-top:" . $vertical_px . "px;}";
-                }
-                break;
-            case 'bottom':
-                if ($overlay_color == 'no_bg_fix_popup' || $overlay_color == 'no_bg_absoulute_popup') {
-                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal{bottom:" . $vertical_px . "px;}";
-                } else {
-                    $verticalpx = ".sc-popup".$popup->getData('template_code')." .modal-dialog{bottom:" . $vertical_px . "px;}";
-                }
-                break;
-        }
-    }
-
-
-
-    $close_path = $popup->getData('close_style');
-    $close_icon = "";
-    switch ($close_path) {
-        case 'circle':
-            if ($overlay_color == 'white') {
-                $close_icon = ".dialogClose{background:url(" . $this->getSkinUrl('images/campaign/popup/close_dark.png') . ") no-repeat 5px 5px}";
-            } else {
-                if ($overlay_color == 'dark') {
-                    $close_icon = ".dialogClose{background:url(" . $this->getSkinUrl('images/campaign/popup/close_white.png') . ") no-repeat 5px 5px}";
-                }else{
-                    $close_icon = ".dialogClose{background:url(" . $this->getSkinUrl('images/campaign/popup/close_promotion.png') . ") no-repeat 5px -20px;top:5px;right:5px;}";
-                }
-            }
-            break;
-        case 'simple':
-            $close_icon = ".dialogClose{background:url(" . $this->getSkinUrl('images/campaign/popup/close_promotion.png') . ") no-repeat 5px -20px}";
-            break;
-        case 'none':
-            $close_icon = ".dialogClose{background:none transparent}";
-            break;
-        default:
-            $close_icon = ".dialogClose{background:url(" . $this->getSkinUrl('images/campaign/popup/close_promotion.png') . ") no-repeat 5px -20px;top:5px;right:5px;}";
-    }
-
-    $corner_style = $popup->getData('corner_style');
-    switch ($corner_style) {
-        case 0:
-            $style_plus = "border-radius:" . $popup->getData('border_radius') . "px;";
-            break;
-        case 1:
-            $style_plus = "border-radius:0px;";
-            break;
-        case 2:
-            $style_plus = "border-radius:50%;overflow:hidden;";
-            break;
-    }
-    $stylecontent = ".sc-popup" . $popup->getData('template_code') . "  .modal-content{" . $width . " " . $backgroundcolor . " " . $style_plus . " " . $border_color . " " . $border_size . " " . $padding_size . " " . $maxwidth . "}";
-   // $styleoverbg = ".sc-popup" . $popup->getData('template_code') . "  .modal-backdrop{" . $bg_overlay . "}";
-    //$styledialog = ".sc-popup".$popup->getData('template_code')."  .modal-dialog{".$horizontalpx." ".$verticalpx."}";
-    $customcss = $popup->getData('custom_css');
-    ?>
-    <script type="text/javascript">
-        var $j = jQuery.noConflict();
-        switch (<?php echo $popup->getData('appear_effect')?>) {
-            case 0:
-                $j('.modal').prop('class', 'modal fade').addClass('top');
-                break;
-            case 1:
-                $j('.modal').prop('class', 'modal fade').addClass('left');
-                break;
-            case 2:
-                $j('.modal').prop('class', 'modal fade').addClass('right');
-                break;
-            case 3:
-                $j('.modal').prop('class', 'modal fade').addClass('bottom');
-                break;
-            case 4:
-                $j('.modal').prop('class', 'modal fade').addClass('top-left');
-                break;
-            case 5:
-                $j('.modal').prop('class', 'modal fade').addClass('top-right');
-                break;
-            case 6:
-                $j('.modal').prop('class', 'modal fade').addClass('bottom-left');
-                break;
-            case 7:
-                $j('.modal').prop('class', 'modal fade').addClass('bottom-right');
-                break;
-            default:
-                $j('.modal').prop('class', 'modal fade').addClass('top');
-        }
-        $j(window).bind("load", function () {
-            var string = "<style type=\"text/css\"><?php echo $horizontalpx . " " .$verticalpx . " " .$stylecontent . " " .$bg_overlay . " " .$close_icon . " " . $customcss ?></style>"
-            $j('head').append(string);
-            <?php
-            $show_when = $popup->getData('show_when');
-            ?>
-
-            showwhen = '<?php echo $show_when ?>';
-            console.log(showwhen);
-            if (showwhen == 'after_seconds') {
-                secondsdelay = 1000 * <?php echo $popup->getData('seconds_delay')?>;
-                setTimeout(function () {
-                    $j('.sc-popup<?php echo $popup->getData('template_code') ?> .modal').modal('show');
-                }, secondsdelay);
-                console.log(secondsdelay);
-            }
-            if (showwhen == 'after_load_page') {
-                $j('.sc-popup<?php echo $popup->getData('template_code') ?> .modal').modal('show');
-            }
-
-        });
-    </script>
 <?php endforeach; ?>
+<script type="text/javascript">
+    var dataPopup = [
+        <?php $count = 0; $total = count($popups) ?>
+        <?php foreach ($popups as $key => $popup): ?>
+        <?php echo json_encode($popup->getData()) ?>
+        <?php if ($count < $total - 1) echo ', ' ?>
+        <?php $count++; ?>
+        <?php endforeach; ?>
+    ];
+
+    var Popups = [];
+    for (var id = 0; id < dataPopup.length; id++) {
+        var Popup = new Scpopup();
+        Popup.idPopup = dataPopup[id].popup_id;
+        Popup.templateCode = dataPopup[id].template_code;
+        Popup.effect = dataPopup[id].appear_effect;
+        Popup.borderSize = dataPopup[id].border_size;
+        Popup.borderColor = dataPopup[id].border_color;
+        Popup.paddingSize = dataPopup[id].padding;
+        Popup.width = dataPopup[id].width;
+        Popup.bgColor = dataPopup[id].popup_background;
+        Popup.overlayColor = dataPopup[id].overlay_color;
+        Popup.closeStyle = dataPopup[id].close_style;
+        Popup.cornerRadius = dataPopup[id].corner_style;
+        Popup.horizontalPosition = dataPopup[id].horizontal_position;
+        Popup.verticalPosition = dataPopup[id].vertical_position;
+        Popup.horizontalPx = dataPopup[id].horizontal_px;
+        Popup.verticalPx = dataPopup[id].vertical_px;
+        Popup.secondDelay = dataPopup[id].seconds_delay;
+        Popup.showWhen = dataPopup[id].show_when;
+        Popup.status = dataPopup[id].status;
+        Popup.priority = id;
+        Popup.urlImages = "<?php echo $this->getBaseUrl();?>" + "skin/frontend/base/default/";
+        Popups[id] = Popup;
+    }
+    $j(window).bind("load", function () {
+        Popups[Popups.length - 1].showPopup();
+        for (var i = Popups.length - 1; i >= 0; i--) {
+            Popups[i].onClose(function (_priority) {
+                if (Popups[_priority - 1]) {
+                    Popups[_priority - 1].showPopup();
+                }
+            });
+        }
+    });
+</script>
 
