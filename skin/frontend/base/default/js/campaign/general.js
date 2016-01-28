@@ -23,28 +23,12 @@ var Scpopup = function(){
     this.verticalPx= "";
     this.secondDelay= "";
     this.showWhen= "";
+    this.urlImages = "";
     this.status= false;
+    this.idClose = "";
+    this.priority = "";
     //this.Scpopup = function(){return this;};
-    this.showPopup = function() {
-        var idPopup = this.idPopup;
-        var scdelay = this.secondDelay;
-        console.log(idPopup + 'seconday' + scdelay);
-        console.log("#sc-popup" + idPopup);
-        if (this.showWhen == 'after_seconds') {
-            if(scdelay != "") {
-                var timedelay = 1000 * scdelay;
-                setTimeout(function () {
-                    $j("#sc-popup" + idPopup).modal('show');
-                }, timedelay);
-            }
-        }
-        if (this.showWhen == 'after_load_page') {
-                $j("#sc-popup" + idPopup).modal('show');
-        }
-    };
-    this.hidePopup= function () {
-        $j("#sc-popup" + this.idPopup).modal('hide');
-    };
+
     this.runEffect= function () {
         var effectPopup = this.effect;
         switch (effectPopup) {
@@ -82,30 +66,37 @@ var Scpopup = function(){
         var tpcode = this.templateCode;
         var overlayColor = this.overlayColor;
         var widthcenter = this.width * 0.5;
+        var height = $j("#sc-popup" + this.idPopup + " .modal-dialog").height();
         var cssHead, cssHz, cssVt;
         switch (hzposition) {
             case 'left':
                 if (hzpx != "") {
                     if (overlayColor == 'no_bg_fix_popup' || overlayColor == 'no_bg_absoulute_popup') {
-                        cssHz = ".sc-popup" + tpcode + " .modal{left:" + hzpx + "px}";
+                        cssHz = "#sc-popup" + this.idPopup + "{left:" + hzpx + "px;width:"+this.width +"px;right:auto} ";
+                        cssHz = cssHz + "#sc-popup" + this.idPopup + " .modal-dialog{position:relative} ";
                     } else {
-                        cssHz = ".sc-popup" + tpcode + " .modal-dialog{left:" + hzpx + "px}";
+                        cssHz = "#sc-popup" + this.idPopup + "{top:0;left:0;bottom:0;right:0} ";
+                        cssHz = cssHz + "#sc-popup" + this.idPopup + " .modal-dialog{left:" + hzpx + "px} ";
                     }
                 }
                 break;
             case 'center':
                 if (overlayColor == 'no_bg_fix_popup' || overlayColor == 'no_bg_absoulute_popup') {
-                    cssHz = ".sc-popup" + tpcode + " .modal{left:50%;margin-left:-" + widthcenter + "px}";
+                    cssHz = "#sc-popup" + this.idPopup + "{left:50%;margin-left:-" + widthcenter + "px}";
+                    cssHz = cssHz + "#sc-popup" + this.idPopup + " .modal-dialog{position:relative} ";
                 } else {
-                    cssHz = ".sc-popup" + tpcode + " .modal-dialog{left:50%;margin-left:-" + widthcenter + "px}";
+                    cssHz = "#sc-popup" + this.idPopup + "{top:0;left:0;bottom:0;right:0} ";
+                    cssHz = cssHz + "#sc-popup" + this.idPopup + " .modal-dialog{left:50%;margin-left:-" + widthcenter + "px}";
                 }
                 break;
             case 'right':
                 if (hzpx != "") {
                     if (overlayColor == 'no_bg_fix_popup' || overlayColor == 'no_bg_absoulute_popup') {
-                        cssHz = ".sc-popup" + tpcode + " .modal{right:" + hzpx + "px}";
+                        cssHz = "#sc-popup" + this.idPopup + "{right:" + hzpx + "px;width:"+this.width +"px;left:auto} ";
+                        cssHz = cssHz + "#sc-popup" + this.idPopup + " .modal-dialog{position:relative} ";
                     } else {
-                        cssHz = ".sc-popup" + tpcode + " .modal-dialog{right:" + hzpx + "px}";
+                        cssHz = "#sc-popup" + this.idPopup + "{top:0;left:0;bottom:0;right:0}";
+                        cssHz = cssHz + "#sc-popup" + this.idPopup + " .modal-dialog{right:" + hzpx + "px} ";
                     }
                 }
                 break;
@@ -114,18 +105,22 @@ var Scpopup = function(){
             case 'top':
                 if (vtpx != "") {
                     if (overlayColor == 'no_bg_fix_popup' || overlayColor == 'no_bg_absoulute_popup') {
-                        cssVt = ".sc-popup" + tpcode + " .modal{top:" + vtpx + "px}";
+                        cssVt = "#sc-popup" + this.idPopup + "{top:" + vtpx + "px;bottom:auto} ";
+                        cssHz = cssHz + "#sc-popup" + this.idPopup + " .modal-dialog{position:relative} ";
                     } else {
-                        cssVt = ".sc-popup" + tpcode + " .modal-dialog{top:" + vtpx + "px}";
+                        cssVt = "#sc-popup" + this.idPopup + "{top:0;left:0;bottom:0;right:0} ";
+                        cssVt = cssVt + "#sc-popup" + this.idPopup + " .modal-dialog{top:" + vtpx + "px;width:"+this.width +"px;} ";
                     }
                 }
                 break;
             case 'bottom':
                 if (vtpx != "") {
                     if (overlayColor == 'no_bg_fix_popup' || overlayColor == 'no_bg_absoulute_popup') {
-                        cssVt = ".sc-popup" + tpcode + " .modal{bottom:" + vtpx + "px}";
+                        cssVt = "#sc-popup" + this.idPopup + "{bottom:" + vtpx + "px;width:"+this.width +"px;top:auto} ";
+                        cssHz = cssHz + "#sc-popup" + this.idPopup + " .modal-dialog{position:relative} ";
                     } else {
-                        cssVt = ".sc-popup" + tpcode + " .modal-dialog{top:" + vtpx + "px}";
+                        cssVt = "#sc-popup" + this.idPopup + "{top:0;left:0;bottom:0;right:0}";
+                        cssVt =  cssVt + "#sc-popup" + this.idPopup + " .modal-dialog{top:" + vtpx + "px} ";
                     }
                 }
                 break;
@@ -141,13 +136,13 @@ var Scpopup = function(){
         var cssHead = "";
         switch (overlay) {
             case "white":
-                cssHead = ".modal-open{overflow:auto}";
+                cssHead = ".modal-open{overflow:auto;top:0;left:0;right:0;left:0}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal{top:0;left:0;right:0;bottom:0;position:fixed;}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal-backdrop{background-color:#fff}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal-dialog{width:" + widthPopup + "px}";
                 break;
             case "dark":
-                cssHead = ".modal-open{overflow:auto}";
+                cssHead = ".modal-open{overflow:auto;top:0;left:0;right:0;left:0}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal{top:0;left:0;right:0;bottom:0;position:fixed;}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal-backdrop{background-color:#000}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal-dialog{width:" + widthPopup + "px}";
@@ -210,33 +205,66 @@ var Scpopup = function(){
         cssHead = ".sc-popup" + tcode + " .modal-content{" + cssBColor + cssBRadius + cssBSize + cssPadding + cssWidth + cssbgContentColor + "}";
         return cssHead;
     };
-    this.showCloseIcon= function (_url) {
+    this.showCloseIcon= function () {
         var cssCloseIcon = "";
         switch (this.closeStyle) {
             case 'circle':
                 if (this.overlayColor == 'white') {
-                    cssCloseIcon = ".dialogClose{background:url(" + _url + "images/campaign/popup/close_dark.png) no-repeat 5px 5px}";
+                    cssCloseIcon = "#sc-popup" + this.idPopup +" .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_dark.png) no-repeat 5px 5px}";
                 } else {
                     if (this.overlayColor == 'dark') {
-                        cssCloseIcon = ".dialogClose{background:url(" + _url + "images/campaign/popup/close_white.png) no-repeat 5px 5px}";
+                        cssCloseIcon = "#sc-popup" + this.idPopup +" .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_white.png) no-repeat 5px 5px}";
                     } else {
-                        cssCloseIcon = ".dialogClose{background:url(" + _url + "images/campaign/popup/close_promotion.png) no-repeat 5px -20px;top:5px;right:5px;}";
+                        cssCloseIcon = "#sc-popup" + this.idPopup +" .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_promotion.png) no-repeat 5px -20px;top:5px;right:5px;}";
                     }
                 }
                 break;
             case 'simple':
-                cssCloseIcon = ".dialogClose{background:url(" + _url + "images/campaign/popup/close_promotion.png) no-repeat 5px -20px}";
+                cssCloseIcon = "#sc-popup" + this.idPopup +" .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_promotion.png) no-repeat 5px -20px}";
                 break;
             case 'none':
-                cssCloseIcon = ".dialogClose{background:none transparent}";
+                cssCloseIcon = "#sc-popup" + this.idPopup +" .dialogClose{background:none transparent}";
                 break;
-            default:
-                cssCloseIcon = ".dialogClose{background:url(" + _url + "images/campaign/popup/close_promotion.png) no-repeat 5px -20px;top:5px;right:5px;}";
         }
         return cssCloseIcon;
     };
-    this.addCssToHead = function (_url) {
-        var stringcss = "<style type=\"text/css\">" + this.showPosition() + this.showOverlayColor() + this.showStylePopup() + this.showCloseIcon(_url) + "</style>"
+    this.addCssToHead = function () {
+        var stringcss = "<style type=\"text/css\">" + this.showPosition() + this.showOverlayColor() + this.showStylePopup() + this.showCloseIcon(this.urlImages) + "</style>";
         $j('html > head').append(stringcss);
-    }
+    };
+    this.showPopup = function() {
+        _this = this;
+        this.idClose = "close-"+this.idPopup;
+        $j('#'+this.idClose).click(function(){
+            _this.hidePopup();
+        });
+
+        var idPopup = this.idPopup;
+        var scdelay = this.secondDelay;
+        console.log(idPopup + 'seconday' + scdelay);
+        console.log("#sc-popup" + idPopup);
+        this.addCssToHead();
+        this.runEffect();
+        if (this.showWhen == 'after_seconds') {
+            if(scdelay != "") {
+                var timedelay = 1000 * scdelay;
+                setTimeout(function () {
+                    $j("#sc-popup" + idPopup).modal('show');
+                }, timedelay);
+            }
+        }
+        if (this.showWhen == 'after_load_page') {
+            $j("#sc-popup" + idPopup).modal('show');
+        }
+        return this;
+    };
+    this.hidePopup= function () {
+        $j("#sc-popup" + this.idPopup).modal('hide');
+        if(typeof this.callBack == "function" ) {
+            this.callBack(this.priority);
+        }
+    };
+    this.onClose = function(_function){
+        this.callBack = _function;
+    };
 };
