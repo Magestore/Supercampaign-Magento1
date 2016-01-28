@@ -5,60 +5,60 @@
     }
 }(jQuery);
 var $j = jQuery.noConflict();
-var Scpopup = function(){
-    this.idPopup= "";
-    this.templateCode= "";
-    this.effect= "";
-    this.borderSize= "";
-    this.borderColor= "";
-    this.paddingSize= "";
-    this.width= "";
-    this.bgColor= "";
-    this.overlayColor= "";
-    this.closeStyle= "";
-    this.cornerRadius= "";
-    this.horizontalPosition= "";
-    this.verticalPosition= "";
-    this.horizontalPx= "";
-    this.verticalPx= "";
-    this.secondDelay= "";
-    this.showWhen= "";
+var Scpopup = function () {
+    this.idPopup = "";
+    this.templateCode = "";
+    this.effect = "";
+    this.borderSize = "";
+    this.borderColor = "";
+    this.paddingSize = "";
+    this.width = "";
+    this.bgColor = "";
+    this.overlayColor = "";
+    this.closeStyle = "";
+    this.cornerRadius = "";
+    this.horizontalPosition = "";
+    this.verticalPosition = "";
+    this.horizontalPx = "";
+    this.verticalPx = "";
+    this.secondDelay = "";
+    this.showWhen = "";
     this.urlImages = "";
-    this.status= false;
+    this.status = false;
     this.idClose = "";
     this.priority = "";
     //this.Scpopup = function(){return this;};
 
-    this.runEffect= function () {
+    this.runEffect = function () {
         var effectPopup = this.effect;
         switch (effectPopup) {
-        case 0:
-            $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top');
-            break;
-        case 1:
-            $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('left');
-            break;
-        case 2:
-            $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('right');
-            break;
-        case 3:
-            $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom');
-            break;
-        case 4:
-            $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top-left');
-            break;
-        case 5:
-            $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top-right');
-            break;
-        case 6:
-            $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom-left');
-            break;
-        case 7:
-            $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom-right');
-            break;
+            case 0:
+                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top');
+                break;
+            case 1:
+                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('left');
+                break;
+            case 2:
+                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('right');
+                break;
+            case 3:
+                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom');
+                break;
+            case 4:
+                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top-left');
+                break;
+            case 5:
+                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top-right');
+                break;
+            case 6:
+                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom-left');
+                break;
+            case 7:
+                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom-right');
+                break;
         }
     };
-    this.showPosition= function () {
+    this.showPosition = function () {
         var hzposition = this.horizontalPosition;
         var vtposition = this.verticalPosition;
         var hzpx = this.horizontalPx;
@@ -72,7 +72,7 @@ var Scpopup = function(){
             case 'left':
                 if (hzpx != "") {
                     if (overlayColor == 'no_bg_fix_popup' || overlayColor == 'no_bg_absoulute_popup') {
-                        cssHz = "#sc-popup" + this.idPopup + "{left:" + hzpx + "px;width:"+this.width +"px;right:auto} ";
+                        cssHz = "#sc-popup" + this.idPopup + "{left:" + hzpx + "px;width:" + this.width + "px;right:auto} ";
                         cssHz = cssHz + "#sc-popup" + this.idPopup + " .modal-dialog{position:relative} ";
                     } else {
                         cssHz = "#sc-popup" + this.idPopup + "{top:0;left:0;bottom:0;right:0} ";
@@ -92,7 +92,7 @@ var Scpopup = function(){
             case 'right':
                 if (hzpx != "") {
                     if (overlayColor == 'no_bg_fix_popup' || overlayColor == 'no_bg_absoulute_popup') {
-                        cssHz = "#sc-popup" + this.idPopup + "{right:" + hzpx + "px;width:"+this.width +"px;left:auto} ";
+                        cssHz = "#sc-popup" + this.idPopup + "{right:" + hzpx + "px;width:" + this.width + "px;left:auto} ";
                         cssHz = cssHz + "#sc-popup" + this.idPopup + " .modal-dialog{position:relative} ";
                     } else {
                         cssHz = "#sc-popup" + this.idPopup + "{top:0;left:0;bottom:0;right:0}";
@@ -109,18 +109,18 @@ var Scpopup = function(){
                         cssHz = cssHz + "#sc-popup" + this.idPopup + " .modal-dialog{position:relative} ";
                     } else {
                         cssVt = "#sc-popup" + this.idPopup + "{top:0;left:0;bottom:0;right:0} ";
-                        cssVt = cssVt + "#sc-popup" + this.idPopup + " .modal-dialog{top:" + vtpx + "px;width:"+this.width +"px;} ";
+                        cssVt = cssVt + "#sc-popup" + this.idPopup + " .modal-dialog{top:" + vtpx + "px;width:" + this.width + "px;} ";
                     }
                 }
                 break;
             case 'bottom':
                 if (vtpx != "") {
                     if (overlayColor == 'no_bg_fix_popup' || overlayColor == 'no_bg_absoulute_popup') {
-                        cssVt = "#sc-popup" + this.idPopup + "{bottom:" + vtpx + "px;width:"+this.width +"px;top:auto} ";
+                        cssVt = "#sc-popup" + this.idPopup + "{bottom:" + vtpx + "px;width:" + this.width + "px;top:auto} ";
                         cssHz = cssHz + "#sc-popup" + this.idPopup + " .modal-dialog{position:relative} ";
                     } else {
                         cssVt = "#sc-popup" + this.idPopup + "{top:0;left:0;bottom:0;right:0}";
-                        cssVt =  cssVt + "#sc-popup" + this.idPopup + " .modal-dialog{top:" + vtpx + "px} ";
+                        cssVt = cssVt + "#sc-popup" + this.idPopup + " .modal-dialog{top:" + vtpx + "px} ";
                     }
                 }
                 break;
@@ -129,7 +129,7 @@ var Scpopup = function(){
         return cssHead;
     };
 
-    this.showOverlayColor= function () {
+    this.showOverlayColor = function () {
         var tpcode = this.templateCode;
         var overlay = this.overlayColor;
         var widthPopup = this.width;
@@ -162,7 +162,7 @@ var Scpopup = function(){
         }
         return cssHead;
     };
-    this.showStylePopup= function () {
+    this.showStylePopup = function () {
         var bColor = this.borderColor;
         var bSize = this.borderSize;
         var bRadius = this.cornerRadius;
@@ -190,7 +190,7 @@ var Scpopup = function(){
                     break;
             }
         }
-        else{
+        else {
             cssBRadius = "";
         }
         if (padding != "") {
@@ -205,25 +205,25 @@ var Scpopup = function(){
         cssHead = ".sc-popup" + tcode + " .modal-content{" + cssBColor + cssBRadius + cssBSize + cssPadding + cssWidth + cssbgContentColor + "}";
         return cssHead;
     };
-    this.showCloseIcon= function () {
+    this.showCloseIcon = function () {
         var cssCloseIcon = "";
         switch (this.closeStyle) {
             case 'circle':
                 if (this.overlayColor == 'white') {
-                    cssCloseIcon = "#sc-popup" + this.idPopup +" .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_dark.png) no-repeat 5px 5px}";
+                    cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_dark.png) no-repeat 5px 5px}";
                 } else {
                     if (this.overlayColor == 'dark') {
-                        cssCloseIcon = "#sc-popup" + this.idPopup +" .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_white.png) no-repeat 5px 5px}";
+                        cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_white.png) no-repeat 5px 5px}";
                     } else {
-                        cssCloseIcon = "#sc-popup" + this.idPopup +" .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_promotion.png) no-repeat 5px -20px;top:5px;right:5px;}";
+                        cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_promotion.png) no-repeat 5px -20px;top:5px;right:5px;}";
                     }
                 }
                 break;
             case 'simple':
-                cssCloseIcon = "#sc-popup" + this.idPopup +" .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_promotion.png) no-repeat 5px -20px}";
+                cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_promotion.png) no-repeat 5px -20px}";
                 break;
             case 'none':
-                cssCloseIcon = "#sc-popup" + this.idPopup +" .dialogClose{background:none transparent}";
+                cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:none transparent}";
                 break;
         }
         return cssCloseIcon;
@@ -232,10 +232,10 @@ var Scpopup = function(){
         var stringcss = "<style type=\"text/css\">" + this.showPosition() + this.showOverlayColor() + this.showStylePopup() + this.showCloseIcon(this.urlImages) + "</style>";
         $j('html > head').append(stringcss);
     };
-    this.showPopup = function() {
+    this.showPopup = function () {
         _this = this;
-        this.idClose = "close-"+this.idPopup;
-        $j('#'+this.idClose).click(function(){
+        this.idClose = "close-" + this.idPopup;
+        $j('#' + this.idClose).click(function () {
             _this.hidePopup();
         });
 
@@ -246,7 +246,7 @@ var Scpopup = function(){
         this.addCssToHead();
         this.runEffect();
         if (this.showWhen == 'after_seconds') {
-            if(scdelay != "") {
+            if (scdelay != "") {
                 var timedelay = 1000 * scdelay;
                 setTimeout(function () {
                     $j("#sc-popup" + idPopup).modal('show');
@@ -258,13 +258,13 @@ var Scpopup = function(){
         }
         return this;
     };
-    this.hidePopup= function () {
+    this.hidePopup = function () {
         $j("#sc-popup" + this.idPopup).modal('hide');
-        if(typeof this.callBack == "function" ) {
+        if (typeof this.callBack == "function") {
             this.callBack(this.priority);
         }
     };
-    this.onClose = function(_function){
+    this.onClose = function (_function) {
         this.callBack = _function;
     };
 };
