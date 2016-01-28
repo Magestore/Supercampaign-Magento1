@@ -14,6 +14,23 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Setting extends Mage_Adm
 
         $fieldset = $form->addFieldset('popup_form', array('legend'=>Mage::helper('campaign')->__('Setting information')));
 
+        $fieldset->addField('multipopup', 'select', array(
+            'label'		=> Mage::helper('campaign')->__('Show multipopup:'),
+            'required'	=> true,
+            'name'		=> 'multipopup',
+            'note'      => "Show multipopup.",
+            'values' => array(
+                array(
+                    'value' => 0,
+                    'label' => Mage::helper('campaign')->__('No'),
+                ),
+                array(
+                    'value' => 1,
+                    'label' => Mage::helper('campaign')->__('Yes'),
+                ),
+            ),
+        ));
+
         $fieldset->addField('showing_frequency', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Show Frequency:'),
             'required'	=> true,
