@@ -14,12 +14,12 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
 
         $fieldset = $form->addFieldset('popup_form', array('legend'=>Mage::helper('campaign')->__('Visitorsegment information')));
 
-        $fieldset->addField('country', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Country:'),
-            'required'	=> false,
-            'note'      => 'Show popup for country.',
-            'name'		=> 'country',
-        ));
+//        $fieldset->addField('country', 'text', array(
+//            'label'		=> Mage::helper('campaign')->__('Country:'),
+//            'required'	=> false,
+//            'note'      => 'Show popup for country.',
+//            'name'		=> 'country',
+//        ));
 
         $fieldset->addField('devices', 'multiselect', array(
             'label'		=> Mage::helper('campaign')->__('Devices'),
