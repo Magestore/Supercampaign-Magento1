@@ -1,6 +1,9 @@
 <!--campaign/smmodal.phtml-->
 
-<?php $popups = $this->getAllPopupAvailable(); ?>
+<?php
+$helper = Mage::helper('campaign');
+$popups = $this->getAllPopupAvailable();
+?>
 <?php foreach ($popups as $key => $popup): ?>
     <?php
     //Zend_debug::dump($popup->getData());
@@ -15,7 +18,7 @@
                 <a id="close-<?php echo $popup->getData('popup_id') ?>" class="dialogClose style1 overlay2"
                    data-dismiss="modal"
                    data-target=".sc-popup<?php echo $popup->getData('template_code') ?>"></a>
-                <?php echo $popup->getData('popup_content'); ?>
+                <?php echo $helper->convertContentToHtml($popup->getData('popup_content')); ?>
             </div>
         </div>
     </div>
