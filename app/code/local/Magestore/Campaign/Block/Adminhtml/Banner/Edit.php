@@ -142,9 +142,9 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Edit extends Mage_Adminhtml_Bloc
     public function getHeaderText()
     {
         if( Mage::registry('banner_data') && Mage::registry('banner_data')->getId() ) {
-            return Mage::helper('campaign')->__("Edit Banner '%s'", $this->htmlEscape(Mage::registry('banner_data')->getName()));
+            return Mage::helper('campaign')->__("Edit Banner Item '%s'", $this->htmlEscape(Mage::registry('banner_data')->getName()));
         } else {
-            return Mage::helper('campaign')->__('Add Banner');
+            return Mage::helper('campaign')->__('Add Banner Item');
         }
     }
 

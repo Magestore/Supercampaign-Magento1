@@ -57,8 +57,8 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tabs extends Mage_Adm
             ));
         } else {
             $this->addTab('banner_section', array(
-                'label' => Mage::helper('campaign')->__('Banner(s) of Slider'),
-                'title' => Mage::helper('campaign')->__('Banner(s) of Slider'),
+                'label' => Mage::helper('campaign')->__('Image(s) of Banner'),
+                'title' => Mage::helper('campaign')->__('Image(s) of Banner'),
                 'url' => $this->getUrl('*/*/custom', array('_current' => true, 'id' => $this->getRequest()->getParam('id'))),
                 'class' => 'ajax',
             ));
