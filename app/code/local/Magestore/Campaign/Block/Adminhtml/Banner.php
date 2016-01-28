@@ -33,7 +33,7 @@ class Magestore_Campaign_Block_Adminhtml_Banner extends Mage_Adminhtml_Block_Wid
         $this->_controller = 'adminhtml_banner';
         $this->_blockGroup = 'campaign';
         $this->_headerText = Mage::helper('campaign')->__('Items Manager');
-        $this->_addButtonLabel = Mage::helper('campaign')->__('Add new Items');
+        $this->_addButtonLabel = Mage::helper('campaign')->__('Add new Banner');
         parent::__construct();
     }
 }

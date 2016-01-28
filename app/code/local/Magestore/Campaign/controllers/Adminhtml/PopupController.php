@@ -70,19 +70,19 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
             //save login user
             if(isset($data['login_user']) && is_array($data['login_user'])){
                 $store = implode(',', $data['login_user']);
-                $data['login_user'] = $store.','; //fix store view in grid
+                $data['login_user'] = $store.',';
             }
 
             //save customer group
             if(isset($data['customer_group_ids']) && is_array($data['customer_group_ids'])){
                 $store = implode(',', $data['customer_group_ids']);
-                $data['customer_group_ids'] = $store.','; //fix store view in grid
+                $data['customer_group_ids'] = $store.',';
             }
 
             //save devices
             if(isset($data['devices']) && is_array($data['devices'])){
                 $store = implode(',', $data['devices']);
-                $data['devices'] = $store.','; //fix store view in grid
+                $data['devices'] = $store.',';
             }
 
 

@@ -35,8 +35,8 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit extends Mage_Adminhtm
 		$this->_blockGroup = 'campaign';
 		$this->_controller = 'adminhtml_bannerslider';
 		
-		$this->_updateButton('save', 'label', Mage::helper('campaign')->__('Save Slider'));
-		$this->_updateButton('delete', 'label', Mage::helper('campaign')->__('Delete Slider'));
+		$this->_updateButton('save', 'label', Mage::helper('campaign')->__('Save Banner'));
+		$this->_updateButton('delete', 'label', Mage::helper('campaign')->__('Delete Banner'));
 		
 		$this->_addButton('saveandcontinue', array(
 			'label'		=> Mage::helper('adminhtml')->__('Save And Continue Edit'),
@@ -65,7 +65,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit extends Mage_Adminhtm
 	 */
 	public function getHeaderText(){
 		if(Mage::registry('bannerslider_data') && Mage::registry('bannerslider_data')->getId())
-			return Mage::helper('campaign')->__("Edit Slider '%s'", $this->htmlEscape(Mage::registry('bannerslider_data')->getTitle()));
-		return Mage::helper('campaign')->__('Add Slider');
+			return Mage::helper('campaign')->__("Edit Banner '%s'", $this->htmlEscape(Mage::registry('bannerslider_data')->getTitle()));
+		return Mage::helper('campaign')->__('Create new Banner');
 	}
 }

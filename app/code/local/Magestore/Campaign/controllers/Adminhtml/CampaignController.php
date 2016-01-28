@@ -139,78 +139,49 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
 
                 /*get all added popups to this campaign*/
                 /*saving campaign_id top popups*/
-                $popupIds = array();
                 if(isset($data['popup_ids'])){
                     $popupIds = explode('&', $data['popup_ids']);
-                }
-                $popups = Mage::getModel('campaign/popup')->getCollection();
-                $popups->addFieldToFilter(array('campaign_id', 'popup_id'),
-                    array($model->getId(), array('in'=>$popupIds)));
-                //zend_debug::dump($popups->getSelectSql(true));die;
-                foreach($popups as $popup){
-                    if(in_array($popup->getId(), $popupIds)){
-                        $popup->setCampaignId($model->getId());//set campaign id
-                    }else{
-                        $popup->setCampaignId('');//set no campaign id (delete old)
+                    $popups = Mage::getModel('campaign/popup')->getCollection();
+                    $popups->addFieldToFilter(array('campaign_id', 'popup_id'),
+                        array($model->getId(), array('in'=>$popupIds)));
+                    foreach($popups as $popup){
+                        if(in_array($popup->getId(), $popupIds)){
+                            $popup->setCampaignId($model->getId());//set campaign id
+                        }else{
+                            $popup->setCampaignId('');//set no campaign id (delete old)
+                        }
+                        $popup->save();
                     }
-                    $popup->save();
                 }
-
 
                 /*get all added banner to this campaign*/
                 /*saving banner campaign_id*/
-                $banner_ids = array();
                 if(isset($data['banner_ids'])){
                     $banner_ids = explode('&', $data['banner_ids']);
-                }
-                $banners = Mage::getModel('campaign/bannerslider')->getCollection();
-                $banners->addFieldToFilter(array('campaign_id', 'bannerslider_id'),
-                    array($model->getId(), array('in'=>$banner_ids)));
-
-                foreach($banners as $banner){
-                    if(in_array($banner->getId(), $banner_ids)){
-                        $banner->setCampaignId($model->getId());//set campaign id to banners
-                    }else{
-                        $banner->setCampaignId('');//set no campaign id to banners
-                    }
-                    $banner->save();
-                }
-
-                /*zeus saving banner start time - end time follow campaign*/
-                $banner_ids = array();
-                if(isset($data['banner_ids'])){
-                    $banner_ids = explode('&', $data['banner_ids']);
-                }
-
-                $banners = Mage::getModel('campaign/bannerslider')->getCollection();
-                $banners->addFieldToFilter(array('campaign_id', 'bannerslider_id'),
-                    array($model->getId(), array('in'=>$banner_ids)));
-
-                foreach($banners as $banner){
-
-                    if(in_array($banner->getId(), $banner_ids)){
-
-                        $sub_banner = Mage::getModel('campaign/banner')->getCollection();
-                        $sub_banner->addFieldToFilter(array('banner_id', 'bannerslider_id'),
-                            array($banner->getId(), array('in'=>$banner_ids)));
-
-                        //-------------------
-
-                        foreach($sub_banner as $subbn){
-
-                            if(in_array($subbn->getBannersliderId(), $banner_ids)){
-
-                                $subbn->setStartTime($campaignData->getStartTime());
-                                $subbn->setEndTime($campaignData->getEndTime());
-                                $subbn->save();
+                    $banners = Mage::getModel('campaign/bannerslider')->getCollection();
+                    $banners->addFieldToFilter(array('campaign_id', 'bannerslider_id'),
+                        array($model->getId(), array('in'=>$banner_ids)));
+                    foreach($banners as $banner){
+                        if(in_array($banner->getId(), $banner_ids)){
+                            $banner->setCampaignId($model->getId());//set campaign id to banners
+                            $banner->setStartTime($campaignData->getStartTime());
+                            $banner->setEndTime($campaignData->getEndTime());
+                            $sub_banner = Mage::getModel('campaign/banner')->getCollection();
+                            $sub_banner->addFieldToFilter(array('banner_id', 'bannerslider_id'),
+                                array($banner->getId(), array('in'=>$banner_ids)));
+                            //set banner item limit time
+                            foreach($sub_banner as $subbn){
+                                if(in_array($subbn->getBannersliderId(), $banner_ids)){
+                                    $subbn->setStartTime($campaignData->getStartTime());
+                                    $subbn->setEndTime($campaignData->getEndTime());
+                                    $subbn->save();
+                                }
                             }
+                        }else{
+                            $banner->setCampaignId('');//set no campaign id to banners
                         }
-                        //----------------------
-
-                    }else{
-                        $banner_ids = explode('&', $data['banner_ids']);//set no campaign id to banners
+                        $banner->save();
                     }
-
                 }
 
                 /**
