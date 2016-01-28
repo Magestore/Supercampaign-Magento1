@@ -132,7 +132,6 @@ CREATE TABLE {$this->getTable('campaign/popup')} (
   `has_shadow` smallint(6) NULL default 0,
   `appear_effect` varchar(255) NULL default '',
   `custom_css` text NULL default '',
-  `multipopup` smallint(6) NULL default 0,
   `showing_frequency` varchar(255) NULL default '',
   `cookie_time` varchar(255) NULL default '',
   `max_time` varchar(255) NULL default '',

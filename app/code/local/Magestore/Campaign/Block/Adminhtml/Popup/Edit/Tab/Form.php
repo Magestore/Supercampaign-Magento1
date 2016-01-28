@@ -210,7 +210,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         if(!isset($data['categories'])){
             $data['categories'] = $categoryIds;
         }
-        $fieldset->addField('categories', 'text', array(
+        $categories = $fieldset->addField('categories', 'text', array(
             'label' => Mage::helper('campaign')->__('Categories Ids:'),
             'name' => 'categories',
             'after_element_html' => '<a id="category_link" href="javascript:void(0)" onclick="toggleMainCategories()"><img src="' . $this->getSkinUrl('images/rule_chooser_trigger.gif') . '" alt="" class="v-middle rule-chooser-trigger" title="Select Categories"></a>
@@ -329,6 +329,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                 ->addFieldMap($show_when->getHtmlId(), $show_when->getName())
                 ->addFieldMap($show_on_page->getHtmlId(), $show_on_page->getName())
                 ->addFieldMap($specified_url->getHtmlId(), $specified_url->getName())
+                ->addFieldMap($categories->getHtmlId(), $categories->getName())
                 ->addFieldMap($other_page->getHtmlId(), $other_page->getName())
                 ->addFieldMap($productidpage->getHtmlId(), $productidpage->getName())
                 ->addFieldMap($seconds_number0->getHtmlId(), $seconds_number0->getName())
@@ -341,6 +342,10 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                     $specified_url->getName(),
                     $show_on_page->getName(),
                     'specified_url'
+                )->addFieldDependence(
+                    $categories->getName(),
+                    $show_on_page->getName(),
+                    'category'
                 )->addFieldDependence(
                     $other_page->getName(),
                     $show_on_page->getName(),
