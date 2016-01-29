@@ -30,7 +30,7 @@ $installer->startSetup();
 
 
 $installer->run("
-
+/*
 DROP TABLE IF EXISTS {$this->getTable('campaign/popup_type_game_halloween')};
 
 CREATE TABLE {$this->getTable('campaign/popup_type_game_halloween')} (
@@ -47,8 +47,8 @@ CREATE TABLE {$this->getTable('campaign/popup_type_game_halloween')} (
   CONSTRAINT `popup_game_halloween` FOREIGN KEY (`popup_id`)
     REFERENCES {$this->getTable('campaign/popup')} (`popup_id`) ON UPDATE CASCADE ON DELETE CASCADE,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;*/
+/*
 DROP TABLE IF EXISTS {$this->getTable('campaign/popup_type_game_player')};
 
 CREATE TABLE {$this->getTable('campaign/popup_type_game_player')} (
@@ -60,11 +60,11 @@ CREATE TABLE {$this->getTable('campaign/popup_type_game_player')} (
   CONSTRAINT `popup_game_player_refer_maillist` FOREIGN KEY (`id`)
     REFERENCES {$this->getTable('campaign/maillist')} (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;*/
 
 ");
 
-
+/*
 $template = array(
     array(
         'title' => 'Game Halloween',
@@ -146,7 +146,7 @@ foreach($template as $row){
     Mage::getModel('campaign/template')
         ->setData($row)
         ->save();
-}
+}*/
 
 $installer->endSetup();
 

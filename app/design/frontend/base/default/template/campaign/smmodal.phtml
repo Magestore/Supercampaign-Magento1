@@ -1,0 +1,78 @@
+<!--campaign/smmodal.phtml-->
+
+<?php
+$helper = Mage::helper('campaign');
+$popups = $this->getAllPopupAvailable();
+?>
+<?php foreach ($popups as $key => $popup): ?>
+    <?php
+    //check device
+    $devices = $this->getDevices();
+    $userlogin = $this->getUserlogin();
+    $customergroup = $this->getCustomerGroup();
+   //var_dump($devices); //die('34343');
+
+    $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
+    $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
+    $stylepopup = Mage::helper('campaign')->checkStylepopup();
+    ?>
+    <div id="sc-popup<?php echo $popup->getData('popup_id') ?>"
+         class="modal fade sc-popup<?php echo $popup->getData('template_code') ?>" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <a id="close-<?php echo $popup->getData('popup_id') ?>" class="dialogClose style1 overlay2"
+                   data-dismiss="modal"
+                   data-target="#sc-popup<?php echo $popup->getData('popup_id') ?>"></a>
+                <div class="content-popup"><?php echo $helper->convertContentToHtml($popup->getData('popup_content')); ?></div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<script type="text/javascript">
+    var dataPopup = [
+        <?php $count = 0; $total = count($popups) ?>
+        <?php foreach ($popups as $key => $popup): ?>
+        <?php echo json_encode($popup->getData()) ?>
+        <?php if ($count < $total - 1) echo ', ' ?>
+        <?php $count++; ?>
+        <?php endforeach; ?>
+    ];
+    var Popups = [];
+    for (var id = 0; id < dataPopup.length; id++) {
+        var Popup = new Scpopup();
+        Popup.idPopup = dataPopup[id].popup_id;
+        Popup.templateCode = dataPopup[id].template_code;
+        Popup.effect = dataPopup[id].appear_effect;
+        Popup.borderSize = dataPopup[id].border_size;
+        Popup.borderColor = dataPopup[id].border_color;
+        Popup.paddingSize = dataPopup[id].padding;
+        Popup.width = dataPopup[id].width;
+        Popup.bgColor = dataPopup[id].popup_background;
+        Popup.overlayColor = dataPopup[id].overlay_color;
+        Popup.closeStyle = dataPopup[id].close_style;
+        Popup.cornerRadius = dataPopup[id].corner_style;
+        Popup.horizontalPosition = dataPopup[id].horizontal_position;
+        Popup.verticalPosition = dataPopup[id].vertical_position;
+        Popup.horizontalPx = dataPopup[id].horizontal_px;
+        Popup.verticalPx = dataPopup[id].vertical_px;
+        Popup.secondDelay = dataPopup[id].seconds_delay;
+        Popup.showWhen = dataPopup[id].show_when;
+        Popup.status = dataPopup[id].status;
+        Popup.priority = id;
+        Popup.urlImages = "<?php echo $this->getBaseUrl();?>" + "skin/frontend/base/default/";
+        Popups[id] = Popup;
+    }
+    $j(window).bind("load", function () {
+
+        for (var i = Popups.length - 1; i >= 0; i--) {
+            Popups[i].showPopup();
+            /*Popups[i].onClose(function (_priority) {
+                if (Popups[_priority - 1]) {
+                    Popups[_priority - 1].showPopup();
+                }
+            });*/
+
+        }
+    });
+</script>
+

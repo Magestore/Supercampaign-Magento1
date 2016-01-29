@@ -30,6 +30,6 @@ class Magestore_Campaign_Model_Resource_Template extends Mage_Core_Model_Mysql4_
 {
     public function _construct()
     {
-        $this->_init('campaign/template', 'id');
+        $this->_init('campaign/template', 'template_id');
     }
 }

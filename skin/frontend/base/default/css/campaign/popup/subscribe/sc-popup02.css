@@ -1,0 +1,50 @@
+.sc-popup2 form {
+    /*height: 38px;*/
+    width:55%;
+}
+
+.sc-popup2 form input {
+    font-size: 22px;
+    text-align:center;
+    padding-left:10px;
+    margin-bottom:10px;
+    height:47px;
+    background-color:#ffffff;
+    box-shadow:2px 2px 5px #d5d5d4 inset;
+    border:none;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -o-border-radius: 1px;
+    -ms-border-radius: 1px;
+    -khtml-border-radius: 1px;
+    border-radius: 1px;
+    box-sizing:border-box;
+    width:100%;
+}
+
+.sc-popup2 form button {
+    box-sizing:border-box;
+    border:none;
+    outline: none;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 17px 45px;
+    font-size: 28px;
+    line-height: 1;
+    text-align:center;
+    text-shadow:0 -1px 0 rgba(0, 0, 0, 0.31);
+    /* height: 38px;*/
+    background-image:none;
+    background-color:#ff1176;
+    text-decoration:none;
+    display:inline-block;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -o-border-radius: 1px;
+    -ms-border-radius: 1px;
+    -khtml-border-radius: 1px;
+    border-radius: 1px;
+    color:#FFFFFF;
+    position:relative;
+    width: 100%;
+}

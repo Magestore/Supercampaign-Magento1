@@ -1,0 +1,18 @@
+.sc-popup8 table {
+    border-spacing: 0 !important;
+}
+
+.sc-popup8 .modal-dialog {
+    position: fixed;
+    left: 50%;
+    margin-left: -412px;
+    bottom: -18px;
+}
+
+.sc-popup8 .modal-dialog .modal-content {
+    padding: 20px 20px 30px;
+    width:300px
+}
+.promotion .modal-backdrop{display:none}
+.promotion .dialogClose{background: url(../../../../images/campaign/popup/close_promotion.png) no-repeat 4px 4px;top:0;right: 0; }
+.promotion .dialogClose:hover{background-position:4px -17px;}

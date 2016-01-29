@@ -33,7 +33,12 @@ class Magestore_Campaign_TestController extends Mage_Core_Controller_Front_Actio
      */
     public function TestAction()
     {
-        $this->loadLayout();
-        $this->renderLayout();
+        //$this->loadLayout();
+
+        //$this->renderLayout();
+
+        Zend_debug::dump($this->getLayout()->createBlock('campaign/popup')->setTemplate('campaign/popup/subscribe/template10.phtml')->toHtml());
+
     }
+
 }

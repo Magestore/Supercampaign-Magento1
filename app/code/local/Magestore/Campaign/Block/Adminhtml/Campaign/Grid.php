@@ -75,13 +75,13 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Grid extends Mage_Adminhtml_Bl
             'index'     => 'description',
         ));
 
-        $this->addColumn('store', array(
+        /*$this->addColumn('store', array(
             'header'    => Mage::helper('campaign')->__('Store'),
             'align'     => 'left',
             'width'     => '100px',
             'index'     => 'store',
             'type'        => 'store'
-        ));
+        ));*/
 
         $this->addColumn('start_time', array(
             'header'    => Mage::helper('campaign')->__('Start Time'),
@@ -112,10 +112,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Grid extends Mage_Adminhtml_Bl
             'width'     => '80px',
             'index'     => 'status',
             'type'        => 'options',
-            'options'     => array(
-                1 => 'Enabled',
-                0 => 'Disabled',
-            ),
+            'options'     => Magestore_Campaign_Model_Status::getOptionArray(),
         ));
 
         $this->addColumn('action',

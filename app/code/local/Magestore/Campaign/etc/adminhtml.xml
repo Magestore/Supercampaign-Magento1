@@ -31,21 +31,26 @@
                     <sort_order>0</sort_order>
                     <action>campaignadmin/adminhtml_campaign</action>
                 </campaign>
-                <widget module="campaign" translate="title">
+                <!--<widget module="campaign" translate="title">
                     <title>Manage Widget</title>
                     <sort_order>5</sort_order>
                     <action>campaignadmin/adminhtml_widget</action>
-                </widget>
-                <banner module="campaign" translate="title">
-                    <title>Manage Banner</title>
+                </widget>-->
+                <popup module="campaign" translate="title">
+                    <title>Manage Popup</title>
+                    <sort_order>10</sort_order>
+                    <action>campaignadmin/adminhtml_popup</action>
+                </popup>
+                <bannerslider module="campaign" translate="title">
+                    <title>Manage Banners</title>
                     <sort_order>15</sort_order>
-                    <action>campaignadmin/adminhtml_banner</action>
-                </banner>
-                <maillist module="campaign" translate="title">
+                    <action>campaignadmin/adminhtml_bannerslider</action>
+                </bannerslider>
+                <!--<maillist module="campaign" translate="title">
                     <title>Email Campaign</title>
                     <sort_order>20</sort_order>
                     <action>campaignadmin/adminhtml_maillist</action>
-                </maillist>
+                </maillist>-->
                 <settings module="campaign" translate="title">
                     <title>Settings</title>
                     <sort_order>1000</sort_order>
@@ -85,10 +90,18 @@
                                 <title>Manage Widget</title>
                                 <sort_order>5</sort_order>
                             </widget>
-                            <maillist module="campaign" translate="title">
-                                <title>Email Campaign</title>
+                            <popup module="campaign" translate="title">
+                                <title>Manage Popup</title>
                                 <sort_order>10</sort_order>
-                            </maillist>
+                            </popup>
+                            <bannerslider module="campaign" translate="title">
+                                <title>Manage Banners</title>
+                                <sort_order>15</sort_order>
+                            </bannerslider>
+                            <!--<maillist module="campaign" translate="title">
+                                <title>Email Campaign</title>
+                                <sort_order>20</sort_order>
+                            </maillist>-->
                             <settings module="campaign" translate="title">
                                 <title>Settings</title>
                                 <sort_order>1000</sort_order>

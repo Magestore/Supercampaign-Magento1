@@ -29,9 +29,6 @@
 class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
 {
     public function _construct(){
-        if($this->getPopup()){
-            $this->setBlockType($this->getPopup()->getBlockType());
-        }
         return parent::_construct();
     }
 
@@ -43,57 +40,50 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
     public function _prepareLayout()
     {
         parent::_prepareLayout();
-        $this->setTemplate('campaign/popup.phtml');
         return $this;
     }
 
-    /*protected function _toHtml(){
 
-    }*/
-
-    public function getPopHtml(){
-        $block = $this->getBlockType();
-        if($block){
-            $blockObject = $this->getLayout()->createBlock($block);
-            if($blockObject){
-                return $blockObject->toHtml();
-            }
+    /**
+     * get single popup, first item
+     * @return mixed
+     */
+    public function getAllDataPopupActive(){
+        $pops = $this->getAllPopupAvailable();
+        foreach($pops as $pop){
+            return $pop;
         }
-        return '';
     }
 
     /**
-     * get Popup model by search available
-     * @return object | bool
+     * get all popup through all campaigns
+     * @return mixed
      */
-    public function getPopup()
-    {
-        if (!is_object($this->_popup)) {
-            if(Mage::registry('campaign_popup')){
-                $this->_popup = Mage::registry('campaign_popup');
-            }else{
-                $pop = $this->getAvailable();
-                if(is_object($pop)){
-                    $this->_popup = $pop;
-                    if($this->_popup->getId() == null){
-                        return false;
-                    }
-                }else{
-                    return false;
-                }
-            }
-            if(!Mage::registry('campaign_popup')){
-                Mage::register('campaign_popup', $this->_popup);
-            }
-        }
-        return $this->_popup;
+    public function getAllPopupAvailable(){
+        return Mage::getModel('campaign/supercampaign')->getPopups();
     }
 
     /**
-     * get popup has accepted by includes - excludes and is active
-     * @return array
+     * get all popup through all campaigns
+     * @return mixed
      */
-    public function getAvailable(){
-        return Mage::getModel('campaign/popup')->getAvailable();
+    public function getDevices(){
+        return Mage::getModel('campaign/popup')->checkDevices();
+    }
+
+    /**
+     * show all popup for login user
+     * @return mixed
+     */
+    public function getUserlogin(){
+        return Mage::getModel('campaign/popup')->checkUserLogin();
+    }
+
+    /**
+     * show all popup for customer group user
+     * @return mixed
+     */
+    public function getCustomerGroup(){
+        return Mage::getModel('campaign/popup')->checkCustomerGroup();
     }
 }

@@ -30,9 +30,9 @@ $installer->startSetup();
 
 
 $installer->run("
-
+/*
 ALTER TABLE {$this->getTable('campaign/countdown')}
-    MODIFY COLUMN `product_id` text NOT NULL default '';
+    MODIFY COLUMN `product_id` text NOT NULL default '';*/
 
 ");
 

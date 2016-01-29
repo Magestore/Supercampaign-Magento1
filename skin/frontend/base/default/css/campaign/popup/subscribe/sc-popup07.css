@@ -1,0 +1,19 @@
+.popupButton{
+    border: 1px solid;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.19);
+    border-color: #e1c000 #e1c000 #b49300 #cdac00;
+    background-color: #ffde00;
+    background-image: -webkit-linear-gradient(top, #ffde00 0%, #e1c000 100%);
+    background-image: -moz-linear-gradient(top, #ffde00 0%, #e1c000 100%);
+    background-image: -ms-linear-gradient(top, #ffde00 0%, #e1c000 100%);
+    background-image: -o-linear-gradient(top, #ffde00 0%, #e1c000 100%);
+    background-image: linear-gradient(top, #ffde00 0%, #e1c000 100%);
+    color:#000000;
+    padding: 5px;
+}
+.sc-popup7 .modal-content{border:2px solid #FFFFFF;;padding:10px;}
+.sc-popup7 .modal-content{border-radius: 16px; -webkit-border-radius:16px; -moz-border-radius: 16px; -o-border-radius: 16px;}
+.sc-popup7 .modal-content{background-color: #26292a;}
+.sc-popup7 table{border-spacing:0 !important;}
+.sc-popup7 .modal-dialog{position:fixed;left:50%;margin-left:-412px;bottom:-18px;}

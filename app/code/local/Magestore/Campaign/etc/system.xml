@@ -46,6 +46,28 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
+                        <enable translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </enable>
+                        <frontend_showmutil_popup translate="label">
+                            <label>Show mutil poup</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>2</sort_order>
+                            <source_model>campaign/configmutil</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </frontend_showmutil_popup>
+                    </fields>
+                    <!--<fields>
                         <info translate="label">
                             <label></label>
                             <frontend_type>label</frontend_type>
@@ -55,7 +77,7 @@
                             <show_in_store>1</show_in_store>
                             <comment><![CDATA[Super Campaign is very good for your marketing.]]></comment>
                         </info>
-                        <!--<enable translate="label">
+                        <enable translate="label">
                             <label>Enable</label>
                             <frontend_type>select</frontend_type>
                             <sort_order>1</sort_order>
@@ -64,7 +86,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <comment></comment>
-                        </enable>-->
+                        </enable>
                         <mc_list translate="label">
                             <label>Mailchimp List</label>
                             <frontend_type>select</frontend_type>
@@ -77,7 +99,7 @@
                             <comment><![CDATA[Select mailchimp list. You must install <a target="_blank" href="http://www.magentocommerce.com/magento-connect/ebizmarts-magemonkey-official-mailchimp-and-mandrill-extension.html">Ebizmarts_MageMonkey</a> extension.
                             <p>We will push these data FNAME, CAMPAIGN, COUPON, DATE_START, DATE_EXP, USED</p>]]></comment>
                         </mc_list>
-                    </fields>
+                    </fields>-->
                 </general>
 
                 <email translate="label">
