@@ -165,7 +165,6 @@ var Scpopup = function () {
         var padding = this.paddingSize;
         var width = this.width;
         var bgContentColor = this.bgColor;
-        var heightcontent;
         var cssHead, cssBColor, cssBRadius, cssBSize, cssPadding, cssWidth;
         if (bColor != "") {
             cssBColor = "border-color:#" + bColor + ";";
@@ -183,12 +182,11 @@ var Scpopup = function () {
                     break;
                 case 'circle':
                     cssBRadius = "#sc-popup" + this.idPopup + " .modal-content{border-radius:50%;}";
-                    cssBRadius = cssBRadius + "#sc-popup" + this.idPopup + " .modal-content{height:" + width + "px;} #sc-popup" + this.idPopup + " .modal-content .content-popup{overflow:hidden;height:100%;width:100%;border-radius:50%}";
+                    cssBRadius = cssBRadius + " #sc-popup" + this.idPopup + " .modal-content{height:" + width + "px;} #sc-popup" + this.idPopup + " .modal-content .content-popup{overflow:hidden;height:100%;width:100%;border-radius:50%}";
                     break;
+                default:
+                    cssBRadius = "#sc-popup" + this.idPopup + " .modal-content{border-radius:0px;}";
             }
-        }
-        else {
-            cssBRadius = "";
         }
         if (padding != "") {
             cssPadding = "padding:" + padding + "px;";
@@ -211,11 +209,10 @@ var Scpopup = function () {
                 } else if (this.overlayColor == 'dark') {
                     cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_white.png) no-repeat 5px 5px}";
                 } else {
-                    cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_promotion.png) no-repeat 5px -20px;top:5px;right:5px;}";
+                    cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_dark.png) no-repeat 5px 0;top:5px;right:5px;}";
                 }
                 break;
             case 'simple':
-
                 cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_promotion.png) no-repeat 5px -20px}";
                 break;
             case 'none':
