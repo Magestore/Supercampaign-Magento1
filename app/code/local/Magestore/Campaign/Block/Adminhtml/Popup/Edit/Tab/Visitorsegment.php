@@ -66,26 +66,22 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
             ),
         ));
 
-        $fieldset->addField('login_user', 'multiselect', array(
+        $fieldset->addField('login_user', 'select', array(
             'label'		=> Mage::helper('campaign')->__('User Login:'),
             'name'		=> 'login_user',
             'note'      => "Show popup when user login.",
             'values' => array(
                 array(
-                    'value' => 'registed',
-                    'label' => Mage::helper('campaign')->__('Mutil Registed'),
+                    'value' => 'all_user',
+                    'label' => Mage::helper('campaign')->__('All User'),
                 ),
                 array(
-                    'value' => 'login',
-                    'label' => Mage::helper('campaign')->__('Login'),
+                    'value' => 'registed_loged',
+                    'label' => Mage::helper('campaign')->__('Registed and Loged User'),
                 ),
                 array(
-                    'value' => 'logout',
-                    'label' => Mage::helper('campaign')->__('Unloged'),
-                ),
-                array(
-                    'value' => 'not_register',
-                    'label' => Mage::helper('campaign')->__('Unregistered'),
+                    'value' => 'logout_not_register',
+                    'label' => Mage::helper('campaign')->__('Unloged and Unregister'),
                 ),
             ),
         ));
@@ -132,7 +128,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
                     'label' => Mage::helper('campaign')->__('Not loged in'),
                 ),
                 array(
-                    'value' => 'general',
+                    'value' => 'General',
                     'label' => Mage::helper('campaign')->__('General'),
                 ),
                 array(
