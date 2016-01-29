@@ -41,7 +41,7 @@
           <!--<block type="campaign/popup" name="popup-campaign" template="campaign/popupmodal.phtml"/>-->
           <block type="campaign/popup" name="popup-campaign" />
           <!--<block type="campaign/sidebar" name="sidebar-campaign" template="campaign/sidebarleft.phtml"/>-->
-          <block type="campaign/bannerslider" name="page.bottom" >
+          <block type="campaign/bannerslider" name="page.bottom.campaign" >
               <action method="setBlockPosition">
                   <block_position>page-bottom</block_position>
               </action>
@@ -51,31 +51,31 @@
 
       <!--zeus banner slider add-->
         <reference name="right">
-            <block type="campaign/bannerslider" name="sidebar.right.top" before="-">
+            <block type="campaign/bannerslider" name="sidebar.right.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>sidebar-right-top</block_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="sidebar.right.bottom">
+            <block type="campaign/bannerslider" name="sidebar.right.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>sidebar-right-bottom</block_position>
                 </action>
             </block>
         </reference>
         <reference name="left">
-            <block type="campaign/bannerslider" name="sidebar.left.top" before="-">
+            <block type="campaign/bannerslider" name="sidebar.left.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>sidebar-left-top</block_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="sidebar.left.bottom">
+            <block type="campaign/bannerslider" name="sidebar.left.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>sidebar-left-bottom</block_position>
                 </action>
             </block>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>content-top</block_position>
                 </action>
@@ -85,12 +85,12 @@
             </block>
         </reference>
         <reference name="top.menu">
-            <block type="campaign/bannerslider" name="menu.top" before="-">
+            <block type="campaign/bannerslider" name="menu.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>menu-top</block_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="menu.bottom">
+            <block type="campaign/bannerslider" name="menu.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>menu-bottom</block_position>
                 </action>
@@ -118,7 +118,7 @@
     <!-- homepage -->
     <cms_index_index>
         <reference name="content">
-            <block type="campaign/bannerslider" name="cms.page.content.top" before="-">
+            <block type="campaign/bannerslider" name="cms.page.content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>cms-page-content-top</block_position>
                 </action>
@@ -148,14 +148,14 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>customer-content-top</block_position>
                 </action>
             </block>
         </reference>
         <reference name="left">
-            <block type="campaign/bannerslider" name="sidebar.left.bottom">
+            <block type="campaign/bannerslider" name="sidebar.left.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>sidebar-left-bottom</block_position>
                 </action>
@@ -167,7 +167,7 @@
             <action method="unsetChild">
                 <name>content.top</name>
             </action>
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>customer-content-top</block_position>
                 </action>
@@ -187,12 +187,12 @@
             </action>
         </reference>
         <reference name="right">
-            <block type="campaign/bannerslider" name="sidebar.right.top" before="-">
+            <block type="campaign/bannerslider" name="sidebar.right.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>sidebar-right-top</block_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="sidebar.right.bottom">
+            <block type="campaign/bannerslider" name="sidebar.right.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>sidebar-right-bottom</block_position>
                 </action>
@@ -201,7 +201,7 @@
     </catalog_product_view>
     <catalog_category_default>
         <reference name="right">
-            <block type="campaign/bannerslider" name="catalog.sidebar.right.top" before="-">
+            <block type="campaign/bannerslider" name="catalog.sidebar.right.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>catalog-sidebar-right-top</block_position>
                 </action>
@@ -209,7 +209,7 @@
                     <cateblock_position>category-sidebar-right-top</cateblock_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="catalog.sidebar.right.bottom">
+            <block type="campaign/bannerslider" name="catalog.sidebar.right.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>catalog-sidebar-right-bottom</block_position>
                 </action>
@@ -219,7 +219,7 @@
             </block>
         </reference>
         <reference name="left">
-            <block type="campaign/bannerslider" name="catalog.sidebar.left.top" before="-">
+            <block type="campaign/bannerslider" name="catalog.sidebar.left.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>catalog-sidebar-left-top</block_position>
                 </action>
@@ -227,7 +227,7 @@
                     <cateblock_position>category-sidebar-left-top</cateblock_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="catalog.sidebar.left.bottom">
+            <block type="campaign/bannerslider" name="catalog.sidebar.left.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>catalog-sidebar-left-bottom</block_position>
                 </action>
@@ -237,7 +237,7 @@
             </block>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="catalog.content.top" before="-">
+            <block type="campaign/bannerslider" name="catalog.content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>catalog-content-top</block_position>
                 </action>
@@ -247,7 +247,7 @@
             </block>
         </reference>
         <reference name="top.menu">
-            <block type="campaign/bannerslider" name="catalog.menu.top" before="-">
+            <block type="campaign/bannerslider" name="catalog.menu.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>catalog-menu-top</block_position>
                 </action>
@@ -255,7 +255,7 @@
                     <cateblock_position>category-menu-top</cateblock_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="catalog.menu.bottom">
+            <block type="campaign/bannerslider" name="catalog.menu.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>catalog-menu-bottom</block_position>
                 </action>
@@ -265,7 +265,7 @@
             </block>
         </reference>
         <reference name="before_body_end" >
-            <block type="campaign/bannerslider" name="catalog.page.bottom" >
+            <block type="campaign/bannerslider" name="catalog.page.bottom.campaign" >
                 <action method="setBlockPosition">
                     <block_position>catalog-page-bottom</block_position>
                 </action>
@@ -277,7 +277,7 @@
     </catalog_category_default>
     <catalog_category_layered>
         <reference name="right">
-            <block type="campaign/bannerslider" name="catalog.sidebar.right.top" before="-">
+            <block type="campaign/bannerslider" name="catalog.sidebar.right.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>catalog-sidebar-right-top</block_position>
                 </action>
@@ -285,7 +285,7 @@
                     <cateblock_position>category-sidebar-right-top</cateblock_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="catalog.sidebar.right.bottom">
+            <block type="campaign/bannerslider" name="catalog.sidebar.right.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>catalog-sidebar-right-bottom</block_position>
                 </action>
@@ -295,7 +295,7 @@
             </block>
         </reference>
         <reference name="left">
-            <block type="campaign/bannerslider" name="catalog.sidebar.left.top" before="-">
+            <block type="campaign/bannerslider" name="catalog.sidebar.left.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>catalog-sidebar-left-top</block_position>
                 </action>
@@ -303,7 +303,7 @@
                     <cateblock_position>category-sidebar-left-top</cateblock_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="catalog.sidebar.left.bottom">
+            <block type="campaign/bannerslider" name="catalog.sidebar.left.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>catalog-sidebar-left-bottom</block_position>
                 </action>
@@ -313,7 +313,7 @@
             </block>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="catalog.content.top" before="-">
+            <block type="campaign/bannerslider" name="catalog.content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>catalog-content-top</block_position>
                 </action>
@@ -323,7 +323,7 @@
             </block>
         </reference>
         <reference name="top.menu">
-            <block type="campaign/bannerslider" name="catalog.menu.top" before="-">
+            <block type="campaign/bannerslider" name="catalog.menu.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>catalog-menu-top</block_position>
                 </action>
@@ -331,7 +331,7 @@
                     <cateblock_position>category-menu-top</cateblock_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="catalog.menu.bottom">
+            <block type="campaign/bannerslider" name="catalog.menu.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>catalog-menu-bottom</block_position>
                 </action>
@@ -341,7 +341,7 @@
             </block>
         </reference>
         <reference name="before_body_end" >
-            <block type="campaign/bannerslider" name="catalog.page.bottom" >
+            <block type="campaign/bannerslider" name="catalog.page.bottom.campaign" >
                 <action method="setBlockPosition">
                     <block_position>catalog-page-bottom</block_position>
                 </action>
@@ -353,100 +353,100 @@
     </catalog_category_layered>
     <catalog_product_view>
         <reference name="right">
-            <block type="campaign/bannerslider" name="catalog.sidebar.right.top" before="-">
+            <block type="campaign/bannerslider" name="catalog.sidebar.right.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>catalog-sidebar-right-top</block_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="catalog.sidebar.right.bottom">
+            <block type="campaign/bannerslider" name="catalog.sidebar.right.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>catalog-sidebar-right-bottom</block_position>
                 </action>
             </block>
         </reference>
         <reference name="left">
-            <block type="campaign/bannerslider" name="catalog.sidebar.left.top" before="-">
+            <block type="campaign/bannerslider" name="catalog.sidebar.left.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>catalog-sidebar-left-top</block_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="catalog.sidebar.left.bottom">
+            <block type="campaign/bannerslider" name="catalog.sidebar.left.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>catalog-sidebar-left-bottom</block_position>
                 </action>
             </block>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="catalog.content.top" before="-">
+            <block type="campaign/bannerslider" name="catalog.content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>catalog-content-top</block_position>
                 </action>
             </block>
         </reference>
         <reference name="top.menu">
-            <block type="campaign/bannerslider" name="catalog.menu.top" before="-">
+            <block type="campaign/bannerslider" name="catalog.menu.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>catalog-menu-top</block_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="catalog.menu.bottom">
+            <block type="campaign/bannerslider" name="catalog.menu.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>catalog-menu-bottom</block_position>
                 </action>
             </block>
         </reference>
         <reference name="before_body_end" >
-            <block type="campaign/bannerslider" name="catalog.page.bottom" >
+            <block type="campaign/bannerslider" name="catalog.page.bottom.campaign" >
                 <action method="setBlockPosition">
                     <block_position>catalog-page-bottom</block_position>
                 </action>
             </block>
         </reference>
         <reference name="right">
-            <block type="campaign/bannerslider" name="product.sidebar.right.top" before="-">
+            <block type="campaign/bannerslider" name="product.sidebar.right.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>product-sidebar-right-top</block_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="product.sidebar.right.bottom">
+            <block type="campaign/bannerslider" name="product.sidebar.right.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>product-sidebar-right-bottom</block_position>
                 </action>
             </block>
         </reference>
         <reference name="left">
-            <block type="campaign/bannerslider" name="product.sidebar.left.top" before="-">
+            <block type="campaign/bannerslider" name="product.sidebar.left.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>product-sidebar-left-top</block_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="product.sidebar.left.bottom">
+            <block type="campaign/bannerslider" name="product.sidebar.left.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>product-sidebar-left-bottom</block_position>
                 </action>
             </block>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="product.content.top" before="-">
+            <block type="campaign/bannerslider" name="product.content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>product-content-top</block_position>
                 </action>
             </block>
         </reference>
         <reference name="top.menu">
-            <block type="campaign/bannerslider" name="product.menu.top" before="-">
+            <block type="campaign/bannerslider" name="product.menu.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>product-menu-top</block_position>
                 </action>
             </block>
-            <block type="campaign/bannerslider" name="product.menu.bottom">
+            <block type="campaign/bannerslider" name="product.menu.bottom.campaign">
                 <action method="setBlockPosition">
                     <block_position>product-menu-bottom</block_position>
                 </action>
             </block>
         </reference>
         <reference name="before_body_end" >
-            <block type="campaign/bannerslider" name="product.page.bottom" >
+            <block type="campaign/bannerslider" name="product.page.bottom.campaign" >
                 <action method="setBlockPosition">
                     <block_position>product-page-bottom</block_position>
                 </action>
@@ -463,7 +463,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>cart-content-top</block_position>
                 </action>
@@ -477,7 +477,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -491,7 +491,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -505,7 +505,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -519,7 +519,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -533,7 +533,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -547,7 +547,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -561,7 +561,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -575,7 +575,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -589,7 +589,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -603,7 +603,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -617,7 +617,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -631,7 +631,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -645,7 +645,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -659,7 +659,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -673,7 +673,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -687,7 +687,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -701,7 +701,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -715,7 +715,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -729,7 +729,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -743,7 +743,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -757,7 +757,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -771,7 +771,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -785,7 +785,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>
@@ -799,7 +799,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="campaign/bannerslider" name="content.top" before="-">
+            <block type="campaign/bannerslider" name="content.top.campaign" before="-">
                 <action method="setBlockPosition">
                     <block_position>checkout-content-top</block_position>
                 </action>

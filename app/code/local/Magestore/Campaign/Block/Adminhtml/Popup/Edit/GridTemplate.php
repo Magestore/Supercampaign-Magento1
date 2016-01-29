@@ -46,12 +46,12 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_GridTemplate extends Mage_Ad
 			'index'	 => 'template_id',
 			'renderer'	=> 'Magestore_Campaign_Block_Adminhtml_Renderer_Action',
 			'values'	=> array(
-				array(
-					'caption' => Mage::helper('campaign')->__('Preview'),
-					//'url' => array('*/*/newfromtemplate', array('template_id'=>999)),
-					'name' => 'template_id',
-					'onclick' => "alert('Comming soon!')",
-				),
+//				array(
+//					'caption' => Mage::helper('campaign')->__('Preview'),
+//					//'url' => array('*/*/newfromtemplate', array('template_id'=>999)),
+//					'name' => 'template_id',
+//					'onclick' => "alert('Comming soon!')",
+//				),
 				array(
 					'caption' => Mage::helper('campaign')->__('Apply'),
 					//'url' => array('http://www.magestore.com/', array('id'=>'666')),

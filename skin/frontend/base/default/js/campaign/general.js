@@ -27,36 +27,36 @@ var Scpopup = function () {
     this.status = false;
     this.idClose = "";
     this.priority = "";
-    //this.Scpopup = function(){return this;};
 
     this.runEffect = function () {
         var effectPopup = this.effect;
         switch (effectPopup) {
-            case 0:
+            case '0':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top');
                 break;
-            case 1:
+            case '1':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('left');
                 break;
-            case 2:
+            case '2':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('right');
                 break;
-            case 3:
+            case '3':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom');
                 break;
-            case 4:
+            case '4':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top-left');
                 break;
-            case 5:
+            case '5':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top-right');
                 break;
-            case 6:
+            case '6':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom-left');
                 break;
-            case 7:
+            case '7':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom-right');
                 break;
         }
+        return "";
     };
     this.showPosition = function () {
         var hzposition = this.horizontalPosition;
@@ -136,25 +136,25 @@ var Scpopup = function () {
         var cssHead = "";
         switch (overlay) {
             case "white":
-                cssHead = ".modal-open{overflow:auto;top:0;left:0;right:0;left:0}";
+                cssHead = ".modal-open{top:0;left:0;right:0;left:0}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal{top:0;left:0;right:0;bottom:0;position:fixed;}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal-backdrop{background-color:#fff}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal-dialog{width:" + widthPopup + "px}";
                 break;
             case "dark":
-                cssHead = ".modal-open{overflow:auto;top:0;left:0;right:0;left:0}";
+                cssHead = ".modal-open{top:0;left:0;right:0;left:0}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal{top:0;left:0;right:0;bottom:0;position:fixed;}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal-backdrop{background-color:#000}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal-dialog{width:" + widthPopup + "px}";
                 break;
             case 'no_bg_fix_popup':
-                cssHead = ".modal-open{overflow:auto}";
+                cssHead = ".modal-open{overflow:auto;padding-right:0}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal{position:fixed}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal-backdrop{display:none}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal-dialog{margin:0;width:" + widthPopup + "px}";
                 break;
             case 'no_bg_absoulute_popup':
-                cssHead = ".modal-open{overflow:auto}";
+                cssHead = ".modal-open{overflow:auto;padding-right:0}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal{position:absolute}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal-backdrop{display:none}";
                 cssHead = cssHead + ".sc-popup" + tpcode + " .modal-dialog{margin:0;width:" + widthPopup + "px}";
@@ -180,7 +180,7 @@ var Scpopup = function () {
         if (bRadius != "") {
             switch (bRadius) {
                 case 'rounded':
-                    cssBRadius = "border-radius:" + this.borderSize + "px;";
+                    cssBRadius = "border-radius:" + this.cornerRadius + "px;";
                     break;
                 case 'sharp':
                     cssBRadius = "border-radius:0px;";
@@ -202,7 +202,7 @@ var Scpopup = function () {
         if (bgContentColor != "") {
             var cssbgContentColor = "background:#" + bgContentColor + ";";
         }
-        cssHead = ".sc-popup" + tcode + " .modal-content{" + cssBColor + cssBRadius + cssBSize + cssPadding + cssWidth + cssbgContentColor + "}";
+        cssHead = "#sc-popup" + this.idPopup + " .modal-content{" + cssBColor + cssBRadius + cssBSize + cssPadding + cssWidth + cssbgContentColor + "}";
         return cssHead;
     };
     this.showCloseIcon = function () {
