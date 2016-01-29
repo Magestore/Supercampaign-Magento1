@@ -196,21 +196,31 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     }
 
     public function checkUserLogin(){
+        $user = $this->getLoginUser();
+        if($user != ''){
+            //if all user
+            if($user == 'all_user'){
+                return true;
+            }else{
+                //if registed or loged
+                $login = Mage::getSingleton('customer/session')->isLoggedIn(); //Check if User is Logged In
+                if($user == 'registed_loged'){
+                    if($login){
+                        return true;
+                    }
+                }
+                //if register or logout
+                if($user == 'logout_not_register'){
+                    if($login == false){
+                        return true;
+                    }
+                }
+            }
 
-//        $user = $this->getLoginUser();
-//        if($user != ''){
-//            //check session
-//            $login = Mage::getSingleton('customer/session')->isLoggedIn(); //Check if User is Logged In
-//            if($login)
-//            {
-//
-//            }
-//        }else{
-//            return false;
-//        }
-//        zend_debug::dump($sub_case); die('userkkk');
-//        return $sub_case;
-        return true;
+            return false;
+        }else{
+            return false;
+        }
     }
 
     /**
