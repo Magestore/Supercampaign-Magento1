@@ -57,6 +57,33 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
         }
     }
 
+    public function chooserMainCategoriesAction() {
+        $request = $this->getRequest();
+        $ids = $request->getParam('selected', array());
+
+        if (is_array($ids)) {
+            foreach ($ids as $key => &$id) {
+                $id = (int) $id;
+                if ($id <= 0) {
+                    unset($ids[$key]);
+                }
+            }
+
+            $ids = array_unique($ids);
+        } else {
+            $ids = array();
+        }
+
+        $block = $this->getLayout()->createBlock('campaign/adminhtml_popup_edit_tab_content_maincontent_categories','maincontent_category', array('js_form_object' => $request->getParam('form')))
+            ->setCategoryIds($ids)
+        ;
+
+        if ($block) {
+            $this->getResponse()->setBody($block->toHtml());
+        }
+    }
+
+
     public function saveAction() {
         if ($data = $this->getRequest()->getPost()) {
             //zend_debug::dump($data); die('ccc');
