@@ -164,34 +164,52 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     }
 
     /*Functions below for Visitorsegment*/
+
     //z set visitorsegment check value
     public function checkDevices(){
-        $devicetoshow = array();
-        $devices = $this->getDevices();
-        if($devices != ''){
-            if(!is_array($devices)){
-                $devicetoshow[] = $devices;
-            }else{
-                $devicetoshow = $devices;
-            }
 
-            //explode in array
-            $sub_device = array();
-            foreach (explode(',', $this->getDevices()) as $subdevice) {
-                if(in_array(trim($subdevice), $devicetoshow)){
-                    $sub_device[] = trim($subdevice);
-                }
-            }
-        }else{
-            return false;
-        }
-    }
-
-    public function checkCountry($countries = ''){
+//        $devicetoshow = array();
+//        $devices = $this->getDevices();
+//        if($devices != ''){
+//
+//            if(!is_array($devices)){
+//                $devicetoshow[] = $devices;
+//            }else{
+//                $devicetoshow = $devices;
+//            }
+//
+//            //explode in array
+//            $sub_device = array();
+//            $n=0;
+//            foreach ($devicetoshow as $subdevice) {
+//                if(in_array(trim($subdevice), $devicetoshow)){
+//                    $sub_device[] = explode(',', trim($subdevice));
+//                    $n = $n+1;
+//                }
+//            }
+//        }else{
+//            return array(0);
+//        }
+//        //zend_debug::dump($sub_device); die('323');
+//        return $sub_device;
         return true;
     }
 
     public function checkUserLogin(){
+
+//        $user = $this->getLoginUser();
+//        if($user != ''){
+//            //check session
+//            $login = Mage::getSingleton('customer/session')->isLoggedIn(); //Check if User is Logged In
+//            if($login)
+//            {
+//
+//            }
+//        }else{
+//            return false;
+//        }
+//        zend_debug::dump($sub_case); die('userkkk');
+//        return $sub_case;
         return true;
     }
 
@@ -208,6 +226,48 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
      * @return bool
      */
     public function checkCustomerGroup(){
+//        $customergroup = array();
+//        $group = $this->getCustomerGroupIds();
+//        if($group != ''){
+//            if(!is_array($group)){
+//                $customergroup[] = $group;
+//            }else{
+//                $customergroup = $group;
+//            }
+//            //explode in array
+//            $sub_group = array();
+//            foreach ($customergroup as $subgr) {
+//                if(in_array(trim($subgr), $customergroup)){
+//                    $sub_group[] = explode(',', trim($subgr));
+//                }
+//            }
+//        }else{
+//            return false;
+//        }
+//
+//        //check session
+//        $login = Mage::getSingleton('customer/session')->isLoggedIn(); //Check if User is Logged In
+//        if($login)
+//        {
+//            $groupId = Mage::getSingleton('customer/session')->getCustomerGroupId(); //Get Customers Group ID
+//
+//            $group = Mage::getModel('customer/group')->load($groupId);
+//
+//            $namegroup = $group->getCustomerGroupCode();
+//
+//        }
+//
+//        //end check session
+//        foreach($sub_group as $subg){
+//            foreach($subg as $sub){
+//                if($sub == 'all_group'){
+//                    return true;
+//                    break;
+//                }
+//            }
+//        }
+//
+//        return $sub_group;
         return true;
     }
 

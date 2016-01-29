@@ -64,12 +64,26 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
     }
 
     /**
-     * get all device to show campaigns
+     * get all popup through all campaigns
      * @return mixed
      */
-
-    public function getDevice(){
+    public function getDevices(){
         return Mage::getModel('campaign/popup')->checkDevices();
     }
 
+    /**
+     * show all popup for login user
+     * @return mixed
+     */
+    public function getUserlogin(){
+        return Mage::getModel('campaign/popup')->checkUserLogin();
+    }
+
+    /**
+     * show all popup for customer group user
+     * @return mixed
+     */
+    public function getCustomerGroup(){
+        return Mage::getModel('campaign/popup')->checkCustomerGroup();
+    }
 }

@@ -7,8 +7,10 @@ $popups = $this->getAllPopupAvailable();
 <?php foreach ($popups as $key => $popup): ?>
     <?php
     //check device
-    $devices = $this->getDevice();
-//    Zend_debug::dump($devices); die('ewew');
+    $devices = $this->getDevices();
+    $userlogin = $this->getUserlogin();
+    $customergroup = $this->getCustomerGroup();
+   //var_dump($devices); //die('34343');
 
     $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
     $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
