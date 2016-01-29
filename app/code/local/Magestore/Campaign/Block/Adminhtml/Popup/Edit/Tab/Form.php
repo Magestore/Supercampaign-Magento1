@@ -40,34 +40,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'values'	=> Magestore_Campaign_Model_Status::getOptionHash(),
         ));
 
-		/*$fieldset->addField('popup_type', 'select', array(
-			'label'		=> Mage::helper('campaign')->__('Popup Content Type:'),
-			'required'	=> true,
-			'name'		=> 'popup_type',
-            'note'      => 'Type of popup.',
-            'values' => array(
-                array(
-                    'value' => 'static',
-                    'label' => Mage::helper('campaign')->__('Static'),
-                ),
-                array(
-                    'value' => 'video',
-                    'label' => Mage::helper('campaign')->__('Video'),
-                ),
-                array(
-                    'value' => 'sticker',
-                    'label' => Mage::helper('campaign')->__('Sticker'),
-                ),
-                array(
-                    'value' => 'subscribe',
-                    'label' => Mage::helper('campaign')->__('Subscribe'),
-                ),
-                array(
-                    'value' => 'register',
-                    'label' => Mage::helper('campaign')->__('Register'),
-                ),
-            ),
-		));*/
 
         $fieldset->addField('template_code', 'hidden', array(
             'name'		=> 'template_code',
@@ -198,13 +170,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                 ),
             ),
         ));
-
-//        $categories = $fieldset->addField('categories', 'text', array(
-//            'label'		=> Mage::helper('campaign')->__('Category Ids:'),
-//            'required'	=> false,
-//            'name'		=> 'categories',
-//            'note'      => 'Show popup for categories have selected.',
-//        ));
 
         $categoryIds = implode(", ", Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('level', array('gt' => 0))->getAllIds());
         if(!isset($data['categories'])){
