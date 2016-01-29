@@ -1,18 +1,18 @@
 
-
-            <table style="background-image: url(http://localhost.com/campaign/skin/frontend/base/default/images/campaign/popup/image-2-new.png); background-position: right; background-size:auto 100%; background-repeat: no-repeat; width: 100%;" border="0">
-                <tbody>
-                <tr>
-                    <td style="padding: 30px;">
-                        <p class="fontBig" style="text-align: left; font-size: 26px; font-style: italic; margin: 0;">Hear about</p>
-                        <p class="fontBig" style="text-align: left; font-size: 70px; line-height: 1; margin: 0;">EXCLUSIVE</p>
-                        <p class="fontBig" style="text-align: left; font-size: 70px; line-height: 1; font-weight: bold; margin: 0; color: #ff1176;">SAVINGS!</p>
-                        <p class="popupSmall" style="text-align: left; font-size: 24px; line-height: 1; margin: 20px 0; font-style: italic;">Enter your e-mail and hear<br />about exclusive savings and news!</p>
-                        <div style="text-align: left;"><?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setTemplate('campaign/popup/form/subscribe-type2.phtml')->toHtml(); ?></div>
-                        <p class="dialogCloseCustom popupSmall" style="text-decoration: underline; text-align: left; font-size: 18px; font-style: italic; margin-top: 10px;" data-dismiss="modal" data-target="#sc-popup2">No thanks, I will pay full price</p>
-                        <p class="popupSmall" style="text-align: left; font-size: 16px; font-style: italic; margin: 0;">&nbsp;</p>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
+            <div class="sc-popup2">
+                <table style="background-image: url(http://localhost.com/campaign/skin/frontend/base/default/images/campaign/popup/image-2-new.png); background-position: right; background-size:auto 100%; background-repeat: no-repeat; width: 100%;" border="0">
+                    <tbody>
+                    <tr>
+                        <td style="padding: 30px;">
+                            <p class="fontBig" style="text-align: left; font-size: 26px; font-style: italic; margin: 0;">Hear about</p>
+                            <p class="fontBig" style="text-align: left; font-size: 70px; line-height: 1; margin: 0;">EXCLUSIVE</p>
+                            <p class="fontBig" style="text-align: left; font-size: 70px; line-height: 1; font-weight: bold; margin: 0; color: #ff1176;">SAVINGS!</p>
+                            <p class="popupSmall" style="text-align: left; font-size: 24px; line-height: 1; margin: 20px 0; font-style: italic;">Enter your e-mail and hear<br />about exclusive savings and news!</p>
+                            <div style="text-align: left;"><?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setArea('frontend')->setTemplate('campaign/popup/form/subscribe-type2.phtml')->toHtml(); ?></div>
+                            <p class="dialogCloseCustom popupSmall" style="text-decoration: underline; text-align: left; font-size: 18px; font-style: italic; margin-top: 10px;" data-dismiss="modal" data-target="#sc-popup2">No thanks, I will pay full price</p>
+                            <p class="popupSmall" style="text-align: left; font-size: 16px; font-style: italic; margin: 0;">&nbsp;</p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>

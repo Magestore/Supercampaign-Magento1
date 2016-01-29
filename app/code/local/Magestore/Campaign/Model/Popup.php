@@ -164,7 +164,6 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     }
 
     /*Functions below for Visitorsegment*/
-
     //z set visitorsegment check value
     public function checkDevices(){
 

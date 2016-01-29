@@ -7,7 +7,6 @@
 var $j = jQuery.noConflict();
 var Scpopup = function () {
     this.idPopup = "";
-    this.templateCode = "";
     this.effect = "";
     this.borderSize = "";
     this.borderColor = "";
@@ -25,45 +24,43 @@ var Scpopup = function () {
     this.showWhen = "";
     this.urlImages = "";
     this.status = false;
-    this.idClose = "";
     this.priority = "";
-    //this.Scpopup = function(){return this;};
 
     this.runEffect = function () {
         var effectPopup = this.effect;
         switch (effectPopup) {
-            case 0:
+            case '0':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top');
                 break;
-            case 1:
+            case '1':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('left');
                 break;
-            case 2:
+            case '2':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('right');
                 break;
-            case 3:
+            case '3':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom');
                 break;
-            case 4:
+            case '4':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top-left');
                 break;
-            case 5:
+            case '5':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top-right');
                 break;
-            case 6:
+            case '6':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom-left');
                 break;
-            case 7:
+            case '7':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom-right');
                 break;
         }
+        return "";
     };
     this.showPosition = function () {
         var hzposition = this.horizontalPosition;
         var vtposition = this.verticalPosition;
         var hzpx = this.horizontalPx;
         var vtpx = this.verticalPx;
-        var tpcode = this.templateCode;
         var overlayColor = this.overlayColor;
         var widthcenter = this.width * 0.5;
         var height = $j("#sc-popup" + this.idPopup + " .modal-dialog").height();
@@ -130,34 +127,33 @@ var Scpopup = function () {
     };
 
     this.showOverlayColor = function () {
-        var tpcode = this.templateCode;
         var overlay = this.overlayColor;
         var widthPopup = this.width;
         var cssHead = "";
         switch (overlay) {
             case "white":
-                cssHead = ".modal-open{overflow:auto;top:0;left:0;right:0;left:0}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal{top:0;left:0;right:0;bottom:0;position:fixed;}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-backdrop{background-color:#fff}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-dialog{width:" + widthPopup + "px}";
+                cssHead = ".modal-open{top:0;left:0;right:0;left:0}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + "{top:0;left:0;right:0;bottom:0;position:fixed;}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-backdrop{background-color:#fff}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-dialog{width:" + widthPopup + "px}";
                 break;
             case "dark":
-                cssHead = ".modal-open{overflow:auto;top:0;left:0;right:0;left:0}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal{top:0;left:0;right:0;bottom:0;position:fixed;}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-backdrop{background-color:#000}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-dialog{width:" + widthPopup + "px}";
+                cssHead = ".modal-open{top:0;left:0;right:0;left:0}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + "{top:0;left:0;right:0;bottom:0;position:fixed;}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-backdrop{background-color:#000}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-dialog{width:" + widthPopup + "px}";
                 break;
             case 'no_bg_fix_popup':
-                cssHead = ".modal-open{overflow:auto}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal{position:fixed}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-backdrop{display:none}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-dialog{margin:0;width:" + widthPopup + "px}";
+                cssHead = ".modal-open{overflow:auto;padding-right:0}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + "{position:fixed}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-backdrop{display:none}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-dialog{margin:0;width:" + widthPopup + "px}";
                 break;
             case 'no_bg_absoulute_popup':
-                cssHead = ".modal-open{overflow:auto}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal{position:absolute}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-backdrop{display:none}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-dialog{margin:0;width:" + widthPopup + "px}";
+                cssHead = ".modal-open{overflow:auto;padding-right:0}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + "{position:absolute}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-backdrop{display:none}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-dialog{margin:0;width:" + widthPopup + "px}";
                 break;
         }
         return cssHead;
@@ -169,7 +165,7 @@ var Scpopup = function () {
         var padding = this.paddingSize;
         var width = this.width;
         var bgContentColor = this.bgColor;
-        var tcode = this.templateCode;
+        var heightcontent;
         var cssHead, cssBColor, cssBRadius, cssBSize, cssPadding, cssWidth;
         if (bColor != "") {
             cssBColor = "border-color:#" + bColor + ";";
@@ -180,13 +176,14 @@ var Scpopup = function () {
         if (bRadius != "") {
             switch (bRadius) {
                 case 'rounded':
-                    cssBRadius = "border-radius:" + this.borderSize + "px;";
+                    cssBRadius = "#sc-popup" + this.idPopup + " .modal-content{border-radius:" + this.cornerRadius + "px;}";
                     break;
                 case 'sharp':
-                    cssBRadius = "border-radius:0px;";
+                    cssBRadius = "#sc-popup" + this.idPopup + " .modal-content{border-radius:0px;}";
                     break;
                 case 'circle':
-                    cssBRadius = "border-radius:50%;overflow:hidden;";
+                    cssBRadius = "#sc-popup" + this.idPopup + " .modal-content{border-radius:50%;}";
+                    cssBRadius = cssBRadius + "#sc-popup" + this.idPopup + " .modal-content{height:" + width + "px;} #sc-popup" + this.idPopup + " .modal-content .content-popup{overflow:hidden;height:100%;width:100%;border-radius:50%}";
                     break;
             }
         }
@@ -202,7 +199,7 @@ var Scpopup = function () {
         if (bgContentColor != "") {
             var cssbgContentColor = "background:#" + bgContentColor + ";";
         }
-        cssHead = ".sc-popup" + tcode + " .modal-content{" + cssBColor + cssBRadius + cssBSize + cssPadding + cssWidth + cssbgContentColor + "}";
+        cssHead = "#sc-popup" + this.idPopup + " .modal-content{" + cssBColor + cssBSize + cssPadding + cssWidth + cssbgContentColor + "}" + cssBRadius;
         return cssHead;
     };
     this.showCloseIcon = function () {
@@ -211,15 +208,14 @@ var Scpopup = function () {
             case 'circle':
                 if (this.overlayColor == 'white') {
                     cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_dark.png) no-repeat 5px 5px}";
+                } else if (this.overlayColor == 'dark') {
+                    cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_white.png) no-repeat 5px 5px}";
                 } else {
-                    if (this.overlayColor == 'dark') {
-                        cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_white.png) no-repeat 5px 5px}";
-                    } else {
-                        cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_promotion.png) no-repeat 5px -20px;top:5px;right:5px;}";
-                    }
+                    cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_promotion.png) no-repeat 5px -20px;top:5px;right:5px;}";
                 }
                 break;
             case 'simple':
+
                 cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_promotion.png) no-repeat 5px -20px}";
                 break;
             case 'none':
@@ -233,12 +229,12 @@ var Scpopup = function () {
         $j('html > head').append(stringcss);
     };
     this.showPopup = function () {
-        _this = this;
-        this.idClose = "close-" + this.idPopup;
-        $j('#' + this.idClose).click(function () {
-            _this.hidePopup();
-        });
-
+        /* _this = this;
+         this.idClose = "close-" + this.idPopup;
+         $j('#' + this.idClose).click(function () {
+         _this.hidePopup();
+         });
+         */
         var idPopup = this.idPopup;
         var scdelay = this.secondDelay;
         console.log(idPopup + 'seconday' + scdelay);
@@ -252,19 +248,18 @@ var Scpopup = function () {
                     $j("#sc-popup" + idPopup).modal('show');
                 }, timedelay);
             }
-        }
-        if (this.showWhen == 'after_load_page') {
+        } else if (this.showWhen == 'after_load_page') {
             $j("#sc-popup" + idPopup).modal('show');
         }
         return this;
     };
-    this.hidePopup = function () {
-        $j("#sc-popup" + this.idPopup).modal('hide');
-        if (typeof this.callBack == "function") {
-            this.callBack(this.priority);
-        }
-    };
-    this.onClose = function (_function) {
-        this.callBack = _function;
-    };
+    /* this.hidePopup = function () {
+     $j("#sc-popup" + this.idPopup).modal('hide');
+     if (typeof this.callBack == "function") {
+     this.callBack(this.priority);
+     }
+     };*/
+    /* this.onClose = function (_function) {
+     this.callBack = _function;
+     };*/
 };

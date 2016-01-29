@@ -50,7 +50,9 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         $fieldset->addField('load_template', 'label', array(
             'label'		=> Mage::helper('campaign')->__(''),
             'after_element_html' => '<button id="" type="button" class="scalable add" style="" alt="Load template"
- title="Load template" onclick="popupwindow(\''.$this->getUrl('campaignadmin/adminhtml_popup/loadTemplate').'\', \'_blank\', 1000, 500);" href="javascript:void(0);" <span="">'.$this->__('Create popup using predefined templates').'
+ title="Load template" onclick="popupwindow(\''
+                .$this->getUrl('campaignadmin/adminhtml_popup/loadTemplate').'\', \'_blank\', 1000, 500);" href="javascript:void(0);" <span="">'
+                .$this->__('Create popup using predefined templates').'
         </button>
         <script type="text/javascript">
         var popupLoadTemplate;
@@ -64,15 +66,13 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         //window closed
         var template_id = wLoad.document.getElementById(\'template_id\').value;
         window.location.href = "'.$this->getUrl('campaignadmin/adminhtml_popup/newfromtemplate/').'template_id/"+template_id;
-        console.log(wLoad.document.getElementById(\'template_id\').value);
+        //console.log(wLoad.document.getElementById(\'template_id\').value);
     }else{
        //just refreshed
     }
   }
   return popupLoadTemplate;
 }
-
-
 </script>',
         ));
 
