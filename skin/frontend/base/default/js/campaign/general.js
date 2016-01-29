@@ -233,12 +233,12 @@ var Scpopup = function () {
         $j('html > head').append(stringcss);
     };
     this.showPopup = function () {
-        _this = this;
+       /* _this = this;
         this.idClose = "close-" + this.idPopup;
         $j('#' + this.idClose).click(function () {
             _this.hidePopup();
         });
-
+*/
         var idPopup = this.idPopup;
         var scdelay = this.secondDelay;
         console.log(idPopup + 'seconday' + scdelay);
@@ -252,7 +252,7 @@ var Scpopup = function () {
                     $j("#sc-popup" + idPopup).modal('show');
                 }, timedelay);
             }
-        }
+        }else
         if (this.showWhen == 'after_load_page') {
             $j("#sc-popup" + idPopup).modal('show');
         }
