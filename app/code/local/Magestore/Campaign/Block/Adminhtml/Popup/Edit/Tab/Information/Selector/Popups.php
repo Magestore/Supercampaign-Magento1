@@ -134,7 +134,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Information_Selector_Pop
     
     protected function _prepareCollection() {
         $collection = Mage::getModel('campaign/popup')->getCollection();
-        $collection->addFieldToFilter('popup_id', $this->getRequest()->getParam('popup_id'));
+        $collection->addFieldToFilter('popup_id', array('neq'=>$this->getRequest()->getParam('popup_id')));
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
