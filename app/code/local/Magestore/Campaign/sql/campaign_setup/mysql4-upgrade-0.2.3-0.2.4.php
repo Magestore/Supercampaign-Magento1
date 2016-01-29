@@ -27,10 +27,10 @@ $installer->startSetup();
 $installer->run("
 
     ALTER TABLE {$this->getTable('campaign/popup')}
-        ADD COLUMN `trigger_popup` smallint(6) NULL;
+        ADD COLUMN `trigger_popup` VARCHAR(20) NULL;
 
     ALTER TABLE {$this->getTable('campaign/template')}
-        ADD COLUMN `trigger_popup` smallint(6) NULL;
+        ADD COLUMN `trigger_popup` VARCHAR(20) NULL;
 
 ");
 

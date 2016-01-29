@@ -83,6 +83,20 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
         }
     }
 
+    public function chooserPopupsAction() {
+        $request = $this->getRequest();
+        $block = $this->getLayout()->createBlock(
+            'campaign/adminhtml_popup_edit_tab_information_selector_popups',
+            'information_selector_popups',
+            array('input' =>'trigger_popup','grid_url_call'=>'chooserPopups','id'=>'popupGrid',
+                'js_form_object' => $request->getParam('form'),
+        ));
+
+        if ($block) {
+            $this->getResponse()->setBody($block->toHtml());
+        }
+    }
+
 
     public function saveAction() {
         if ($data = $this->getRequest()->getPost()) {

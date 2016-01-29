@@ -316,6 +316,42 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'required'	=> false,
             'name'		=> 'priority',
         ));
+
+        $popups = Mage::getModel('campaign/popup')->getCollection();
+        if(isset($data['popup_id']))  $popups->addFieldToFilter('popup_id', array('neq'=>$data['popup_id']));
+        $popupIds = implode(", ", $popups->getAllIds());
+        $fieldset->addField('trigger_popup', 'text', array(
+            'label'		=> $this->__('When click show other popup:'),
+            'required'	=> false,
+            'name'		=> 'trigger_popup',
+            'note'      => 'Select ID of the popup you want to show when click this popup',
+            'after_element_html' => '<a id="product_link" href="javascript:void(0)" onclick="toggleSelectPopups()">
+                <img src="' . $this->getSkinUrl('images/rule_chooser_trigger.gif') . '"
+                alt="" class="v-middle rule-chooser-trigger" title="Select Popups"></a>
+                <input type="hidden" value="'.$popupIds.'" id="popup_all_ids"/>
+                <div id="main_popups_select" style="display:none;width:640px"></div>
+                <script type="text/javascript">
+                    function toggleSelectPopups(){
+                        if($("main_popups_select").style.display == "none"){
+                            var url = "' . $this->getUrl('campaignadmin/adminhtml_popup/chooserPopups/', array('popup_id'=>$data['popup_id'])) . '";
+                            var params = $("trigger_popup").value.split(", ");
+                            var parameters = {"form_key": FORM_KEY,"selected[]":params };
+                            var request = new Ajax.Request(url,
+                            {
+                                evalScripts: true,
+                                parameters: parameters,
+                                onComplete:function(transport){
+                                    $("main_popups_select").update(transport.responseText);
+                                    $("main_popups_select").style.display = "block";
+                                }
+                            });
+                        }else{
+                            $("main_popups_select").style.display = "none";
+                        }
+                    };
+                </script>'
+        ));
+
         //end setting poup tab
 
         if($data['width'] < 1){$data['width'] = 300;}
