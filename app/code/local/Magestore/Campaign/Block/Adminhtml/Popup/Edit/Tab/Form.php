@@ -165,35 +165,35 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'note'      => 'Show popup when with page selectd.',
             'values' => array(
                 array(
-                    'value' => 'all_page',
+                    'value' => Magestore_Campaign_Model_Popup::SHOW_ON_ALL_PAGE,
                     'label' => Mage::helper('campaign')->__('All Page'),
                 ),
                 array(
-                    'value' => 'home_page',
+                    'value' => Magestore_Campaign_Model_Popup::SHOW_ON_HOME_PAGE,
                     'label' => Mage::helper('campaign')->__('Home Page'),
                 ),
                 array(
-                    'value' => 'product',
+                    'value' => Magestore_Campaign_Model_Popup::SHOW_ON_PRODUCT_PAGE,
                     'label' => Mage::helper('campaign')->__('Product Detail Page'),
                 ),
                 array(
-                    'value' => 'category',
+                    'value' => Magestore_Campaign_Model_Popup::SHOW_ON_CATEGORY_PAGE,
                     'label' => Mage::helper('campaign')->__('Category'),
                 ),
                 array(
-                    'value' => 'checkout_page',
+                    'value' => Magestore_Campaign_Model_Popup::SHOW_ON_CHECKOUT_PAGE,
                     'label' => Mage::helper('campaign')->__('Checkout Page'),
                 ),
                 array(
-                    'value' => 'cart_page',
+                    'value' => Magestore_Campaign_Model_Popup::SHOW_ON_CART_PAGE,
                     'label' => Mage::helper('campaign')->__('Cart Page'),
                 ),
                 array(
-                    'value' => 'specified_url',
+                    'value' => Magestore_Campaign_Model_Popup::SHOW_ON_URLS_PAGE,
                     'label' => Mage::helper('campaign')->__('Specified Url'),
                 ),
                 array(
-                    'value' => 'other_page',
+                    'value' => Magestore_Campaign_Model_Popup::SHOW_ON_OTHER_PAGE,
                     'label' => Mage::helper('campaign')->__('Other Page'),
                 ),
             ),

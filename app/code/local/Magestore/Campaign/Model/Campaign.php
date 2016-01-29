@@ -289,9 +289,13 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
                 $popups[] = $item;
                 continue;
             }
-            if($item->checkUrl() && $item->checkProducts() && $item->checkDevices()
-                && $item->checkCountry() && $item->checkUserLogin() && $item->checkReturnCustomer()
-                && $item->checkCustomerGroup() && $item->checkCartSubtotalLessThan()
+            if($item->checkShowOnPage()
+                && $item->checkDevices()
+                && $item->checkCountry()
+                && $item->checkUserLogin()
+                && $item->checkReturnCustomer()
+                && $item->checkCustomerGroup()
+                && $item->checkCartSubtotalLessThan()
             ){
                 $popups[] = $item;
                 continue;
