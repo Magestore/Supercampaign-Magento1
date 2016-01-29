@@ -86,7 +86,10 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
             $specified = $this->getSpecifiedUrl();
         }
         if($exclude == ''){
-            $specified = $this->getExcludeUrl();
+            $exclude = $this->getExcludeUrl();
+        }
+        if($specified == ''){
+            return false;
         }
         return Mage::helper('campaign')->checkInclude($specified, $exclude);
     }
@@ -98,6 +101,7 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
      * @return bool
      */
     public function checkProducts($products = ''){
+        $isInProductPage = false;
         $productIds = array();
         if($products != ''){
             if(!is_array($products)){
@@ -109,21 +113,23 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
             $request = Mage::app()->getRequest();
             if($request->getControllerName() == 'product' && $request->getActionName() == 'view'){
                 $productIds[] = $request->getParam('id');
+                $isInProductPage = true;
             }
         }
-        //search in array
-        $isInArray = false;
+        //search in product array
+        $isInSelected = false;
         foreach (explode(',', $this->getProducts()) as $productId) {
             if(in_array(trim($productId), $productIds)){
-                $isInArray = true;
+                $isInSelected = true;
                 break;
             }
         }
-        if(!empty($productIds) && !$isInArray && $this->getProducts() != ''){
-            return false;
-        }else{
-            return true;
+        if($isInProductPage){
+            if($isInSelected || $this->getProducts() == '' || $this->getProducts() == '0'){
+                return true;
+            }
         }
+        return false;
     }
 
     public function checkShowCategory(){
@@ -135,7 +141,7 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
         $request = Mage::app()->getRequest();
         if($request->getControllerName() == 'category' && $request->getActionName() == 'view'){
             $currentCatId = $request->getParam('id');
-            if(in_array($currentCatId, $categoryIds) || $categories == '' || $categories == 0){
+            if(in_array($currentCatId, $categoryIds) || $categories == '' || $categories == '0'){
                 //show
                 return true;
             }else{
@@ -164,7 +170,7 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     public function checkIsOnCheckoutPage(){
         $request = Mage::app()->getRequest();
         if(($request->getModuleName() == 'checkout'
-            && $request->getControllerName() == 'index'
+            && $request->getControllerName() == 'onepage'
             && $request->getActionName() == 'index') ||
             ($request->getModuleName() == 'onestepcheckout'
                 && $request->getControllerName() == 'index'

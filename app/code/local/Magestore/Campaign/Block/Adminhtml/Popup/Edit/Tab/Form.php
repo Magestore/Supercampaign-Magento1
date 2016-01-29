@@ -181,20 +181,16 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                     'label' => Mage::helper('campaign')->__('Category'),
                 ),
                 array(
-                    'value' => Magestore_Campaign_Model_Popup::SHOW_ON_CHECKOUT_PAGE,
-                    'label' => Mage::helper('campaign')->__('Checkout Page'),
-                ),
-                array(
                     'value' => Magestore_Campaign_Model_Popup::SHOW_ON_CART_PAGE,
                     'label' => Mage::helper('campaign')->__('Cart Page'),
                 ),
                 array(
-                    'value' => Magestore_Campaign_Model_Popup::SHOW_ON_URLS_PAGE,
-                    'label' => Mage::helper('campaign')->__('Specified Url'),
+                    'value' => Magestore_Campaign_Model_Popup::SHOW_ON_CHECKOUT_PAGE,
+                    'label' => Mage::helper('campaign')->__('Checkout Page'),
                 ),
                 array(
-                    'value' => Magestore_Campaign_Model_Popup::SHOW_ON_OTHER_PAGE,
-                    'label' => Mage::helper('campaign')->__('Other Page'),
+                    'value' => Magestore_Campaign_Model_Popup::SHOW_ON_URLS_PAGE,
+                    'label' => Mage::helper('campaign')->__('Special Urls'),
                 ),
             ),
         ));
@@ -207,7 +203,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         ));
 
         $specified_url = $fieldset->addField('specified_url', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Specified Url:'),
+            'label'		=> Mage::helper('campaign')->__('Special Urls:'),
             'required'	=> false,
             'name'		=> 'specified_url',
         ));
@@ -293,19 +289,19 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                 ->addFieldDependence(
                     $specified_url->getName(),
                     $show_on_page->getName(),
-                    'specified_url'
+                    Magestore_Campaign_Model_Popup::SHOW_ON_URLS_PAGE
                 )->addFieldDependence(
                     $other_page->getName(),
                     $show_on_page->getName(),
-                    'other_page'
+                    Magestore_Campaign_Model_Popup::SHOW_ON_URLS_PAGE
                 )->addFieldDependence(
                     $categories->getName(),
                     $show_on_page->getName(),
-                    'category'
+                    Magestore_Campaign_Model_Popup::SHOW_ON_CATEGORY_PAGE
                 )->addFieldDependence(
                     $productidpage->getName(),
                     $show_on_page->getName(),
-                    'product'
+                    Magestore_Campaign_Model_Popup::SHOW_ON_PRODUCT_PAGE
                 )
         );
 
