@@ -295,7 +295,6 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
                 && $item->checkUserLogin()
                 && $item->checkReturnCustomer()
                 && $item->checkCustomerGroup()
-                && $item->checkCartSubtotalLessThan()
             ){
                 $popups[] = $item;
                 continue;

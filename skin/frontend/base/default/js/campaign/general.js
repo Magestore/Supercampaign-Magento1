@@ -137,27 +137,27 @@ var Scpopup = function () {
         switch (overlay) {
             case "white":
                 cssHead = ".modal-open{top:0;left:0;right:0;left:0}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal{top:0;left:0;right:0;bottom:0;position:fixed;}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-backdrop{background-color:#fff}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-dialog{width:" + widthPopup + "px}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal{top:0;left:0;right:0;bottom:0;position:fixed;}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-backdrop{background-color:#fff}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-dialog{width:" + widthPopup + "px}";
                 break;
             case "dark":
                 cssHead = ".modal-open{top:0;left:0;right:0;left:0}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal{top:0;left:0;right:0;bottom:0;position:fixed;}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-backdrop{background-color:#000}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-dialog{width:" + widthPopup + "px}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal{top:0;left:0;right:0;bottom:0;position:fixed;}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-backdrop{background-color:#000}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-dialog{width:" + widthPopup + "px}";
                 break;
             case 'no_bg_fix_popup':
                 cssHead = ".modal-open{overflow:auto;padding-right:0}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal{position:fixed}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-backdrop{display:none}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-dialog{margin:0;width:" + widthPopup + "px}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal{position:fixed}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-backdrop{display:none}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-dialog{margin:0;width:" + widthPopup + "px}";
                 break;
             case 'no_bg_absoulute_popup':
                 cssHead = ".modal-open{overflow:auto;padding-right:0}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal{position:absolute}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-backdrop{display:none}";
-                cssHead = cssHead + ".sc-popup" + tpcode + " .modal-dialog{margin:0;width:" + widthPopup + "px}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal{position:absolute}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-backdrop{display:none}";
+                cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-dialog{margin:0;width:" + widthPopup + "px}";
                 break;
         }
         return cssHead;
