@@ -6,7 +6,12 @@ $popups = $this->getAllPopupAvailable();
 ?>
 <?php foreach ($popups as $key => $popup): ?>
     <?php
-    //Zend_debug::dump($popup->getData());
+    //check device
+    $devices = $this->getDevices();
+    $userlogin = $this->getUserlogin();
+    $customergroup = $this->getCustomerGroup();
+   //var_dump($devices); //die('34343');
+
     $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
     $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
     $stylepopup = Mage::helper('campaign')->checkStylepopup();
@@ -17,8 +22,8 @@ $popups = $this->getAllPopupAvailable();
             <div class="modal-content">
                 <a id="close-<?php echo $popup->getData('popup_id') ?>" class="dialogClose style1 overlay2"
                    data-dismiss="modal"
-                   data-target=".sc-popup<?php echo $popup->getData('template_code') ?>"></a>
-                <?php echo $helper->convertContentToHtml($popup->getData('popup_content')); ?>
+                   data-target="#sc-popup<?php echo $popup->getData('popup_id') ?>"></a>
+                <div class="content-popup"><?php echo $helper->convertContentToHtml($popup->getData('popup_content')); ?></div>
             </div>
         </div>
     </div>
@@ -58,13 +63,15 @@ $popups = $this->getAllPopupAvailable();
         Popups[id] = Popup;
     }
     $j(window).bind("load", function () {
-        Popups[Popups.length - 1].showPopup();
+
         for (var i = Popups.length - 1; i >= 0; i--) {
-            Popups[i].onClose(function (_priority) {
+            Popups[i].showPopup();
+            /*Popups[i].onClose(function (_priority) {
                 if (Popups[_priority - 1]) {
                     Popups[_priority - 1].showPopup();
                 }
-            });
+            });*/
+
         }
     });
 </script>
