@@ -11,7 +11,7 @@ $popups = $this->getAllPopupAvailable();
     $userlogin = $this->getUserlogin();
     $customergroup = $this->getCustomerGroup();
    //var_dump($devices); //die('34343');
-
+    Zend_debug::dump($popup->getData());
     $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
     $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
     $stylepopup = Mage::helper('campaign')->checkStylepopup();

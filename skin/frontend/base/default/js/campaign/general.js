@@ -33,13 +33,13 @@ var Scpopup = function () {
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top');
                 break;
             case '1':
-                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('left');
+                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom');
                 break;
             case '2':
-                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('right');
+                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('left');
                 break;
             case '3':
-                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom');
+                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('right');
                 break;
             case '4':
                 $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top-left');
