@@ -31,20 +31,12 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
                     'label' => Mage::helper('campaign')->__('All Devices'),
                 ),
                 array(
-                    'value' => 'pc',
-                    'label' => Mage::helper('campaign')->__('PC'),
+                    'value' => 'pc_laptop',
+                    'label' => Mage::helper('campaign')->__('PC and Laptop'),
                 ),
                 array(
-                    'value' => 'laptop',
-                    'label' => Mage::helper('campaign')->__('Laptop'),
-                ),
-                array(
-                    'value' => 'tablet',
-                    'label' => Mage::helper('campaign')->__('Tablet'),
-                ),
-                array(
-                    'value' => 'mobiphone',
-                    'label' => Mage::helper('campaign')->__('Mobiphone'),
+                    'value' => 'tablet_mobile',
+                    'label' => Mage::helper('campaign')->__('Mobile and Tablet'),
                 ),
             ),
         ));

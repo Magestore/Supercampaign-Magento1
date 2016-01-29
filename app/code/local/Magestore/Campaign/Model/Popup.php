@@ -26,6 +26,7 @@
  * @package     Magestore_Campaign
  * @author      Magestore Developer
  */
+include('lib/Mobile_Detect.php');
 class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
 {
     const STATUS_ENABLE = 1;
@@ -166,32 +167,53 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     /*Functions below for Visitorsegment*/
     //z set visitorsegment check value
     public function checkDevices(){
+        $detector = new Mobile_Detect();
+        $devices = $this->getDevices();
+        $devicetoshow = array();
+        $devices = $this->getDevices();
+        if($devices != ''){
+            if(!is_array($group)){
+                $devicetoshow[] = $devices;
+            }else{
+                $devicetoshow = $devices;
+            }
+            //explode in array
+            $sub_device = array();
+            foreach ($devicetoshow as $subgr) {
+                if(in_array(trim($subgr), $devicetoshow)){
+                    $sub_device[] = explode(',', trim($subgr));
+                }
+            }
+        }else{
+            return false;
+        }
+        //end get value of device
+        if($devices != ''){
+            $tablet = $detector->isTablet();
+            $mobile = $detector->isMobile();
 
-//        $devicetoshow = array();
-//        $devices = $this->getDevices();
-//        if($devices != ''){
-//
-//            if(!is_array($devices)){
-//                $devicetoshow[] = $devices;
-//            }else{
-//                $devicetoshow = $devices;
-//            }
-//
-//            //explode in array
-//            $sub_device = array();
-//            $n=0;
-//            foreach ($devicetoshow as $subdevice) {
-//                if(in_array(trim($subdevice), $devicetoshow)){
-//                    $sub_device[] = explode(',', trim($subdevice));
-//                    $n = $n+1;
-//                }
-//            }
-//        }else{
-//            return array(0);
-//        }
-//        //zend_debug::dump($sub_device); die('323');
-//        return $sub_device;
-        return true;
+            foreach($sub_device as $subg){
+                foreach($subg as $sub){
+                    if($sub == 'all_device'){
+                        return true;
+                    }
+                    if($sub == 'pc_laptop'){
+                        if($tablet == false && $mobile == false){
+                            return true;
+                        }
+                    }
+                    if($sub == 'tablet_mobile'){
+                        if($tablet || $mobile){
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }else{
+            return false;
+        }
     }
 
     public function checkUserLogin(){
@@ -235,49 +257,66 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
      * @return bool
      */
     public function checkCustomerGroup(){
-//        $customergroup = array();
-//        $group = $this->getCustomerGroupIds();
-//        if($group != ''){
-//            if(!is_array($group)){
-//                $customergroup[] = $group;
-//            }else{
-//                $customergroup = $group;
-//            }
-//            //explode in array
-//            $sub_group = array();
-//            foreach ($customergroup as $subgr) {
-//                if(in_array(trim($subgr), $customergroup)){
-//                    $sub_group[] = explode(',', trim($subgr));
-//                }
-//            }
-//        }else{
-//            return false;
-//        }
-//
-//        //check session
-//        $login = Mage::getSingleton('customer/session')->isLoggedIn(); //Check if User is Logged In
-//        if($login)
-//        {
-//            $groupId = Mage::getSingleton('customer/session')->getCustomerGroupId(); //Get Customers Group ID
-//
-//            $group = Mage::getModel('customer/group')->load($groupId);
-//
-//            $namegroup = $group->getCustomerGroupCode();
-//
-//        }
-//
-//        //end check session
-//        foreach($sub_group as $subg){
-//            foreach($subg as $sub){
-//                if($sub == 'all_group'){
-//                    return true;
-//                    break;
-//                }
-//            }
-//        }
-//
-//        return $sub_group;
-        return true;
+
+        $grouptoshow = array();
+        $group = $this->getCustomerGroupIds();
+        if($group != ''){
+            if(!is_array($group)){
+                $grouptoshow[] = $group;
+            }else{
+                $grouptoshow = $group;
+            }
+            //explode in array
+            $sub_group = array();
+            foreach ($grouptoshow as $subgr) {
+                if(in_array(trim($subgr), $grouptoshow)){
+                    $sub_group[] = explode(',', trim($subgr));
+                }
+            }
+        }else{
+            return false;
+        }
+        //end get value of device
+        if($group != ''){
+            foreach($sub_group as $subg){
+                foreach($subg as $sub){
+
+                    if($sub == 'all_group'){
+                        return true;
+                    }
+                    if($sub == 'not_loged_in'){
+
+                            return true;
+
+                    }
+                    if($sub == 'General'){
+
+                            return true;
+
+                    }
+                    if($sub == 'wholesale'){
+
+                            return true;
+
+                    }
+                    if($sub == 'vip_member'){
+
+                            return true;
+
+                    }
+                    if($sub == 'private_sale_member'){
+
+                            return true;
+
+                    }
+
+                }
+            }
+
+            return false;
+        }else{
+            return false;
+        }
     }
 
 
