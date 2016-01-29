@@ -52,7 +52,6 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
         return Mage::helper('campaign')->checkInclude($specified, $exclude);
     }
 
-
     /**
      * check product show condition
      * @param string $products
@@ -87,13 +86,29 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
         }
     }
 
-    public function checkDevices($devices = ''){
-        return true;
+    //z set visitorsegment check value
+    public function checkDevices(){
+        $devicetoshow = array();
+        $devices = $this->getDevices();
+        if($devices != ''){
+            if(!is_array($devices)){
+                $devicetoshow[] = $devices;
+            }else{
+                $devicetoshow = $devices;
+            }
+
+            //explode in array
+            $sub_device = array();
+            foreach (explode(',', $this->getDevices()) as $subdevice) {
+                if(in_array(trim($subdevice), $devicetoshow)){
+                    $sub_device[] = trim($subdevice);
+                }
+            }
+        }else{
+            return false;
+        }
     }
 
-    public function checkCountry($countries = ''){
-        return true;
-    }
 
     public function checkUserLogin(){
         return true;
@@ -115,9 +130,6 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
         return true;
     }
 
-    public function checkCartSubtotalLessThan(){
-        return true;
-    }
 
     public function checkUserIP(){
         if(!$this->getUserIp()){

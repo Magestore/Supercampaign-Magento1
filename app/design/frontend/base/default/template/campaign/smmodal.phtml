@@ -3,7 +3,10 @@
 <?php $popups = $this->getAllPopupAvailable(); ?>
 <?php foreach ($popups as $key => $popup): ?>
     <?php
-    //Zend_debug::dump($popup->getData());
+    //check device
+    $devices = $this->getDevice();
+//    Zend_debug::dump($devices); die('ewew');
+
     $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
     $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
     $stylepopup = Mage::helper('campaign')->checkStylepopup();

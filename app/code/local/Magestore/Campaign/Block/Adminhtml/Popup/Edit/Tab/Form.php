@@ -285,6 +285,43 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'note'      => 'Seconds to show popup.',
         ));
 
+        //setting popup tab
+        $fieldset->addField('showing_frequency', 'select', array(
+            'label'		=> Mage::helper('campaign')->__('Show Frequency:'),
+            'required'	=> true,
+            'name'		=> 'showing_frequency',
+            'note'      => "Show popup when have had customer's action .",
+            'values' => array(
+                array(
+                    'value' => 'until_user_close',
+                    'label' => Mage::helper('campaign')->__('Show until user close it'),
+                ),
+                array(
+                    'value' => 'only_once',
+                    'label' => Mage::helper('campaign')->__('Only once'),
+                ),
+                array(
+                    'value' => 'every_time',
+                    'label' => Mage::helper('campaign')->__('Every time'),
+                ),
+            ),
+        ));
+
+        $fieldset->addField('cookie_time', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('Cookie Life Time:'),
+            'note'      => 'Set time for cookie to show popup.',
+            'required'	=> false,
+            'name'		=> 'cookie_time',
+        ));
+
+        $fieldset->addField('priority', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('Set Priority:'),
+            'note'      => 'Set priority when have many popup.',
+            'required'	=> false,
+            'name'		=> 'priority',
+        ));
+        //end setting poup tab
+
         if($data['width'] < 1){$data['width'] = 300;}
 
 		$form->setValues($data);

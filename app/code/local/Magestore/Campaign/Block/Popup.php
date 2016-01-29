@@ -62,4 +62,14 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
     public function getAllPopupAvailable(){
         return Mage::getModel('campaign/supercampaign')->getPopups();
     }
+
+    /**
+     * get all device to show campaigns
+     * @return mixed
+     */
+
+    public function getDevice(){
+        return Mage::getModel('campaign/popup')->checkDevices();
+    }
+
 }
