@@ -40,34 +40,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'values'	=> Magestore_Campaign_Model_Status::getOptionHash(),
         ));
 
-		/*$fieldset->addField('popup_type', 'select', array(
-			'label'		=> Mage::helper('campaign')->__('Popup Content Type:'),
-			'required'	=> true,
-			'name'		=> 'popup_type',
-            'note'      => 'Type of popup.',
-            'values' => array(
-                array(
-                    'value' => 'static',
-                    'label' => Mage::helper('campaign')->__('Static'),
-                ),
-                array(
-                    'value' => 'video',
-                    'label' => Mage::helper('campaign')->__('Video'),
-                ),
-                array(
-                    'value' => 'sticker',
-                    'label' => Mage::helper('campaign')->__('Sticker'),
-                ),
-                array(
-                    'value' => 'subscribe',
-                    'label' => Mage::helper('campaign')->__('Subscribe'),
-                ),
-                array(
-                    'value' => 'register',
-                    'label' => Mage::helper('campaign')->__('Register'),
-                ),
-            ),
-		));*/
 
         $fieldset->addField('template_code', 'hidden', array(
             'name'		=> 'template_code',
@@ -195,11 +167,52 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             ),
         ));
 
+        $categoryIds = implode(", ", Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('level', array('gt' => 0))->getAllIds());
+        if(!isset($data['categories'])){
+            $data['categories'] = $categoryIds;
+        }
         $categories = $fieldset->addField('categories', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Category Ids:'),
-            'required'	=> false,
-            'name'		=> 'categories',
-            'note'      => 'Show popup for categories have selected.',
+            'label' => Mage::helper('campaign')->__('Categories Ids:'),
+            'name' => 'categories',
+            'after_element_html' => '<a id="category_link" href="javascript:void(0)" onclick="toggleMainCategories()"><img src="' . $this->getSkinUrl('images/rule_chooser_trigger.gif') . '" alt="" class="v-middle rule-chooser-trigger" title="Select Categories"></a>
+                <div  id="categories_check" style="display:none">
+                    <a href="javascript:toggleMainCategories(1)">Check All</a> / <a href="javascript:toggleMainCategories(2)">Uncheck All</a>
+                </div>
+                <div id="main_categories_select" style="display:none"></div>
+                    <script type="text/javascript">
+                    function toggleMainCategories(check){
+                        var cate = $("main_categories_select");
+                        if($("main_categories_select").style.display == "none" || (check ==1) || (check == 2)){
+                            $("categories_check").style.display ="";
+                            var url = "' . $this->getUrl('campaignadmin/adminhtml_popup/chooserMainCategories') . '";
+                            if(check == 1){
+                                $("categories").value = $("category_all_ids").value;
+                            }else if(check == 2){
+                                $("categories").value = "";
+                            }
+                            var params = $("categories").value.split(", ");
+                            var parameters = {"form_key": FORM_KEY,"selected[]":params };
+                            var request = new Ajax.Request(url,
+                                {
+                                    evalScripts: true,
+                                    parameters: parameters,
+                                    onComplete:function(transport){
+                                        $("main_categories_select").update(transport.responseText);
+                                        $("main_categories_select").style.display = "block";
+                                    }
+                                });
+                        if(cate.style.display == "none"){
+                            cate.style.display = "";
+                        }else{
+                            cate.style.display = "none";
+                        }
+                    }else{
+                        cate.style.display = "none";
+                        $("categories_check").style.display ="none";
+                    }
+                };
+		</script>
+            '
         ));
 
         $specified_url = $fieldset->addField('specified_url', 'text', array(
@@ -277,8 +290,8 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                 ->addFieldMap($show_when->getHtmlId(), $show_when->getName())
                 ->addFieldMap($show_on_page->getHtmlId(), $show_on_page->getName())
                 ->addFieldMap($specified_url->getHtmlId(), $specified_url->getName())
-                ->addFieldMap($other_page->getHtmlId(), $other_page->getName())
                 ->addFieldMap($categories->getHtmlId(), $categories->getName())
+                ->addFieldMap($other_page->getHtmlId(), $other_page->getName())
                 ->addFieldMap($productidpage->getHtmlId(), $productidpage->getName())
                 ->addFieldMap($seconds_number0->getHtmlId(), $seconds_number0->getName())
                 ->addFieldDependence(
