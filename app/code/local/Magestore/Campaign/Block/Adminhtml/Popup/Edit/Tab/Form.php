@@ -289,7 +289,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'note'      => "Show popup when have had customer's action .",
             'values' => array(
                 array(
-                    'value' => 'until_user_close',
+                    'value' => 'until_close',
                     'label' => Mage::helper('campaign')->__('Show until user close it'),
                 ),
                 array(
@@ -299,6 +299,10 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                 array(
                     'value' => 'every_time',
                     'label' => Mage::helper('campaign')->__('Every time'),
+                ),
+                array(
+                    'value' => 'only_trigger',
+                    'label' => Mage::helper('campaign')->__('Only trigger'),
                 ),
             ),
         ));
