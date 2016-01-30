@@ -162,10 +162,14 @@ var Scpopup = function () {
         }
         return cssHead;
     };
+    this.setFrequencyCookie = function(){
+        $j.post(this.cookieUrl, {'frequency_showed':1, 'popup_id':this.idPopup},function(response){
+            console.log(response);
+        });
+    };
     this.getFrequencyCookie = function(){
         document.cookie="showedPopup=1; expires=Thu, 18 Dec 2013 12:00:00 UTC";
     };
-
     this.checkCookie = function(){
 
         if(this.frequency =='only_once'){
@@ -242,6 +246,11 @@ var Scpopup = function () {
         var stringcss = "<style type=\"text/css\">" + this.showPosition() + this.showOverlayColor() + this.showStylePopup() + this.showCloseIcon(this.urlImages) + "</style>";
         $j('html > head').append(stringcss);
     };
+    this.modalShow = function(id){
+        $j("#sc-popup" + id).modal('show');
+        //set cookie when showing
+        this.setFrequencyCookie();
+    };
     this.showPopup = function () {
         var idPopup = this.idPopup;
         var scdelay = this.secondDelay;
@@ -249,18 +258,18 @@ var Scpopup = function () {
             if (scdelay != "") {
                 var timedelay = 1000 * scdelay;
                 setTimeout(function () {
-                    $j("#sc-popup" + idPopup).modal('show');
+                    this.modalShow(idPopup);
                 }, timedelay);
             }
         } else if (this.showWhen == 'after_load_page') {
-            $j("#sc-popup" + idPopup).modal('show');
+            this.modalShow(idPopup);
         }
     };
     this.initTrigger = function () {
         if(this.trigger_popup != '' && this.trigger_popup != null){
             var trigger_idpopup = this.trigger_popup;
             $j('.target_popup'+trigger_idpopup).click(function(){
-                $j("#sc-popup" + trigger_idpopup).modal('show');
+                this.modalShow(trigger_idpopup);
             });
         }
     };
