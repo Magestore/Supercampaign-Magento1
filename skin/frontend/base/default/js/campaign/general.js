@@ -27,6 +27,8 @@ var Scpopup = function () {
     this.status = false;
     this.priority = "";
     this.frequency = "";
+    this.trigger_popup = "";
+    this.cookiePopup = "";
 
     this.runEffect = function () {
         var effectPopup = this.effect;
@@ -160,6 +162,17 @@ var Scpopup = function () {
         }
         return cssHead;
     };
+    this.getFrequencyCookie = function(){
+        document.cookie="showedPopup=1; expires=Thu, 18 Dec 2013 12:00:00 UTC";
+    };
+
+    this.checkCookie = function(){
+
+        if(this.frequency =='only_once'){
+
+        }
+        return false;
+    };
     this.showStylePopup = function () {
         var bColor = this.borderColor;
         var bSize = this.borderSize;
@@ -243,9 +256,18 @@ var Scpopup = function () {
             $j("#sc-popup" + idPopup).modal('show');
         }
     };
+    this.initTrigger = function () {
+        if(this.trigger_popup != '' && this.trigger_popup != null){
+            var trigger_idpopup = this.trigger_popup;
+            $j('.target_popup'+trigger_idpopup).click(function(){
+                $j("#sc-popup" + trigger_idpopup).modal('show');
+            });
+        }
+    };
     this.initPopup = function () {
         this.addCssToHead();
         this.runEffect();
+        this.initTrigger();
         return this;
     };
     /* this.hidePopup = function () {
