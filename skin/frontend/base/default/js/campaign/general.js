@@ -15,6 +15,7 @@ var Scpopup = function () {
     this.bgColor = "";
     this.overlayColor = "";
     this.closeStyle = "";
+    this.cornerStyle = "";
     this.cornerRadius = "";
     this.horizontalPosition = "";
     this.verticalPosition = "";
@@ -25,6 +26,7 @@ var Scpopup = function () {
     this.urlImages = "";
     this.status = false;
     this.priority = "";
+    this.frequency = "";
 
     this.runEffect = function () {
         var effectPopup = this.effect;
@@ -161,7 +163,7 @@ var Scpopup = function () {
     this.showStylePopup = function () {
         var bColor = this.borderColor;
         var bSize = this.borderSize;
-        var bRadius = this.cornerRadius;
+        var bRadius = this.cornerStyle;
         var padding = this.paddingSize;
         var width = this.width;
         var bgContentColor = this.bgColor;
@@ -176,13 +178,15 @@ var Scpopup = function () {
             switch (bRadius) {
                 case 'rounded':
                     cssBRadius = "#sc-popup" + this.idPopup + " .modal-content{border-radius:" + this.cornerRadius + "px;}";
+                    cssBRadius = cssBRadius + "#sc-popup" + this.idPopup + " .modal-content .content-popup{overflow:hidden;border-radius:"+this.cornerRadius + "px;}";
                     break;
                 case 'sharp':
                     cssBRadius = "#sc-popup" + this.idPopup + " .modal-content{border-radius:0px;}";
                     break;
                 case 'circle':
+                    var padding_circle = (width/2) - Math.round(width/2.8);
                     cssBRadius = "#sc-popup" + this.idPopup + " .modal-content{border-radius:50%;}";
-                    cssBRadius = cssBRadius + " #sc-popup" + this.idPopup + " .modal-content{height:" + width + "px;} #sc-popup" + this.idPopup + " .modal-content .content-popup{overflow:hidden;height:100%;width:100%;border-radius:50%}";
+                    cssBRadius = cssBRadius + " #sc-popup" + this.idPopup + " .modal-content{height:" + width + "px;} #sc-popup" + this.idPopup + " .modal-content .content-popup{overflow:hidden;height:100%;width:100%;padding:"+padding_circle +"px}";
                     break;
                 default:
                     cssBRadius = "#sc-popup" + this.idPopup + " .modal-content{border-radius:0px;}";
@@ -226,18 +230,8 @@ var Scpopup = function () {
         $j('html > head').append(stringcss);
     };
     this.showPopup = function () {
-        /* _this = this;
-         this.idClose = "close-" + this.idPopup;
-         $j('#' + this.idClose).click(function () {
-         _this.hidePopup();
-         });
-         */
         var idPopup = this.idPopup;
         var scdelay = this.secondDelay;
-        console.log(idPopup + 'seconday' + scdelay);
-        console.log("#sc-popup" + idPopup);
-        this.addCssToHead();
-        this.runEffect();
         if (this.showWhen == 'after_seconds') {
             if (scdelay != "") {
                 var timedelay = 1000 * scdelay;
@@ -248,6 +242,10 @@ var Scpopup = function () {
         } else if (this.showWhen == 'after_load_page') {
             $j("#sc-popup" + idPopup).modal('show');
         }
+    };
+    this.initPopup = function () {
+        this.addCssToHead();
+        this.runEffect();
         return this;
     };
     /* this.hidePopup = function () {

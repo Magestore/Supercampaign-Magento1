@@ -23,8 +23,8 @@ $popups = $this->getAllPopupAvailable();
                 <a id="close-<?php echo $popup->getData('popup_id') ?>" class="dialogClose style1 overlay2"
                    data-dismiss="modal"
                    data-target="#sc-popup<?php echo $popup->getData('popup_id') ?>"></a>
-                <?php $trigger = ''; if($popup->getData('trigger_popup')) $trigger = 'data-toggle="modal" data-target="#sc-popup'.$popup->getData('trigger_popup').'""'; ?>
-                <div class="content-popup" <?php echo $trigger ?>>
+                <?php $trigger = ''; if($popup->getData('trigger_popup')) $trigger = 'target_popup'.$popup->getData('trigger_popup'); ?>
+                <div class="content-popup <?php echo $trigger ?>">
                     <?php echo $helper->convertContentToHtml($popup->getData('popup_content')); ?>
                 </div>
             </div>
@@ -53,7 +53,8 @@ $popups = $this->getAllPopupAvailable();
         Popup.bgColor = dataPopup[id].popup_background;
         Popup.overlayColor = dataPopup[id].overlay_color;
         Popup.closeStyle = dataPopup[id].close_style;
-        Popup.cornerRadius = dataPopup[id].corner_style;
+        Popup.cornerStyle = dataPopup[id].corner_style;
+        Popup.cornerRadius = dataPopup[id].border_radius;
         Popup.horizontalPosition = dataPopup[id].horizontal_position;
         Popup.verticalPosition = dataPopup[id].vertical_position;
         Popup.horizontalPx = dataPopup[id].horizontal_px;
@@ -62,6 +63,7 @@ $popups = $this->getAllPopupAvailable();
         Popup.showWhen = dataPopup[id].show_when;
         Popup.status = dataPopup[id].status;
         Popup.priority = id;
+        Popup.frequency = dataPopup[id].frequency;
         Popup.urlImages = "<?php echo $this->getBaseUrl();?>" + "skin/frontend/base/default/";
         Popup.trigger_popup = dataPopup[id].trigger_popup;
         Popups[id] = Popup;
@@ -69,23 +71,47 @@ $popups = $this->getAllPopupAvailable();
     }
     $j(window).bind("load", function () {
         var triggerPopupIds = [];
+        var noTrigger = [];
+
         for (var i = Popups.length - 1; i >= 0; i--) {
             if(Popups[i].trigger_popup != '' && Popups[i].trigger_popup != null){
                 triggerPopupIds.push(Popups[i].trigger_popup);
             }
+            else{
+                noTrigger.push(Popups[i].idPopup);
+            }
         }
         for (var i = Popups.length - 1; i >= 0; i--) {
-            if($j.inArray(Popups[i].idPopup, triggerPopupIds) < 0){
-                Popups[i].showPopup();
+            Popups[i].initPopup();
+        }
+        for (var i = Popups.length - 1; i >= 0; i--) {
+           if(Popups[i].frequency =='trigger'){
+               continue;
+           }
+            Popups[i].showPopup();
+            /*if($j.inArray(Popups[i].idPopup, triggerPopupIds) < 0){
+
+                var triggerNumber = Popups[i].trigger_popup;
+                for(var j = noTrigger.length; j >= 0; j--){
+                    if($j.inArray(triggerNumber, noTrigger) >= 0){
+                        trigger_id = triggerNumber;
+                    }
+                }
             }
 
-            /*Popups[i].onClose(function (_priority) {
-             if (Popups[_priority - 1]) {
-             Popups[_priority - 1].showPopup();
-             }
-             });*/
-        }
+            if(trigger_id){
+                alert(trigger_id);
+                var classTrigger = '.target_popup' + trigger_id;
+                for(var k = i-1; k>=0; k--){
+                    if(Popups[k].idPopup == trigger_id){
+                        $j(classTrigger).click(function () {
+                            Popups[k].initPopup();
+                        });
+                    }
+                }
+            }*/
 
+        }
 
     });
 </script>
