@@ -164,11 +164,12 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
         }
     }
 
+
     /*Functions below for Visitorsegment*/
     //z set visitorsegment check value
     public function checkDevices(){
         $detector = new Mobile_Detect();
-        $devices = $this->getDevices();
+        //$devices = $this->getDevices(); //comment
         $devicetoshow = array();
         $devices = $this->getDevices();
         if($devices != ''){
@@ -248,8 +249,55 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
      * option show with new user or visited user
      * @return bool
      */
+    //check enable cookie
+    public function enableCookie(){
+        $enable = $this->getCookiesEnabled();
+        if($enable != ''){
+            if($enable == 1){
+                $this->checkReturnCustomer();
+            }else{
+                return false;
+            }
+        }
+    }
+
     public function checkReturnCustomer(){
-        return true;
+
+        $login = Mage::getSingleton('customer/session')->isLoggedIn();
+        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+
+            $customer = Mage::getSingleton('customer/session')->getCustomer();
+            $customer_name = $customer->getName();
+        }
+        $ipcustomer = Mage::helper('core/http')->getRemoteAddr();
+        $popupid = $this->getPopupId();
+        $camPaignid = $this->getCampaignId();
+        $getReturn = $this->getReturningUser();
+        $cookiepopup = $this->getCookieTime();
+
+        $customer_cookie = Mage::getModel('core/cookie')->get($ipcustomer);
+        $allcookie = Mage::getModel('core/cookie')->get();
+
+        //check cookie customer
+        if(isset($_COOKIE[$ipcustomer])) {
+            if($getReturn == 'new'){
+                return false;
+            }
+            if($getReturn == 'return'){
+                return true;
+            }
+        }
+        //set cookie for new customer
+        if(!isset($_COOKIE[$ipcustomer])) {
+                if($ipcustomer){
+                        //set cookie for customer
+                        $name = $ipcustomer;
+                        $value = $customer_name;
+                        $period = $cookiepopup;
+                        Mage::getModel('core/cookie')->set($name, $value, $period);
+                }
+            return true;
+        }
     }
 
     /**
@@ -260,6 +308,13 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
 
         $grouptoshow = array();
         $group = $this->getCustomerGroupIds();
+
+        //call group code of group customer
+        $login = Mage::getSingleton('customer/session')->isLoggedIn();
+        $gid = Mage::getSingleton('customer/session')->getCustomerGroupId();
+        $groupcustomer = Mage::getModel('customer/group')->load($gid);
+        $groupcode = $groupcustomer->getCustomerGroupCode();
+
         if($group != ''){
             if(!is_array($group)){
                 $grouptoshow[] = $group;
@@ -273,58 +328,82 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
                     $sub_group[] = explode(',', trim($subgr));
                 }
             }
+
         }else{
             return false;
         }
+
         //end get value of device
         if($group != ''){
+
             foreach($sub_group as $subg){
                 foreach($subg as $sub){
 
                     if($sub == 'all_group'){
                         return true;
+                        //break;
                     }
                     if($sub == 'not_loged_in'){
-
-                            return true;
-
+                        if($login == false){
+                            if($groupcode == 'NOT LOGGED IN'){
+                                return true;
+                            }
+                        }
+                        //break;
                     }
-                    if($sub == 'General'){
+                    if($sub == 'general'){
 
+                        if($groupcode == 'General'){
                             return true;
+                        }
+                        //break;
 
                     }
                     if($sub == 'wholesale'){
 
+                        if($groupcode == 'Wholesale'){
                             return true;
-
+                        }
+                        //break;
                     }
                     if($sub == 'vip_member'){
 
+                        if($groupcode == 'VIP Member'){
                             return true;
-
+                        }
+                        break;
                     }
                     if($sub == 'private_sale_member'){
 
+                        if($groupcode == 'Private Sales Member'){
                             return true;
-
+                        }
+                        //break;
                     }
 
                 }
             }
 
+
             return false;
         }else{
             return false;
         }
+        //return true;
     }
 
 
     public function checkUserIP(){
-        if(!$this->getUserIp()){
-            return false;
+        $ipcustomer = Mage::helper('core/http')->getRemoteAddr();
+
+        $ipdata = $this->getUserIp();
+
+        if($ipdata != ''){
+           if($ipdata == $ipcustomer){
+               return true;
+           }
         }
-        return true;
+        return false;
     }
 
     /*End for check visitorsegment*/

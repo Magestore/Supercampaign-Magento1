@@ -39,6 +39,23 @@ class Magestore_Campaign_Model_Observer
         return $this;
     }
 
+
+    public function subscribedToNewsletter(Varien_Event_Observer $observer)
+    {
+        $event = $observer->getEvent();
+        $subscriber = $event->getDataObject();
+        $data = $subscriber->getData();
+        //zend_debug::dump($data); die('phuong');
+        $statusChange = $subscriber->getIsStatusChanged();
+
+        // Trigger if user is now subscribed and there has been a status change:
+        if ($data['subscriber_status'] == "1" && $statusChange == true) {
+            // Insert your code here
+        }
+        return $observer;
+    }
+
+
     /**
      * update final price product for get add to cart and checkout
      * @param $observer

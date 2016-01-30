@@ -291,6 +291,14 @@
                     </campaign_observers>
                 </observers>
             </catalog_block_product_list_collection>
+            <newsletter_subscriber_save_commit_after>
+                <observers>
+                    <magestore_campaign_model_observer>
+                        <class>Magestore_Campaign_Model_Observer</class>
+                        <method>subscribedToNewsletter</method>
+                    </magestore_campaign_model_observer>
+                </observers>
+            </newsletter_subscriber_save_commit_after>
         </events>
 
         <!--add rewardpoints action-->
