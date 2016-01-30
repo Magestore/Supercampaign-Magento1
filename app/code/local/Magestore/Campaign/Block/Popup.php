@@ -60,7 +60,14 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
      * @return mixed
      */
     public function getAllPopupAvailable(){
-        return Mage::getModel('campaign/supercampaign')->getPopups();
+        $popups = Mage::getModel('campaign/supercampaign')->getPopups();
+        //popup frontend variable cookies
+        foreach ($popups as $popup) {
+            $cookie = Mage::getModel('core/cookie');
+            $cookie->set('showed_popup_'.$popup->getId(), 1, $popup->getData('showing_frequency'));
+        }
+        return $popups;
+
     }
 
     /**
