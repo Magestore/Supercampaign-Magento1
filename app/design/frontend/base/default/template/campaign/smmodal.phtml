@@ -11,7 +11,7 @@ $popups = $this->getAllPopupAvailable();
     $userlogin = $this->getUserlogin();
     $customergroup = $this->getCustomerGroup();
    //var_dump($devices); //die('34343');
-    Zend_debug::dump($popup->getData());
+    //Zend_debug::dump($popup->getData());
     $segmentpopup = Mage::helper('campaign')->checkSegmentpopup();
     $cookiepopup = Mage::helper('campaign')->checkCookiepopup();
     $stylepopup = Mage::helper('campaign')->checkStylepopup();
@@ -23,7 +23,10 @@ $popups = $this->getAllPopupAvailable();
                 <a id="close-<?php echo $popup->getData('popup_id') ?>" class="dialogClose style1 overlay2"
                    data-dismiss="modal"
                    data-target="#sc-popup<?php echo $popup->getData('popup_id') ?>"></a>
-                <div class="content-popup"><?php echo $helper->convertContentToHtml($popup->getData('popup_content')); ?></div>
+                <?php $trigger = ''; if($popup->getData('trigger_popup')) $trigger = 'data-toggle="modal" data-target="#sc-popup'.$popup->getData('trigger_popup').'""'; ?>
+                <div class="content-popup" <?php echo $trigger ?>>
+                    <?php echo $helper->convertContentToHtml($popup->getData('popup_content')); ?>
+                </div>
             </div>
         </div>
     </div>
@@ -60,19 +63,30 @@ $popups = $this->getAllPopupAvailable();
         Popup.status = dataPopup[id].status;
         Popup.priority = id;
         Popup.urlImages = "<?php echo $this->getBaseUrl();?>" + "skin/frontend/base/default/";
+        Popup.trigger_popup = dataPopup[id].trigger_popup;
         Popups[id] = Popup;
+
     }
     $j(window).bind("load", function () {
-
+        var triggerPopupIds = [];
         for (var i = Popups.length - 1; i >= 0; i--) {
-            Popups[i].showPopup();
-            /*Popups[i].onClose(function (_priority) {
-                if (Popups[_priority - 1]) {
-                    Popups[_priority - 1].showPopup();
-                }
-            });*/
-
+            if(Popups[i].trigger_popup != '' && Popups[i].trigger_popup != null){
+                triggerPopupIds.push(Popups[i].trigger_popup);
+            }
         }
+        for (var i = Popups.length - 1; i >= 0; i--) {
+            if($j.inArray(Popups[i].idPopup, triggerPopupIds) < 0){
+                Popups[i].showPopup();
+            }
+
+            /*Popups[i].onClose(function (_priority) {
+             if (Popups[_priority - 1]) {
+             Popups[_priority - 1].showPopup();
+             }
+             });*/
+        }
+
+
     });
 </script>
 
