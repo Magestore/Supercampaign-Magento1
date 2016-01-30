@@ -16,14 +16,32 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
 
     public function editAction() {
         $id	 = $this->getRequest()->getParam('id');
+        //skip old data popup when load template from old popup editing
+        $editIdNewFromTemplate = Mage::getSingleton('adminhtml/session')->getPopupIdNewFromTemplate();
+        if(isset($editIdNewFromTemplate)){
+            $id = $editIdNewFromTemplate;
+        }
+        //end
+
         $model  = Mage::getModel('campaign/popup')->load($id);
 
         if ($model->getId() || $id == 0) {
             $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
-            if (!empty($data))
-                $model->setData($data);
+
+            //skip old data popup when load template from old popup editing
+            if (!empty($data)){
+                if(isset($editIdNewFromTemplate)){
+                    $model->addData($data);
+                }else{
+                    $model->setData($data);
+                }
+            }
+            //end
+
 
             Mage::register('popup_data', $model);
+            Mage::getSingleton('adminhtml/session')->setPopupEditId($id);
+
 
             $this->loadLayout();
             $this->_setActiveMenu('campaign/popup');
@@ -100,7 +118,6 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
 
     public function saveAction() {
         if ($data = $this->getRequest()->getPost()) {
-            //zend_debug::dump($data); die('ccc');
 
             //save store
             if(isset($data['store']) && is_array($data['store'])){
@@ -126,12 +143,17 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
                 $data['devices'] = $store.',';
             }
 
-
-
-
+            $id = $this->getRequest()->getParam('id');
+            //skip old data popup when load template from old popup editing
+            //get session and clear with true option
+            $editIdNewFromTemplate = Mage::getSingleton('adminhtml/session')->getPopupIdNewFromTemplate(true);
+            if(isset($editIdNewFromTemplate)){
+                $id = $editIdNewFromTemplate;
+            }
+            //end
             $model = Mage::getModel('campaign/popup');
             $model->setData($data)
-                ->setId($this->getRequest()->getParam('id'));
+                ->setId($id);
 
             try {
                 if ($model->getCreatedTime == NULL || $model->getUpdateTime() == NULL)
@@ -247,7 +269,16 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
         if($template->getId()){
             $data = $template->getData();
             $data['popup_content'] = $template->getTemplateContentHtml();
+            //skip old data popup when load template from old popup editing
+            $popupEditId = Mage::getSingleton('adminhtml/session')->getPopupEditId();
+            if(isset($popupEditId)){
+                unset($data['title']);//skip replace title in old popup
+            }
+            Mage::getSingleton('adminhtml/session')->setPopupIdNewFromTemplate(
+                Mage::getSingleton('adminhtml/session')->getPopupEditId(true));
+            //end
             Mage::getSingleton('adminhtml/session')->setFormData($data);
+
         }else{
             Mage::getSingleton('adminhtml/session')->addError('Can\' load template.');
         }
