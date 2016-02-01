@@ -54,7 +54,7 @@ $popups = $this->getAllPopupAvailable();
         Popup.status = dataPopup[id].status;
         Popup.priority = id;
         Popup.frequency = dataPopup[id].showing_frequency;
-        Popup.urlImages = "<?php echo $this->getBaseUrl();?>" + "skin/frontend/base/default/";
+        Popup.urlImages = "<?php echo $this->getBaseUrl('skin/frontend/base/default');?>";
         Popup.trigger_popup = dataPopup[id].trigger_popup;
         Popups[id] = Popup;
 
@@ -81,5 +81,6 @@ $popups = $this->getAllPopupAvailable();
             Popups[i].showPopup();
         }
     });
+
 </script>
 
