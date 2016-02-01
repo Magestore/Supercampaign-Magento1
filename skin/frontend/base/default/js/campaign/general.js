@@ -173,7 +173,9 @@ var Scpopup = function () {
         var Params = new Object;
         Params['popup_showed_'+_id] = 1;
         Params['popup_id'] = _id;
-        this.setCookie(Params);
+        if(this.getCookie('popup_showed_'+_id) != ''){
+            this.setCookie(Params);
+        }
     };
     this.setClosedCookie = function(id){
         var _id = '';
@@ -185,7 +187,9 @@ var Scpopup = function () {
         var Params = new Object;
         Params['popup_closed_'+_id] = 1;
         Params['popup_id'] = _id;
-        this.setCookie(Params);
+        if(this.getCookie('popup_closed_'+_id) != ''){
+            this.setCookie(Params);
+        }
     };
     this.setCookie = function(params){
         $j.post(this.cookieUrl, params,function(response){
@@ -263,15 +267,15 @@ var Scpopup = function () {
         switch (this.closeStyle) {
             case 'circle':
                 if (this.overlayColor == 'white') {
-                    cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_dark.png) no-repeat 5px 5px}";
+                    cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(skin/frontend/base/default/images/campaign/popup/close_dark.png) no-repeat 5px 5px}";
                 } else if (this.overlayColor == 'dark') {
-                    cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_white.png) no-repeat 5px 5px}";
+                    cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(skin/frontend/base/default/images/campaign/popup/close_white.png) no-repeat 5px 5px}";
                 } else {
-                    cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_dark.png) no-repeat 5px 0;top:5px;right:5px;}";
+                    cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(skin/frontend/base/default/images/campaign/popup/close_dark.png) no-repeat 5px 0;top:5px;right:5px;}";
                 }
                 break;
             case 'simple':
-                cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(" + this.urlImages + "images/campaign/popup/close_promotion.png) no-repeat 5px -20px}";
+                cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url(skin/frontend/base/default/images/campaign/popup/close_promotion.png) no-repeat 5px -20px}";
                 break;
             case 'none':
                 cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:none transparent}";
@@ -328,7 +332,8 @@ var Scpopup = function () {
         });
     };
     this.initCloseBackground = function(){
-        $j("#sc-popup" + this.idPopup+".modal-backdrop").on('click', function(ev) {
+        var _this = this;
+        $j("#sc-popup" + this.idPopup+" .modal-backdrop").on('click', function(ev) {
             _this.closeBackground();
             ev.preventDefault();
         });
