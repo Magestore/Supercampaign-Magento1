@@ -61,6 +61,18 @@ class Magestore_Campaign_Adminhtml_BannersliderController extends Mage_Adminhtml
     }
 
     /**
+     *change status banner slider
+     */
+    public function disableSliderAction() {
+        $params = $this->getRequest()->getParams();
+        $slider_id = $params['id'];
+        $model_slider = Mage::getModel('campaign/bannerslider')->load($slider_id);
+        $model_slider->setStatus(1);
+        $model_slider->save();
+        $this->_redirect('*/*/');
+    }
+
+    /**
      * view and edit item action
      */
     public function editAction() {

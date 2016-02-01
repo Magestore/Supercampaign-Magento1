@@ -141,6 +141,25 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Banner_Grid extends M
                 'is_system'    => true,
             ));
 
+        $this->addColumn('action_delete',
+            array(
+                'header'    =>    Mage::helper('campaign')->__('Disable'),
+                'width'        => '100',
+                'type'        => 'action',
+                'getter'    => 'getId',
+                'actions'    => array(
+                    array(
+                        'caption'    => Mage::helper('campaign')->__('Disable slider'),
+                        'url'        => array('base'=> '*/adminhtml_bannerslider/disableSlider'),
+                        //'onclick' => 'return saveAndContinueEdit();',
+                        'field'        => 'id'
+                    )),
+                'filter'    => false,
+                'sortable'    => false,
+                'index'        => 'stores',
+                'is_system'    => true,
+            ));
+
         $this->addExportType('*/*/exportCsv', Mage::helper('campaign')->__('CSV'));
         $this->addExportType('*/*/exportXml', Mage::helper('campaign')->__('XML'));
 
