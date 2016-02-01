@@ -65,7 +65,7 @@ class Magestore_Campaign_Model_Observer
 
             //luu du lieu
             $modelsubcribe->setCampaignId($campaign_id);
-            $modelsubcribe->setCampainName($campaign_name);
+            $modelsubcribe->setCampaignName($campaign_name);
             $modelsubcribe->save();
         }
         return $observer;

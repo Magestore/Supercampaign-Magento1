@@ -25,8 +25,8 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
                     'label' => Mage::helper('campaign')->__('Rounded'),
                 ),
                 array(
-                    'value' => 'shapr',
-                    'label' => Mage::helper('campaign')->__('Shapr'),
+                    'value' => 'sharp',
+                    'label' => Mage::helper('campaign')->__('Sharp'),
                 ),
                 array(
                     'value' => 'circle',
