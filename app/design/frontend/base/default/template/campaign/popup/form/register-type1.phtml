@@ -1,8 +1,8 @@
-<form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate">
+<form action="<?php echo $this->getUrl('customer/account/createpost') ?>" method="post" id="sc-register-form">
     <div class="fieldset">
         <input type="hidden" name="success_url" value="">
         <input type="hidden" name="error_url" value="">
-        <p class="form-instructions">Please enter the following information to create your account.</p>
+
         <p class="required">* Required Fields</p>
         <ul class="form-list">
             <li class="fields">
@@ -80,7 +80,22 @@
         </script>
     </div>
     <div class="buttons-set">
-        <p class="back-link"><a href="http://localhost.com/campaign/customer/account/login/" class="back-link"><small>« </small>Back</a></p>
+        <p class="back-link"><a style="cursor:pointer" class="back-link campaign-login"><small>« </small>Login</a></p>
         <button type="submit" title="Register" class="button"><span><span>Register</span></span></button>
     </div>
+</form>
+
+<form style="display:none" action="<?php echo $this->getUrl('customer/account/login/')?>" method="post" id="sc-login">
+    <ul>
+        <li>
+            <input type="text" name="login_email" placeholder="Enter Your Email" title="Enter Your Email">
+        </li>
+        <li>
+            <input type="password" name="login_password" placeholder="Password" title="Select Your Password">
+        </li>
+        <li style="text-align:right">
+            <button title="Login" type="submit" style="border:0 none;background:green;padding:7px 15px;margin-top:20px;color:#fff"> Login </button>
+        </li>
+    </ul>
+    <p><a href="<?php echo $this->getUrl('customer/account/forgotpassword/')?>">Forgot password?</a> | <a href="#" class="campaign-register">Register</a></p>
 </form>
