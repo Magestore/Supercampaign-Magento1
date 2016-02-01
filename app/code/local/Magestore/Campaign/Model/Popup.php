@@ -199,6 +199,33 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
         }
     }
 
+    /**
+     * run with Onestepcheckout of Magestore
+     * @return bool
+     */
+    public function checkIsOnCheckoutPage(){
+        $request = Mage::app()->getRequest();
+        if(($request->getModuleName() == 'checkout'
+                && $request->getControllerName() == 'onepage'
+                && $request->getActionName() == 'index') ||
+            ($request->getModuleName() == 'onestepcheckout'
+                && $request->getControllerName() == 'index'
+                && $request->getActionName() == 'index')){
+            return true;
+        }else{
+            //if not on cart page is not show
+            return false;
+        }
+    }
+
+    public function checkShowOnHomePage(){
+        if(Mage::getBlockSingleton('page/html_header')->getIsHomePage()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     /*Functions below for Visitorsegment*/
     //z set visitorsegment check value
