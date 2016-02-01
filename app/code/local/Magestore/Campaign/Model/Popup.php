@@ -441,5 +441,14 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     }
 
     /*End for check visitorsegment*/
+
+    public function getCouponCode(){
+        $campaign = Mage::getModel('campaign/campaign')->load($this->getCampaignId());
+        if($campaign->getId()){
+            return $campaign->getCouponCode();
+        }else{
+            return '';
+        }
+    }
 }
 
