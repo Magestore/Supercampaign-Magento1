@@ -5,6 +5,20 @@ $helper = Mage::helper('campaign');
 $popups = $this->getAllPopupAvailable();
 ?>
 <?php foreach ($popups as $key => $popup): ?>
+    <?php
+    $name = 'popupcampaign';
+    $customer_cookie = Mage::getModel('core/cookie')->get($name);
+
+    if($customer_cookie == false){
+        $popup_id = $popup->getData('popup_id');
+        $campaign_id = $popup->getData('campaign_id');
+        $priority = $popup->getData('priority');
+        $value = '_pid:'.$popup_id;
+        $period = 600;
+        Mage::getModel('core/cookie')->set($name, $value, $period);
+    }
+
+    ?>
     <div id="sc-popup<?php echo $popup->getData('popup_id') ?>"
          class="modal fade sc-popup<?php echo $popup->getData('template_code') ?>" role="dialog">
         <div class="modal-dialog">

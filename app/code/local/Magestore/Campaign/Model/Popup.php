@@ -207,7 +207,7 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
         $devicetoshow = array();
         $devices = $this->getDevices();
         if($devices != ''){
-            if(!is_array($group)){
+            if(!is_array($devices)){
                 $devicetoshow[] = $devices;
             }else{
                 $devicetoshow = $devices;

@@ -91,19 +91,10 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
             'values' => Mage::getSingleton('campaign/sliderstatus')->getOptionHash(),
         ));
 		
-		$fieldset->addField('style_content', 'select', array(
+		$fieldset->addField('style_content', 'hidden', array(
             'label' => Mage::helper('campaign')->__('Select available Slider Styles'),
             'name' => 'style_content',           
-            'values' => array(
-                array(
-                    'value' => 1,
-                    'label' => Mage::helper('campaign')->__('Yes'),
-                ),
-                array(
-                    'value' => 0,
-                    'label' => Mage::helper('campaign')->__('No'),
-                ),
-            ),
+            'values' => 0,
             'onchange'	=> 'onchangeStyleShow()',
         ));
 
@@ -121,7 +112,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
             'label' => Mage::helper('campaign')->__('Select Slider Mode'),
             'name' => 'style_slide',
             'values' => Mage::helper('campaign')->getStyleSlider(),
-            'note'   => '<a href="javasrcipt:void(0)" target="_blank" id="style-slide-view">Preview</a>',
+            'note'   => '<a href="javasrcipt:void(0)" target="_blank" id="style-slide-view"></a>',
             'onchange'	=> 'onchangeStyleSlider(0)',
         ));
         

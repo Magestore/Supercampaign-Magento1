@@ -25,21 +25,15 @@ $installer = $this;
 $installer->startSetup();
 
 $installer->run("
-
     ALTER TABLE {$this->getTable('campaign/popup')}
         ADD COLUMN `trigger_popup` VARCHAR(20) NULL;
 
     ALTER TABLE {$this->getTable('campaign/template')}
         ADD COLUMN `trigger_popup` VARCHAR(20) NULL;
-
-    ALTER TABLE {$this->getTable('newsletter_subscriber')}
-        DROP `campaign_id`,
-        DROP `campain_name`;
-    ALTER TABLE {$this->getTable('newsletter_subscriber')}
-        add `campaign_id` int(11) NULL default 0,
-        add `campain_name` varchar(255) NULL default ''
-
 ");
+
+$installer->getConnection()->addColumn($this->getTable('newsletter_subscriber'), 'campaign_id', 'int(11) NULL');
+$installer->getConnection()->addColumn($this->getTable('newsletter_subscriber'), 'campaign_name', 'varchar(255) NULL');
 
 $installer->endSetup();
 
