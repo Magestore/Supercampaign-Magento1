@@ -6,15 +6,18 @@ $popups = $this->getAllPopupAvailable();
 ?>
 <?php foreach ($popups as $key => $popup): ?>
     <?php
-    $popup_id = $popup->getData('popup_id');
-    $campaign_id = $popup->getData('campaign_id');
-    $priority = $popup->getData('priority');
     $name = 'popupcampaign';
-    $value = '_pid:'.$popup_id;
-    $period = 600;
-    Mage::getModel('core/cookie')->set($name, $value, $period);
-//    $customer_cookie = Mage::getModel('core/cookie')->get($name);
-//    zend_debug::dump($customer_cookie); die('phuong day roi');
+    $customer_cookie = Mage::getModel('core/cookie')->get($name);
+
+    if($customer_cookie == false){
+        $popup_id = $popup->getData('popup_id');
+        $campaign_id = $popup->getData('campaign_id');
+        $priority = $popup->getData('priority');
+        $value = '_pid:'.$popup_id;
+        $period = 600;
+        Mage::getModel('core/cookie')->set($name, $value, $period);
+    }
+
     ?>
     <div id="sc-popup<?php echo $popup->getData('popup_id') ?>"
          class="modal fade sc-popup<?php echo $popup->getData('template_code') ?>" role="dialog">

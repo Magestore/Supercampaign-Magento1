@@ -62,11 +62,11 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
                 ),
                 array(
                     'value' => 'registed_loged',
-                    'label' => Mage::helper('campaign')->__('Registed and Loged User'),
+                    'label' => Mage::helper('campaign')->__('Loged User'),
                 ),
                 array(
                     'value' => 'logout_not_register',
-                    'label' => Mage::helper('campaign')->__('Unloged and Unregister'),
+                    'label' => Mage::helper('campaign')->__('Unloged User'),
                 ),
             ),
         ));
