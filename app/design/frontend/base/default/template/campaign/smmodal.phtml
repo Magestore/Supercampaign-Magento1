@@ -1,5 +1,5 @@
 <!--campaign/smmodal.phtml-->
-
+<?php if(Mage::helper('campaign')->isEnabled()): ?>
 <?php
 $helper = Mage::helper('campaign');
 $popups = $this->getAllPopupAvailable();
@@ -85,4 +85,6 @@ $popups = $this->getAllPopupAvailable();
     });
 
 </script>
+
+<?php endif; ?>
 
