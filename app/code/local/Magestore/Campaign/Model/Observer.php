@@ -45,12 +45,17 @@ class Magestore_Campaign_Model_Observer
         $event = $observer->getEvent();
         $subscriber = $event->getDataObject();
         $data = $subscriber->getData();
-        //zend_debug::dump($data); die('phuong');
         $statusChange = $subscriber->getIsStatusChanged();
 
         // Trigger if user is now subscribed and there has been a status change:
         if ($data['subscriber_status'] == "1" && $statusChange == true) {
-            // Insert your code here
+            $name = 'popupcampaign';
+            $customer_cookie = Mage::getModel('core/cookie')->get($name);
+            $popupid = substr ($customer_cookie, 5);
+            $model_popup = Mage::getModel('campaign/popup')->load($popupid);
+            $campaignid = $model_popup->getCampaignId();
+            $subscriber->setCampaignId($campaignid);
+            $subscriber->save();
         }
         return $observer;
     }

@@ -169,7 +169,6 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     //z set visitorsegment check value
     public function checkDevices(){
         $detector = new Mobile_Detect();
-        //$devices = $this->getDevices(); //comment
         $devicetoshow = array();
         $devices = $this->getDevices();
         if($devices != ''){
@@ -341,7 +340,7 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
 
                     if($sub == 'all_group'){
                         return true;
-                        //break;
+
                     }
                     if($sub == 'not_loged_in'){
                         if($login == false){
@@ -349,14 +348,14 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
                                 return true;
                             }
                         }
-                        //break;
+
                     }
                     if($sub == 'general'){
 
                         if($groupcode == 'General'){
                             return true;
                         }
-                        //break;
+
 
                     }
                     if($sub == 'wholesale'){
@@ -364,7 +363,7 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
                         if($groupcode == 'Wholesale'){
                             return true;
                         }
-                        //break;
+
                     }
                     if($sub == 'vip_member'){
 
@@ -378,7 +377,7 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
                         if($groupcode == 'Private Sales Member'){
                             return true;
                         }
-                        //break;
+
                     }
 
                 }
@@ -389,7 +388,7 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
         }else{
             return false;
         }
-        //return true;
+
     }
 
 

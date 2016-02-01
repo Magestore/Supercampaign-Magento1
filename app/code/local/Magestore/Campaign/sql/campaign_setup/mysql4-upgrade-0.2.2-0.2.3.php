@@ -193,9 +193,6 @@ INSERT INTO `magestore_campaign_template` (`template_id`, `title`, `popup_type`,
 (5, 'Template 05 - Subscribe', '0', '5', 'campaign/popup/subscribe/template05.phtml\r\n', 'images/campaign/popup/template_images/template05.png', 600, 'px', 'circle', 0, '', 0, '000000', '6E6E6E', 20, 'circle', 0, 'top', NULL, '', '', 'center', 100, 'top', 100, ''),
 (6, 'Template 06 - Subscribe', '0', '6', 'campaign/popup/subscribe/template06.phtml\r\n', 'images/campaign/popup/template_images/template06.png', 700, 'px', 'rounded', 20, '', 0, '000000', 'ffffff', 0, 'cricle', 0, 'top', NULL, '', '', 'center', 100, 'top', 100, '');
 
-ALTER TABLE {$this->getTable('newsletter_subscriber')}
-    add `campaign_id` int(11) NULL default 0,
-    add `campain_name` varchar(255) NULL default '';
 
 ");
 
