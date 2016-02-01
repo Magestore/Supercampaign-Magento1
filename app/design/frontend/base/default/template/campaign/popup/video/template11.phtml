@@ -1,0 +1,15 @@
+<div class="video-box">
+    <iframe class="interview-video" width="100%" height="315" src="https://www.youtube.com/embed/YlbgM4xw-1Y?rel=0&amp;showinfo=0&amp;enablejsapi=1&amp; autoplay="0" frameborder="0" allowfullscreen=""></iframe>
+</div>
+<script type="text/javascript">
+    var $j = jQuery.noConflict();
+    $j('.dialogClose').on('click', function(ev) {
+        $j(".interview-video")[0].src="https://www.youtube.com/embed/YlbgM4xw-1Y?rel=0&amp;showinfo=0";
+        ev.preventDefault();
+    });
+
+    $j('.modal-backdrop').on('click', function(ev) {
+        $j(".interview-video")[0].src="https://www.youtube.com/embed/YlbgM4xw-1Y?rel=0&amp;showinfo=0";
+        ev.preventDefault();
+    });
+</script>
