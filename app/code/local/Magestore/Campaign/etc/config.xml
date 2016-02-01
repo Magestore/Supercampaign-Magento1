@@ -326,6 +326,9 @@
     </global>
     <default>
         <campaign>
+            <general>
+                <enable>1</enable>
+            </general>
             <email>
                 <enabled>1</enabled>
             </email>

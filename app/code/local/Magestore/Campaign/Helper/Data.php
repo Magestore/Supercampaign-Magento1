@@ -28,6 +28,12 @@
  */
 class Magestore_Campaign_Helper_Data extends Mage_Core_Helper_Abstract
 {
+    const CONFIG_ENABLE_PATH = 'campaign/general/enable';
+
+    public function isEnabled(){
+        return Mage::getStoreConfig(self::CONFIG_ENABLE_PATH);
+    }
+
     public function convertContentToHtml($content){
         /* @var $helper Mage_Cms_Helper_Data */
         $helper = Mage::helper('cms');
@@ -648,13 +654,6 @@ class Magestore_Campaign_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     //zeus end helper slider
-    public function checkSegmentpopup(){
-        return true;
-    }
-    public function checkStylepopup(){
-        return true;
-    }
-    public function checkCookiepopup(){
-        return true;
-    }
+
+
 }

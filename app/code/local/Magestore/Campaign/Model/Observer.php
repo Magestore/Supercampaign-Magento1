@@ -47,15 +47,26 @@ class Magestore_Campaign_Model_Observer
         $data = $subscriber->getData();
         $statusChange = $subscriber->getIsStatusChanged();
 
-        // Trigger if user is now subscribed and there has been a status change:
         if ($data['subscriber_status'] == "1" && $statusChange == true) {
+            //get popup by cookie
             $name = 'popupcampaign';
             $customer_cookie = Mage::getModel('core/cookie')->get($name);
             $popupid = substr ($customer_cookie, 5);
             $model_popup = Mage::getModel('campaign/popup')->load($popupid);
-            $campaignid = $model_popup->getCampaignId();
-            $subscriber->setCampaignId($campaignid);
-            $subscriber->save();
+
+            //get campaign by popup
+            $campaign_id = $model_popup->getCampaignId();
+            $campaign_model = Mage::getModel('campaign/campaign')->load($campaign_id);
+            $campaign_name = $campaign_model->getName();
+
+            //get subcribe
+            $idscriber = $data["subscriber_id"];
+            $modelsubcribe = Mage::getModel('newsletter/subscriber')->load($idscriber);
+
+            //luu du lieu
+            $modelsubcribe->setCampaignId($campaign_id);
+            $modelsubcribe->setCampaignName($campaign_name);
+            $modelsubcribe->save();
         }
         return $observer;
     }

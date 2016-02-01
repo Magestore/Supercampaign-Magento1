@@ -1,10 +1,24 @@
 <!--campaign/smmodal.phtml-->
-
+<?php if(Mage::helper('campaign')->isEnabled()): ?>
 <?php
 $helper = Mage::helper('campaign');
 $popups = $this->getAllPopupAvailable();
 ?>
 <?php foreach ($popups as $key => $popup): ?>
+    <?php
+    $name = 'popupcampaign';
+    $customer_cookie = Mage::getModel('core/cookie')->get($name);
+
+    if($customer_cookie == false){
+        $popup_id = $popup->getData('popup_id');
+        $campaign_id = $popup->getData('campaign_id');
+        $priority = $popup->getData('priority');
+        $value = '_pid:'.$popup_id;
+        $period = 600;
+        Mage::getModel('core/cookie')->set($name, $value, $period);
+    }
+
+    ?>
     <div id="sc-popup<?php echo $popup->getData('popup_id') ?>"
          class="modal fade sc-popup<?php echo $popup->getData('template_code') ?>" role="dialog">
         <div class="modal-dialog">
@@ -56,6 +70,11 @@ $popups = $this->getAllPopupAvailable();
         Popup.priority = id;
         Popup.frequency = dataPopup[id].showing_frequency;
         Popup.urlImages = "<?php echo $this->getSkinUrl();?>";
+        Popup.closeImages = {
+            circle_white:"<?php echo $this->getSkinUrl('images/campaign/popup/close_dark.png');?>",
+            circle_dark:"<?php echo $this->getSkinUrl('images/campaign/popup/close_white.png');?>",
+            simple:"<?php echo $this->getSkinUrl('images/campaign/popup/close_promotion.png');?>"
+        };
         Popup.cookieUrl = "<?php echo $this->getUrl('campaign/cookie/set');?>";
         Popup.trigger_popup = dataPopup[id].trigger_popup;
         Popups[id] = Popup;
@@ -85,4 +104,6 @@ $popups = $this->getAllPopupAvailable();
     });
 
 </script>
+
+<?php endif; ?>
 

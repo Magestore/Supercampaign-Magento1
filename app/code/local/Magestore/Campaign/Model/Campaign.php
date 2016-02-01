@@ -225,10 +225,10 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
      */
     public function getCouponCode(){
         if(!$this->_coupon_code){
-            if($this->getGiftCodeType() == 'static'){
+            if($this->getData('coupon_code_type') == 'static'){
                 $this->_coupon_code = $this->getData('coupon_code');
                 return $this->_coupon_code;
-            }elseif($this->getGiftCodeType() == 'promotion'){
+            }elseif($this->getData('coupon_code_type') == 'promotion'){
                 $promoQuoteId = $this->getPromoQuoteId();
                 $promo = Mage::getModel('salesrule/rule')->load($promoQuoteId);
                 if($promo->getCouponType() == Mage_SalesRule_Model_Rule::COUPON_TYPE_SPECIFIC){
@@ -285,8 +285,10 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
         $collection = $this->getPopupCollection();
         foreach ($collection as $item) {
             //priority from highest to lowest
-            if($item->checkUserIP()){
-                $popups[] = $item;
+            if($item->getUserIp() != ''){
+                if($item->checkUserIP()){
+                    $popups[] = $item;
+                }
                 continue;
             }
             if($item->checkShowFrequency()
