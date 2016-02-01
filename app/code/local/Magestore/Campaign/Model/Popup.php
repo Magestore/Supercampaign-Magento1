@@ -40,10 +40,45 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     const SHOW_ON_ALL_PAGE = 'all_page';
     const SHOW_ON_OTHER_PAGE = 'other_page';
 
+    //show frequency
+    const SHOW_FREQUENCY_EVERY_TIME = 'every_time';
+    const SHOW_FREQUENCY_ONLY_ONE = 'only_once';
+    const SHOW_FREQUENCY_ONLY_TRIGGER = 'all_page';
+    const SHOW_FREQUENCY_UNTIL_CLOSE = 'until_close';
+
     public function _construct()
     {
         parent::_construct();
         $this->_init('campaign/popup');
+    }
+
+    /**
+     * Return true value is show
+     * @return bool
+     */
+    public function checkShowFrequency(){
+        $cookie = Mage::getModel('core/cookie');
+        switch($this->getShowingFrequency()){
+            case self::SHOW_FREQUENCY_EVERY_TIME:
+                return true;
+
+            case self::SHOW_FREQUENCY_ONLY_ONE:
+                if($cookie->get('popup_showed_'.$this->getData('popup_id'))){
+                    return false;
+                }
+                break;
+
+            case self::SHOW_FREQUENCY_ONLY_TRIGGER:
+                return true;
+
+            case self::SHOW_FREQUENCY_UNTIL_CLOSE:
+                if($cookie->get('popup_closed_'.$this->getData('popup_id'))){
+                    return false;
+                }
+                break;
+
+        }
+        return true;
     }
 
     /**

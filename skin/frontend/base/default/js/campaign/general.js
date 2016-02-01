@@ -7,6 +7,7 @@
 var $j = jQuery.noConflict();
 var Scpopup = function () {
     this.idPopup = "";
+    this.campaign_id = "";
     this.effect = "";
     this.borderSize = "";
     this.borderColor = "";
@@ -162,18 +163,54 @@ var Scpopup = function () {
         }
         return cssHead;
     };
-    this.setFrequencyCookie = function(){
-        $j.post(this.cookieUrl, {'frequency_showed':1, 'popup_id':this.idPopup},function(response){
-            console.log(response);
+    this.setFrequencyCookie = function(id){
+        var _id = '';
+        if(typeof id != 'undefined'){
+            _id = id;
+        }else{
+            _id = this.idPopup;
+        }
+        var Params = new Object;
+        Params['popup_showed_'+_id] = 1;
+        Params['popup_id'] = _id;
+        this.setCookie(Params);
+    };
+    this.setClosedCookie = function(id){
+        var _id = '';
+        if(typeof id != 'undefined'){
+            _id = id;
+        }else{
+            _id = this.idPopup;
+        }
+        var Params = new Object;
+        Params['popup_closed_'+_id] = 1;
+        Params['popup_id'] = _id;
+        this.setCookie(Params);
+    };
+    this.setCookie = function(params){
+        $j.post(this.cookieUrl, params,function(response){
+            console.log('Set cookie success!');
         });
     };
-    this.getFrequencyCookie = function(){
-        document.cookie="showedPopup=1; expires=Thu, 18 Dec 2013 12:00:00 UTC";
+    this.getCookie = function(cname){
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+        }
+        return "";
     };
-    this.checkCookie = function(){
-
-        if(this.frequency =='only_once'){
-
+    this.checkFrequencyCookie = function(){
+        if(this.frequency =='only_once' && !this.getCookie('popup_frequency_showed_'+this.idPopup)){
+            return true;
+        }else if(this.frequency =='until_close' && !this.getCookie('popup_frequency_showed_'+this.idPopup)){
+            return true;
+        }else if(this.frequency =='every_time'){
+            return true;
+        }else if(this.frequency =='only_trigger'){
+            return true;
         }
         return false;
     };
@@ -249,27 +286,30 @@ var Scpopup = function () {
     this.modalShow = function(id){
         $j("#sc-popup" + id).modal('show');
         //set cookie when showing
-        this.setFrequencyCookie();
+        this.setFrequencyCookie(id);
     };
     this.showPopup = function () {
+        var _this = this;
         var idPopup = this.idPopup;
         var scdelay = this.secondDelay;
         if (this.showWhen == 'after_seconds') {
             if (scdelay != "") {
                 var timedelay = 1000 * scdelay;
                 setTimeout(function () {
-                    this.modalShow(idPopup);
+                    _this.modalShow(idPopup);
                 }, timedelay);
             }
         } else if (this.showWhen == 'after_load_page') {
             this.modalShow(idPopup);
         }
+        this.initCloseBackground(); //init close event, only showed can catch dom
     };
     this.initTrigger = function () {
+        var _this = this;
         if(this.trigger_popup != '' && this.trigger_popup != null){
             var trigger_idpopup = this.trigger_popup;
             $j('.target_popup'+trigger_idpopup).click(function(){
-                this.modalShow(trigger_idpopup);
+                _this.modalShow(trigger_idpopup);
             });
         }
     };
@@ -277,7 +317,35 @@ var Scpopup = function () {
         this.addCssToHead();
         this.runEffect();
         this.initTrigger();
+        this.initCloseButton();
         return this;
+    };
+    this.initCloseButton = function(){
+        var _this = this;
+        $j("#sc-popup" + this.idPopup+" .dialogClose").on('click', function(ev) {
+            _this.closeButton();
+            ev.preventDefault();
+        });
+    };
+    this.initCloseBackground = function(){
+        $j("#sc-popup" + this.idPopup+".modal-backdrop").on('click', function(ev) {
+            _this.closeBackground();
+            ev.preventDefault();
+        });
+    };
+    this.close = function(){
+        $j("#sc-popup" + this.idPopup).modal('hide');
+        $j(document).trigger('on_popup_closed', [this.idPopup, this.campaign_id]); //event for callback with jQuery event
+        if(typeof this.onClosed == 'function'){
+            this.onClosed(this.idPopup, this.campaign_id); //event for call back with object
+        }
+    };
+    this.closeButton = function(){
+        this.close();
+        this.setClosedCookie();
+    };
+    this.closeBackground = function(){
+        this.close();
     };
     /* this.hidePopup = function () {
      $j("#sc-popup" + this.idPopup).modal('hide');

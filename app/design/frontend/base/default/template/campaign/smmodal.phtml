@@ -34,6 +34,7 @@ $popups = $this->getAllPopupAvailable();
     for (var id = 0; id < dataPopup.length; id++) {
         var Popup = new Scpopup();
         Popup.idPopup = dataPopup[id].popup_id;
+        Popup.campaign_id = dataPopup[id].campaign_id;
         Popup.templateCode = dataPopup[id].template_code;
         Popup.effect = dataPopup[id].appear_effect;
         Popup.borderSize = dataPopup[id].border_size;

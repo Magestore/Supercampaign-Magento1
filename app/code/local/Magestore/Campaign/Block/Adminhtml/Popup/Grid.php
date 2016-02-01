@@ -16,6 +16,8 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
 			->joinLeft(array('campaign'=>$collection->getTable('campaign/campaign')),
 				'main_table.campaign_id = campaign.campaign_id', '')
 			->columns(array('campaign_name'=>'campaign.name'))
+			->order('main_table.popup_id DESC')
+			->order('main_table.priority DESC')
 			->group('main_table.popup_id');
 		$this->setCollection($collection);
 		return parent::_prepareCollection();
