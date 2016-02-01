@@ -182,16 +182,6 @@ CREATE TABLE {$this->getTable('campaign/template')} (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
-
-INSERT INTO `{$this->getTable('campaign/template')}` (`template_id`, `title`, `popup_type`, `template_code`, `template_file`, `preview_image`, `width`, `width_unit`, `corner_style`, `border_radius`, `border_color`, `border_size`, `overlay_color`, `popup_background`, `padding`, `close_style`, `has_shadow`, `appear_effect`, `custom_css`, `horizontal_position`, `horizontal_px`, `vertical_position`, `vertical_px`) VALUES
-(1, 'Template 01 - Subscribe ', '0', '1', 'campaign/popup/subscribe/template01.phtml', 'images/campaign/popup/template_images/template01.png', 800, 'px', 'rounded', 20, '0', 0, '000000', 'FFF0F8', 0, 'simple', 1, 'top', NULL, 'center', 100, 'top', 100),
-(2, 'Template 02 - Subscribe ', '0', '2', 'campaign/popup/subscribe/template02.phtml', 'images/campaign/popup/template_images/template02.png', 800, 'px', 'rounded', 20, '', 0, '000000', 'FFF5F8', 0, 'simple', 0, 'top', NULL, 'center', 100, 'top', 100),
-(3, 'Template 03 - Subscribe', '0', '3', 'campaign/popup/subscribe/template03.phtml\r\n', 'images/campaign/popup/template_images/template03.png', 700, 'px', 'circle', 10, '', 0, '000000', 'ffffff', 0, '', 0, 'top', NULL, 'center', 100, 'top', 100),
-(4, 'Template 04 - Subscribe', '0', '4', 'campaign/popup/subscribe/template04.phtml\r\n', 'images/campaign/popup/template_images/template04.png', 500, 'px', 'rounded', 20, '', 0, '000000', 'BBAEAE', 20, 'circle', 0, 'bottom', NULL, 'center', 100, 'bottom', 100),
-(5, 'Template 05 - Subscribe', '0', '5', 'campaign/popup/subscribe/template05.phtml\r\n', 'images/campaign/popup/template_images/template05.png', 600, 'px', 'circle', 0, '', 0, '000000', '6E6E6E', 20, 'circle', 0, 'top', NULL, 'center', 100, 'top', 100),
-(6, 'Template 06 - Subscribe', '0', '6', 'campaign/popup/subscribe/template06.phtml\r\n', 'images/campaign/popup/template_images/template06.png', 700, 'px', 'rounded', 20, '', 0, '000000', 'ffffff', 0, 'cricle', 0, 'top', NULL, 'center', 100, 'top', 100);
-
-
 ");
 
 
