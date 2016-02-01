@@ -285,7 +285,7 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
         $collection = $this->getPopupCollection();
         foreach ($collection as $item) {
             //priority from highest to lowest
-            if($item->checkUserIP() != ''){
+            if($item->getUserIp() != ''){
                 if($item->checkUserIP()){
                     $popups[] = $item;
                 }

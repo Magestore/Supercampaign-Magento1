@@ -429,9 +429,7 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
 
     public function checkUserIP(){
         $ipcustomer = Mage::helper('core/http')->getRemoteAddr();
-
         $ipdata = $this->getUserIp();
-
         if($ipdata != ''){
            if($ipdata == $ipcustomer){
                return true;
