@@ -1,7 +1,7 @@
 +function ($) {
-    var version = $j.fn.jquery.split(' ')[0].split('.')
+    var version = $j.fn.jquery.split(' ')[0].split('.');
     if ((version[0] < 2 && version[1] < 9) || (version[0] == 1 && version[1] == 9 && version[2] < 1)) {
-        throw new Error('JavaScript requires jQuery higher')
+        throw new Error('JavaScript requires jQuery higher');
     }
 }(jQuery);
 var $j = jQuery.noConflict();
