@@ -291,16 +291,16 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'note'      => "Show popup when have had customer's action .",
             'values' => array(
                 array(
+                    'value' => Magestore_Campaign_Model_Popup::SHOW_FREQUENCY_EVERY_TIME,
+                    'label' => Mage::helper('campaign')->__('Every time'),
+                ),
+                array(
                     'value' => Magestore_Campaign_Model_Popup::SHOW_FREQUENCY_UNTIL_CLOSE,
                     'label' => Mage::helper('campaign')->__('Show until user close it'),
                 ),
                 array(
                     'value' => Magestore_Campaign_Model_Popup::SHOW_FREQUENCY_ONLY_ONE,
                     'label' => Mage::helper('campaign')->__('Only once'),
-                ),
-                array(
-                    'value' => Magestore_Campaign_Model_Popup::SHOW_FREQUENCY_EVERY_TIME,
-                    'label' => Mage::helper('campaign')->__('Every time'),
                 ),
                 array(
                     'value' => Magestore_Campaign_Model_Popup::SHOW_FREQUENCY_ONLY_TRIGGER,
