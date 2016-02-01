@@ -38,6 +38,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
         $border_px = $fieldset->addField('border_radius', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Border Radius In Px:'),
             'required'	=> false,
+            'class'       => 'validate-number',
             'name'		=> 'border_radius',
         ));
 
@@ -90,6 +91,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
         $fieldset->addField('padding', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Padding Size:'),
             'required'	=> false,
+            'class'       => 'validate-number',
             'name'		=> 'padding',
         ));
 
