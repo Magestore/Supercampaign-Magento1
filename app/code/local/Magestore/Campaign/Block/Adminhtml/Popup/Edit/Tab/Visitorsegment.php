@@ -14,13 +14,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
 
         $fieldset = $form->addFieldset('popup_form', array('legend'=>Mage::helper('campaign')->__('Visitorsegment information')));
 
-//        $fieldset->addField('country', 'text', array(
-//            'label'		=> Mage::helper('campaign')->__('Country:'),
-//            'required'	=> false,
-//            'note'      => 'Show popup for country.',
-//            'name'		=> 'country',
-//        ));
-
         $fieldset->addField('devices', 'multiselect', array(
             'label'		=> Mage::helper('campaign')->__('Devices'),
             'name'		=> 'devices',
@@ -31,20 +24,12 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
                     'label' => Mage::helper('campaign')->__('All Devices'),
                 ),
                 array(
-                    'value' => 'pc',
-                    'label' => Mage::helper('campaign')->__('PC'),
+                    'value' => 'pc_laptop',
+                    'label' => Mage::helper('campaign')->__('PC and Laptop'),
                 ),
                 array(
-                    'value' => 'laptop',
-                    'label' => Mage::helper('campaign')->__('Laptop'),
-                ),
-                array(
-                    'value' => 'tablet',
-                    'label' => Mage::helper('campaign')->__('Tablet'),
-                ),
-                array(
-                    'value' => 'mobiphone',
-                    'label' => Mage::helper('campaign')->__('Mobiphone'),
+                    'value' => 'tablet_mobile',
+                    'label' => Mage::helper('campaign')->__('Mobile and Tablet'),
                 ),
             ),
         ));
@@ -57,11 +42,11 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
             'values' => array(
                 array(
                     'value' => 0,
-                    'label' => Mage::helper('campaign')->__('Yes'),
+                    'label' => Mage::helper('campaign')->__('No'),
                 ),
                 array(
                     'value' => 1,
-                    'label' => Mage::helper('campaign')->__('No'),
+                    'label' => Mage::helper('campaign')->__('Yes'),
                 ),
             ),
         ));
@@ -86,33 +71,23 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
             ),
         ));
 
-        $fieldset->addField('if_returning', 'select', array(
+        $fieldset->addField('returning_user', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Return or new customer:'),
             'required'	=> true,
-            'name'		=> 'if_returning',
+            'name'		=> 'returning_user',
             'note'      => "Allow show popup for return or new customer .",
             'values' => array(
                 array(
-                    'value' => 0,
+                    'value' => 'return',
                     'label' => Mage::helper('campaign')->__('Return'),
                 ),
                 array(
-                    'value' => 1,
+                    'value' => 'new',
                     'label' => Mage::helper('campaign')->__('New Customer'),
                 ),
             ),
         ));
 
-
-
-//        $fieldset->addField('customer_group_ids', 'multiselect', array(
-//            'label' => Mage::helper('campaign')->__('Customer groups'),
-//            'title' => Mage::helper('campaign')->__('Customer groups'),
-//            'name' => 'customer_group_ids',
-//            'required' => true,
-//            'values' => Mage::getResourceModel('customer/group_collection')
-//                    ->toOptionArray()
-//        ));
 
         $fieldset->addField('customer_group_ids', 'multiselect', array(
             'label'		=> Mage::helper('campaign')->__('Customer groups:'),
@@ -128,7 +103,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
                     'label' => Mage::helper('campaign')->__('Not loged in'),
                 ),
                 array(
-                    'value' => 'General',
+                    'value' => 'general',
                     'label' => Mage::helper('campaign')->__('General'),
                 ),
                 array(

@@ -21,12 +21,12 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Position extends Mage_Ad
             'note'      => 'Horizontal position popup.',
             'values' => array(
                 array(
-                    'value' => 'left',
-                    'label' => Mage::helper('campaign')->__('Left'),
-                ),
-                array(
                     'value' => 'center',
                     'label' => Mage::helper('campaign')->__('Center'),
+                ),
+                array(
+                    'value' => 'left',
+                    'label' => Mage::helper('campaign')->__('Left'),
                 ),
                 array(
                     'value' => 'right',
@@ -39,6 +39,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Position extends Mage_Ad
             'label'		=> Mage::helper('campaign')->__('How many horizontal px:'),
             'required'	=> false,
             'name'		=> 'horizontal_px',
+            'class'       => 'validate-number',
             'note'      => 'Fill px number horizontal.',
         ));
 
@@ -63,6 +64,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Position extends Mage_Ad
         $fieldset->addField('vertical_px', 'text', array(
             'label'		=> Mage::helper('campaign')->__('How many vertical px:'),
             'required'	=> false,
+            'class'       => 'validate-number',
             'name'		=> 'vertical_px',
             'note'      => 'Fill px number vertical.',
         ));

@@ -106,6 +106,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         $fieldset->addField('width', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Width:'),
             'required'	=> false,
+            'class'       => 'validate-number',
             'name'		=> 'width',
         ));
 
@@ -278,6 +279,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'label'		=> Mage::helper('campaign')->__('Seconds:'),
             'required'	=> false,
             'name'		=> 'seconds_delay',
+            'class'       => 'validate-number',
             'note'      => 'Seconds to show popup.',
         ));
 
@@ -310,6 +312,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         $fieldset->addField('cookie_time', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Cookie Life Time:'),
             'note'      => 'Set time for cookie to show popup.',
+            'class'       => 'validate-number',
             'required'	=> false,
             'name'		=> 'cookie_time',
         ));
@@ -318,6 +321,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'label'		=> Mage::helper('campaign')->__('Set Priority:'),
             'note'      => 'Set priority when have many popup.',
             'required'	=> false,
+            'class'       => 'validate-number',
             'name'		=> 'priority',
         ));
 

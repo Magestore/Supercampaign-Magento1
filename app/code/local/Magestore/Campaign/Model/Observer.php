@@ -39,6 +39,28 @@ class Magestore_Campaign_Model_Observer
         return $this;
     }
 
+
+    public function subscribedToNewsletter(Varien_Event_Observer $observer)
+    {
+        $event = $observer->getEvent();
+        $subscriber = $event->getDataObject();
+        $data = $subscriber->getData();
+        $statusChange = $subscriber->getIsStatusChanged();
+
+        // Trigger if user is now subscribed and there has been a status change:
+        if ($data['subscriber_status'] == "1" && $statusChange == true) {
+            $name = 'popupcampaign';
+            $customer_cookie = Mage::getModel('core/cookie')->get($name);
+            $popupid = substr ($customer_cookie, 5);
+            $model_popup = Mage::getModel('campaign/popup')->load($popupid);
+            $campaignid = $model_popup->getCampaignId();
+            $subscriber->setCampaignId($campaignid);
+            $subscriber->save();
+        }
+        return $observer;
+    }
+
+
     /**
      * update final price product for get add to cart and checkout
      * @param $observer
