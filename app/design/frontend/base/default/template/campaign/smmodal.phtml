@@ -36,26 +36,28 @@ $popups = $this->getAllPopupAvailable();
     </div>
         <script type="text/javascript">
             $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').submit(function(){
-                var valueinput = new VarienForm('newsletter-popup-2', true);
-                if(valueinput.validator &&  valueinput.validator.validate()){
+                var newsletterForm<?php echo $popup->getData('popup_id') ?> = new VarienForm($$('#sc-popup<?php echo $popup->getData('popup_id') ?> form')[0]);
+                if(newsletterForm<?php echo $popup->getData('popup_id') ?>.validator &&  newsletterForm<?php echo $popup->getData('popup_id') ?>.validator.validate()){
                     var popupsubmit = document.URL;
                         var url = $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').attr('action');
                     //$j('.loading').show();
+
                     $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').hide();
                     $j.ajax({
                         url: url,
                         method: 'POST',
-                        data: {formdata: $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').serialize(), popup_id:<?php echo $popup->getData('popup_id') ?>},
+                        data: $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').serialize()+ '&popup_id=<?php echo $popup->getData('popup_id') ?>',
                         context: document.body
                     }).success(function(data) {
-                        console.log(data);
+                       // console.log(data);
                         //$j('.loading').hide();
-                        $j('#sc-popup<?php echo $popup->getData('popup_id')?> .content-popup form').html(<?php echo $popup->getData('contentofsuccess')?>);
+                        $j('#sc-popup<?php echo $popup->getData('popup_id')?> .content-popup').html(data.content_for_success + <?php echo $popup->getCouponCode()?>);
                     });
                 }
                 return false;
             });
         </script>
+
 <?php endforeach; ?>
 <script type="text/javascript">
     var dataPopup = [

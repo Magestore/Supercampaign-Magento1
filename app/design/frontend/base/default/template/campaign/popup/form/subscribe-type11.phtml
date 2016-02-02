@@ -1,8 +1,8 @@
 <div class="newsletter-form">
-    <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-popup-11">
+    <form action="<?php echo $this->getUrl('campaign/ajaxform/subcriber') ?>" method="post">
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody><tr>
-                <td><input type="text" name="email-11" id="newsletter-11" placeholder="Enter your email" title="<?php echo $this->__('Enter your email') ?>" class="input-text required-entry validate-email" /></td>
+                <td><input type="text" name="email" placeholder="Enter your email" title="<?php echo $this->__('Enter your email') ?>" class="input-text required-entry validate-email" /></td>
                 <td style="width:1px;">
                     <button type="submit" title="<?php echo $this->__('Join me') ?>" class="button"><span><span><?php echo $this->__('Join me') ?></span></span></button>
                 </td>
@@ -11,9 +11,3 @@
 
     </form>
 </div>
-<script type="text/javascript">
-    //<![CDATA[
-    var newsletterSubscriberFormDetail = new VarienForm('newsletter-popup-11');
-
-    //]]>
-</script>
