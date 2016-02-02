@@ -112,7 +112,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
             'format'    => 'y-MM-dd HH:mm:00',
             'time'      => true,
             'required'    => true,
-            'class'     => 'validate-date',
+            //'class'     => 'validate-date',
             'style'     => 'width:274px;',
             'note'     => $time_zone,
         ));
@@ -125,7 +125,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
             'format'    => 'y-MM-dd HH:mm:00',
             'time'      => true,
             'required'    => true,
-            'class'     => 'validate-date',
+            //'class'     => 'validate-date',
             'style'     => 'width:274px;',
             'note'     => $time_zone,
         ));

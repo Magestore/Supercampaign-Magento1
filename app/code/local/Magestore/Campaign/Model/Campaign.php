@@ -131,6 +131,9 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
     public function toUTCTimezone($date, $format = null){
         $timezone = new DateTimeZone(Mage::getStoreConfig(
             Mage_Core_Model_Locale::XML_PATH_DEFAULT_TIMEZONE));
+        if(!preg_match('/^(\s*)?\d{4}-\d{2}-\d{2}(\s{1})?(\d{2}:\d{2}:\d{2})?$/', $date)){
+            $date = '';
+        }
         $date = new DateTime($date, $timezone);
         $utcZone = new DateTimeZone('UTC');
         $date->setTimezone($utcZone);
@@ -148,6 +151,9 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
      */
     public function toLocaleTimezone($date, $format = null){
         $utcZone = new DateTimeZone('UTC');
+        if(!preg_match('/^(\s*)?\d{4}-\d{2}-\d{2}(\s{1})?(\d{2}:\d{2}:\d{2})?$/', $date)){
+            $date = '';
+        }
         $date = new DateTime($date, $utcZone);
         $localeZone = new DateTimeZone(Mage::getStoreConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_TIMEZONE));
         $date->setTimezone($localeZone);
@@ -157,40 +163,40 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
         return $date->format($format);
     }
 
-    /**
-     * will remove in future
-     */
-    private function _addTimezone($date, $locale = null, $format = null){
-        $datetime = new Zend_Date($date);
-        if($locale == null){
-            $locale = Mage::getStoreConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_LOCALE);
-        }
-        if($format == null){
-            $format = 'y-MM-dd HH:mm:00';
-        }
-        $datetime->setLocale($locale)
-            ->setTimezone(Mage::getStoreConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_TIMEZONE));
-        return $datetime->get($format);
-    }
+//    /**
+//     * will remove in future
+//     */
+//    private function _addTimezone($date, $locale = null, $format = null){
+//        $datetime = new Zend_Date($date);
+//        if($locale == null){
+//            $locale = Mage::getStoreConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_LOCALE);
+//        }
+//        if($format == null){
+//            $format = 'y-MM-dd HH:mm:00';
+//        }
+//        $datetime->setLocale($locale)
+//            ->setTimezone(Mage::getStoreConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_TIMEZONE));
+//        return $datetime->get($format);
+//    }
+//
+//    /**
+//     * revert to save with UTC
+//     * @param $date
+//     * @param null $format
+//     * @return mixed
+//     */
+//    private function _revertTimezone($date, $format = null){
+//        $timezone = new DateTimeZone(Mage::getStoreConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_TIMEZONE));
+//        $date = new DateTime($date, $timezone);
+//        $utcZone = new DateTimeZone('UTC');
+//        $date->setTimezone($utcZone);
+//        if($format == null){
+//            $format = 'Y-m-d H:i:s';
+//        }
+//        return $date->format($format);
+//    }
 
-    /**
-     * revert to save with UTC
-     * @param $date
-     * @param null $format
-     * @return mixed
-     */
-    private function _revertTimezone($date, $format = null){
-        $timezone = new DateTimeZone(Mage::getStoreConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_TIMEZONE));
-        $date = new DateTime($date, $timezone);
-        $utcZone = new DateTimeZone('UTC');
-        $date->setTimezone($utcZone);
-        if($format == null){
-            $format = 'Y-m-d H:i:s';
-        }
-        return $date->format($format);
-    }
-
-    protected function _beforeDelete(){
+//    protected function _beforeDelete(){
 //        $this->getPopup()->delete(); //delete relationship models
 //        $this->getHeadertext()->delete();
 //        $this->getCountdown()->delete();
@@ -198,7 +204,7 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
 //        $this->getBannerhomepage()->delete();
 //        $this->getBannerlistpage()->delete();
 //        $this->getBannermenu()->delete();
-    }
+//    }
 
     //return false = co email roi
     public function saveEmail($name, $email){
