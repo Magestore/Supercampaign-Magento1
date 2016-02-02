@@ -178,10 +178,10 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             ),
         ));
 
-        $categoryIds = implode(", ", Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('level', array('gt' => 0))->getAllIds());
-        if(!isset($data['categories'])){
-            $data['categories'] = $categoryIds;
-        }
+//        $categoryIds = implode(", ", Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('level', array('gt' => 0))->getAllIds());
+//        if(!isset($data['categories'])){
+//            $data['categories'] = $categoryIds;
+//        }
         $categories = $fieldset->addField('categories', 'text', array(
             'label' => Mage::helper('campaign')->__('Categories Ids:'),
             'name' => 'categories',
