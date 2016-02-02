@@ -44,11 +44,13 @@ $popups = $this->getAllPopupAvailable();
                     $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').hide();
                     $j.ajax({
                         url: url,
+                        method: 'POST',
                         data: {formdata: $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').serialize(), popup_id:<?php echo $popup->getData('popup_id') ?>},
                         context: document.body
-                    }).success(function() {
+                    }).success(function(data) {
+                        console.log(data);
                         //$j('.loading').hide();
-                        $j('#sc-popup<?php echo $popup->getData('popup_id')?> .content-popup').html(<?php echo $popup->getData('contentofsuccess')?>);
+                        $j('#sc-popup<?php echo $popup->getData('popup_id')?> .content-popup form').html(<?php echo $popup->getData('contentofsuccess')?>);
                     });
                 }
                 return false;
