@@ -121,7 +121,9 @@ $popups = $this->getAllPopupAvailable();
             if (Popups[i].frequency == 'only_trigger') {
                 continue;
             }
-            Popups[i].showPopup();
+            if(Popups[i].checkFrequencyCookie()){
+                Popups[i].showPopup();
+            }
         }
     });
 

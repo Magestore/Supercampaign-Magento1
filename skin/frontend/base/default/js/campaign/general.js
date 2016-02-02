@@ -173,7 +173,7 @@ var Scpopup = function () {
         var Params = new Object;
         Params['popup_showed_'+_id] = 1;
         Params['popup_id'] = _id;
-        if(this.getCookie('popup_showed_'+_id) != ''){
+        if(this.getCookie('popup_showed_'+_id) == ''){
             this.setCookie(Params);
         }
     };
@@ -193,7 +193,7 @@ var Scpopup = function () {
     };
     this.setCookie = function(params){
         $j.post(this.cookieUrl, params,function(response){
-            console.log('Set cookie success!');
+            //console.log('Set cookie success!');
         });
     };
     this.getCookie = function(cname){
@@ -207,9 +207,9 @@ var Scpopup = function () {
         return "";
     };
     this.checkFrequencyCookie = function(){
-        if(this.frequency =='only_once' && !this.getCookie('popup_frequency_showed_'+this.idPopup)){
+        if(this.frequency =='only_once' && !this.getCookie('popup_showed_'+this.idPopup)){
             return true;
-        }else if(this.frequency =='until_close' && !this.getCookie('popup_frequency_showed_'+this.idPopup)){
+        }else if(this.frequency =='until_close' && !this.getCookie('popup_showed_'+this.idPopup)){
             return true;
         }else if(this.frequency =='every_time'){
             return true;
