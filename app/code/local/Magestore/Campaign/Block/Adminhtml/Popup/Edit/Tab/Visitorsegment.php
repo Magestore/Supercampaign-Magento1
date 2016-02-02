@@ -34,7 +34,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
             ),
         ));
 
-        $fieldset->addField('cookies_enabled', 'select', array(
+        $enable_cookie = $fieldset->addField('cookies_enabled', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Cookies Enabled:'),
             'required'	=> true,
             'name'		=> 'cookies_enabled',
@@ -71,7 +71,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
             ),
         ));
 
-        $fieldset->addField('returning_user', 'select', array(
+       $customer_cookie = $fieldset->addField('returning_user', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Return or new customer:'),
             'required'	=> true,
             'name'		=> 'returning_user',
@@ -135,6 +135,19 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
         if($data['customer_group_ids'] == ''){$data['customer_group_ids'] = 'all_group';}
 
         $form->setValues($data);
+
+        $this->setForm($form);
+        $this->setChild('form_after', $this->getLayout()->createBlock('adminhtml/widget_form_element_dependence')
+                ->addFieldMap($enable_cookie->getHtmlId(), $enable_cookie->getName())
+                ->addFieldMap($customer_cookie->getHtmlId(), $customer_cookie->getName())
+                ->addFieldDependence(
+                    $customer_cookie->getName(),
+                    $enable_cookie->getName(),
+                    '1'
+                )
+        );
+
+
         return parent::_prepareForm();
     }
 }
