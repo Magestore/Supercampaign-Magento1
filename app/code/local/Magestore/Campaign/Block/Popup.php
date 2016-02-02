@@ -88,4 +88,12 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
     public function getCustomerGroup(){
         return Mage::getModel('campaign/popup')->checkCustomerGroup();
     }
+
+    /**
+     * show all popup for customer group user
+     * @return mixed
+     */
+    public function getCouponcodeforcp(){
+        return Mage::getModel('campaign/popup')->getCouponCode();
+    }
 }
