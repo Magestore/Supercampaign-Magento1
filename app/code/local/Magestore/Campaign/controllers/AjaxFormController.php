@@ -29,6 +29,9 @@
 class Magestore_Campaign_AjaxformController extends Mage_Core_Controller_Front_Action
 {
     public function subcriberAction(){
+        $helper = Mage::helper('campaign');
+        $popupId = $this->getRequest()->getParam('popup_id');
+        $popup = Mage::getModel('campaign/popup')->load($popupId);
         $result = array('status'=>0, 'message'=>'');
         if ($this->getRequest()->isPost() && $this->getRequest()->getPost('email')) {
             $customerSession    = Mage::getSingleton('customer/session');
@@ -59,10 +62,16 @@ class Magestore_Campaign_AjaxformController extends Mage_Core_Controller_Front_A
                 else {
                     $message = $this->__('Thank you for your subscription.');
                 }
-                $result = array('status'=>1, 'message'=>$message);
+                $contentForSuccess = '';
+                if($popup->getId()){
+                    $contentForSuccess = $helper->convertContentToHtml($popup->getData('content_for_success'));
+                }
+                $result = array('status'=>1, 'message'=>$message,
+                    'content_for_success' => $contentForSuccess
+                );
             }
             catch (Exception $e) {
-                $result = array('status'=>1,
+                $result = array('status'=>0,
                     'message'=>$this->__('There was a problem with the subscription: %s', $e->getMessage())
                 );
             }
@@ -80,6 +89,9 @@ class Magestore_Campaign_AjaxformController extends Mage_Core_Controller_Front_A
      */
     public function registerAction()
     {
+        $helper = Mage::helper('campaign');
+        $popupId = $this->getRequest()->getParam('popup_id');
+        $popup = Mage::getModel('campaign/popup')->load($popupId);
         $result = array('status'=>0, 'message'=>'');
         try{
             $session = Mage::getSingleton('customer/session');
@@ -185,9 +197,14 @@ class Magestore_Campaign_AjaxformController extends Mage_Core_Controller_Front_A
                                 '',
                                 Mage::app()->getStore()->getId()
                             );
+                            $contentForSuccess = '';
+                            if($popup->getId()){
+                                $contentForSuccess = $helper->convertContentToHtml($popup->getData('content_for_success'));
+                            }
                             $result = array(
                                 'status' => 1,
                                 'message' => $this->__('Thank you for registering with %s.', Mage::app()->getStore()->getFrontendName()),
+                                'content_for_success' => $contentForSuccess,
                                 'redirect_url' => $successUrl
                             );
                         }
