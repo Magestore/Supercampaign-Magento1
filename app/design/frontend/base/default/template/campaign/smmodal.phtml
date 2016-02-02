@@ -93,8 +93,8 @@ $popups = $this->getAllPopupAvailable();
         Popup.frequency = dataPopup[id].showing_frequency;
         Popup.urlImages = "<?php echo $this->getSkinUrl();?>";
         Popup.closeImages = {
-            circle_white:"<?php echo $this->getSkinUrl('images/campaign/popup/close_dark.png');?>",
-            circle_dark:"<?php echo $this->getSkinUrl('images/campaign/popup/close_white.png');?>",
+            circle_white:"<?php echo $this->getSkinUrl('images/campaign/popup/close_white.png');?>",
+            circle_dark:"<?php echo $this->getSkinUrl('images/campaign/popup/close_dark.png');?>",
             simple:"<?php echo $this->getSkinUrl('images/campaign/popup/close_promotion.png');?>"
         };
         Popup.cookieUrl = "<?php echo $this->getUrl('campaign/cookie/set');?>";
