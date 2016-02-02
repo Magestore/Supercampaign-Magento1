@@ -120,6 +120,15 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Custom extends Ma
             'index' => 'image_alt'
         ));
 
+
+        $this->addColumn('imagename', array(
+            'header' => Mage::helper('campaign')->__('Image'),
+            'align' => 'center',
+            'width' => '200px',
+            'index' => 'imagename',
+            'renderer' => 'campaign/adminhtml_renderer_imagebanner'
+        ));
+
         $this->addColumn('action_banner', array(
             'header' => Mage::helper('campaign')->__('Action'),
             'renderer' => 'campaign/adminhtml_renderer_edit',
