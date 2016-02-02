@@ -125,7 +125,6 @@ CREATE TABLE {$this->getTable('campaign/popup')} (
   `horizontal_px` int(11) NULL default 100,
   `vertical_position` varchar(255) NULL default '',
   `vertical_px` int(11) NULL default 100,
-  `contentofsuccess` text NULL default '',
   `store` varchar(255) NOT NULL default '',
   `show_on_page` varchar(255) NOT NULL default '',
   `categories` varchar(255) NOT NULL default '',
@@ -149,6 +148,7 @@ CREATE TABLE {$this->getTable('campaign/popup')} (
   `show_next_popup` varchar(255) NOT NULL default '',
   `connect_with` varchar(255) NOT NULL default '',
   `popup_content` text NOT NULL default '',
+  `content_for_success` text NULL default '',
   PRIMARY KEY (`popup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 

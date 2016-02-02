@@ -103,11 +103,11 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'required'	=> true,
         ));
 
-        $fieldset->addField('contentofsuccess', 'textarea', array(
+        $fieldset->addField('content_for_success', 'textarea', array(
             'label'		=> Mage::helper('campaign')->__('Content of success:'),
             'required'	=> false,
             'note'      => 'Show content success after subcriber and register.',
-            'name'		=> 'contentofsuccess',
+            'name'		=> 'content_for_success',
         ));
 
         $fieldset->addField('width', 'text', array(
