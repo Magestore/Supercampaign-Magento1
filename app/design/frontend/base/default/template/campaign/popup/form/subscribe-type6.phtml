@@ -1,13 +1,8 @@
-<form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-popup-6">
+<form action="<?php echo $this->getUrl('campaign/ajaxform/subcriber') ?>" method="post">
     <table border="0" cellspacing="0" cellpadding="0" style="border-spacing: 25px;border-collapse: separate;">
         <tbody><tr>
-            <td><input type="text" name="email-6" id="newsletter-6" placeholder="Enter your email" title="<?php echo $this->__('Enter your email') ?>" class="input-text required-entry validate-email" /></td>
+            <td><input type="text" name="email" placeholder="Enter your email" title="<?php echo $this->__('Enter your email') ?>" class="input-text required-entry validate-email" /></td>
             <td style="width:1px;vertical-align: top"><button type="submit" title="<?php echo $this->__('Yes, let’s join') ?>" class="button"><span><span><?php echo $this->__('Yes, let’s join') ?></span></span></button></td>
         </tr>
         </tbody></table>
 </form>
-<script type="text/javascript">
-    //<![CDATA[
-    var newsletterSubscriberFormDetail = new VarienForm('newsletter-popup-6');
-    //]]>
-</script>
