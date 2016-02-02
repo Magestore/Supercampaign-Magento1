@@ -65,6 +65,13 @@ class Magestore_Campaign_AjaxformController extends Mage_Core_Controller_Front_A
                 $contentForSuccess = '';
                 if($popup->getId()){
                     $contentForSuccess = $helper->convertContentToHtml($popup->getData('content_for_success'));
+                    //set cookie to disappear popup
+                    $cookie = Mage::getModel('core/cookie');
+                    if($popup->getData('cookie_time')){
+                        $cookie->set('is_form_success_'.$popupId, 1, $popup->getData('cookie_time'));
+                    }else{
+                        $cookie->set('is_form_success_'.$popupId, true);
+                    }
                 }
                 $result = array('status'=>1, 'message'=>$message,
                     'content_for_success' => $contentForSuccess
@@ -203,6 +210,13 @@ class Magestore_Campaign_AjaxformController extends Mage_Core_Controller_Front_A
                             $contentForSuccess = '';
                             if($popup->getId()){
                                 $contentForSuccess = $helper->convertContentToHtml($popup->getData('content_for_success'));
+                                //set cookie to disappear popup
+                                $cookie = Mage::getModel('core/cookie');
+                                if($popup->getData('cookie_time')){
+                                    $cookie->set('is_form_success_'.$popupId, 1, $popup->getData('cookie_time'));
+                                }else{
+                                    $cookie->set('is_form_success_'.$popupId, true);
+                                }
                             }
                             $result = array(
                                 'status' => 1,

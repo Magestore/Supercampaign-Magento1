@@ -112,6 +112,14 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
         return true;
     }
 
+    public function checkFormSuccess(){
+        $cookie = Mage::getModel('core/cookie');
+        if($cookie->get('is_form_success_'.$this->getId())){
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @param string $specified
      * @param string $exclude
