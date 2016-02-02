@@ -34,6 +34,26 @@ $popups = $this->getAllPopupAvailable();
             </div>
         </div>
     </div>
+        <script type="text/javascript">
+            $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').submit(function(){
+                var valueinput = new VarienForm('newsletter-popup-2', true);
+                if(valueinput.validator &&  valueinput.validator.validate()){
+                    var popupsubmit = document.URL;
+                        var url = $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').attr('action');
+                    //$j('.loading').show();
+                    $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').hide();
+                    $j.ajax({
+                        url: url,
+                        data: {formdata: $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').serialize(), popup_id:<?php echo $popup->getData('popup_id') ?>},
+                        context: document.body
+                    }).success(function() {
+                        //$j('.loading').hide();
+                        $j('#sc-popup<?php echo $popup->getData('popup_id')?> .content-popup').html(<?php echo $popup->getData('contentofsuccess')?>);
+                    });
+                }
+                return false;
+            });
+        </script>
 <?php endforeach; ?>
 <script type="text/javascript">
     var dataPopup = [
