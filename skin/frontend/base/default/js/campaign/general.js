@@ -275,7 +275,7 @@ var Scpopup = function () {
                 }
                 break;
             case 'simple':
-                cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url("+Popup.closeImages.simple+") no-repeat 5px -20px}";
+                cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:url("+Popup.closeImages.simple+") no-repeat 5px -20px;top:0;right:0}";
                 break;
             case 'none':
                 cssCloseIcon = "#sc-popup" + this.idPopup + " .dialogClose{background:none transparent}";
