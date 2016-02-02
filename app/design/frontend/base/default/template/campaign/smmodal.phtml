@@ -49,9 +49,7 @@ $popups = $this->getAllPopupAvailable();
                         data: $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').serialize()+ '&popup_id=<?php echo $popup->getData('popup_id') ?>',
                         context: document.body
                     }).success(function(data) {
-                       // console.log(data);
-                        //$j('.loading').hide();
-                        $j('#sc-popup<?php echo $popup->getData('popup_id')?> .content-popup').html(data.content_for_success + <?php echo $popup->getCouponCode()?>);
+                        $j('#sc-popup<?php echo $popup->getData('popup_id')?> .content-popup').html(data.content_for_success);
                     });
                 }
                 return false;
