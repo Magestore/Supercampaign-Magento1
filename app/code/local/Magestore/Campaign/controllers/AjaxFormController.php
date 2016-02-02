@@ -75,6 +75,9 @@ class Magestore_Campaign_AjaxformController extends Mage_Core_Controller_Front_A
                     'message'=>$this->__('There was a problem with the subscription: %s', $e->getMessage())
                 );
             }
+        }else{
+            $result = array('status'=>1, 'message'=> $this->__('Only accept method post')
+            );
         }
         $json = json_encode($result);
         $this->getResponse()
