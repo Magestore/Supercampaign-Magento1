@@ -96,18 +96,21 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         $fieldset->addField('popup_content', 'editor', array(
             'label' => Mage::helper('campaign')->__('Content:'),
             'title' => Mage::helper('campaign')->__('Content:'),
-            'style'		=> 'width:800px; height:350px;',
+            'style' => 'width:800px; height:350px;',
             'name' => 'popup_content',
             'wysiwyg' => true,
             'config'        =>$wysiwygConfig,
             'required'	=> true,
         ));
 
-        $fieldset->addField('content_for_success', 'textarea', array(
+        $fieldset->addField('content_for_success', 'editor', array(
             'label'		=> Mage::helper('campaign')->__('Content of success:'),
+            'style'		=> 'width:800px; height:350px;',
+            'name'		=> 'content_for_success',
+            'wysiwyg'   => true,
+            'config'    => $wysiwygConfig,
             'required'	=> false,
             'note'      => 'Show content success after subcriber and register.',
-            'name'		=> 'content_for_success',
         ));
 
         $fieldset->addField('width', 'text', array(

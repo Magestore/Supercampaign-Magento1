@@ -17,11 +17,10 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
     public function editAction() {
         $id	 = $this->getRequest()->getParam('id');
         //skip old data popup when load template from old popup editing
-        //anh Tit code lỗi chỗ này em z comment
-//        $editIdNewFromTemplate = Mage::getSingleton('adminhtml/session')->getPopupIdNewFromTemplate();
-//        if(isset($editIdNewFromTemplate)){
-//            $id = $editIdNewFromTemplate;
-//        }
+        $editIdNewFromTemplate = Mage::getSingleton('adminhtml/session')->getPopupIdNewFromTemplate();
+        if(isset($editIdNewFromTemplate)){
+            $id = $editIdNewFromTemplate;
+        }
         //end
 
         $model  = Mage::getModel('campaign/popup')->load($id);
