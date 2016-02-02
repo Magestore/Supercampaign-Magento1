@@ -269,6 +269,7 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
         if($template->getId()){
             $data = $template->getData();
             $data['popup_content'] = $template->getTemplateContentHtml();
+            $data['content_for_success'] = $template->getContentSuccessHtml();
             //skip old data popup when load template from old popup editing
             $popupEditId = Mage::getSingleton('adminhtml/session')->getPopupEditId();
             if(isset($popupEditId)){

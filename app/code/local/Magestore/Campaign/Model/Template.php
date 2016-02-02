@@ -42,5 +42,13 @@ class Magestore_Campaign_Model_Template extends Mage_Core_Model_Abstract
             ->toHtml();
         return $html;
     }
+
+    public function getContentSuccessHtml(){
+        $html = Mage::app()->getLayout()->createBlock('campaign/popup')
+            ->setArea('frontend')
+            ->setTemplate(trim($this->getTemplateFileSuccess()))
+            ->toHtml();
+        return $html;
+    }
 }
 
