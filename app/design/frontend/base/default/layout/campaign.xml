@@ -24,6 +24,7 @@
     <default>
         <!-- update layout for all frontend page -->
         <reference name="head">
+            <block type="core/template" template="campaign/js.phtml" name="campaign.js" as="campaign_js"></block>
             <action method="addCss"><stylesheet>css/campaign/msmodal.css</stylesheet></action>
             <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup01.css</stylesheet></action>
             <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup02.css</stylesheet></action>
@@ -35,8 +36,8 @@
             <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup08.css</stylesheet></action>
             <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup09.css</stylesheet></action>
             <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup11.css</stylesheet></action>
-            <action method="addItem"><type>skin_js</type><name>js/campaign/bootstrap.min.js</name></action>
-            <action method="addItem"><type>skin_js</type><name>js/campaign/general.js</name></action>
+            <!--<action method="addItem"><type>skin_js</type><name>js/campaign/bootstrap.min.js</name></action>-->
+            <!--<action method="addItem"><type>skin_js</type><name>js/magestore/campaign/general.js</name></action>-->
         </reference>
       <reference name="before_body_end">
           <!--<block type="campaign/popup" name="popup-campaign" template="campaign/popupmodal.phtml"/>-->
