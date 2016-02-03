@@ -26,7 +26,7 @@
  * @package     Magestore_Campaign
  * @author      Magestore Developer
  */
-include('lib/Mobile_Detect.php');
+include_once('lib/Mobile_Detect.php');
 class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
 {
     const STATUS_ENABLE = 1;
@@ -374,7 +374,6 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
      * @return bool
      */
     public function checkCustomerGroup(){
-
         $grouptoshow = array();
         $group = $this->getCustomerGroupIds();
 
@@ -487,6 +486,12 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     public function clearCookie(){
         $cookie = Mage::getModel('core/cookie');
         $cookie->delete('is_form_success_'.$this->getId());
+        return $this;
+    }
+
+    protected function _beforeSave(){
+        //zend_debug::dump($this->getData());die;
+        $this->clearCookie();
         return $this;
     }
 }
