@@ -412,14 +412,14 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
                         return true;
 
                     }
-//                    if($sub == 'not_loged_in'){
-//                        if($login == false){
-//                            if($groupcode == 'NOT LOGGED IN'){
-//                                return true;
-//                            }
-//                        }
-//
-//                    }
+                    if($sub == 'not_loged_in'){
+                        if($login == false){
+                            if($groupcode == 'NOT LOGGED IN'){
+                                return true;
+                            }
+                        }
+
+                    }
                     if($sub == 'general'){
 
                         if($groupcode == 'General'){

@@ -115,7 +115,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
 
         $fieldset->addField('width', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Width:'),
-            'required'	=> true,
+            'required'	=> false,
             'class'       => 'validate-number',
             'name'		=> 'width',
         ));
