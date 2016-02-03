@@ -98,10 +98,10 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
                     'value' => 'all_group',
                     'label' => Mage::helper('campaign')->__('All Group'),
                 ),
-                array(
-                    'value' => 'not_loged_in',
-                    'label' => Mage::helper('campaign')->__('Not loged in'),
-                ),
+//                array(
+//                    'value' => 'not_loged_in',
+//                    'label' => Mage::helper('campaign')->__('Not loged in'),
+//                ),
                 array(
                     'value' => 'general',
                     'label' => Mage::helper('campaign')->__('General'),

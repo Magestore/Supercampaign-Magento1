@@ -122,7 +122,7 @@ class Magestore_Campaign_Adminhtml_BannersliderController extends Mage_Adminhtml
             }elseif($data['style_slide'] == 6){
                 $data['position'] = 'note-allsite';
             }
-                                    
+
             //Zend_debug::dump($data);	
             $model = Mage::getModel('campaign/bannerslider');
             $model->setData($data)

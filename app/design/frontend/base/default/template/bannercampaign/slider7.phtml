@@ -3,6 +3,7 @@ $block_data = $this->getBlockData();
 $blocks = $block_data['block'];
 $banners = $block_data['banners'];
 $click_url = $this->getUrl('campaign/index/click',array('_secure'=>true));
+$speed = $blocks['slider_speed'] * 1000;
 ?>
 <script type="text/javascript" src="<?php echo $this->getJsUrl('magestore/bannercampaign/jquery-1.7.min.js') ?>"></script>
 <script src="<?php echo $this->getJsUrl('magestore/bannercampaign/jquery.flexslider.js') ?>"></script>
@@ -12,7 +13,7 @@ $click_url = $this->getUrl('campaign/index/click',array('_secure'=>true));
     j7(window).load(function() {
         j7('.flexslider-7-<?php echo $blocks['bannerslider_id'] ?>').flexslider({
             animation: "<?php echo $blocks['animationB'];?>",
-            slideshowSpeed: <?php echo $blocks['slider_speed'];?>
+            slideshowSpeed: <?php echo $speed; ?>
             //minItems: 2,
             //maxItems: <?php echo $this->getMaxItem($blocks['max_item']); ?>            
         });

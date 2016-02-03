@@ -3,6 +3,7 @@ $block_data = $this->getBlockData();
 $blocks = $block_data['block'];
 $banners = $block_data['banners'];
 $click_url = $this->getUrl('campaign/index/click',array('_secure'=>true));
+$speed = $blocks['slider_speed'] * 1000;
 ?>
 
 <script type="text/javascript" src="<?php echo $this->getJsUrl('magestore/bannercampaign/jquery-1.7.min.js') ?>"></script>
@@ -27,7 +28,7 @@ $click_url = $this->getUrl('campaign/index/click',array('_secure'=>true));
             controlNav: false,
             animationLoop: false,
             slideshow: true,
-            slideshowSpeed: <?php echo $blocks['slider_speed'];?>,
+            slideshowSpeed: <?php echo $speed; ?>,
             sync: "#carousel-9-<?php echo $blocks['bannerslider_id'] ?>"            
         });
     });
