@@ -490,7 +490,6 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     }
 
     protected function _beforeSave(){
-        //zend_debug::dump($this->getData());die;
         $this->clearCookie();
         return $this;
     }
