@@ -281,7 +281,7 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
             Mage::getSingleton('adminhtml/session')->setFormData($data);
 
         }else{
-            Mage::getSingleton('adminhtml/session')->addError('Can\' load template.');
+            Mage::getSingleton('adminhtml/session')->addError('Can\'t load template.');
         }
         $this->_forward('edit');
     }
