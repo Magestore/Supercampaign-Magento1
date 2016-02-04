@@ -1,65 +1,56 @@
 <form action="<?php echo $this->getUrl('campaign/ajaxform/register') ?>" method="post" class="form-register-campaign">
-    <div class="fieldset">
+    <div>
         <input type="hidden" name="success_url" value="">
         <input type="hidden" name="error_url" value="">
         <p style="font-size:20px;color:#333;text-transform: uppercase">Register to get <strong style="color:red">$5</strong>.</p>
         <p class="required">* Required Fields</p>
-        <ul class="form-list">
-            <li class="fields">
-                <div class="customer-name">
-                    <div class="field name-firstname">
+        <ul>
+            <li>
+                <div>
+                    <div style="margin-bottom:20px">
                         <label for="firstname" class="required"><em>*</em>First Name</label>
-                        <div class="input-box">
+                        <div>
                             <input type="text" id="firstname" name="firstname" value="" title="First Name" maxlength="255" class="input-text required-entry">
                         </div>
                     </div>
-                    <div class="field name-lastname">
+                    <div style="margin-bottom:20px">
                         <label for="lastname" class="required"><em>*</em>Last Name</label>
-                        <div class="input-box">
+                        <div>
                             <input type="text" id="lastname" name="lastname" value="" title="Last Name" maxlength="255" class="input-text required-entry">
                         </div>
                     </div>
                 </div>
             </li>
             <li>
-                <label for="email_address" class="required"><em>*</em>Email Address</label>
-                <div class="input-box">
-                    <input type="email" spellcheck="false" name="email" id="email_address" value="" title="Email Address" class="input-text validate-email required-entry">
+                <div  style="margin-bottom:20px">
+                    <label for="email_address" class="required"><em>*</em>Email Address</label>
+                    <div>
+                        <input type="email" spellcheck="false" name="email" id="email_address" value="" title="Email Address" class="input-text validate-email required-entry">
+                    </div>
                 </div>
             </li>
 
-            <li class="fields">
-                <div class="field">
+            <li>
+                <div style="margin-bottom:20px">
                     <label for="password" class="required"><em>*</em>Password</label>
-                    <div class="input-box">
+                    <div>
                         <input type="password" name="password" id="password" title="Password" class="input-text required-entry validate-password">
                     </div>
                 </div>
-                <div class="field">
+                <div style="margin-bottom:20px">
                     <label for="confirmation" class="required"><em>*</em>Confirm Password</label>
-                    <div class="input-box">
+                    <div>
                         <input type="password" name="confirmation" title="Confirm Password" id="confirmation" class="input-text required-entry validate-cpassword">
                     </div>
                 </div>
             </li>
             <li class="control">
-                <div class="input-box">
+                <div style="margin-bottom:20px">
                     <input type="checkbox" name="is_subscribed" title="Sign Up for Newsletter" value="1" id="is_subscribed" class="checkbox">
+                    <label for="is_subscribed">Sign Up for Newsletter</label>
                 </div>
-                <label for="is_subscribed">Sign Up for Newsletter</label>
             </li>
         </ul>
-        <div class="remember-me-popup">
-            <div class="remember-me-popup-head">
-                <h3>What's this?</h3>
-                <a href="#" class="remember-me-popup-close" title="Close">Close</a>
-            </div>
-            <div class="remember-me-popup-body">
-                <p>Checking "Remember Me" will let you access your shopping cart on this computer when you are logged out</p>
-                <div class="remember-me-popup-close-button a-right">
-                    <a href="#" class="remember-me-popup-close button" title="Close"><span>Close</span></a>
-                </div>
-            </div>
         </div>
         <script type="text/javascript">
             //<![CDATA[
@@ -78,14 +69,13 @@
             });
             //]]>
         </script>
-    </div>
-    <div class="buttons-set">
-        <p class="back-link"><a style="cursor:pointer" class="back-link campaign-login"><small>« </small>Login</a></p>
-        <button type="submit" title="Register" class="button"><span><span>Register</span></span></button>
+    <div>
+        <p style="float:left"><a style="cursor:pointer" class="back-link campaign-login"><small>« </small>Login</a></p>
+        <button style="float:right" type="submit" title="Register" class="button"><span><span>Register</span></span></button>
     </div>
 </form>
 
-<form style="display:none" action="<?php echo $this->getUrl('customer/account/login/')?>" method="post" id="sc-login">
+<form style="display:none" action="<?php echo $this->getUrl('customer/account/login/')?>" method="post" class="sc-login">
     <p style="font-size:20px;color:#333;text-transform: uppercase"><?php echo $this->__('Login')?></p>
     <ul>
         <li>
