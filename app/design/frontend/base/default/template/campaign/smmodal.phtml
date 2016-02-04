@@ -31,6 +31,7 @@ $popups = $this->getAllPopupAvailable();
                 <div class="content-popup <?php echo $trigger ?>">
                     <?php echo $helper->convertContentToHtml($popup->getData('popup_content')); ?>
                 </div>
+                <img class="sc-loadding-popup" src="<?php echo $this->getSkinUrl('images/campaign/popup/loading.gif')?>" width="32" height="32" alt="<?php echo $this->__('Loadding')?>" />
             </div>
         </div>
     </div>
@@ -40,7 +41,7 @@ $popups = $this->getAllPopupAvailable();
                 if(newsletterForm<?php echo $popup->getData('popup_id') ?>.validator &&  newsletterForm<?php echo $popup->getData('popup_id') ?>.validator.validate()){
                     var popupsubmit = document.URL;
                         var url = $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').attr('action');
-                    //$j('.loading').show();
+                    $j('.sc-loadding-popup').show();
 
                     $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').hide();
                     $j.ajax({
@@ -49,6 +50,7 @@ $popups = $this->getAllPopupAvailable();
                         data: $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').serialize()+ '&popup_id=<?php echo $popup->getData('popup_id') ?>',
                         context: document.body
                     }).success(function(data) {
+                        $j('.sc-loadding-popup').hide();
                         $j('#sc-popup<?php echo $popup->getData('popup_id')?> .content-popup').html(data.content_for_success);
                     });
                 }
