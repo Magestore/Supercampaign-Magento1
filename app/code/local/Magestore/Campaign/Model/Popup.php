@@ -474,15 +474,23 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     }
     /*End for check visitorsegment*/
 
-   /* public function getCouponCode(){
+    public function CheckCampaignInfor(){
         $campaign_id = $this->getCampaignId();
-        var_dump($campaign_id); die('ddd');
-        $campaign = Mage::getModel('campaign/campaign')->load($this->getCampaignId());
-        if($campaign->getId()){
-            return $campaign->getCouponCode();
+        $coupon = $this->getCouponforcampaign($campaign_id);
+
+        if($campaign_id){
+            return true;
         }else{
-            return '';
+            return false;
         }
-    }*/
+    }
+
+    public function getCouponforcampaign($campaign_id){
+        $campaign = Mage::getModel('campaign/campaign')->load($campaign_id);
+        $coupon = $campaign->getCouponCode();
+        //var_dump($coupon); die('qqqq');
+        return $campaign_id;
+    }
+
 }
 

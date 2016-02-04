@@ -3,9 +3,14 @@
 <?php
 $helper = Mage::helper('campaign');
 $popups = $this->getAllPopupAvailable();
+$couponcampaign = $this->getCampaignCoupon();
 ?>
 <?php foreach ($popups as $key => $popup): ?>
     <?php
+
+        //$code = $this->getCampaignnew();
+        //var_dump($code); die('iiii day');
+
     $name = 'popupcampaign';
     $customer_cookie = Mage::getModel('core/cookie')->get($name);
 
