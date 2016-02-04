@@ -2,7 +2,7 @@
     <div class="fieldset">
         <input type="hidden" name="success_url" value="">
         <input type="hidden" name="error_url" value="">
-
+        <p style="font-size:20px;color:#333;text-transform: uppercase">Register to get <strong style="color:red">$5</strong>.</p>
         <p class="required">* Required Fields</p>
         <ul class="form-list">
             <li class="fields">
@@ -86,15 +86,26 @@
 </form>
 
 <form style="display:none" action="<?php echo $this->getUrl('customer/account/login/')?>" method="post" id="sc-login">
+    <p style="font-size:20px;color:#333;text-transform: uppercase"><?php echo $this->__('Login')?></p>
     <ul>
         <li>
-            <input type="text" name="login_email" placeholder="Enter Your Email" title="Enter Your Email">
+            <div class="field" style="margin-bottom: 20px;">
+                <label class="required"><em>*</em><?php echo $this->__('Your Email')?></label>
+                <div class="input-box">
+                    <input class="input-text required-entry" type="text" name="login_email" placeholder="Enter Your Email" title="Enter Your Email">
+                </div>
+            </div>
         </li>
         <li class="margin:20px 0">
-            <input type="password" name="login_password" placeholder="Password" title="Select Your Password">
+            <div class="field">
+                <label class="required"><em>*</em><?php echo $this->__('Your Password')?></label>
+                <div class="input-box">
+                    <input class="input-text required-entry" type="password" name="login_password" placeholder="Password" title="Select Your Password">
+                </div>
+            </div>
         </li>
         <li style="text-align:right">
-            <button title="Login" type="submit" style="border:0 none;background:green;padding:7px 15px;margin-top:20px;color:#fff"> Login </button>
+            <button title="Login" type="submit" style="border:0 none;background:#2e8ab8;padding:7px 15px;margin-top:20px;color:#fff"> Login </button>
         </li>
     </ul>
     <p><a href="<?php echo $this->getUrl('customer/account/forgotpassword/')?>">Forgot password?</a> | <a href="#" class="campaign-register">Register</a></p>

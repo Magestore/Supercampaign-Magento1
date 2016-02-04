@@ -26,7 +26,7 @@
  * @package     Magestore_Campaign
  * @author      Magestore Developer
  */
-include('lib/Mobile_Detect.php');
+include_once('lib/Mobile_Detect.php');
 class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
 {
     const STATUS_ENABLE = 1;
@@ -374,7 +374,6 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
      * @return bool
      */
     public function checkCustomerGroup(){
-
         $grouptoshow = array();
         $group = $this->getCustomerGroupIds();
 
@@ -412,14 +411,14 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
                         return true;
 
                     }
-                    if($sub == 'not_loged_in'){
-                        if($login == false){
-                            if($groupcode == 'NOT LOGGED IN'){
-                                return true;
-                            }
-                        }
-
-                    }
+//                    if($sub == 'not_loged_in'){
+//                        if($login == false){
+//                            if($groupcode == 'NOT LOGGED IN'){
+//                                return true;
+//                            }
+//                        }
+//
+//                    }
                     if($sub == 'general'){
 
                         if($groupcode == 'General'){
@@ -474,23 +473,25 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     }
     /*End for check visitorsegment*/
 
-    public function CheckCampaignInfor(){
-        $campaign_id = $this->getCampaignId();
-        $coupon = $this->getCouponforcampaign($campaign_id);
-
-        if($campaign_id){
-            return true;
+    public function getCouponCode(){
+        $campaign = Mage::getModel('campaign/campaign')->load($this->getCampaignId());
+        if($campaign->getId()){
+            return $campaign->getCouponCode();
         }else{
-            return false;
+            return '';
         }
     }
 
-    public function getCouponforcampaign($campaign_id){
-        $campaign = Mage::getModel('campaign/campaign')->load($campaign_id);
-        $coupon = $campaign->getCouponCode();
-        //var_dump($coupon); die('qqqq');
-        return $campaign_id;
+
+    public function clearCookie(){
+        $cookie = Mage::getModel('core/cookie');
+        $cookie->delete('is_form_success_'.$this->getId());
+        return $this;
     }
 
+    protected function _beforeSave(){
+        $this->clearCookie();
+        return $this;
+    }
 }
 
