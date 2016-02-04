@@ -320,13 +320,13 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             ),
         ));
 
-        $fieldset->addField('cookie_time', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Cookie Life Time:'),
-            'note'      => 'Set days for cookie to show popup.',
-            'class'       => 'validate-number',
-            'required'	=> false,
-            'name'		=> 'cookie_time',
-        ));
+//        $fieldset->addField('cookie_time', 'text', array(
+//            'label'		=> Mage::helper('campaign')->__('Cookie Life Time:'),
+//            'note'      => 'Set days for cookie to show popup.',
+//            'class'       => 'validate-number',
+//            'required'	=> false,
+//            'name'		=> 'cookie_time',
+//        ));
 
         $fieldset->addField('priority', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Set Priority:'),

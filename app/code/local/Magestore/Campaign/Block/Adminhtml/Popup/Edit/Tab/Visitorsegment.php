@@ -51,6 +51,35 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
             ),
         ));
 
+        $cookie_time = $fieldset->addField('cookie_time', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('Cookie Life Time:'),
+            'note'      => 'Set days for cookie to show popup.',
+            'class'       => 'validate-number',
+            'required'	=> false,
+            'name'		=> 'cookie_time',
+        ));
+
+       $customer_cookie = $fieldset->addField('returning_user', 'select', array(
+            'label'		=> Mage::helper('campaign')->__('Return or new customer:'),
+            'required'	=> true,
+            'name'		=> 'returning_user',
+            'note'      => "Allow show popup for return or new customer .",
+            'values' => array(
+                array(
+                    'value' => 'alluser',
+                    'label' => Mage::helper('campaign')->__('All User'),
+                ),
+                array(
+                    'value' => 'return',
+                    'label' => Mage::helper('campaign')->__('Return'),
+                ),
+                array(
+                    'value' => 'new',
+                    'label' => Mage::helper('campaign')->__('New Customer'),
+                ),
+            ),
+        ));
+
         $fieldset->addField('login_user', 'select', array(
             'label'		=> Mage::helper('campaign')->__('User Login:'),
             'name'		=> 'login_user',
@@ -70,24 +99,6 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
                 ),
             ),
         ));
-
-       $customer_cookie = $fieldset->addField('returning_user', 'select', array(
-            'label'		=> Mage::helper('campaign')->__('Return or new customer:'),
-            'required'	=> true,
-            'name'		=> 'returning_user',
-            'note'      => "Allow show popup for return or new customer .",
-            'values' => array(
-                array(
-                    'value' => 'return',
-                    'label' => Mage::helper('campaign')->__('Return'),
-                ),
-                array(
-                    'value' => 'new',
-                    'label' => Mage::helper('campaign')->__('New Customer'),
-                ),
-            ),
-        ));
-
 
         $fieldset->addField('customer_group_ids', 'multiselect', array(
             'label'		=> Mage::helper('campaign')->__('Customer groups:'),
@@ -126,7 +137,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
         $fieldset->addField('user_ip', 'text', array(
             'label'		=> Mage::helper('campaign')->__('User Ip:'),
             'required'	=> false,
-            'note'      => 'Show popup for user id.',
+            'note'      => "Show popup for user's ip.",
             'name'		=> 'user_ip',
         ));
 
@@ -140,8 +151,13 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Visitorsegment extends M
         $this->setChild('form_after', $this->getLayout()->createBlock('adminhtml/widget_form_element_dependence')
                 ->addFieldMap($enable_cookie->getHtmlId(), $enable_cookie->getName())
                 ->addFieldMap($customer_cookie->getHtmlId(), $customer_cookie->getName())
+                ->addFieldMap($cookie_time->getHtmlId(), $cookie_time->getName())
                 ->addFieldDependence(
                     $customer_cookie->getName(),
+                    $enable_cookie->getName(),
+                    '1'
+                )->addFieldDependence(
+                    $cookie_time->getName(),
                     $enable_cookie->getName(),
                     '1'
                 )

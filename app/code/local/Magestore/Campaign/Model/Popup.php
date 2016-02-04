@@ -347,8 +347,16 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
         $customer_cookie = Mage::getModel('core/cookie')->get($ipcustomer);
         $allcookie = Mage::getModel('core/cookie')->get();
 
+        // if empty cookie time
+        if($cookiepopup == '' || $cookiepopup < 1){
+            return true;
+        }
+
         //check cookie customer
         if(isset($_COOKIE[$ipcustomer])) {
+            if($getReturn == 'alluser'){
+                return true;
+            }
             if($getReturn == 'new'){
                 return false;
             }
@@ -362,7 +370,7 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
                         //set cookie for customer
                         $name = $ipcustomer;
                         $value = $customer_name;
-                        $period = $cookiepopup;
+                        $period = $cookiepopup * 86400;
                         Mage::getModel('core/cookie')->set($name, $value, $period);
                 }
             return true;
