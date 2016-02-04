@@ -101,6 +101,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'wysiwyg' => true,
             'config'        =>$wysiwygConfig,
             'required'	=> true,
+            'note'      => 'If you want to show coupon code on the popup template, please in sert code: {{block type="campaign/coupon" name="couponcampaign" template="campaign/coupon.phtml"}}',
         ));
 
         $fieldset->addField('content_for_success', 'editor', array(
@@ -321,7 +322,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
 
         $fieldset->addField('cookie_time', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Cookie Life Time:'),
-            'note'      => 'Set time for cookie to show popup.',
+            'note'      => 'Set days for cookie to show popup.',
             'class'       => 'validate-number',
             'required'	=> false,
             'name'		=> 'cookie_time',
