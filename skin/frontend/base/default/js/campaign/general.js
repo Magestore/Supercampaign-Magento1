@@ -225,6 +225,7 @@ var Scpopup = function () {
         var padding = this.paddingSize;
         var width = this.width;
         var bgContentColor = this.bgColor;
+        var contentRadius = this.cornerRadius - bSize;
         var cssHead, cssBColor, cssBRadius, cssBSize, cssPadding, cssWidth;
         if (bColor != "") {
             cssBColor = "border-color:#" + bColor + ";";
@@ -232,11 +233,12 @@ var Scpopup = function () {
         if (bSize != "") {
             cssBSize = "border-width:" + bSize + "px;";
         }
+
         if (bRadius != "") {
             switch (bRadius) {
                 case 'rounded':
                     cssBRadius = "#sc-popup" + this.idPopup + " .modal-content{border-radius:" + this.cornerRadius + "px;}";
-                    cssBRadius = cssBRadius + "#sc-popup" + this.idPopup + " .modal-content .content-popup{overflow:hidden;border-radius:"+this.cornerRadius + "px;}";
+                    cssBRadius = cssBRadius + "#sc-popup" + this.idPopup + " .modal-content .content-popup{overflow:hidden;border-radius:"+ contentRadius + "px;}";
                     break;
                 case 'sharp':
                     cssBRadius = "#sc-popup" + this.idPopup + " .modal-content{border-radius:0px;}";

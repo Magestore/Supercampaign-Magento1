@@ -1,12 +1,12 @@
 <form action="<?php echo $this->getUrl('campaign/ajaxform/register') ?>" method="post" class="form-register-campaign">
-    <div class="fieldset">
+    <div>
         <input type="hidden" name="success_url" value="">
         <input type="hidden" name="error_url" value="">
         <p style="font-size:20px;color:#333;text-transform: uppercase">Register to get <strong style="color:red">$5</strong>.</p>
         <p class="required">* Required Fields</p>
-        <div class="content-register">
+        <div>
             <div class="input-layout">
-                <input type="text" id="firstname" name="firstname" value="" title="First Name" maxlength="255" class="input-text required-entry">
+                <input type="text" id="firstname" name="firstname" value="" title="First Name" maxlength="255" class="input-text required-entry" required />
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label for="firstname" class="required"><em>*</em>First Name</label>
@@ -18,19 +18,19 @@
                 <label for="lastname" class="required"><em>*</em>Last Name</label>
             </div>
              <div class="input-layout">
-                 <input type="email" spellcheck="false" name="email" id="email_address" value="" title="Email Address" class="input-text validate-email required-entry">
+                 <input type="email" spellcheck="false" name="email" id="email_address" value="" title="Email Address" class="input-text validate-email required-entry" required />
                 <span class="highlight"></span>
                 <span class="bar"></span>
                  <label for="email_address" class="required"><em>*</em>Email Address</label>
             </div>
             <div class="input-layout">
-                <input type="password" name="password" id="password" title="Password" class="input-text required-entry validate-password">
+                <input type="password" name="password" id="password" title="Password" class="input-text required-entry validate-password" required />
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label for="password" class="required"><em>*</em>Password</label>
             </div>
             <div class="input-layout">
-                <input type="password" name="confirmation" title="Confirm Password" id="confirmation" class="input-text required-entry validate-cpassword">
+                <input type="password" name="confirmation" title="Confirm Password" id="confirmation" class="input-text required-entry validate-cpassword" required />
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label for="confirmation" class="required"><em>*</em>Confirm Password</label>
@@ -41,18 +41,6 @@
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label for="is_subscribed">Sign Up for Newsletter</label>
-            </div>
-        </div>
-        <div class="remember-me-popup">
-            <div class="remember-me-popup-head">
-                <h3>What's this?</h3>
-                <a href="#" class="remember-me-popup-close" title="Close">Close</a>
-            </div>
-            <div class="remember-me-popup-body">
-                <p>Checking "Remember Me" will let you access your shopping cart on this computer when you are logged out</p>
-                <div class="remember-me-popup-close-button a-right">
-                    <a href="#" class="remember-me-popup-close button" title="Close"><span>Close</span></a>
-                </div>
             </div>
         </div>
         <script type="text/javascript">

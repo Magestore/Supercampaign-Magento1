@@ -36,6 +36,7 @@
             <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup09.css</stylesheet></action>
             <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup11.css</stylesheet></action>
             <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup13.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/campaign/popup/subscribe/sc-popup14.css</stylesheet></action>
             <action method="addItem"><type>skin_js</type><name>js/campaign/bootstrap.min.js</name></action>
             <action method="addItem"><type>skin_js</type><name>js/campaign/general.js</name></action>
         </reference>

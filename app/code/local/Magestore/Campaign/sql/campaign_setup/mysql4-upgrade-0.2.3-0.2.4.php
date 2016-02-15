@@ -43,8 +43,8 @@ INSERT INTO `{$this->getTable('campaign/template')}` (`template_id`, `title`, `t
 (9, 'Template 10 - Popup title left bottom', '10', 'campaign/popup/subscribe/template10.phtml', 'campaign/popup/success/success10.phtml', '0', 'images/campaign/popup/template_images/template10.png', 600, '', 'sharp', 0, '', 0, 'no_bg_fix_popup', 'ffffff', 0, 'cricle', 0, 'bottom', NULL, 'left', 0, 'bottom', 0, NULL),
 (10, 'Template -12 ', '12', 'campaign/popup/sticker/template12.phtml', 'campaign/popup/success/success12.phtml', '0', 'images/campaign/popup/template_images/template12.png', 150, 'px', 'sharp', 2, 'FFD45E', 0, 'no_bg_fix_popup', 'EA2EFF', 20, 'simple', 0, 'bottom', NULL, 'left', 0, 'bottom', 0, NULL),
 (11, 'Template 11 - Video', '', 'campaign/popup/video/template11.phtml', 'campaign/popup/success/success11.phtml', '0', 'images/campaign/popup/template_images/template11.png', 600, 'px', 'rounded', 20, '', 0, 'dark', 'ffffff', 20, 'circle', 0, 'top', NULL, 'center', 100, 'top', 100, NULL),
-(12, 'Template 13 - Register', '', 'campaign/popup/register/template13.phtml', 'campaign/popup/success/success13.phtml', '0', 'images/campaign/popup/template_images/template13.png', 500, '', 'rounded', 0, '20', 0, 'dark', 'ffffff', 20, 'circle', 0, 'top', NULL, 'center', 100, 'top', 100, NULL);
-
+(12, 'Template 13 - Register', '', 'campaign/popup/register/template13.phtml', 'campaign/popup/success/success13.phtml', '0', 'images/campaign/popup/template_images/template13.png', 500, '', 'rounded', 0, '20', 0, 'dark', 'ffffff', 20, 'circle', 0, 'top', NULL, 'center', 100, 'top', 100, NULL),
+(13, 'Template 14 - Register Material design', '', 'campaign/popup/register/template14.phtml', 'campaign/popup/success/success14.phtml', '0', 'images/campaign/popup/template_images/template14.png', 500, '', 'rounded', 0, '20', 0, 'dark', 'ffffff', 20, 'circle', 0, 'top', NULL, 'center', 100, 'top', 100, NULL);
 ");
 
 $installer->getConnection()->addColumn($this->getTable('newsletter_subscriber'), 'campaign_id', 'int(11) NULL');
