@@ -45,7 +45,7 @@ class Magestore_Campaign_Block_Coupon extends Mage_Core_Block_Template
     }
 
     public function getCouponcode(){
-        $code = Mage::registry('coupon');
+        //$code = Mage::registry('coupon');
         if($code){
             $coupon = $code;
         }
