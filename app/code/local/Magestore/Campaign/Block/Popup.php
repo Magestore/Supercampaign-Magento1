@@ -55,6 +55,15 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
         }
     }
 
+    public function getCampaignCoupon(){
+        $all_campaign = $this->getAllDataPopupActive();
+
+        foreach($all_campaign as $pop){
+            //zend_debug::dump($pop); //die('oooo');
+            //return $pop;
+        }
+    }
+
     /**
      * get all popup through all campaigns
      * @return mixed
@@ -94,6 +103,13 @@ class Magestore_Campaign_Block_Popup extends Mage_Core_Block_Template
      * @return mixed
      */
     public function getCouponcodeforcp(){
-        return Mage::getModel('campaign/popup')->getCouponCode();
+       $campaign = $this->getCouponforcampaign();
+        return $campaign;
+    }
+
+    public function getCampaignnew(){
+        $campaign = Mage::getModel('campaign/popup')->getCouponforcampaign();
+        zend_debug::dump($campaign); die('otoke');
+        return $campaign;
     }
 }

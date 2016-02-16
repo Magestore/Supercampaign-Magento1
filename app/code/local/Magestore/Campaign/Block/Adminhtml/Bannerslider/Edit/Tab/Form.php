@@ -434,7 +434,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
                             $(\'position_note\').parentNode.parentNode.hide();	
                             if(!$(\'width\').value || $(\'width\').value == 0) $(\'width\').value = 400;
                             if(!$(\'height\').value || $(\'height\').value == 0) $(\'height\').value = 200;
-                            if(!$(\'slider_speed\').value) $(\'slider_speed\').value = 4500;
+                            if(!$(\'slider_speed\').value) $(\'slider_speed\').value = 5;
                       }
 						
 		     function activesomeField56(){
@@ -448,7 +448,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
                             $(\'position_note\').parentNode.parentNode.hide();
                             if(!$(\'width\').value || $(\'width\').value == 0) $(\'width\').value = 400;
                             if(!$(\'height\').value || $(\'height\').value == 0) $(\'height\').value = 200;
-                            if(!$(\'slider_speed\').value) $(\'slider_speed\').value = 4500;							
+                            if(!$(\'slider_speed\').value) $(\'slider_speed\').value = 5;
 						}
 						
                     function activesomeField710(){
@@ -460,7 +460,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
 			$(\'position_note\').parentNode.parentNode.hide();	
 			$(\'width\').parentNode.parentNode.hide();                                                           
                         $(\'height\').parentNode.parentNode.hide();                     
-			if(!$(\'slider_speed\').value) $(\'slider_speed\').value = 4500;							
+			if(!$(\'slider_speed\').value) $(\'slider_speed\').value = 5;
 		}
 						
                         function hideSomeField(){

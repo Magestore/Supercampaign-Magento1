@@ -101,6 +101,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'wysiwyg' => true,
             'config'        =>$wysiwygConfig,
             'required'	=> true,
+            'note'      => 'Template popup to show on frontend',
         ));
 
         $fieldset->addField('content_for_success', 'editor', array(
@@ -110,7 +111,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'wysiwyg'   => true,
             'config'    => $wysiwygConfig,
             'required'	=> false,
-            'note'      => 'Show content success after subcriber and register.',
+            'note'      => 'Show content success after subcriber and register. If you want to show coupon code, please in sert code: {{block type="campaign/coupon" name="couponcampaign" template="campaign/coupon.phtml"}}',
         ));
 
         $fieldset->addField('width', 'text', array(
@@ -178,10 +179,10 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             ),
         ));
 
-//        $categoryIds = implode(", ", Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('level', array('gt' => 0))->getAllIds());
-//        if(!isset($data['categories'])){
-//            $data['categories'] = $categoryIds;
-//        }
+        $categoryIds = implode(", ", Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('level', array('gt' => 0))->getAllIds());
+        if(!isset($data['categories'])){
+            //$data['categories'] = $categoryIds;
+        }
         $categories = $fieldset->addField('categories', 'text', array(
             'label' => Mage::helper('campaign')->__('Categories Ids:'),
             'name' => 'categories',
@@ -224,6 +225,14 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                 };
 		</script>
             '
+        ));
+
+        $fieldset->addField('all_categories','hidden', array(
+            'label' =>  Mage::helper('campaign')->__('All Categories: '),
+            'required'	=> false,
+            'name'  => 'all_categories',
+            'after_element_html' => '
+                <input type="hidden" value="' . $categoryIds . '" id="category_all_ids" />'
         ));
 
         $specified_url = $fieldset->addField('specified_url', 'text', array(
@@ -319,13 +328,13 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             ),
         ));
 
-        $fieldset->addField('cookie_time', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Cookie Life Time:'),
-            'note'      => 'Set time for cookie to show popup.',
-            'class'       => 'validate-number',
-            'required'	=> false,
-            'name'		=> 'cookie_time',
-        ));
+//        $fieldset->addField('cookie_time', 'text', array(
+//            'label'		=> Mage::helper('campaign')->__('Cookie Life Time:'),
+//            'note'      => 'Set days for cookie to show popup.',
+//            'class'       => 'validate-number',
+//            'required'	=> false,
+//            'name'		=> 'cookie_time',
+//        ));
 
         $fieldset->addField('priority', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Set Priority:'),

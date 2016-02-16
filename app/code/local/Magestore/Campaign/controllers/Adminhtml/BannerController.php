@@ -220,7 +220,7 @@ class Magestore_Campaign_Adminhtml_BannerController extends Mage_Adminhtml_Contr
         } else {
             try {
                 foreach ($bannersliderIds as $bannersliderId) {
-                    $bannerslider = Mage::getModel('bannerslider/banner')->load($bannersliderId);
+                    $bannerslider = Mage::getModel('campaign/banner')->load($bannersliderId);
                     $bannerslider->delete();
                 }
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Total of %d record(s) were successfully deleted', count($bannersliderIds)));
@@ -244,7 +244,7 @@ class Magestore_Campaign_Adminhtml_BannerController extends Mage_Adminhtml_Contr
         } else {
             try {
                 foreach ($bannerIds as $bannerId) {
-                    $banner = Mage::getSingleton('bannerslider/banner')
+                    $banner = Mage::getSingleton('campaign/banner')
                         ->load($bannerId)
                         ->setStatus($this->getRequest()->getParam('status'))
                         ->setIsMassupdate(true)

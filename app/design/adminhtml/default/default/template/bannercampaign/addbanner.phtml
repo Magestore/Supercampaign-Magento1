@@ -28,7 +28,7 @@
                                                 <option value="1"><?php echo $this->__('Disabled') ?></option>
                                             </select>
                                         </td>
-                                    </tr>                               
+                                    </tr>
                                     <tr>
                                         <td class="label"><label for="image_alt"><?php echo $this->__('Alt Text') ?></label></td>
                                         <td class="value">
@@ -94,7 +94,7 @@
                                             <select id="tartget" name="tartget" class="required-entry select">
 												<option value="2"><?php echo $this->__('New Window without Browser Navigation') ?></option>
                                                 <option value="0"><?php echo $this->__('New Window with Browser Navigation') ?></option>
-                                                <option value="1"><?php echo $this->__('Parent Window with Browser Navigation') ?></option>                                                
+                                                <option value="1"><?php echo $this->__('Parent Window with Browser Navigation') ?></option>
                                             </select>            </td>
                                     </tr>
                                     <tr>
@@ -146,7 +146,7 @@
                                     <tr>
                                         <td class="label"><label for="status"><?php echo $this->__('Status') ?></label></td>
                                         <td class="value">
-                                            <select id="status" name="status" class=" select">                                            
+                                            <select id="status" name="status" class=" select">
                                                 <?php $status = $banner->getStatus(); ?>
                                                 <?php if ($status == 0): ?>
                                                     <option value="0" selected="selected"><?php echo $this->__('Enable') ?></option>
@@ -158,7 +158,7 @@
                                             </select>
                                         </td>
                                     </tr>
-                                                    
+
                                     <tr>
                                         <td class="label"><label for="image_alt"><?php echo $this->__('Alt Text') ?></label></td>
                                         <td class="value">
@@ -222,7 +222,7 @@
                                     <tr>
                                         <td class="label"><label for="tartget"><?php echo $this->__('Tartget') ?></label></td>
                                         <td class="value">
-                                            <select id="tartget" name="tartget" class="required-entry select">                                                
+                                            <select id="tartget" name="tartget" class="required-entry select">
                                                 <?php if($banner->getTartget() == 0):?>
                                                 <option value="0" selected="selected"><?php echo $this->__('New Window with Browser Navigation') ?></option>
                                                 <option value="1"><?php echo $this->__('Parent Window with Browser Navigation') ?></option>
@@ -236,7 +236,7 @@
                                                 <option value="1"><?php echo $this->__('Parent Window with Browser Navigation') ?></option>
                                                 <option value="2" selected="selected"><?php echo $this->__('New Window without Browser Navigation') ?></option>
                                                 <?php endif; ?>
-                                            </select>           
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr>
