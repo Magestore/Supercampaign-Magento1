@@ -78,8 +78,8 @@
 <form style="display:none" action="<?php echo $this->getUrl('customer/account/login/')?>" method="post" class="sc-login">
     <p style="font-size:20px;color:#333;text-transform: uppercase"><?php echo $this->__('Login')?></p>
     <ul>
-        <li>
-            <div class="field" style="margin-bottom: 20px;">
+        <li style="text-align:left;">
+            <div style="text-align:left;margin-bottom: 20px;">
                 <label class="required"><em>*</em><?php echo $this->__('Your Email')?></label>
                 <div class="input-box">
                     <input class="input-text required-entry" type="text" name="login_email" placeholder="Enter Your Email" title="Enter Your Email" />
@@ -87,7 +87,7 @@
             </div>
         </li>
         <li style="text-align:left;margin:20px 0">
-            <div class="field">
+            <div>
                 <label class="required"><em>*</em><?php echo $this->__('Your Password')?></label>
                 <div class="input-box">
                     <input class="input-text required-entry" type="password" name="login_password" placeholder="Password" title="Select Your Password" />

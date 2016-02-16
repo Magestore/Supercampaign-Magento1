@@ -41,6 +41,7 @@
 .sc-popup13 input[type=text] {
     width: 100%;
     max-width: 100%;
+    box-sizing: border-box;
 }
 .sc-popup13 .form-list .control label {
     float: none;
@@ -70,5 +71,5 @@
     vertical-align: middle;
     white-space: nowrap;
 }
-.sc-popup13 .button span{padding:0;margin:0;text-align:center;line-height:19px;background: none transparent;color: #FFFFFF;font-size: 13px;font-weight: normal;}
+.sc-popup13 .button span{border: 0 none;padding:0;margin:0;text-align:center;line-height:19px;background: none transparent;color: #FFFFFF;font-size: 13px;font-weight: normal;}
 
