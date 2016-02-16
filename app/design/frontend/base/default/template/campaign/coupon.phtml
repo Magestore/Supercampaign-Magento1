@@ -1,8 +1,6 @@
-<?php if($this->isShowCoupon() && $this->getCouponCode() != null): ?>
 <div class="sub-title">
-    <span class="coupon-campaign" id="coupon-campaign" onclick="copyToClipboard('#coupon-campaign')" title="Click to copy">
-        <?php echo $this->getCouponCode(); ?>
+    <span class="coupon-campaign" id="coupon-campaign">
+        <?php echo $this->getCouponcode(); ?>
     </span>
 </div>
-<?php endif; ?>
 

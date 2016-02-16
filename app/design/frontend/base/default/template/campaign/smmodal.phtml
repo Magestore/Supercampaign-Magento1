@@ -3,9 +3,12 @@
 <?php
 $helper = Mage::helper('campaign');
 $popups = $this->getAllPopupAvailable();
+$couponcampaign = $this->getCampaignCoupon();
+
 ?>
 <?php foreach ($popups as $key => $popup): ?>
     <?php
+
     $name = 'popupcampaign';
     $customer_cookie = Mage::getModel('core/cookie')->get($name);
 
@@ -17,7 +20,8 @@ $popups = $this->getAllPopupAvailable();
         $period = 600;
         Mage::getModel('core/cookie')->set($name, $value, $period);
     }
-
+        $coupon = $popup->getCouponcode();
+        Mage::register('coupon', $coupon);
     ?>
     <div id="sc-popup<?php echo $popup->getData('popup_id') ?>"
          class="modal fade sc-popup<?php echo $popup->getData('template_code') ?>" role="dialog">

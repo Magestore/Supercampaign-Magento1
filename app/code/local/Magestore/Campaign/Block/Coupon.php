@@ -26,8 +26,12 @@
  * @package     Magestore_Campaign
  * @author      Magestore Developer
  */
-class Magestore_Campaign_Block_Coupon extends Magestore_Campaign_Block_Popup_Abstract
+class Magestore_Campaign_Block_Coupon extends Mage_Core_Block_Template
 {
+
+    public function _construct(){
+        return parent::_construct();
+    }
     /**
      * prepare block's layout
      *
@@ -40,5 +44,11 @@ class Magestore_Campaign_Block_Coupon extends Magestore_Campaign_Block_Popup_Abs
         return $this;
     }
 
-    public function getHtml(){}
+    public function getCouponcode(){
+        $code = Mage::registry('coupon');
+        if($code){
+            $coupon = $code;
+        }
+        return $coupon;
+    }
 }

@@ -26,7 +26,7 @@
  * @package     Magestore_Campaign
  * @author      Magestore Developer
  */
-include('lib/Mobile_Detect.php');
+include_once('lib/Mobile_Detect.php');
 class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
 {
     const STATUS_ENABLE = 1;
@@ -347,8 +347,16 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
         $customer_cookie = Mage::getModel('core/cookie')->get($ipcustomer);
         $allcookie = Mage::getModel('core/cookie')->get();
 
+        // if empty cookie time
+        if($cookiepopup == '' || $cookiepopup < 1){
+            return true;
+        }
+
         //check cookie customer
         if(isset($_COOKIE[$ipcustomer])) {
+            if($getReturn == 'alluser'){
+                return true;
+            }
             if($getReturn == 'new'){
                 return false;
             }
@@ -362,7 +370,7 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
                         //set cookie for customer
                         $name = $ipcustomer;
                         $value = $customer_name;
-                        $period = $cookiepopup;
+                        $period = $cookiepopup * 86400;
                         Mage::getModel('core/cookie')->set($name, $value, $period);
                 }
             return true;
@@ -374,7 +382,6 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
      * @return bool
      */
     public function checkCustomerGroup(){
-
         $grouptoshow = array();
         $group = $this->getCustomerGroupIds();
 
@@ -474,15 +481,25 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     }
     /*End for check visitorsegment*/
 
-   /* public function getCouponCode(){
-        $campaign_id = $this->getCampaignId();
-        var_dump($campaign_id); die('ddd');
+    public function getCouponCode(){
         $campaign = Mage::getModel('campaign/campaign')->load($this->getCampaignId());
         if($campaign->getId()){
             return $campaign->getCouponCode();
         }else{
             return '';
         }
-    }*/
+    }
+
+
+    public function clearCookie(){
+        $cookie = Mage::getModel('core/cookie');
+        $cookie->delete('is_form_success_'.$this->getId());
+        return $this;
+    }
+
+    protected function _beforeSave(){
+        $this->clearCookie();
+        return $this;
+    }
 }
 

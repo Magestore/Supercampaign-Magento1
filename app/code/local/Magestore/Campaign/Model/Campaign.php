@@ -235,12 +235,14 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
                 $this->_coupon_code = $this->getData('coupon_code');
                 return $this->_coupon_code;
             }elseif($this->getData('coupon_code_type') == 'promotion'){
-                $promoQuoteId = $this->getPromoQuoteId();
+                $promoQuoteId = $this->getData('promo_rule_id');
                 $promo = Mage::getModel('salesrule/rule')->load($promoQuoteId);
-                if($promo->getCouponType() == Mage_SalesRule_Model_Rule::COUPON_TYPE_SPECIFIC){
+                if($promo->getCouponType() == Mage_SalesRule_Model_Rule::COUPON_TYPE_SPECIFIC
+                    && !$promo->getData('use_auto_generation')){
                     $this->_coupon_code = $promo->getCouponCode();
                     return $this->_coupon_code;
-                }elseif($promo->getCouponType() == Mage_SalesRule_Model_Rule::COUPON_TYPE_AUTO){
+                }elseif($promo->getCouponType() == Mage_SalesRule_Model_Rule::COUPON_TYPE_SPECIFIC
+                        && $promo->getData('use_auto_generation')){
                     $coupons = $promo->getCoupons();
                     foreach ($coupons as $coupon) {
                         if($coupon->getTimesUsed() < $coupon->getUsageLimit()){
