@@ -1,0 +1,94 @@
+<form action="<?php echo $this->getUrl('campaign/ajaxform/register') ?>" method="post" class="form-register-campaign">
+    <div>
+        <input type="hidden" name="success_url" value="">
+        <input type="hidden" name="error_url" value="">
+        <p style="font-size:20px;color:#333;text-transform: uppercase">Register to get <strong style="color:red">$5</strong>.</p>
+        <p class="required">* Required Fields</p>
+        <div>
+            <div class="input-layout">
+                <input type="text" id="firstname" name="firstname" value="" title="First Name" maxlength="255" class="input-text required-entry" required />
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label for="firstname" class="required"><em>*</em>First Name</label>
+            </div>
+            <div class="input-layout">
+                <input type="text" id="lastname" name="lastname" value="" title="Last Name" maxlength="255" class="input-text required-entry">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label for="lastname" class="required"><em>*</em>Last Name</label>
+            </div>
+             <div class="input-layout">
+                 <input type="email" spellcheck="false" name="email" id="email_address" value="" title="Email Address" class="input-text validate-email required-entry" required />
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                 <label for="email_address" class="required"><em>*</em>Email Address</label>
+            </div>
+            <div class="input-layout">
+                <input type="password" name="password" id="password" title="Password" class="input-text required-entry validate-password" required />
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label for="password" class="required"><em>*</em>Password</label>
+            </div>
+            <div class="input-layout">
+                <input type="password" name="confirmation" title="Confirm Password" id="confirmation" class="input-text required-entry validate-cpassword" required />
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label for="confirmation" class="required"><em>*</em>Confirm Password</label>
+            </div>
+
+            <div class="input-layout">
+                <input type="checkbox" name="is_subscribed" title="Sign Up for Newsletter" value="1" id="is_subscribed" class="checkbox">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label for="is_subscribed">Sign Up for Newsletter</label>
+            </div>
+        </div>
+        <script type="text/javascript">
+            //<![CDATA[
+            function toggleRememberMePopup() {
+                var formParent = jQuery(this).parents('form:first');
+                formParent.find('.remember-me-box a').toggleClass('hide');
+                formParent.find('.remember-me-popup').toggleClass('show');
+                return false;
+            }
+            var rememberMeToggleSetup = false;
+            jQuery(document).ready(function(){
+                if (!rememberMeToggleSetup) {
+                    jQuery('.remember-me-box a, .remember-me-popup a').on('click', toggleRememberMePopup);
+                    rememberMeToggleSetup = true;
+                }
+            });
+            //]]>
+        </script>
+    </div>
+    <div class="buttons-set">
+        <p class="back-link"><a style="cursor:pointer" class="back-link campaign-login"><small>« </small>Login</a></p>
+        <button type="submit" title="Register" class="button"><span><span>Register</span></span></button>
+    </div>
+</form>
+
+<form style="display:none" action="<?php echo $this->getUrl('customer/account/login/')?>" method="post" class="sc-login">
+    <p style="font-size:20px;color:#333;text-transform: uppercase"><?php echo $this->__('Login')?></p>
+    <ul>
+        <li>
+            <div class="field" style="margin-bottom: 20px;">
+                <label class="required"><em>*</em><?php echo $this->__('Your Email')?></label>
+                <div class="input-box">
+                    <input class="input-text required-entry" type="text" name="login_email" placeholder="Enter Your Email" title="Enter Your Email">
+                </div>
+            </div>
+        </li>
+        <li class="margin:20px 0">
+            <div class="field">
+                <label class="required"><em>*</em><?php echo $this->__('Your Password')?></label>
+                <div class="input-box">
+                    <input class="input-text required-entry" type="password" name="login_password" placeholder="Password" title="Select Your Password">
+                </div>
+            </div>
+        </li>
+        <li style="text-align:right">
+            <button title="Login" type="submit" style="border:0 none;background:#2e8ab8;padding:7px 15px;margin-top:20px;color:#fff"> Login </button>
+        </li>
+    </ul>
+    <p><a href="<?php echo $this->getUrl('customer/account/forgotpassword/')?>">Forgot password?</a> | <a href="#" class="campaign-register">Register</a></p>
+</form>
