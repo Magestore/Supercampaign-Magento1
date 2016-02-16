@@ -51,4 +51,14 @@ class Magestore_Campaign_Block_Coupon extends Mage_Core_Block_Template
         }
         return $coupon;
     }
+
+    public function getPopupCoupon(){
+        $popup_cookie = Mage::getModel('core/cookie')->get('popup_id');
+            $model_popup = Mage::getModel('campaign/popup')->load($popup_cookie);
+            $campaign_id = $model_popup->getCampaignId();
+            $model_campaign = Mage::getModel('campaign/campaign')->load($campaign_id);
+            $campaign_coupon = $model_campaign->getCouponCode();
+            return $campaign_coupon;
+
+    }
 }

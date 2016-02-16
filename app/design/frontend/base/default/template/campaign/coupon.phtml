@@ -1,6 +1,10 @@
 <div class="sub-title">
     <span class="coupon-campaign" id="coupon-campaign">
-        <?php echo $this->getCouponcode(); ?>
+        <?php
+        //echo $this->getCouponcode();
+        $coupon = $this->getPopupCoupon();
+        echo $coupon;
+        ?>
     </span>
 </div>
 
