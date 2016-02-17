@@ -125,17 +125,21 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
      * @param string $exclude
      * @return bool
      */
-    public function checkUrl($specified = '', $exclude = ''){
+    public function checkUrl($specified = ''){
         if($specified == ''){
             $specified = $this->getSpecifiedUrl();
         }
-        if($exclude == ''){
-            $exclude = $this->getExcludeUrl();
-        }
         if($specified == ''){
+            return true;
+        }
+        return Mage::helper('campaign')->checkInclude($specified);
+    }
+
+    public function checkExclude(){
+        if(Mage::helper('campaign')->checkInclude($this->getExcludeUrl()) && $this->getExcludeUrl() != ''){
             return false;
         }
-        return Mage::helper('campaign')->checkInclude($specified, $exclude);
+        return true;
     }
 
 

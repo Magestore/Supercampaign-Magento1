@@ -302,6 +302,7 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
             }
             if($item->checkShowFrequency()
                 && $item->checkShowOnPage()
+                && $item->checkExclude()
                 && $item->checkFormSuccess()
                 && $this->checkDevices()
                 && $this->checkUserLogin()
