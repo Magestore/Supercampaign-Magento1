@@ -50,6 +50,16 @@ CREATE TABLE {$this->getTable('campaign/campaign')} (
   `countdown_type` VARCHAR(255) NOT NULL default '',
   `countdown_products` VARCHAR(255) NOT NULL default '',
   `countdown_onoff` smallint(6) NOT NULL DEFAULT 0,
+
+  `country` varchar(255) NULL default '',
+  `devices` varchar(255) NULL default '',
+  `cookies_enabled` smallint(6) NULL default 0,
+  `returning_user` varchar(255) NULL default '',
+  `login_user` varchar(255) NULL default '',
+  `customer_group_ids` varchar(255) NULL default '',
+  `user_ip` varchar(30) NULL default '',
+  `cookie_time` varchar(255) NULL default '',
+
   PRIMARY KEY (`campaign_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
