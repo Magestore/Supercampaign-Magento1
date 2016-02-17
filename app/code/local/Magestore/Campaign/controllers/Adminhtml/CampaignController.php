@@ -119,15 +119,27 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
         if ($data = $this->getRequest()->getPost()) {
             /* save campaign model */
             $model = Mage::getModel('campaign/campaign');
-//zend_debug::dump($data);die;
+
             //save store
 //            if(isset($data['stores']) && is_array($data['stores'])){
 //                $store = implode(',', $data['stores']);
 //                $data['store'] = $store.','; //fix store view in grid
 //            }
             $campaignData = new Varien_Object($data['general']);
+            //save login user
+            //$logUsr = implode(',', $campaignData->getData('login_user'));
+            //$campaignData->setData('login_user', $logUsr.',');
 
-            $model->setData($data['general'])
+            //save customer group
+            $gIds = implode(',', $campaignData->getData('customer_group_ids'));
+            $campaignData->setData('customer_group_ids', $gIds.',');
+
+            //save devices
+            $div = implode(',', $campaignData->getData('devices'));
+            $campaignData->setData('devices', $div.',');
+
+
+            $model->setData($campaignData->getData())
                 ->setId($this->getRequest()->getParam('id'));
             /*set start date, end date to UTC timezone*/
             $model->setStartTime($model->toUTCTimezone($campaignData->getStartTime()));
