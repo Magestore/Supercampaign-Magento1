@@ -59,20 +59,74 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
     //get slider
     public function getSegmentcampaign(){
         $result = $this->getBlockData();
-
-        if($this->checkUserLogin()){
+        if($this->checkUserLogin() && $this->checkReturnCustomer() && $this->checkCustomerGroup() && $this->checkDevices()){
             return $result;
         }
         return NULL;
     }
 
-    //z set visitorsegment check user login
-    public function checkUserLogin(){
+    public function getCampaignId(){
         $result = $this->getBlockData();
         $block = $result['block'];
         $campaignId = $block['campaign_id'];
-        $model_campaign = Mage::getModel('campaign/campaign')->load($campaignId);
+        return $campaignId;
+    }
 
+    //z set visitorsegment check value
+    public function checkDevices(){
+        $detector = new Mobile_Detect();
+        $devicetoshow = array();
+        $campaignId = $this->getCampaignId();
+        $model_campaign = Mage::getModel('campaign/campaign')->load($campaignId);
+        $devices = $model_campaign->getDevices();
+        if($devices != ''){
+            if(!is_array($devices)){
+                $devicetoshow[] = $devices;
+            }else{
+                $devicetoshow = $devices;
+            }
+            //explode in array
+            $sub_device = array();
+            foreach ($devicetoshow as $subgr) {
+                if(in_array(trim($subgr), $devicetoshow)){
+                    $sub_device[] = explode(',', trim($subgr));
+                }
+            }
+        }else{
+            return false;
+        }
+        //end get value of device
+        if($devices != ''){
+            $tablet = $detector->isTablet();
+            $mobile = $detector->isMobile();
+
+            foreach($sub_device as $subg){
+                foreach($subg as $sub){
+                    if($sub == 'all_device'){
+                        return true;
+                    }
+                    if($sub == 'pc_laptop'){
+                        if($tablet == false && $mobile == false){
+                            return true;
+                        }
+                    }
+                    if($sub == 'tablet_mobile'){
+                        if($tablet || $mobile){
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }else{
+            return false;
+        }
+    }
+    //z set visitorsegment check user login
+    public function checkUserLogin(){
+        $campaignId = $this->getCampaignId();
+        $model_campaign = Mage::getModel('campaign/campaign')->load($campaignId);
         $user = $model_campaign->getLoginUser();
 
         if($user != ''){
@@ -99,6 +153,174 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
         }else{
             return false;
         }
+    }
+
+    /**
+     * option show with new user or visited user
+     * @return bool
+     */
+    //check enable cookie
+    public function enableCookie(){
+        $campaignId = $this->getCampaignId();
+        $model_campaign = Mage::getModel('campaign/campaign')->load($campaignId);
+        $enable = $model_campaign->getCookiesEnabled();
+        if($enable != ''){
+            if($enable == 1){
+                $this->checkReturnCustomer();
+            }else{
+                return false;
+            }
+        }
+    }
+
+    //z set visitorsegment check return customer
+    public function checkReturnCustomer(){
+
+        $login = Mage::getSingleton('customer/session')->isLoggedIn();
+        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+
+            $customer = Mage::getSingleton('customer/session')->getCustomer();
+            $customer_name = $customer->getName();
+        }
+        $campaignId = $this->getCampaignId();
+        $model_campaign = Mage::getModel('campaign/campaign')->load($campaignId);
+        $ipcustomer = Mage::helper('core/http')->getRemoteAddr();
+        $popupid = $this->getPopupId();
+        $camPaignid = $model_campaign->getCampaignId();
+        $getReturn = $model_campaign->getReturningUser();
+        $cookiepopup = $model_campaign->getCookieTime();
+
+        $customer_cookie = Mage::getModel('core/cookie')->get($ipcustomer);
+        $allcookie = Mage::getModel('core/cookie')->get();
+
+        // if empty cookie time
+        if($cookiepopup == '' || $cookiepopup < 1){
+            return true;
+        }
+
+        //check cookie customer
+        if(isset($_COOKIE[$ipcustomer])) {
+            if($getReturn == 'alluser'){
+                return true;
+            }
+            if($getReturn == 'new'){
+                return false;
+            }
+            if($getReturn == 'return'){
+                return true;
+            }
+        }
+        //set cookie for new customer
+        if(!isset($_COOKIE[$ipcustomer])) {
+            if($ipcustomer){
+                //set cookie for customer
+                $name = $ipcustomer;
+                $value = $customer_name;
+                $period = $cookiepopup * 86400;
+                Mage::getModel('core/cookie')->set($name, $value, $period);
+            }
+            return true;
+        }
+    }
+
+    /**
+     * option show or not with current customer's group
+     * @return bool
+     */
+    public function checkCustomerGroup(){
+        $grouptoshow = array();
+        $campaignId = $this->getCampaignId();
+        $model_campaign = Mage::getModel('campaign/campaign')->load($campaignId);
+        $group = $model_campaign->getCustomerGroupIds();
+
+        //call group code of group customer
+        $login = Mage::getSingleton('customer/session')->isLoggedIn();
+        $gid = Mage::getSingleton('customer/session')->getCustomerGroupId();
+        $groupcustomer = Mage::getModel('customer/group')->load($gid);
+        $groupcode = $groupcustomer->getCustomerGroupCode();
+
+        if($group != ''){
+            if(!is_array($group)){
+                $grouptoshow[] = $group;
+            }else{
+                $grouptoshow = $group;
+            }
+            //explode in array
+            $sub_group = array();
+            foreach ($grouptoshow as $subgr) {
+                if(in_array(trim($subgr), $grouptoshow)){
+                    $sub_group[] = explode(',', trim($subgr));
+                }
+            }
+
+        }else{
+            return false;
+        }
+
+        //end get value
+        if($group != ''){
+
+            foreach($sub_group as $subg){
+                foreach($subg as $sub){
+
+                    if($sub == 'all_group'){
+                        return true;
+
+                    }
+
+                    if($sub == 'general'){
+
+                        if($groupcode == 'General'){
+                            return true;
+                        }
+
+
+                    }
+                    if($sub == 'wholesale'){
+
+                        if($groupcode == 'Wholesale'){
+                            return true;
+                        }
+
+                    }
+                    if($sub == 'vip_member'){
+
+                        if($groupcode == 'VIP Member'){
+                            return true;
+                        }
+                        break;
+                    }
+                    if($sub == 'private_sale_member'){
+
+                        if($groupcode == 'Private Sales Member'){
+                            return true;
+                        }
+
+                    }
+
+                }
+            }
+
+
+            return false;
+        }else{
+            return false;
+        }
+
+    }
+
+
+    public function checkUserIP(){
+        $ipcustomer = Mage::helper('core/http')->getRemoteAddr();
+        $campaignId = $this->getCampaignId();
+        $model_campaign = Mage::getModel('campaign/campaign')->load($campaignId);
+        $ipdata = $model_campaign->getUserIp();
+        if($ipdata != ''){
+            if($ipdata == $ipcustomer){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**End Visitorsegment for slider**/

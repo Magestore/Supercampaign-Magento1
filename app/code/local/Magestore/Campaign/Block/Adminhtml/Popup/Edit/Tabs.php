@@ -28,11 +28,11 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tabs extends Mage_Adminhtml_
             'content'   => $this->getLayout()->createBlock('campaign/adminhtml_popup_edit_tab_position')->toHtml(),
         ));
 
-        $this->addTab('visitorsegment_section', array(
-            'label'     => Mage::helper('campaign')->__('Visitorsegment'),
-            'title'     => Mage::helper('campaign')->__('Visitorsegment'),
-            'content'   => $this->getLayout()->createBlock('campaign/adminhtml_popup_edit_tab_visitorsegment')->toHtml(),
-        ));
+//        $this->addTab('visitorsegment_section', array(
+//            'label'     => Mage::helper('campaign')->__('Visitorsegment'),
+//            'title'     => Mage::helper('campaign')->__('Visitorsegment'),
+//            'content'   => $this->getLayout()->createBlock('campaign/adminhtml_popup_edit_tab_visitorsegment')->toHtml(),
+//        ));
 
         $this->setActiveTab('general_section');
 		return parent::_beforeToHtml();
