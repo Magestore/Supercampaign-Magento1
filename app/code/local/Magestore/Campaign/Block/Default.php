@@ -1,5 +1,5 @@
 <?php
-
+include_once('lib/Mobile_Detect.php');
 class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
 
     public function _prepareLayout() {
@@ -54,6 +54,54 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
         }
         return $this->getData('block_data');
     }
+
+    /**Visitorsegment for slider**/
+    //get slider
+    public function getSegmentcampaign(){
+        $result = $this->getBlockData();
+
+        if($this->checkUserLogin()){
+            return $result;
+        }
+        return NULL;
+    }
+
+    //z set visitorsegment check user login
+    public function checkUserLogin(){
+        $result = $this->getBlockData();
+        $block = $result['block'];
+        $campaignId = $block['campaign_id'];
+        $model_campaign = Mage::getModel('campaign/campaign')->load($campaignId);
+
+        $user = $model_campaign->getLoginUser();
+
+        if($user != ''){
+            //if all user
+            if($user == 'all_user'){
+                return true;
+            }else{
+                //if registed or loged
+                $login = Mage::getSingleton('customer/session')->isLoggedIn(); //Check if User is Logged In
+                if($user == 'registed_loged'){
+                    if($login){
+                        return true;
+                    }
+                }
+                //if register or logout
+                if($user == 'logout_not_register'){
+                    if($login == false){
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }else{
+            return false;
+        }
+    }
+
+    /**End Visitorsegment for slider**/
 
     public function returntemplateSlider($style, $result) {
         $html = '';

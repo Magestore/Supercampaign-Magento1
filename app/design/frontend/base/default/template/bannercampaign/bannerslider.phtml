@@ -25,8 +25,10 @@
  */
 ?>
 <?php
-$result = $this->getBlockData();
+//$result = $this->getBlockData();
+$result = $this->getSegmentcampaign();
 $block = $result['block'];
+//zend_debug::dump($block); die('xin em');
 $banners = $result['banners'];
 $banner_ids = array();
 $banner_note_ids = array();
