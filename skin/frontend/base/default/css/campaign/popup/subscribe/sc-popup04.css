@@ -34,6 +34,7 @@
     -khtml-border-radius: 3px 0 0 3px;
     border-radius: 3px 0 0 3px;
     box-shadow: 1px 0 2px 0 rgba(0,0,0,0.3) inset;
+    box-sizing: border-box;
 }
 
 .sc-popup4 form input:focus {

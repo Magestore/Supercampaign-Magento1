@@ -238,7 +238,8 @@ var Scpopup = function () {
             switch (bRadius) {
                 case 'rounded':
                     cssBRadius = "#sc-popup" + this.idPopup + " .modal-content{border-radius:" + this.cornerRadius + "px;}";
-                    cssBRadius = cssBRadius + "#sc-popup" + this.idPopup + " .modal-content .content-popup{overflow:hidden;border-radius:"+ contentRadius + "px;}";
+                    //cssBRadius = cssBRadius + "#sc-popup" + this.idPopup + " .modal-content .content-popup{overflow:hidden;border-radius:"+ contentRadius + "px;}";
+                    cssBRadius = cssBRadius + "#sc-popup" + this.idPopup + " .modal-content .content-popup{overflow:hidden;}";
                     break;
                 case 'sharp':
                     cssBRadius = "#sc-popup" + this.idPopup + " .modal-content{border-radius:0px;}";
