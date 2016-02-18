@@ -353,8 +353,8 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                     function toggleSelectPopups(){
                         if($("main_popups_select").style.display == "none"){
                             var url = "' . $this->getUrl('campaignadmin/adminhtml_popup/chooserPopups/', array('popup_id'=>$data['popup_id'])) . '";
-                            var params = $("trigger_popup").value.split(", ");
-                            var parameters = {"form_key": FORM_KEY,"selected[]":params };
+                            var params = $("trigger_popup").value;
+                            var parameters = {"form_key": FORM_KEY,"selected":params };
                             var request = new Ajax.Request(url,
                             {
                                 evalScripts: true,

@@ -125,7 +125,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Information_Selector_Pop
     public function getRowInitCallback(){
        $js =' function (grid, row) {
             if (!grid.reloadParams) {
-                grid.reloadParams["selected[]"] = $("'.$this->getInput().'").value.split(", ");
+                grid.reloadParams["selected"] = $("'.$this->getInput().'").value;
             }
         } ';
         return $js;
@@ -142,11 +142,15 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Information_Selector_Pop
     protected function _prepareColumns() {
         $this->addColumn('in_popups', array(
             'header_css_class'  => 'a-center',
-            'type'              => 'checkbox',
-            'field_name'        => 'in_popups[]',
-            'values'            => $this->getRequest()->getParam('selected'),
-            'align'             => 'center',	
-            'index'             => 'popup_id'
+            'type'              => 'radio',
+            'html_name' => 'popupId',
+            'width' => '40px',
+            //'field_name'        => 'in_popups[]',
+            'value'            => $this->getRequest()->getParam('selected'),
+            'align'             => 'center',
+            'index'             => 'popup_id',
+            'filter'    => false,
+            'sortable' => false
         ));
                 
         $this->addColumn('popup_id', array(
