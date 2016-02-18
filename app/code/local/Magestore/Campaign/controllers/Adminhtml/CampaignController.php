@@ -337,6 +337,10 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
         $grid = $this->getLayout()->createBlock('campaign/adminhtml_campaign_edit_tab_popup_grid');
         $serialer = Mage::getModel('core/layout')->createBlock('adminhtml/widget_grid_serializer');
         $serialer->initSerializerBlock($grid, 'getSerializeData', 'popup_ids', 'popup_reloaded_ids');
+
+        $addPopupButton = '<button id="addPopupForCampaign" title="Add new Popup" type="button" class="scalable add"
+            onclick="setLocation(\'http://localhost.com/supercampaign/index.php/campaignadmin/adminhtml_campaign/new/key/c894b7a9b8c869a7bae8cc32a78baa8e/\')" style=""><span><span><span>Add new Campaign</span></span></span></button>';
+
         $this->getResponse()->setBody($grid->toHtml().$serialer->toHtml());
         $this->renderLayout();
         $this->getResponse()->sendResponse();

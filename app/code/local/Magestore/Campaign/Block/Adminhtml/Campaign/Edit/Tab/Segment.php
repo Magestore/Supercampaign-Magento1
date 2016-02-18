@@ -172,6 +172,9 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Segment extends Mage_
             'name'		=> 'user_ip',
         ));
 
+
+        if($data['cookies_enabled'] == ''){$data['cookies_enabled'] = '1';}
+        if($data['cookie_time'] == ''){$data['cookie_time'] = '1';}
         if($data['devices'] == ''){$data['devices'] = 'all_device';}
         if($data['login_user'] == ''){$data['login_user'] = 'registed';}
         if($data['customer_group_ids'] == ''){$data['customer_group_ids'] = 'all_group';}
