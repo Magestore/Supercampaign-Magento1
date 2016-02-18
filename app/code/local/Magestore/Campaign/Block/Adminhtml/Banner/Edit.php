@@ -35,15 +35,29 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Edit extends Mage_Adminhtml_Bloc
         $this->_objectId = 'id';
         $this->_blockGroup = 'campaign';
         $this->_controller = 'adminhtml_banner';
-        
-        $this->_updateButton('save', 'label', Mage::helper('campaign')->__('Save and exit'));
+        $this->_removeButton('save');
+        $this->_removeButton('reset');
+        //$this->_updateButton('save', 'label', Mage::helper('campaign')->__('Save and exit'));
         $this->_updateButton('delete', 'label', Mage::helper('campaign')->__('Delete Banner'));
-        
-        $this->_addButton('saveandcontinue', array(
-            'label'        => Mage::helper('adminhtml')->__('Save and continute edit'),
-            'onclick'    => 'saveAndContinueEdit()',
+
+//        $this->_addButton('resetitems', array(
+//            'label'        => Mage::helper('adminhtml')->__('Reset'),
+//            'onclick'    => 'resetitem()',
+//            'class'        => 'save',
+//        ), -100);
+
+        $this->_addButton('saveitems', array(
+            'label'        => Mage::helper('adminhtml')->__('Save Items'),
+            'onclick'    => 'saveitem()',
             'class'        => 'save',
         ), -100);
+
+//        $this->_addButton('saveandcontinue', array(
+//            'label'        => Mage::helper('adminhtml')->__('Save and continute edit'),
+//            'onclick'    => 'saveAndContinueEdit()',
+//            'class'        => 'save',
+//        ), -100);
+
 
         $this->_formScripts[] = "
             function toggleEditor() {
@@ -53,8 +67,55 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Edit extends Mage_Adminhtml_Bloc
                     tinyMCE.execCommand('mceRemoveControl', false, 'campaign_content');
             }
 
+            function resetitem(){
+                setLocation(window.location.href);
+                opener.customgridJsObject.resetFilter();
+            }
+
+
+            window.onunload = function(e){
+                if (window.closed) {
+                    //window closed
+                }else{
+                   //just refreshed
+                   resetfilteritem();
+                   //window.close();
+                }
+            }
+
+
+            function saveitem(){
+                var formId = 'edit_form';
+                var postUrl = $('edit_form').action;
+                if (editForm.submit($('edit_form').action+'back/edit/')) {
+//                    new Ajax.Updater(
+//                        { success:'formLowestSuccess' }, postUrl, {
+//                            method:'post',
+//                            asynchronous:true,
+//                            evalScripts:false,
+//                            onComplete:function(request, json) {
+//                                Element.hide(formId);
+//                                //Element.show('formLowestSuccess');
+//                                resetfilteritem();
+//                                window.close();
+//                            },
+//                            onLoading:function(request, json){
+//                                Element.show('formLoader');
+//                            },
+//                            parameters: $(formId).serialize(true),
+//                        }
+//                    );
+                }
+            }
+
             function saveAndContinueEdit(){
                 editForm.submit($('edit_form').action+'back/edit/');
+                //resetfilteritem();
+            }
+
+
+            function resetfilteritem(){
+                opener.customgridJsObject.resetFilter();
             }
 
             var resetTemplate = function(url, select_template_id, editor_element_id, campaign_id, call_back_func, message){

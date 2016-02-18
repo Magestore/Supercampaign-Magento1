@@ -23,7 +23,13 @@ $speed = $blocks['slider_speed'] * 1000;
     <ul class="slides"> 
     <?php foreach ($banners as $banner): ?>
             <li>
+            <?php
+            if($banner['click_url'] != ''):
+            ?>
                 <a href="<?php echo $banner['click_url']?>" target="<?php echo $this->getTarget($banner['tartget'])?>" onclick="bannerClicks('<?php echo $banner['banner_id'] ?>','<?php echo $blocks['bannerslider_id'] ?>')" style="display:block"><img alt="<?php echo $banner['image_alt'];?>" src="<?php echo $this->getBannerImage($banner['image']); ?>"/></a>
+            <?php else:?>
+                <img alt="<?php echo $banner['image_alt'];?>" src="<?php echo $this->getBannerImage($banner['image']); ?>"/>
+            <?php endif; ?>
             </li>
     <?php endforeach; ?>        
     <!-- items mirrored twice, total of 12 -->

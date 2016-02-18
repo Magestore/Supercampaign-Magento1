@@ -59,6 +59,16 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
     //get slider
     public function getSegmentcampaign(){
         $result = $this->getBlockData();
+        //priority from highest to lowest
+        $campaignId = $this->getCampaignId();
+        $model_campaign = Mage::getModel('campaign/campaign')->load($campaignId);
+        $userip = $model_campaign->getUserIp();
+        if($userip != ''){
+            if($this->checkUserIP()){
+                return $result;
+            }
+            continue;
+        }
         if($this->checkUserLogin() && $this->checkReturnCustomer() && $this->checkCustomerGroup() && $this->checkDevices()){
             return $result;
         }
@@ -171,6 +181,13 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
                 return false;
             }
         }
+    }
+
+    public function statusCookie(){
+        $campaignId = $this->getCampaignId();
+        $model_campaign = Mage::getModel('campaign/campaign')->load($campaignId);
+        $enable = $model_campaign->getCookiesEnabled();
+        return $enable;
     }
 
     //z set visitorsegment check return customer
