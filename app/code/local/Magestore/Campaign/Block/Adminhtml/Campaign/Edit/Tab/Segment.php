@@ -97,22 +97,22 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Segment extends Mage_
         ));
 
         $customer_cookie = $viSegmentFieldset->addField('returning_user', 'select', array(
-            'label'		=> Mage::helper('campaign')->__('Return or new customer:'),
+            'label'		=> Mage::helper('campaign')->__('Visitor type:'),
             'required'	=> true,
             'name'		=> 'returning_user',
             'note'      => "Allow show popup for return or new customer .",
             'values' => array(
                 array(
                     'value' => 'alluser',
-                    'label' => Mage::helper('campaign')->__('All User'),
+                    'label' => Mage::helper('campaign')->__('All Visitors'),
                 ),
                 array(
                     'value' => 'return',
-                    'label' => Mage::helper('campaign')->__('Return'),
+                    'label' => Mage::helper('campaign')->__('Return Visitors'),
                 ),
                 array(
                     'value' => 'new',
-                    'label' => Mage::helper('campaign')->__('New Customer'),
+                    'label' => Mage::helper('campaign')->__('New Visitors'),
                 ),
             ),
         ));
@@ -124,7 +124,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Segment extends Mage_
             'values' => array(
                 array(
                     'value' => 'all_user',
-                    'label' => Mage::helper('campaign')->__('All User'),
+                    'label' => Mage::helper('campaign')->__('All Visitors'),
                 ),
                 array(
                     'value' => 'registed_loged',
