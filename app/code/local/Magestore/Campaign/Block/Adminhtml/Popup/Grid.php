@@ -94,7 +94,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
             'index'	 => 'show_when',
             'type'		=> 'options',
             'options'	 => array(
-                0 => 'After Load Page',
+                0 => 'After loading page',
                 1 => 'After Seconds',
             ),
         ));

@@ -57,7 +57,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
         ));
 
         $fieldset->addField('overlay_color', 'select', array(
-            'label'		=> Mage::helper('campaign')->__('Overlay Color:'),
+            'label'		=> Mage::helper('campaign')->__('Color overlay:'),
             'name'		=> 'overlay_color',
             'note'      => 'Overlay color of popup.',
             'values' => array(
@@ -99,7 +99,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Appear extends Mage_Admi
             'label'		=> Mage::helper('campaign')->__('Close Icon Style:'),
             'required'	=> true,
             'name'		=> 'close_style',
-            'note'      => 'Type of effect close popup.',
+            'note'      => 'Style of popup \'close\' icon.',
             'values' => array(
                 array(
                     'value' => 'circle',

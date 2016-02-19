@@ -105,7 +105,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         ));
 
         $fieldset->addField('content_for_success', 'editor', array(
-            'label'		=> Mage::helper('campaign')->__('Content of success:'),
+            'label'		=> Mage::helper('campaign')->__('Success Content:'),
             'style'		=> 'width:800px; height:350px;',
             'name'		=> 'content_for_success',
             'wysiwyg'   => true,
@@ -146,11 +146,11 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'label'		=> Mage::helper('campaign')->__('Show On Page:'),
             'required'	=> true,
             'name'		=> 'show_on_page',
-            'note'      => 'Show popup when with page selectd.',
+            'note'      => 'Show popup on selected page.',
             'values' => array(
                 array(
                     'value' => Magestore_Campaign_Model_Popup::SHOW_ON_ALL_PAGE,
-                    'label' => Mage::helper('campaign')->__('All Page'),
+                    'label' => Mage::helper('campaign')->__('All pages'),
                 ),
                 array(
                     'value' => Magestore_Campaign_Model_Popup::SHOW_ON_HOME_PAGE,
@@ -174,7 +174,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                 ),
                 array(
                     'value' => Magestore_Campaign_Model_Popup::SHOW_ON_URLS_PAGE,
-                    'label' => Mage::helper('campaign')->__('Special Urls'),
+                    'label' => Mage::helper('campaign')->__('Special URLs'),
                 ),
             ),
         ));
@@ -236,16 +236,16 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         ));
 
         $specified_url = $fieldset->addField('specified_url', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Special Urls:'),
+            'label'		=> Mage::helper('campaign')->__('Special URLs:'),
             'required'	=> false,
             'name'		=> 'specified_url',
         ));
 
         $exclude_url = $fieldset->addField('exclude_url', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Exclude Url:'),
+            'label'		=> Mage::helper('campaign')->__('Exclude URLs:'),
             'required'	=> false,
             'name'		=> 'exclude_url',
-            'note'      => "Don't show popup when open page have url like exclude url.",
+            'note'      => "Don't show on URL paths exactly matching.",
         ));
 
         $productIds = implode(", ", Mage::getResourceModel('catalog/product_collection')->getAllIds());
@@ -285,7 +285,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'values' => array(
                 array(
                     'value' => 'after_load_page',
-                    'label' => Mage::helper('campaign')->__('After Load Page'),
+                    'label' => Mage::helper('campaign')->__('After loading page'),
                 ),
                 array(
                     'value' => 'after_seconds',
@@ -307,7 +307,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'label'		=> Mage::helper('campaign')->__('Show Frequency:'),
             'required'	=> true,
             'name'		=> 'showing_frequency',
-            'note'      => "Show popup when have had customer's action .",
+            'note'      => "Show popup based on visitor's behavior.",
             'values' => array(
                 array(
                     'value' => Magestore_Campaign_Model_Popup::SHOW_FREQUENCY_EVERY_TIME,
@@ -340,10 +340,10 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         if(isset($data['popup_id']))  $popups->addFieldToFilter('popup_id', array('neq'=>$data['popup_id']));
         $popupIds = implode(", ", $popups->getAllIds());
         $trigger = $fieldset->addField('trigger_popup', 'text', array(
-            'label'		=> $this->__('Trigger to other popup:'),
+            'label'		=> $this->__('Click target:'),
             'required'	=> false,
             'name'		=> 'trigger_popup',
-            'note'      => 'Select ID of the popup you want to show when click this popup',
+            'note'      => 'Select ID of the popup to be shown when clicking this popup',
             'after_element_html' => '<a id="product_link" href="javascript:void(0)" onclick="toggleSelectPopups()">
                 <img src="' . $this->getSkinUrl('images/rule_chooser_trigger.gif') . '"
                 alt="" class="v-middle rule-chooser-trigger" title="Select Popups"></a>
@@ -373,7 +373,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
 
         $fieldset->addField('priority', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Set Priority:'),
-            'note'      => 'Set priority when have many popup.',
+            'note'      => 'Set priority for popups to be shown. 0 is the lowest priority.',
             'required'	=> false,
             'class'       => 'validate-number',
             'name'		=> 'priority',
