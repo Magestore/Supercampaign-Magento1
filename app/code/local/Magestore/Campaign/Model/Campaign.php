@@ -443,7 +443,8 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
         $getReturn = $this->getReturningUser();
         $cookiepopup = $this->getCookieTime();
 
-        $customer_cookie = Mage::getModel('core/cookie')->get($ipcustomer);
+        $fixip = str_replace(".","_",$ipcustomer);
+        $customer_cookie = Mage::getSingleton('core/cookie')->get($fixip);
         $allcookie = Mage::getModel('core/cookie')->get();
 
         // if empty cookie time

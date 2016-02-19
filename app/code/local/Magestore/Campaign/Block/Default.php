@@ -207,7 +207,8 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
         $getReturn = $model_campaign->getReturningUser();
         $cookiepopup = $model_campaign->getCookieTime();
 
-        $customer_cookie = Mage::getModel('core/cookie')->get($ipcustomer);
+        $fixip = str_replace(".","_",$ipcustomer);
+        $customer_cookie = Mage::getSingleton('core/cookie')->get($fixip);
         $allcookie = Mage::getModel('core/cookie')->get();
 
         // if empty cookie time
