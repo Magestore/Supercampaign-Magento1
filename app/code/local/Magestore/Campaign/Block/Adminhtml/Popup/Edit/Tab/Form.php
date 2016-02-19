@@ -239,14 +239,16 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'label'		=> Mage::helper('campaign')->__('Special URLs:'),
             'required'	=> false,
             'name'		=> 'specified_url',
-            'note'  => 'Example: "/, *, abc/" with / for home page, * for every url.',
+            'note'  => '',
+            'after_element_html' => '<p class="nm"><small>Example: "/, *, abc/" with / for home page, * for every url.</small></p>'
         ));
 
         $exclude_url = $fieldset->addField('exclude_url', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Exclude URLs:'),
             'required'	=> false,
             'name'		=> 'exclude_url',
-            'note'      => "Don't show on URL paths exactly matching. Example: \"/, *, abc/\" with / for home page, * for every url.",
+            'note'      => '',
+            'after_element_html' => '<p class="nm"><small>Don\'t show on URL paths exactly matching. Example: "/, *, abc/" with / for home page, * for every url.</small></p>'
         ));
 
         $productIds = implode(", ", Mage::getResourceModel('catalog/product_collection')->getAllIds());
