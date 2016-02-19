@@ -242,7 +242,9 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'required'	=> false,
             'name'		=> 'specified_url',
             'note'  => '',
-            'after_element_html' => '<p class="nm"><small>Example: "/, *, abc/" with / for home page, * for every url.</small></p>'
+            'after_element_html' => '<p class="nm"><small>Example: for homepage: <strong>/</strong>, for every page:
+<strong>*</strong>, for specific
+pages: <strong>/abc.html/, /xyz.html/</strong> (seperated by comma).</small></p>'
         ));
 
         $exclude_url = $fieldset->addField('exclude_url', 'text', array(
@@ -250,7 +252,9 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'required'	=> false,
             'name'		=> 'exclude_url',
             'note'      => '',
-            'after_element_html' => '<p class="nm"><small>Don\'t show on URL paths exactly matching. Example: "/, *, abc/" with / for home page, * for every url.</small></p>'
+            'after_element_html' => '<p class="nm"><small>Don\'t show on URL paths exactly matching. <br/>
+Example: for homepage: <strong>/</strong>, for every page: <strong>*</strong>, for specific pages:
+<strong>/abc.html/, /xyz.html/</strong> (seperated by comma).</small></p>'
         ));
 
         $productIds = implode(", ", Mage::getResourceModel('catalog/product_collection')->getAllIds());
