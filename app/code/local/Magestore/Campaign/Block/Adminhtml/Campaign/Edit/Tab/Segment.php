@@ -71,7 +71,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Segment extends Mage_
             ),
         ));
 
-        $enable_cookie = $viSegmentFieldset->addField('cookies_enabled', 'select', array(
+        /*$enable_cookie = $viSegmentFieldset->addField('cookies_enabled', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Cookies Enabled:'),
             'required'	=> true,
             'name'		=> 'cookies_enabled',
@@ -86,7 +86,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Segment extends Mage_
                     'label' => Mage::helper('campaign')->__('Yes'),
                 ),
             ),
-        ));
+        ));*/
 
         $cookie_time = $viSegmentFieldset->addField('cookie_time', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Cookie Life Time:'),
@@ -184,18 +184,19 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Segment extends Mage_
 
         // field dependencies
         $this->setChild('form_after', $this->getLayout()->createBlock('adminhtml/widget_form_element_dependence')
-            ->addFieldMap($enable_cookie->getHtmlId(), $enable_cookie->getName())
+            //->addFieldMap($enable_cookie->getHtmlId(), $enable_cookie->getName())
             ->addFieldMap($customer_cookie->getHtmlId(), $customer_cookie->getName())
             ->addFieldMap($cookie_time->getHtmlId(), $cookie_time->getName())
-            ->addFieldDependence(
+            /*->addFieldDependence(
                 $customer_cookie->getName(),
                 $enable_cookie->getName(),
                 '1'
-            )->addFieldDependence(
+            )*/
+            /*->addFieldDependence(
                 $cookie_time->getName(),
                 $enable_cookie->getName(),
                 '1'
-            )
+            )*/
         );
 
         return parent::_prepareForm();

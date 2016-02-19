@@ -61,11 +61,24 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
         $cookie = Mage::getModel('core/cookie');
         switch($this->getShowingFrequency()){
             case self::SHOW_FREQUENCY_EVERY_TIME:
+                $cookie->set('popup_showed_'.$this->getData('popup_id'), 1, 86400);
                 return true;
 
             case self::SHOW_FREQUENCY_ONLY_ONE:
-                if($cookie->get('popup_showed_'.$this->getData('popup_id'))){
-                    return false;
+                if($this->getCampaign()->getData('returning_user') == 'return'
+                    || $this->getCampaign()->getData('returning_user') == 'new'
+                ){
+                    if(!$cookie->get('popup_showed_'.$this->getData('popup_id'))
+                        && $this->getCampaign()->checkReturnCustomer()
+                    ){
+                        $cookie->set('popup_showed_'.$this->getData('popup_id'), 1, 86400);
+                        return true;
+                    }
+                }else{
+                    if(!$cookie->get('popup_showed_'.$this->getData('popup_id'))){
+                        $cookie->set('popup_showed_'.$this->getData('popup_id'), 1, 86400);
+                        return true;
+                    }
                 }
                 break;
 
@@ -73,13 +86,12 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
                 return true;
 
             case self::SHOW_FREQUENCY_UNTIL_CLOSE:
-                if($cookie->get('popup_closed_'.$this->getData('popup_id'))){
-                    return false;
+                if(!$cookie->get('popup_closed_'.$this->getData('popup_id'))){
+                    return true; //wait for user closed it
                 }
                 break;
-
         }
-        return true;
+        return false;
     }
 
     /**
@@ -251,12 +263,21 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     public function clearCookie(){
         $cookie = Mage::getModel('core/cookie');
         $cookie->delete('is_form_success_'.$this->getId());
+        $cookie->delete('popup_showed_'.$this->getData('popup_id'));
+        $cookie->delete('popup_closed_'.$this->getData('popup_id'));
         return $this;
     }
 
     protected function _beforeSave(){
         $this->clearCookie();
         return $this;
+    }
+
+    public function getCampaign(){
+        if($this->getCampaignId()){
+            return Mage::getModel('campaign/campaign')->load($this->getCampaignId());
+        }
+        return Varien_Object();
     }
 }
 

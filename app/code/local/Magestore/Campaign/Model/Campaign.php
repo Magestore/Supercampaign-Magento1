@@ -417,6 +417,7 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
      */
     //check enable cookie
     public function enableCookie(){
+        return true; //cookie alway enabled
         $enable = $this->getCookiesEnabled();
         if($enable != ''){
             if($enable == 1){

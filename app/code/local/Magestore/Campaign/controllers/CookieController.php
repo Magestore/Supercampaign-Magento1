@@ -43,13 +43,14 @@ class Magestore_Campaign_CookieController extends Mage_Core_Controller_Front_Act
         //set variable cookies
         $cookie = Mage::getModel('core/cookie');
         foreach ($dataPost as $cookieVarName => $cookieVal) {
-            if($popup->getId()){
-                $cookieLifeTime = ($popup->getData('cookie_time') != '')?$popup->getData('cookie_time'):true;
-                $cookie->set($cookieVarName, $cookieVal, $cookieLifeTime);
-            }elseif(isset($dataPost['cookie_life_time'])){
+            /*if($popup->getId()){
+                $cookieLifeTime = ($popup->getCampaign()->getData('cookie_time') != '')?$popup->getCampaign()->getData('cookie_time'):true;
+                $cookie->set($cookieVarName, $cookieVal, $cookieLifeTime*86400);
+            }else*/
+            if(isset($dataPost['cookie_life_time'])){
                 $cookie->set($cookieVarName, $cookieVal, $dataPost['cookie_life_time']);
             }else{
-                $cookie->set($cookieVarName, $cookieVal, true);
+                $cookie->set($cookieVarName, $cookieVal, 86400);
             }
         }
         $json = json_encode($cookie->get());
