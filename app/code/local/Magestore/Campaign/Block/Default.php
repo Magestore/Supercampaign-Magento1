@@ -67,7 +67,6 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
             if($this->checkUserIP()){
                 return $result;
             }
-            continue;
         }
         if($this->checkUserLogin() && $this->checkReturnCustomer() && $this->checkCustomerGroup() && $this->checkDevices()){
             return $result;
