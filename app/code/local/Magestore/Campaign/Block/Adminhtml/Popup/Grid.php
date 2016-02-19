@@ -16,8 +16,8 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
 			->joinLeft(array('campaign'=>$collection->getTable('campaign/campaign')),
 				'main_table.campaign_id = campaign.campaign_id', '')
 			->columns(array('campaign_name'=>'campaign.name'))
-			->order('main_table.popup_id DESC')
 			->order('main_table.priority DESC')
+			->order('main_table.popup_id DESC')
 			->group('main_table.popup_id');
 		$this->setCollection($collection);
 		return parent::_prepareCollection();
@@ -44,7 +44,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
 			'filter_condition_callback' => array($this, '_filterInCampaign'),
         ));
 
-		$this->addColumn('popup_type', array(
+		/*$this->addColumn('popup_type', array(
 			'header'	=> Mage::helper('campaign')->__('Popup Type'),
             'align'	 =>'left',
 			'index'	 => 'popup_type',
@@ -56,7 +56,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
                 'subscribe' => 'Subscribe',
                 'register' => 'Register',
             ),
-		));
+		));*/
 
         if (!Mage::app()->isSingleStoreMode()) {
             $this->addColumn('store', array(
@@ -71,20 +71,19 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
             ));
         }
 
-        $this->addColumn('page_id', array(
+        $this->addColumn('show_on_page', array(
             'header'	=> Mage::helper('campaign')->__('Show On Page'),
             'align'	 =>'left',
-            'index'	 => 'page_id',
+            'index'	 => 'show_on_page',
             'type'		=> 'options',
             'options'	 => array(
-                0 => 'All Page',
-                1 => 'Home Page',
-                2 => 'Product Page',
-                3 => 'Category Page',
-                4 => 'Checkout Page',
-                5 => 'Cart Page',
-                6 => 'Other Page',
-                7 => 'Specified Url',
+				Magestore_Campaign_Model_Popup::SHOW_ON_ALL_PAGE => Mage::helper('campaign')->__('All pages'),
+				Magestore_Campaign_Model_Popup::SHOW_ON_HOME_PAGE => Mage::helper('campaign')->__('Home Page'),
+				Magestore_Campaign_Model_Popup::SHOW_ON_PRODUCT_PAGE => Mage::helper('campaign')->__('Product Detail Page'),
+				Magestore_Campaign_Model_Popup::SHOW_ON_CATEGORY_PAGE => Mage::helper('campaign')->__('Category'),
+				Magestore_Campaign_Model_Popup::SHOW_ON_CART_PAGE => Mage::helper('campaign')->__('Cart Page'),
+				Magestore_Campaign_Model_Popup::SHOW_ON_CHECKOUT_PAGE => Mage::helper('campaign')->__('Checkout Page'),
+				Magestore_Campaign_Model_Popup::SHOW_ON_URLS_PAGE => Mage::helper('campaign')->__('Special URLs'),
             ),
         ));
 
@@ -94,8 +93,8 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Grid extends Mage_Adminhtml_Block
             'index'	 => 'show_when',
             'type'		=> 'options',
             'options'	 => array(
-                0 => 'After loading page',
-                1 => 'After Seconds',
+                'after_load_page' => Mage::helper('campaign')->__('After loading page'),
+                'after_seconds' => Mage::helper('campaign')->__('After Seconds'),
             ),
         ));
 
