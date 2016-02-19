@@ -112,8 +112,8 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'config'    => $wysiwygConfig,
             'required'	=> false,
             'note'      => '',
-            'after_element_html' => 'Show content success after subcriber and register. If you want to show coupon code,
-             please in sert code: <strong>{{block type="campaign/coupon" name="couponcampaign"}}</strong>'
+            'after_element_html' => '<p class="nm"><small>Show content success after subcriber and register. If you want to show coupon code,
+             please in sert code: <strong>{{block type="campaign/coupon" name="couponcampaign"}}</strong></small></p>'
         ));
 
         $fieldset->addField('width', 'text', array(
