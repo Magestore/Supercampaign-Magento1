@@ -67,7 +67,6 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
             if($this->checkUserIP()){
                 return $result;
             }
-            continue;
         }
         if($this->checkUserLogin() && $this->checkReturnCustomer() && $this->checkCustomerGroup() && $this->checkDevices()){
             return $result;
@@ -171,6 +170,7 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
      */
     //check enable cookie
     public function enableCookie(){
+        return true; //cookie alway enabled
         $campaignId = $this->getCampaignId();
         $model_campaign = Mage::getModel('campaign/campaign')->load($campaignId);
         $enable = $model_campaign->getCookiesEnabled();
@@ -202,12 +202,13 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
         $campaignId = $this->getCampaignId();
         $model_campaign = Mage::getModel('campaign/campaign')->load($campaignId);
         $ipcustomer = Mage::helper('core/http')->getRemoteAddr();
-        $popupid = $this->getPopupId();
+        //$popupid = $this->getPopupId();
         $camPaignid = $model_campaign->getCampaignId();
         $getReturn = $model_campaign->getReturningUser();
         $cookiepopup = $model_campaign->getCookieTime();
 
-        $customer_cookie = Mage::getModel('core/cookie')->get($ipcustomer);
+        $fixip = str_replace(".","_",$ipcustomer);
+        $customer_cookie = Mage::getSingleton('core/cookie')->get($fixip);
         $allcookie = Mage::getModel('core/cookie')->get();
 
         // if empty cookie time
@@ -216,7 +217,7 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
         }
 
         //check cookie customer
-        if(isset($_COOKIE[$ipcustomer])) {
+        if($customer_cookie) {
             if($getReturn == 'alluser'){
                 return true;
             }
@@ -228,11 +229,11 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
             }
         }
         //set cookie for new customer
-        if(!isset($_COOKIE[$ipcustomer])) {
+        if(!$customer_cookie) {
             if($ipcustomer){
                 //set cookie for customer
                 $name = $ipcustomer;
-                $value = $customer_name;
+                $value = $campaignId;
                 $period = $cookiepopup * 86400;
                 Mage::getModel('core/cookie')->set($name, $value, $period);
             }
