@@ -39,25 +39,25 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Custom extends Ma
         }
     }
 
-//    protected function _addColumnFilterToCollection($column) {
-//        if ($column->getId() == 'in_custom') {
-//            $bannerIds = $this->_getSelectedBanners();
-//
-//            if (empty($bannerIds)) {
-//                $bannerIds = 0;
-//            }
-//            if ($column->getFilter()->getValue()) {
-//                $this->getCollection()->addFieldToFilter('banner_id', array('in' => $bannerIds));
-//            } else {
-//                if ($bannerIds) {
-//                    $this->getCollection()->addFieldToFilter('banner_id', array('nin' => $bannerIds));
-//                }
-//            }
-//        } else {
-//            parent::_addColumnFilterToCollection($column);
-//        }
-//        return $this;
-//    }
+    protected function _addColumnFilterToCollection($column) {
+        if ($column->getId() == 'in_custom') {
+            $bannerIds = $this->_getSelectedBanners();
+
+            if (empty($bannerIds)) {
+                $bannerIds = 0;
+            }
+            if ($column->getFilter()->getValue()) {
+                $this->getCollection()->addFieldToFilter('banner_id', array('in' => $bannerIds));
+            } else {
+                if ($bannerIds) {
+                    $this->getCollection()->addFieldToFilter('banner_id', array('nin' => $bannerIds));
+                }
+            }
+        } else {
+            parent::_addColumnFilterToCollection($column);
+        }
+        return $this;
+    }
 
     protected function _prepareCollection() {
         $collection = Mage::getModel('campaign/banner')->getCollection();
