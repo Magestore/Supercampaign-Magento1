@@ -438,7 +438,7 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
             $customer_name = $customer->getName();
         }
         $ipcustomer = Mage::helper('core/http')->getRemoteAddr();
-        $popupid = $this->getPopupId();
+        //$popupid = $this->getPopupId();
         $camPaignid = $this->getCampaignId();
         $getReturn = $this->getReturningUser();
         $cookiepopup = $this->getCookieTime();
@@ -452,7 +452,7 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
         }
 
         //check cookie customer
-        if(isset($_COOKIE[$ipcustomer])) {
+        if($customer_cookie) {
             if($getReturn == 'alluser'){
                 return true;
             }
@@ -464,11 +464,11 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
             }
         }
         //set cookie for new customer
-        if(!isset($_COOKIE[$ipcustomer])) {
+        if(!$customer_cookie) {
             if($ipcustomer){
                 //set cookie for customer
                 $name = $ipcustomer;
-                $value = $customer_name;
+                $value = $camPaignid;
                 $period = $cookiepopup * 86400;
                 Mage::getModel('core/cookie')->set($name, $value, $period);
             }
