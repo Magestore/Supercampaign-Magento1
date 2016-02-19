@@ -49,7 +49,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Segment extends Mage_
 
 
         $viSegmentFieldset = $form->addFieldset('campaign_segment', array(
-            'legend'=>Mage::helper('campaign')->__('Visitorsegment information')
+            'legend'=>Mage::helper('campaign')->__('Visitor segmentation information')
         ));
         $viSegmentFieldset->addField('devices', 'multiselect', array(
             'label'		=> Mage::helper('campaign')->__('Devices'),
@@ -128,11 +128,11 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Segment extends Mage_
                 ),
                 array(
                     'value' => 'registed_loged',
-                    'label' => Mage::helper('campaign')->__('Loged User'),
+                    'label' => Mage::helper('campaign')->__('Logged In Users'),
                 ),
                 array(
                     'value' => 'logout_not_register',
-                    'label' => Mage::helper('campaign')->__('Unloged User'),
+                    'label' => Mage::helper('campaign')->__('Unlogged In Users'),
                 ),
             ),
         ));
@@ -166,9 +166,9 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Segment extends Mage_
         ));
 
         $viSegmentFieldset->addField('user_ip', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('User Ip:'),
+            'label'		=> Mage::helper('campaign')->__('User IP:'),
             'required'	=> false,
-            'note'      => "Show popup for user's ip.",
+            'note'      => "Only show popup for these IP addresses.",
             'name'		=> 'user_ip',
         ));
 

@@ -95,7 +95,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
             'value'       => '0',
             'required'    => false,
             'class'       => 'validate-number',
-            'note'     => $this->__('Highest number has highest priority'),
+            'note'     => $this->__('The higher the number, the higher the priority'),
         ));
 
         $fieldset->addField('description', 'editor', array(
@@ -166,7 +166,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
             'name'         => 'coupon_code',
             'label'        => Mage::helper('campaign')->__('Coupon Code'),
             //'class'        => 'required-entry',
-            'note'   => Mage::helper('campaign')->__('Paste your text code here.'),
+            'note'   => Mage::helper('campaign')->__('Insert your coupon code here.'),
             'required'     => true,
         ));
 
