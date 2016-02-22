@@ -27,7 +27,7 @@
             <sort_order>71</sort_order>
             <children>
                 <campaign module="campaign" translate="title">
-                    <title>Manage Campaign</title>
+                    <title>Manage Campaigns</title>
                     <sort_order>0</sort_order>
                     <action>campaignadmin/adminhtml_campaign</action>
                 </campaign>
@@ -37,7 +37,7 @@
                     <action>campaignadmin/adminhtml_widget</action>
                 </widget>-->
                 <popup module="campaign" translate="title">
-                    <title>Manage Popup</title>
+                    <title>Manage Popups</title>
                     <sort_order>10</sort_order>
                     <action>campaignadmin/adminhtml_popup</action>
                 </popup>
