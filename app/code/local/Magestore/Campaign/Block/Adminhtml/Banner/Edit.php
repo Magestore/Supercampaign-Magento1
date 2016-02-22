@@ -37,6 +37,7 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Edit extends Mage_Adminhtml_Bloc
         $this->_controller = 'adminhtml_banner';
         $this->_removeButton('save');
         $this->_removeButton('reset');
+        $this->_removeButton('back');
         //$this->_updateButton('save', 'label', Mage::helper('campaign')->__('Save and exit'));
         $this->_updateButton('delete', 'label', Mage::helper('campaign')->__('Delete Banner'));
 
@@ -79,7 +80,7 @@ class Magestore_Campaign_Block_Adminhtml_Banner_Edit extends Mage_Adminhtml_Bloc
                 }else{
                    //just refreshed
                    resetfilteritem();
-                   //window.close();
+                   window.close();
                 }
             }
 
