@@ -47,15 +47,32 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
         //zend_debug::dump($data);die();
         $fieldset = $form->addFieldset('bannerslider_form', array('legend' => Mage::helper('campaign')->__('Slider information')));
         
-        $wysiwygConfig = Mage::getSingleton('cms/wysiwyg_config')->getConfig();
-        $wysiwygConfig->addData(array(
-            'add_variables'				=> false,
-            'plugins'					=> array(),
-            'widget_window_url'			=> Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/widget/index'),
-            'directives_url'			=> Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg/directive'),
-            'directives_url_quoted'		=> preg_quote(Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg/directive')),
-            'files_browser_window_url'	=> Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg_images/index'),
-        ));        
+//        $wysiwygConfig = Mage::getSingleton('cms/wysiwyg_config')->getConfig();
+//        $wysiwygConfig->addData(array(
+//            'add_variables'				=> false,
+//            'plugins'					=> array(),
+//            'widget_window_url'			=> Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/widget/index'),
+//            'directives_url'			=> Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg/directive'),
+//            'directives_url_quoted'		=> preg_quote(Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg/directive')),
+//            'files_browser_window_url'	=> Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg_images/index'),
+//        ));
+
+        if (Mage::getSingleton('cms/wysiwyg_config')->isEnabled()) {
+            $this->getLayout()->getBlock('head')->setCanLoadTinyMce(true);
+        }
+
+        $wysiwygConfig = Mage::getSingleton('cms/wysiwyg_config')->getConfig(
+            array(
+                'hidden'=>false,
+                'add_variables' => true,
+                'add_widgets' => true,
+                'add_images'=>true,
+                'widget_window_url'	=> Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/widget/index'),
+                'directives_url'	=> Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg/directive'),
+                'directives_url_quoted'	=> preg_quote(Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg/directive')),
+                'files_browser_window_url'	=> Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg_images/index')
+            )
+        );
 
         $fieldset->addField('title', 'text', array(
             'label' => Mage::helper('campaign')->__('Title'),
