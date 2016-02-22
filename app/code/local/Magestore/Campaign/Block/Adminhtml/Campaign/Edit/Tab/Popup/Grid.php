@@ -24,8 +24,14 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Popup_Grid extends Ma
 			$selected_id = $this->_selectedId();
 			if(!empty($selected_id)){
 				$collection->addFieldToFilter('popup_id', array('in'=>$selected_id));
+			}else{
+				$popupTab = Mage::registry('popup_tab');
+				if(isset($popupTab)){
+					$collection->getSelect()->where('main_table.campaign_id is null');
+				}
 			}
 		}
+
 		$this->setCollection($collection);
 		return parent::_prepareCollection();
 	}
