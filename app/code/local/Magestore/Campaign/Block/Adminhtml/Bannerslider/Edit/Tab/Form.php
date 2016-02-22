@@ -203,9 +203,9 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
         ));
             
         $categoryIds = implode(", ", Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('level', array('gt' => 0))->getAllIds());
-//        if(!isset($data['category_ids'])){
-//            $data['category_ids'] = $categoryIds;
-//        }
+        if(!isset($data['category_ids'])){
+            $data['category_ids'] = $categoryIds;
+        }
         $fieldset->addField('category_ids', 'text', array(
             'label' => Mage::helper('campaign')->__('Categories'),
             'name' => 'category_ids',
@@ -219,7 +219,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
                         var cate = $("main_categories_select");
                         if($("main_categories_select").style.display == "none" || (check ==1) || (check == 2)){
                             $("categories_check").style.display ="";
-                            var url = "' . $this->getUrl('*/bannerslider_bannerslider/chooserMainCategories') . '";
+                            var url = "' . $this->getUrl('campaignadmin/adminhtml_bannerslider/chooserMainCategories') . '";
                             if(check == 1){
                                 $("category_ids").value = "'.$categoryIds.'";
                             }else if(check == 2){
@@ -233,14 +233,14 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
                                     parameters: parameters,
                                     onComplete:function(transport){
                                         $("main_categories_select").update(transport.responseText);
-                                        $("main_categories_select").style.display = "block"; 
+                                        $("main_categories_select").style.display = "block";
                                     }
                                 });
                         if(cate.style.display == "none"){
                             cate.style.display = "";
                         }else{
                             cate.style.display = "none";
-                        } 
+                        }
                     }else{
                         cate.style.display = "none";
                         $("categories_check").style.display ="none";
@@ -248,7 +248,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
                 };
 		</script>
             '
-        ));       
+        ));
 
         $fieldset->addField('description', 'editor', array(
             'name' => 'description',

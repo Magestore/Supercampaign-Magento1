@@ -86,7 +86,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Grid extends Mage_Adminhtml_Bl
         $this->addColumn('start_time', array(
             'header'    => Mage::helper('campaign')->__('Start Time'),
             'align'     => 'left',
-            'width'     => '100px',
+            'width'     => '200px',
             'index'     => 'start_time',
             'type'      => 'datetime',
         ));
@@ -94,7 +94,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Grid extends Mage_Adminhtml_Bl
         $this->addColumn('end_time', array(
             'header'    => Mage::helper('campaign')->__('End Time'),
             'align'     => 'left',
-            'width'     => '100px',
+            'width'     => '200px',
             'index'     => 'end_time',
             'type'      => 'datetime',
         ));
@@ -102,14 +102,14 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Grid extends Mage_Adminhtml_Bl
         $this->addColumn('priority', array(
             'header'    => Mage::helper('campaign')->__('Priority'),
             'align'     => 'left',
-            'width'     => '20px',
+            'width'     => '150px',
             'index'     => 'priority'
         ));
 
         $this->addColumn('status', array(
             'header'    => Mage::helper('campaign')->__('Status'),
             'align'     => 'left',
-            'width'     => '80px',
+            'width'     => '150px',
             'index'     => 'status',
             'type'        => 'options',
             'options'     => Magestore_Campaign_Model_Status::getOptionArray(),
