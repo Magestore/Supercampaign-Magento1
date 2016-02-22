@@ -39,8 +39,14 @@ $click_url = $this->getUrl('bannerslider/index/click',array('_secure'=>true));
                     <div class="slider2-note-<?php echo $blocks['bannerslider_id'] ?>">
                         <?php foreach ($banners as $banner): ?>
                             <div>
+                            <?php
+                            if($banner['click_url'] != ''):
+                             ?>
                                 <a href="<?php echo $banner['click_url']; ?>" onclick="bannerClicks('<?php echo $banner['banner_id']?>','<?php echo $blocks['bannerslider_id'] ?>')" style="display:block;"><img src="<?php echo $this->getBannerImage($banner['image']); ?>" title="<?php echo $banner['name']; ?>" width="300" height="200"/></a>
-                            </div>
+                            <?php else:?>
+                                <img src="<?php echo $this->getBannerImage($banner['image']); ?>" title="<?php echo $banner['name']; ?>" width="300" height="200"/>
+                            <?php endif;?>
+                             </div>
                         <?php endforeach; ?>    
 
                     </div>

@@ -65,6 +65,14 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tabs extends Mage_Adminht
             'class' => 'ajax'
         ));
 
+        $this->addTab('segment', array(
+            'label'     => Mage::helper('campaign')->__('Visitor segmentation'),
+            'title'     => Mage::helper('campaign')->__('Visitor segmentation'),
+            'content'   => $this->getLayout()
+                ->createBlock('campaign/adminhtml_campaign_edit_tab_segment')
+                ->toHtml(),
+        ));
+
         //$this->addTab('countdown', 'campaign/adminhtml_campaign_edit_tab_countdown');
 
 

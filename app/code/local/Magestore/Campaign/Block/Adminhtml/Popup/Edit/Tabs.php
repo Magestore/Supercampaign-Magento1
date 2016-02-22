@@ -17,22 +17,22 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tabs extends Mage_Adminhtml_
 		));
 
         $this->addTab('appear_section', array(
-            'label'     => Mage::helper('campaign')->__('Appear Effect, Custom Css'),
-            'title'     => Mage::helper('campaign')->__('Appear Effect, Custom Css'),
+            'label'     => Mage::helper('campaign')->__('Styles and Effects'),
+            'title'     => Mage::helper('campaign')->__('Styles and Effects'),
             'content'   => $this->getLayout()->createBlock('campaign/adminhtml_popup_edit_tab_appear')->toHtml(),
         ));
 
         $this->addTab('position_section', array(
-            'label'     => Mage::helper('campaign')->__('Position Popup'),
-            'title'     => Mage::helper('campaign')->__('Position Popup'),
+            'label'     => Mage::helper('campaign')->__('Placement'),
+            'title'     => Mage::helper('campaign')->__('Placement'),
             'content'   => $this->getLayout()->createBlock('campaign/adminhtml_popup_edit_tab_position')->toHtml(),
         ));
 
-        $this->addTab('visitorsegment_section', array(
-            'label'     => Mage::helper('campaign')->__('Visitorsegment'),
-            'title'     => Mage::helper('campaign')->__('Visitorsegment'),
-            'content'   => $this->getLayout()->createBlock('campaign/adminhtml_popup_edit_tab_visitorsegment')->toHtml(),
-        ));
+//        $this->addTab('visitorsegment_section', array(
+//            'label'     => Mage::helper('campaign')->__('Visitorsegment'),
+//            'title'     => Mage::helper('campaign')->__('Visitorsegment'),
+//            'content'   => $this->getLayout()->createBlock('campaign/adminhtml_popup_edit_tab_visitorsegment')->toHtml(),
+//        ));
 
         $this->setActiveTab('general_section');
 		return parent::_beforeToHtml();

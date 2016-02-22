@@ -26,7 +26,7 @@
  * @package     Magestore_Campaign
  * @author      Magestore Developer
  */
-include_once('lib/Mobile_Detect.php');
+
 class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
 {
     const STATUS_ENABLE = 1;
@@ -61,11 +61,24 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
         $cookie = Mage::getModel('core/cookie');
         switch($this->getShowingFrequency()){
             case self::SHOW_FREQUENCY_EVERY_TIME:
+                $cookie->set('popup_showed_'.$this->getData('popup_id'), 1, 86400);
                 return true;
 
             case self::SHOW_FREQUENCY_ONLY_ONE:
-                if($cookie->get('popup_showed_'.$this->getData('popup_id'))){
-                    return false;
+                if($this->getCampaign()->getData('returning_user') == 'return'
+                    || $this->getCampaign()->getData('returning_user') == 'new'
+                ){
+                    if(!$cookie->get('popup_showed_'.$this->getData('popup_id'))
+                        && $this->getCampaign()->checkReturnCustomer()
+                    ){
+                        $cookie->set('popup_showed_'.$this->getData('popup_id'), 1, 86400);
+                        return true;
+                    }
+                }else{
+                    if(!$cookie->get('popup_showed_'.$this->getData('popup_id'))){
+                        $cookie->set('popup_showed_'.$this->getData('popup_id'), 1, 86400);
+                        return true;
+                    }
                 }
                 break;
 
@@ -73,13 +86,12 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
                 return true;
 
             case self::SHOW_FREQUENCY_UNTIL_CLOSE:
-                if($cookie->get('popup_closed_'.$this->getData('popup_id'))){
-                    return false;
+                if(!$cookie->get('popup_closed_'.$this->getData('popup_id'))){
+                    return true; //wait for user closed it
                 }
                 break;
-
         }
-        return true;
+        return false;
     }
 
     /**
@@ -125,17 +137,21 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
      * @param string $exclude
      * @return bool
      */
-    public function checkUrl($specified = '', $exclude = ''){
+    public function checkUrl($specified = ''){
         if($specified == ''){
             $specified = $this->getSpecifiedUrl();
         }
-        if($exclude == ''){
-            $exclude = $this->getExcludeUrl();
-        }
         if($specified == ''){
+            return true;
+        }
+        return Mage::helper('campaign')->checkInclude($specified);
+    }
+
+    public function checkExclude(){
+        if(Mage::helper('campaign')->checkInclude($this->getExcludeUrl()) && $this->getExcludeUrl() != ''){
             return false;
         }
-        return Mage::helper('campaign')->checkInclude($specified, $exclude);
+        return true;
     }
 
 
@@ -234,253 +250,6 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
         }
     }
 
-
-    /*Functions below for Visitorsegment*/
-    //z set visitorsegment check value
-    public function checkDevices(){
-        $detector = new Mobile_Detect();
-        $devicetoshow = array();
-        $devices = $this->getDevices();
-        if($devices != ''){
-            if(!is_array($devices)){
-                $devicetoshow[] = $devices;
-            }else{
-                $devicetoshow = $devices;
-            }
-            //explode in array
-            $sub_device = array();
-            foreach ($devicetoshow as $subgr) {
-                if(in_array(trim($subgr), $devicetoshow)){
-                    $sub_device[] = explode(',', trim($subgr));
-                }
-            }
-        }else{
-            return false;
-        }
-        //end get value of device
-        if($devices != ''){
-            $tablet = $detector->isTablet();
-            $mobile = $detector->isMobile();
-
-            foreach($sub_device as $subg){
-                foreach($subg as $sub){
-                    if($sub == 'all_device'){
-                        return true;
-                    }
-                    if($sub == 'pc_laptop'){
-                        if($tablet == false && $mobile == false){
-                            return true;
-                        }
-                    }
-                    if($sub == 'tablet_mobile'){
-                        if($tablet || $mobile){
-                            return true;
-                        }
-                    }
-                }
-            }
-
-            return false;
-        }else{
-            return false;
-        }
-    }
-
-    public function checkUserLogin(){
-        $user = $this->getLoginUser();
-        if($user != ''){
-            //if all user
-            if($user == 'all_user'){
-                return true;
-            }else{
-                //if registed or loged
-                $login = Mage::getSingleton('customer/session')->isLoggedIn(); //Check if User is Logged In
-                if($user == 'registed_loged'){
-                    if($login){
-                        return true;
-                    }
-                }
-                //if register or logout
-                if($user == 'logout_not_register'){
-                    if($login == false){
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }else{
-            return false;
-        }
-    }
-
-    /**
-     * option show with new user or visited user
-     * @return bool
-     */
-    //check enable cookie
-    public function enableCookie(){
-        $enable = $this->getCookiesEnabled();
-        if($enable != ''){
-            if($enable == 1){
-                $this->checkReturnCustomer();
-            }else{
-                return false;
-            }
-        }
-    }
-
-    public function checkReturnCustomer(){
-
-        $login = Mage::getSingleton('customer/session')->isLoggedIn();
-        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
-
-            $customer = Mage::getSingleton('customer/session')->getCustomer();
-            $customer_name = $customer->getName();
-        }
-        $ipcustomer = Mage::helper('core/http')->getRemoteAddr();
-        $popupid = $this->getPopupId();
-        $camPaignid = $this->getCampaignId();
-        $getReturn = $this->getReturningUser();
-        $cookiepopup = $this->getCookieTime();
-
-        $customer_cookie = Mage::getModel('core/cookie')->get($ipcustomer);
-        $allcookie = Mage::getModel('core/cookie')->get();
-
-        // if empty cookie time
-        if($cookiepopup == '' || $cookiepopup < 1){
-            return true;
-        }
-
-        //check cookie customer
-        if(isset($_COOKIE[$ipcustomer])) {
-            if($getReturn == 'alluser'){
-                return true;
-            }
-            if($getReturn == 'new'){
-                return false;
-            }
-            if($getReturn == 'return'){
-                return true;
-            }
-        }
-        //set cookie for new customer
-        if(!isset($_COOKIE[$ipcustomer])) {
-                if($ipcustomer){
-                        //set cookie for customer
-                        $name = $ipcustomer;
-                        $value = $customer_name;
-                        $period = $cookiepopup * 86400;
-                        Mage::getModel('core/cookie')->set($name, $value, $period);
-                }
-            return true;
-        }
-    }
-
-    /**
-     * option show or not with current customer's group
-     * @return bool
-     */
-    public function checkCustomerGroup(){
-        $grouptoshow = array();
-        $group = $this->getCustomerGroupIds();
-
-        //call group code of group customer
-        $login = Mage::getSingleton('customer/session')->isLoggedIn();
-        $gid = Mage::getSingleton('customer/session')->getCustomerGroupId();
-        $groupcustomer = Mage::getModel('customer/group')->load($gid);
-        $groupcode = $groupcustomer->getCustomerGroupCode();
-
-        if($group != ''){
-            if(!is_array($group)){
-                $grouptoshow[] = $group;
-            }else{
-                $grouptoshow = $group;
-            }
-            //explode in array
-            $sub_group = array();
-            foreach ($grouptoshow as $subgr) {
-                if(in_array(trim($subgr), $grouptoshow)){
-                    $sub_group[] = explode(',', trim($subgr));
-                }
-            }
-
-        }else{
-            return false;
-        }
-
-        //end get value of device
-        if($group != ''){
-
-            foreach($sub_group as $subg){
-                foreach($subg as $sub){
-
-                    if($sub == 'all_group'){
-                        return true;
-
-                    }
-//                    if($sub == 'not_loged_in'){
-//                        if($login == false){
-//                            if($groupcode == 'NOT LOGGED IN'){
-//                                return true;
-//                            }
-//                        }
-//
-//                    }
-                    if($sub == 'general'){
-
-                        if($groupcode == 'General'){
-                            return true;
-                        }
-
-
-                    }
-                    if($sub == 'wholesale'){
-
-                        if($groupcode == 'Wholesale'){
-                            return true;
-                        }
-
-                    }
-                    if($sub == 'vip_member'){
-
-                        if($groupcode == 'VIP Member'){
-                            return true;
-                        }
-                        break;
-                    }
-                    if($sub == 'private_sale_member'){
-
-                        if($groupcode == 'Private Sales Member'){
-                            return true;
-                        }
-
-                    }
-
-                }
-            }
-
-
-            return false;
-        }else{
-            return false;
-        }
-
-    }
-
-
-    public function checkUserIP(){
-        $ipcustomer = Mage::helper('core/http')->getRemoteAddr();
-        $ipdata = $this->getUserIp();
-        if($ipdata != ''){
-           if($ipdata == $ipcustomer){
-               return true;
-           }
-        }
-        return false;
-    }
-    /*End for check visitorsegment*/
-
     public function getCouponCode(){
         $campaign = Mage::getModel('campaign/campaign')->load($this->getCampaignId());
         if($campaign->getId()){
@@ -494,12 +263,21 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     public function clearCookie(){
         $cookie = Mage::getModel('core/cookie');
         $cookie->delete('is_form_success_'.$this->getId());
+        $cookie->delete('popup_showed_'.$this->getData('popup_id'));
+        $cookie->delete('popup_closed_'.$this->getData('popup_id'));
         return $this;
     }
 
     protected function _beforeSave(){
         $this->clearCookie();
         return $this;
+    }
+
+    public function getCampaign(){
+        if($this->getCampaignId()){
+            return Mage::getModel('campaign/campaign')->load($this->getCampaignId());
+        }
+        return Varien_Object();
     }
 }
 

@@ -46,6 +46,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
         } elseif (Mage::registry('campaign_data')) {
             $data = Mage::registry('campaign_data')->getData();
         }
+
         $fieldset = $form->addFieldset('campaign_form', array(
             'legend'=>Mage::helper('campaign')->__('General Information')
         ));
@@ -94,7 +95,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
             'value'       => '0',
             'required'    => false,
             'class'       => 'validate-number',
-            'note'     => $this->__('Highest number has highest priority'),
+            'note'     => $this->__('The higher the number, the higher the priority'),
         ));
 
         $fieldset->addField('description', 'editor', array(
@@ -165,7 +166,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
             'name'         => 'coupon_code',
             'label'        => Mage::helper('campaign')->__('Coupon Code'),
             //'class'        => 'required-entry',
-            'note'   => Mage::helper('campaign')->__('Paste your text code here.'),
+            'note'   => Mage::helper('campaign')->__('Insert your coupon code here.'),
             'required'     => true,
         ));
 
@@ -217,6 +218,10 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
 //            'value'        => array(0),
 //        ));
 
+
+        $form->setValues($data);
+        $this->setForm($form);
+
         // field dependencies
         $this->setChild('form_after', $this->getLayout()->createBlock('adminhtml/widget_form_element_dependence')
             ->addFieldMap($use_coupon->getHtmlId(), $use_coupon->getName())
@@ -245,7 +250,6 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_General extends Mage_
                 1)
         );
 
-        $form->setValues($data);
         return parent::_prepareForm();
     }
 

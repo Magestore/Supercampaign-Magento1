@@ -134,9 +134,14 @@ CREATE TABLE {$this->getTable('campaign/popup')} (
   `show_when` varchar(255) NOT NULL default '',
   `seconds_delay` smallint(6) NULL default 0,
   `showing_frequency` varchar(255) NULL default '',
-  `cookie_time` varchar(255) NULL default '',
   `max_time` varchar(255) NULL default '',
   `priority` int(11) NULL default 0,
+  `status` smallint(6) NULL default 0,
+  `show_next_popup` varchar(255) NOT NULL default '',
+  `connect_with` varchar(255) NOT NULL default '',
+  `popup_content` text NOT NULL default '',
+  `content_for_success` text NULL default '',
+
   `country` varchar(255) NULL default '',
   `devices` varchar(255) NULL default '',
   `cookies_enabled` smallint(6) NULL default 0,
@@ -144,11 +149,8 @@ CREATE TABLE {$this->getTable('campaign/popup')} (
   `login_user` varchar(255) NULL default '',
   `customer_group_ids` varchar(255) NULL default '',
   `user_ip` varchar(30) NULL default '',
-  `status` smallint(6) NULL default 0,
-  `show_next_popup` varchar(255) NOT NULL default '',
-  `connect_with` varchar(255) NOT NULL default '',
-  `popup_content` text NOT NULL default '',
-  `content_for_success` text NULL default '',
+  `cookie_time` varchar(255) NULL default '',
+
   PRIMARY KEY (`popup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 

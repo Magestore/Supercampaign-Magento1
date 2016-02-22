@@ -40,7 +40,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit extends Mage_Adminhtml_Bl
         $this->_updateButton('delete', 'label', Mage::helper('campaign')->__('Delete Campaign'));
         
         $this->_addButton('saveandcontinue', array(
-            'label'        => Mage::helper('adminhtml')->__('Save'),
+            'label'        => Mage::helper('adminhtml')->__('Save and Continue Edit'),
             'onclick'    => 'saveAndContinueEdit()',
             'class'        => 'save',
         ), -100);

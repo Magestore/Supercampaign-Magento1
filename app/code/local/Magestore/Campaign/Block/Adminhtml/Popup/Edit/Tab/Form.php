@@ -101,17 +101,19 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'wysiwyg' => true,
             'config'        =>$wysiwygConfig,
             'required'	=> true,
-            'note'      => 'If you want to show coupon code on the popup template, please in sert code: {{block type="campaign/coupon" name="couponcampaign" template="campaign/coupon.phtml"}}',
+            'note'      => 'Template popup to show on frontend',
         ));
 
         $fieldset->addField('content_for_success', 'editor', array(
-            'label'		=> Mage::helper('campaign')->__('Content of success:'),
+            'label'		=> Mage::helper('campaign')->__('Success Content:'),
             'style'		=> 'width:800px; height:350px;',
             'name'		=> 'content_for_success',
             'wysiwyg'   => true,
             'config'    => $wysiwygConfig,
             'required'	=> false,
-            'note'      => 'Show content success after subcriber and register.',
+            'note'      => '',
+            'after_element_html' => '<p class="nm"><small>Show content success after subcriber and register. If you want to show coupon code,
+             please in sert code: <strong>{{block type="campaign/coupon" name="couponcampaign"}}</strong></small></p>'
         ));
 
         $fieldset->addField('width', 'text', array(
@@ -146,11 +148,11 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'label'		=> Mage::helper('campaign')->__('Show On Page:'),
             'required'	=> true,
             'name'		=> 'show_on_page',
-            'note'      => 'Show popup when with page selectd.',
+            'note'      => 'Show popup on selected page.',
             'values' => array(
                 array(
                     'value' => Magestore_Campaign_Model_Popup::SHOW_ON_ALL_PAGE,
-                    'label' => Mage::helper('campaign')->__('All Page'),
+                    'label' => Mage::helper('campaign')->__('All pages'),
                 ),
                 array(
                     'value' => Magestore_Campaign_Model_Popup::SHOW_ON_HOME_PAGE,
@@ -174,7 +176,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                 ),
                 array(
                     'value' => Magestore_Campaign_Model_Popup::SHOW_ON_URLS_PAGE,
-                    'label' => Mage::helper('campaign')->__('Special Urls'),
+                    'label' => Mage::helper('campaign')->__('Special URLs'),
                 ),
             ),
         ));
@@ -236,16 +238,23 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         ));
 
         $specified_url = $fieldset->addField('specified_url', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Special Urls:'),
+            'label'		=> Mage::helper('campaign')->__('Special URLs:'),
             'required'	=> false,
             'name'		=> 'specified_url',
+            'note'  => '',
+            'after_element_html' => '<p class="nm"><small>Example: for homepage: <strong>/</strong>, for every page:
+<strong>*</strong>, for specific
+pages: <strong>/abc.html/, /xyz.html/</strong> (seperated by comma).</small></p>'
         ));
 
-        $other_page = $fieldset->addField('exclude_url', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Exclude Url:'),
+        $exclude_url = $fieldset->addField('exclude_url', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('Exclude URLs:'),
             'required'	=> false,
             'name'		=> 'exclude_url',
-            'note'      => "Don't show popup when open page have url like exclude url.",
+            'note'      => '',
+            'after_element_html' => '<p class="nm"><small>Don\'t show on URL paths exactly matching. <br/>
+Example: for homepage: <strong>/</strong>, for every page: <strong>*</strong>, for specific pages:
+<strong>/abc.html/, /xyz.html/</strong> (seperated by comma).</small></p>'
         ));
 
         $productIds = implode(", ", Mage::getResourceModel('catalog/product_collection')->getAllIds());
@@ -285,7 +294,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
             'values' => array(
                 array(
                     'value' => 'after_load_page',
-                    'label' => Mage::helper('campaign')->__('After Load Page'),
+                    'label' => Mage::helper('campaign')->__('After loading page'),
                 ),
                 array(
                     'value' => 'after_seconds',
@@ -303,11 +312,11 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
         ));
 
         //setting popup tab
-        $fieldset->addField('showing_frequency', 'select', array(
+        $preq = $fieldset->addField('showing_frequency', 'select', array(
             'label'		=> Mage::helper('campaign')->__('Show Frequency:'),
             'required'	=> true,
             'name'		=> 'showing_frequency',
-            'note'      => "Show popup when have had customer's action .",
+            'note'      => "Show popup based on visitor's behavior.",
             'values' => array(
                 array(
                     'value' => Magestore_Campaign_Model_Popup::SHOW_FREQUENCY_EVERY_TIME,
@@ -323,7 +332,7 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                 ),
                 array(
                     'value' => Magestore_Campaign_Model_Popup::SHOW_FREQUENCY_ONLY_TRIGGER,
-                    'label' => Mage::helper('campaign')->__('Only trigger'),
+                    'label' => Mage::helper('campaign')->__('When click on trigger'),
                 ),
             ),
         ));
@@ -336,22 +345,14 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
 //            'name'		=> 'cookie_time',
 //        ));
 
-        $fieldset->addField('priority', 'text', array(
-            'label'		=> Mage::helper('campaign')->__('Set Priority:'),
-            'note'      => 'Set priority when have many popup.',
-            'required'	=> false,
-            'class'       => 'validate-number',
-            'name'		=> 'priority',
-        ));
-
         $popups = Mage::getModel('campaign/popup')->getCollection();
         if(isset($data['popup_id']))  $popups->addFieldToFilter('popup_id', array('neq'=>$data['popup_id']));
         $popupIds = implode(", ", $popups->getAllIds());
-        $fieldset->addField('trigger_popup', 'text', array(
-            'label'		=> $this->__('When click show other popup:'),
+        $trigger = $fieldset->addField('trigger_popup', 'text', array(
+            'label'		=> $this->__('Click target:'),
             'required'	=> false,
             'name'		=> 'trigger_popup',
-            'note'      => 'Select ID of the popup you want to show when click this popup',
+            'note'      => 'Select ID of the popup to be shown when clicking this popup',
             'after_element_html' => '<a id="product_link" href="javascript:void(0)" onclick="toggleSelectPopups()">
                 <img src="' . $this->getSkinUrl('images/rule_chooser_trigger.gif') . '"
                 alt="" class="v-middle rule-chooser-trigger" title="Select Popups"></a>
@@ -361,8 +362,8 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                     function toggleSelectPopups(){
                         if($("main_popups_select").style.display == "none"){
                             var url = "' . $this->getUrl('campaignadmin/adminhtml_popup/chooserPopups/', array('popup_id'=>$data['popup_id'])) . '";
-                            var params = $("trigger_popup").value.split(", ");
-                            var parameters = {"form_key": FORM_KEY,"selected[]":params };
+                            var params = $("trigger_popup").value;
+                            var parameters = {"form_key": FORM_KEY,"selected":params };
                             var request = new Ajax.Request(url,
                             {
                                 evalScripts: true,
@@ -379,6 +380,14 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
                 </script>'
         ));
 
+        $fieldset->addField('priority', 'text', array(
+            'label'		=> Mage::helper('campaign')->__('Set Priority:'),
+            'note'      => 'Set priority for popups to be shown. 0 is the lowest priority.',
+            'required'	=> false,
+            'class'       => 'validate-number',
+            'name'		=> 'priority',
+        ));
+
         //end setting poup tab
 
         if($data['width'] < 1){$data['width'] = 300;}
@@ -387,35 +396,44 @@ class Magestore_Campaign_Block_Adminhtml_Popup_Edit_Tab_Form extends Mage_Adminh
 
         $this->setForm($form);
         $this->setChild('form_after', $this->getLayout()->createBlock('adminhtml/widget_form_element_dependence')
-                ->addFieldMap($show_when->getHtmlId(), $show_when->getName())
-                ->addFieldMap($show_on_page->getHtmlId(), $show_on_page->getName())
-                ->addFieldMap($specified_url->getHtmlId(), $specified_url->getName())
-                ->addFieldMap($categories->getHtmlId(), $categories->getName())
-                ->addFieldMap($other_page->getHtmlId(), $other_page->getName())
-                ->addFieldMap($productidpage->getHtmlId(), $productidpage->getName())
-                ->addFieldMap($seconds_number0->getHtmlId(), $seconds_number0->getName())
-                ->addFieldDependence(
-                    $seconds_number0->getName(),
-                    $show_when->getName(),
-                    'after_seconds'
-                )
-                ->addFieldDependence(
-                    $specified_url->getName(),
-                    $show_on_page->getName(),
-                    Magestore_Campaign_Model_Popup::SHOW_ON_URLS_PAGE
-                )->addFieldDependence(
-                    $other_page->getName(),
-                    $show_on_page->getName(),
-                    Magestore_Campaign_Model_Popup::SHOW_ON_URLS_PAGE
-                )->addFieldDependence(
-                    $categories->getName(),
-                    $show_on_page->getName(),
-                    Magestore_Campaign_Model_Popup::SHOW_ON_CATEGORY_PAGE
-                )->addFieldDependence(
-                    $productidpage->getName(),
-                    $show_on_page->getName(),
-                    Magestore_Campaign_Model_Popup::SHOW_ON_PRODUCT_PAGE
-                )
+            ->addFieldMap($show_when->getHtmlId(), $show_when->getName())
+            ->addFieldMap($show_on_page->getHtmlId(), $show_on_page->getName())
+            ->addFieldMap($specified_url->getHtmlId(), $specified_url->getName())
+            ->addFieldMap($categories->getHtmlId(), $categories->getName())
+//            ->addFieldMap($exclude_url->getHtmlId(), $exclude_url->getName())
+            ->addFieldMap($productidpage->getHtmlId(), $productidpage->getName())
+            ->addFieldMap($seconds_number0->getHtmlId(), $seconds_number0->getName())
+            ->addFieldMap($preq->getHtmlId(), $preq->getName())
+            ->addFieldMap($trigger->getHtmlId(), $trigger->getName())
+            ->addFieldDependence(
+                $seconds_number0->getName(),
+                $show_when->getName(),
+                'after_seconds'
+            )
+            ->addFieldDependence(
+                $specified_url->getName(),
+                $show_on_page->getName(),
+                Magestore_Campaign_Model_Popup::SHOW_ON_URLS_PAGE
+            )
+//            ->addFieldDependence(
+//                $exclude_url->getName(),
+//                $show_on_page->getName(),
+//                Magestore_Campaign_Model_Popup::SHOW_ON_URLS_PAGE
+//            )
+            ->addFieldDependence(
+                $categories->getName(),
+                $show_on_page->getName(),
+                Magestore_Campaign_Model_Popup::SHOW_ON_CATEGORY_PAGE
+            )->addFieldDependence(
+                $productidpage->getName(),
+                $show_on_page->getName(),
+                Magestore_Campaign_Model_Popup::SHOW_ON_PRODUCT_PAGE
+            )->addFieldDependence(
+                $trigger->getName(),
+                $preq->getName(),
+                array(Magestore_Campaign_Model_Popup::SHOW_FREQUENCY_EVERY_TIME,
+                    Magestore_Campaign_Model_Popup::SHOW_FREQUENCY_UNTIL_CLOSE)
+            )
         );
 
 		return parent::_prepareForm();
