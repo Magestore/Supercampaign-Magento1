@@ -268,6 +268,24 @@ class Magestore_Campaign_Adminhtml_BannersliderController extends Mage_Adminhtml
         $this->_redirect('*/*/index');
     }
 
+
+    /**
+     *delete banner items on grid custom
+     */
+    public function deleteingridAction() {
+        $params = $this->getRequest()->getParams();
+        $item_id = $params['id'];
+        $model_item = Mage::getModel('campaign/banner')->load($item_id);
+        $model_item->delete();
+        //refresh at page
+        $banner_id = $this->getRequest()->getParams('id');
+        $id = array();
+        $id = intval($banner_id['id']);
+//        $this->_redirect('campaignadmin/adminhtml_bannerslider/edit/id/'.$id);
+       $this->_redirect('*/*/edit', array('id' => $id, 'store' => $this->getRequest()->getParam("store")));
+        //$this->_redirect('*/*/index');
+    }
+
     /**
      * export grid item to CSV type
      */
