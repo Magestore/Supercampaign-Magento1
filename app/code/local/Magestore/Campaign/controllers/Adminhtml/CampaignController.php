@@ -333,6 +333,7 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
     //Tit banner ajax grid
     public function getPopupGridTabAction(){
         //get params
+        Mage::register('popup_tab', 1);
         Mage::register('popup_reloaded_ids', $this->getRequest()->getPost('popup_reloaded_ids'));
         $grid = $this->getLayout()->createBlock('campaign/adminhtml_campaign_edit_tab_popup_grid');
         $serialer = Mage::getModel('core/layout')->createBlock('adminhtml/widget_grid_serializer');

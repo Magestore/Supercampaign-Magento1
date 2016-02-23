@@ -191,7 +191,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Form extends Mage
         $fieldset->addField('slider_speed', 'text', array(
             'label' => Mage::helper('campaign')->__('Speed'),
             'name' => 'slider_speed',
-            'note' => 'Seconds number. This is the display time of a banner',
+            'note' => 'Set the display time of each banner in slider. Unit: second',
         ));
 
         $data['url_view'] = Mage::helper('campaign')->getPreviewSlider();
