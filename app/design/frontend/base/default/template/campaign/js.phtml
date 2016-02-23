@@ -2,6 +2,7 @@
 $canAddJquery = true;
 $canAddOwl = true;
 $existBootstrap = false;
+$existJQCookie = false;
 if($head = $this->getLayout()->getBlock('head')) {
     foreach ($head->getData('items') as $js => $item) {
         if (strpos($js, 'jquery') != false) {
@@ -12,6 +13,9 @@ if($head = $this->getLayout()->getBlock('head')) {
         }
         if (preg_match('#.*bootstrap.*\.js$#', $js)) {
             $existBootstrap = true;
+        }
+        if (preg_match('#.*jquery\.cookie.*\.js$#', $js)) {
+            $existJQCookie = true;
         }
     }
 }

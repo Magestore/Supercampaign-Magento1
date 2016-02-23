@@ -438,3 +438,4 @@
 .input-layout .highlight{position:absolute;height:60%;width:100px;top:25%;left:0;pointer-events:none;opacity:.5}
 .input-layout input:focus~.highlight{-webkit-animation:inputHighlighter .3s ease;animation:inputHighlighter .3s ease}
 .input-layout .validation-failed{background:none rgba(247,239,239,0)!important;border-bottom:2px solid #df280a!important;border-width:0 0 2px!important}
+[class*=target_popup]{cursor:pointer}

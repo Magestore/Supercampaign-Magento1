@@ -20,19 +20,19 @@ $couponcampaign = $this->getCampaignCoupon();
         $period = 600;
         Mage::getModel('core/cookie')->set($name, $value, $period);
     }
-        $coupon = $popup->getCouponcode();
-        //Mage::register('coupon', $coupon);
+    $classTarget = 'target_popup';
+    if($popup->getData('trigger_popup') != ''){
+        $classTarget = 'target_popup';
+    }
     ?>
     <div id="sc-popup<?php echo $popup->getData('popup_id') ?>"
-         class="modal fade sc-popup<?php echo $popup->getData('template_code') ?>" role="dialog">
-        <div class="modal-dialog">
+         class="modal fade sc-popup<?php echo $popup->getData('template_code'); ?> " role="dialog">
+        <div class="modal-dialog <?php echo $classTarget; ?>">
             <div class="modal-content">
                 <a id="close-<?php echo $popup->getData('popup_id') ?>" class="dialogClose style1 overlay2"
                    data-dismiss="modal"
                    data-target="#sc-popup<?php echo $popup->getData('popup_id') ?>"></a>
-                <?php $trigger = '';
-                if ($popup->getData('trigger_popup')) $trigger = 'target_popup' . $popup->getData('trigger_popup'); ?>
-                <div class="content-popup <?php echo $trigger ?>">
+                <div class="content-popup">
                     <?php echo $helper->convertContentToHtml($popup->getData('popup_content')); ?>
                 </div>
                 <img class="sc-loadding-popup" src="<?php echo $this->getSkinUrl('images/campaign/popup/loading.gif')?>" width="32" height="32" alt="<?php echo $this->__('Loadding')?>" />
@@ -106,7 +106,7 @@ $couponcampaign = $this->getCampaignCoupon();
         Popup.cookieUrl = "<?php echo $this->getUrl('campaign/cookie/set');?>";
         Popup.trigger_popup = dataPopup[id].trigger_popup;
         Popups[id] = Popup;
-
+        Popup.isBackgroundRuning = dataPopup[id].isBackgroundRuning;
     }
     $j(window).bind("load", function () {
         var triggerPopupIds = [];

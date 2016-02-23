@@ -25,33 +25,34 @@ var Scpopup = function () {
     this.frequency = "";
     this.trigger_popup = "";
     this.cookiePopup = "";
+    this.isBackgroundRuning = false;
 
     this.runEffect = function () {
         var effectPopup = this.effect;
         switch (effectPopup) {
             case '0':
-                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top');
+                $j("#sc-popup" + this.idPopup).addClass('top');
                 break;
             case '1':
-                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom');
+                $j("#sc-popup" + this.idPopup).addClass('bottom');
                 break;
             case '2':
-                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('left');
+                $j("#sc-popup" + this.idPopup).addClass('left');
                 break;
             case '3':
-                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('right');
+                $j("#sc-popup" + this.idPopup).addClass('right');
                 break;
             case '4':
-                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top-left');
+                $j("#sc-popup" + this.idPopup).addClass('top-left');
                 break;
             case '5':
-                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('top-right');
+                $j("#sc-popup" + this.idPopup).addClass('top-right');
                 break;
             case '6':
-                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom-left');
+                $j("#sc-popup" + this.idPopup).addClass('bottom-left');
                 break;
             case '7':
-                $j("#sc-popup" + this.idPopup).prop("class", "modal fade").addClass('bottom-right');
+                $j("#sc-popup" + this.idPopup).addClass('bottom-right');
                 break;
         }
         return "";
@@ -155,6 +156,13 @@ var Scpopup = function () {
                 cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-backdrop{display:none}";
                 cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-dialog{margin:0;width:" + widthPopup + "px}";
                 break;
+        }
+        if(this.trigger_popup != null){
+            //fix to no_bg_fix_popup
+            cssHead = ".modal-open{overflow:auto;padding-right:0}";
+            cssHead = cssHead + "#sc-popup" + this.idPopup + "{position:fixed}";
+            cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-backdrop{display:none}";
+            cssHead = cssHead + "#sc-popup" + this.idPopup + " .modal-dialog{margin:0;width:" + widthPopup + "px}";
         }
         return cssHead;
     };
@@ -291,6 +299,9 @@ var Scpopup = function () {
         var _this = this;
         var idPopup = this.idPopup;
         var scdelay = this.secondDelay;
+        if(this.isBackgroundRuning){
+            return;
+        }
         if (this.showWhen == 'after_seconds') {
             if (scdelay != "") {
                 var timedelay = 1000 * scdelay;
@@ -307,7 +318,7 @@ var Scpopup = function () {
         var _this = this;
         if(this.trigger_popup != '' && this.trigger_popup != null){
             var trigger_idpopup = this.trigger_popup;
-            $j('.target_popup'+trigger_idpopup).click(function(){
+            $j('#sc-popup'+_this.idPopup+' .target_popup').click(function(){
                 _this.modalShow(trigger_idpopup);
             });
         }
