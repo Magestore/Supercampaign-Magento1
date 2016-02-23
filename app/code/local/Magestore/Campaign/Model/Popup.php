@@ -127,7 +127,10 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
     public function checkFormSuccess(){
         $cookie = Mage::getModel('core/cookie');
         if($cookie->get('is_form_success_'.$this->getId())){
-            return false;
+            $this->setData('isBackgroundRuning', true);
+            //return false;
+        }else{
+            $this->setData('isBackgroundRuning', false);
         }
         return true;
     }

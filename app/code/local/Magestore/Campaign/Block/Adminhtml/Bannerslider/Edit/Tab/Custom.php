@@ -69,6 +69,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Custom extends Ma
 
     protected function _prepareColumns() {
         $this->addColumn('in_custom', array(
+            'header' => Mage::helper('campaign')->__('Choose item(s) of banner:'),
             'header_css_class' => 'a-center',
             'type' => 'checkbox',
             'name' => 'in_custom',
