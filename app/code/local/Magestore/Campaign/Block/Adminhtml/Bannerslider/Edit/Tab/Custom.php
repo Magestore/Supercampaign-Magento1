@@ -69,6 +69,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Custom extends Ma
 
     protected function _prepareColumns() {
         $this->addColumn('in_custom', array(
+            'header' => Mage::helper('campaign')->__('Choose item(s) of banner:'),
             'header_css_class' => 'a-center',
             'type' => 'checkbox',
             'name' => 'in_custom',
@@ -134,6 +135,25 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Custom extends Ma
             'renderer' => 'campaign/adminhtml_renderer_edit',
             'index' => 'action_banner',
         ));
+
+//        $this->addColumn('delete_banner',
+//            array(
+//                'header'    =>    Mage::helper('campaign')->__('Delete Banner'),
+//                'width'        => '100',
+//                'type'        => 'action',
+//                'getter'    => 'getId',
+//                'actions'    => array(
+//                    array(
+//                        'caption'    => Mage::helper('campaign')->__('Delete'),
+//                        'url'        => array('base'=> '*/adminhtml_bannerslider/deleteingrid'),
+//                        //'onclick' => 'return saveAndContinueEdit();',
+//                        'field'        => 'id'
+//                    )),
+//                'filter'    => false,
+//                'sortable'    => false,
+//                'index'        => 'stores',
+//                'is_system'    => true,
+//            ));
 
         $this->addColumn('order_banner_slider', array(
             'header' => Mage::helper('campaign')->__('Order'),

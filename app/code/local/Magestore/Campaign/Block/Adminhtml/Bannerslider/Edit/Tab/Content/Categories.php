@@ -6,7 +6,7 @@ class Magestore_Campaign_Block_Adminhtml_Bannerslider_Edit_Tab_Content_Categorie
 
     protected function _prepareLayout()
     {
-        $this->setTemplate('campaign/categories.phtml');
+        $this->setTemplate('bannercampaign/categories.phtml');
     }
     public function getCategoryIds()
     {

@@ -143,13 +143,13 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Banner_Grid extends M
 
         $this->addColumn('action_delete',
             array(
-                'header'    =>    Mage::helper('campaign')->__('Disable'),
+                'header'    =>    Mage::helper('campaign')->__('Disable Banner'),
                 'width'        => '100',
                 'type'        => 'action',
                 'getter'    => 'getId',
                 'actions'    => array(
                     array(
-                        'caption'    => Mage::helper('campaign')->__('Disable slider'),
+                        'caption'    => Mage::helper('campaign')->__('Disable'),
                         'url'        => array('base'=> '*/adminhtml_bannerslider/disableSlider'),
                         //'onclick' => 'return saveAndContinueEdit();',
                         'field'        => 'id'
