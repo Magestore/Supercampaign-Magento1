@@ -44,8 +44,8 @@ $couponcampaign = $this->getCampaignCoupon();
                 var newsletterForm<?php echo $popup->getData('popup_id') ?> = new VarienForm($$('#sc-popup<?php echo $popup->getData('popup_id') ?> form')[0]);
                 if(newsletterForm<?php echo $popup->getData('popup_id') ?>.validator &&  newsletterForm<?php echo $popup->getData('popup_id') ?>.validator.validate()){
                     var popupsubmit = document.URL;
-                        var url = $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').attr('action');
-                    $j('.sc-loadding-popup').show();
+                    var url = $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').attr('action');
+                    $j('#sc-popup<?php echo $popup->getData('popup_id') ?> .sc-loadding-popup').show();
 
                     $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').hide();
                     $j.ajax({
@@ -54,7 +54,7 @@ $couponcampaign = $this->getCampaignCoupon();
                         data: $j('#sc-popup<?php echo $popup->getData('popup_id') ?> form').serialize()+ '&popup_id=<?php echo $popup->getData('popup_id') ?>',
                         context: document.body
                     }).success(function(data) {
-                        $j('.sc-loadding-popup').hide();
+                        $j('#sc-popup<?php echo $popup->getData('popup_id') ?> .sc-loadding-popup').hide();
                         $j('#sc-popup<?php echo $popup->getData('popup_id')?> .content-popup').html(data.content_for_success);
                     });
                 }
