@@ -280,8 +280,10 @@ class Magestore_Campaign_Adminhtml_BannerController extends Mage_Adminhtml_Contr
         $this->_prepareDownloadResponse($fileName, $content);
     }
 
-    protected function _isAllowed() {
-        return Mage::getSingleton('admin/session')->isAllowed('campaign');
-    }
 
+
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('campaign/popup');
+    }
 }

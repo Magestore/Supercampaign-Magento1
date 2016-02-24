@@ -304,10 +304,6 @@ class Magestore_Campaign_Adminhtml_BannersliderController extends Mage_Adminhtml
         $this->_prepareDownloadResponse($fileName, $content);
     }
 
-    protected function _isAllowed() {
-        return Mage::getSingleton('admin/session')->isAllowed('bannerslider');
-    }
-
     protected function customAction() {
         $this->loadLayout();
         $this->getLayout()->getBlock('slider.edit.tab.custom')
@@ -386,4 +382,8 @@ class Magestore_Campaign_Adminhtml_BannersliderController extends Mage_Adminhtml
         return $category;
     }
 
+
+    protected function _isAllowed() {
+        return Mage::getSingleton('admin/session')->isAllowed('campaign/banner');
+    }
 }

@@ -313,4 +313,9 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
         }
         $this->_forward('edit');
     }
+
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('campaign');
+    }
 }
