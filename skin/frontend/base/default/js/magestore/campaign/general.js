@@ -291,9 +291,11 @@ var Scpopup = function () {
         $j('html > head').append(stringcss);
     };
     this.modalShow = function(id){
-        $j("#sc-popup" + id).modal('show');
-        //set cookie when showing
-        this.setFrequencyCookie(id);
+        if(!$j("#sc-popup" + id).hasClass('in')){
+            $j("#sc-popup" + id).modal('show');
+            //set cookie when showing
+            this.setFrequencyCookie(id);
+        }
     };
     this.showPopup = function () {
         var _this = this;
@@ -317,9 +319,13 @@ var Scpopup = function () {
     this.initTrigger = function () {
         var _this = this;
         if(this.trigger_popup != '' && this.trigger_popup != null){
-            var trigger_idpopup = this.trigger_popup;
+            var target_idpopup = this.trigger_popup;
             $j('#sc-popup'+_this.idPopup+' .target_popup').click(function(){
-                _this.modalShow(trigger_idpopup);
+                if($j("#sc-popup" + target_idpopup).hasClass('in')){
+                    $j("#sc-popup" + target_idpopup).modal('hide');
+                }else{
+                    _this.modalShow(target_idpopup);
+                }
             });
         }
     };
