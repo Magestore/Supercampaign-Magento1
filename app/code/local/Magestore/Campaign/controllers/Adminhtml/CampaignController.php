@@ -72,6 +72,10 @@ class Magestore_Campaign_Adminhtml_CampaignController extends Mage_Adminhtml_Con
             $model->setStartTime($model->getStartTime());
             $model->setEndTime($model->getEndTime());
 
+            if($model->getData('priority') == ''){
+                $model->setData('priority', $model->getPriorityIncrement());
+            }
+
             Mage::register('campaign_data', $model);
             Mage::getSingleton('adminhtml/session')->setCurrentCampaign($model);
             /**

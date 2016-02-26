@@ -22,12 +22,9 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
             $id = $editIdNewFromTemplate;
         }
         //end
-
         $model  = Mage::getModel('campaign/popup')->load($id);
-
         if ($model->getId() || $id == 0) {
             $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
-
             //skip old data popup when load template from old popup editing
             if (!empty($data)){
                 if(isset($editIdNewFromTemplate)){
@@ -37,7 +34,7 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
                 }
             }
             //end
-
+            if($model->getData('priority') == '') $model->setData('priority', $model->getPriorityIncrement());//add priority auto increment
 
             Mage::register('popup_data', $model);
             Mage::getSingleton('adminhtml/session')->setPopupEditId($id);

@@ -112,16 +112,17 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
 
 
     protected function _beforeSave(){
-        //auto convert timezone to GMT+0
-        //$this->setData('start_time', $this->_revertTimezone(parent::getStartTime()));
-        //$this->setData('end_time', $this->_revertTimezone(parent::getEndTime()));
         //auto add priority
         if($this->getPriority() == null){
-            $highest = $this->getCollection();
-            $highest->getSelect()->order('priority DESC');
-            $highest = $highest->getFirstItem();
-            $this->setPriority((int) $highest->getPriority() + 1);
+            $this->setPriority($this->getPriorityIncrement());
         }
+    }
+
+    public function getPriorityIncrement(){
+        $highest = $this->getCollection();
+        $highest->getSelect()->order('priority DESC');
+        $highest = $highest->getFirstItem();
+        return (int) $highest->getPriority() + 1;
     }
 
     /**

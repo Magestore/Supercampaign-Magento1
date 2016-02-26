@@ -282,5 +282,13 @@ class Magestore_Campaign_Model_Popup extends Mage_Core_Model_Abstract
         }
         return Varien_Object();
     }
+
+    public function getPriorityIncrement(){
+        $collection = $this->getCollection();
+        $collection->setOrder('priority', 'DESC');
+        $_popup = $collection->getFirstItem();
+        $_pri = (int)$_popup->getData('priority');
+        return $_pri+1;
+    }
 }
 
