@@ -155,7 +155,7 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Grid extends Mage_Adminhtml_Bl
             'confirm'    => Mage::helper('campaign')->__('Are you sure?')
         ));
 
-        $statuses = Mage::getSingleton('campaign/status')->getOptionArray();
+        $statuses = Magestore_Campaign_Model_Status::getOptionHash();
 
         array_unshift($statuses, array('label'=>'', 'value'=>''));
         $this->getMassactionBlock()->addItem('status', array(
