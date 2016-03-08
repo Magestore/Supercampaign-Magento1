@@ -323,6 +323,7 @@ var Scpopup = function () {
         var _this = this;
         $j("#sc-popup" + this.idPopup+" .dialogClose").on('click', function(ev) {
             _this.closeButton();
+            $j('.video-box iframe').attr("src", ' ');
             ev.preventDefault();
         });
     };
@@ -330,6 +331,7 @@ var Scpopup = function () {
         var _this = this;
         $j("#sc-popup" + this.idPopup+" .modal-backdrop").on('click', function(ev) {
             _this.closeBackground();
+            $j('.video-box iframe').attr("src", ' ');
             ev.preventDefault();
         });
     };

@@ -340,6 +340,15 @@ var Scpopup = function () {
             _this.closeBackground();
             ev.preventDefault();
         });
+        $j('.modal-backdrop').on('click', function(ev) {
+            $j('.video-box iframe').attr("src", ' ');
+            ev.preventDefault();
+        });
+        if ($j(".modal").attr("aria-hidden") === "false") {
+            $j(".modal").modal('hide').on('hidden.bs.modal', function (event) {
+                $j('.video-box iframe').attr("src", ' ');
+            });
+        };
     };
     this.close = function(){
         $j("#sc-popup" + this.idPopup).modal('hide');
