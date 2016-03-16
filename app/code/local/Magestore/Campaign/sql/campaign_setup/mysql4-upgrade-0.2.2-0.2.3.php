@@ -31,6 +31,7 @@ $installer->run("
 DROP TABLE IF EXISTS {$this->getTable('campaign/banner')};
 DROP TABLE IF EXISTS {$this->getTable('campaign/bannerslider')};
 DROP TABLE IF EXISTS {$this->getTable('campaign/value')};
+DROP TABLE IF EXISTS {$this->getTable('campaign/report')};
 DROP TABLE IF EXISTS {$this->getTable('campaign/popup')};
 DROP TABLE IF EXISTS {$this->getTable('campaign/template')};
 
@@ -83,6 +84,18 @@ CREATE TABLE {$this->getTable('campaign/banner')} (
   PRIMARY KEY (`banner_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
+
+CREATE TABLE {$this->getTable('campaign/report')} (
+  `report_id` int(11) unsigned NOT NULL auto_increment,
+  `banner_id` int(11)  NULL,
+  `campaign_id` int(11) unsigned NOT NULL,
+  `campaign_name` varchar(255) NOT NULL default '',
+  `bannerslider_id` int(11) NULL,
+  `impmode` int(11)  NULL default '0',
+  `clicks` int(11)  NULL default '0',
+  `date_click` datetime NULL,
+  PRIMARY KEY (`report_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE {$this->getTable('campaign/value')} (

@@ -226,6 +226,9 @@
                     <value>
                         <table>magestore_campaign_value</table>
                     </value>
+                    <report>
+                        <table>magestore_campaign_report</table>
+                    </report>
                     <popup>
                         <table>magestore_campaign_popup</table>
                     </popup>

@@ -51,6 +51,27 @@
                     <sort_order>20</sort_order>
                     <action>campaignadmin/adminhtml_maillist</action>
                 </maillist>-->
+                <standard_slider module="campaign" translate="title">
+                    <title>Preview Slider Styles</title>
+                    <sort_order>20</sort_order>
+                    <action>campaignadmin/adminhtml_standardslider</action>
+                </standard_slider>
+                <banner_report module="campaign" translate="title">
+                    <title>Report Banners</title>
+                    <sort_order>30</sort_order>
+                    <children>
+                        <banner_report_all module="campaign" translate="title">
+                            <title>Per Banner</title>
+                            <action>campaignadmin/adminhtml_report</action>
+                            <sort_order>1</sort_order>
+                        </banner_report_all>
+                        <banner_report_only module="campaign" translate="title">
+                            <title>All Banners</title>
+                            <action>campaignadmin/adminhtml_report/banner</action>
+                            <sort_order>2</sort_order>
+                        </banner_report_only>
+                    </children>
+                </banner_report>
                 <settings module="campaign" translate="title">
                     <title>Settings</title>
                     <sort_order>1000</sort_order>
@@ -98,6 +119,24 @@
                                 <title>Manage Banners</title>
                                 <sort_order>15</sort_order>
                             </banner>
+                            <standard_slider module="campaign" translate="title">
+                                <title>Preview Banner Styles</title>
+                                <sort_order>20</sort_order>
+                            </standard_slider>
+                            <banner_report module="campaign" translate="title">
+                                <title>Report Banners</title>
+                                <sort_order>30</sort_order>
+                                <children>
+                                    <banner_report_all module="campaign" translate="title">
+                                        <title>Per Banner</title>
+                                        <sort_order>1</sort_order>
+                                    </banner_report_all>
+                                    <banner_report_only module="campaign" translate="title">
+                                        <title>All Banners</title>
+                                        <sort_order>2</sort_order>
+                                    </banner_report_only>
+                                </children>
+                            </banner_report>
                             <!--<maillist module="campaign" translate="title">
                                 <title>Email Campaign</title>
                                 <sort_order>20</sort_order>

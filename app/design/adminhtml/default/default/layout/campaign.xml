@@ -309,6 +309,61 @@
             <block type="campaign/adminhtml_bannerslider_edit_tab_custom" name="slider.edit.tab.custom"/>
         </block>
     </campaignadmin_adminhtml_bannerslider_customgrid>
+
+    <campaignadmin_adminhtml_standardslider_index>
+        <reference name="content">
+            <block type="campaign/adminhtml_standardslider" name="campaign.standardslider" />
+        </reference>
+    </campaignadmin_adminhtml_standardslider_index>
+
+    <campaignadmin_adminhtml_standardslider_preview>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/bannerslider/standardslider/content_slider_master/jquery.easing.1.3.js</script>
+            </action>
+            <action method="addJs">
+                <script>magestore/bannerslider/standardslider/content_slider_master/jquery.ennui.contentslider.js</script>
+            </action>
+            <action method="addJs">
+                <script>magestore/bannerslider/standardslider/content_slider_master/jquery.min.js</script>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="campaign/adminhtml_preview" name="campaign.standardslider" template="bannercampaign/standardslider.phtml" output="toHtml"/>
+        </reference>
+    </campaignadmin_adminhtml_standardslider_preview>
+
+    <campaignadmin_adminhtml_report_index>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/bannercampaign/tooltip.js</script>
+            </action>
+            <action method="addJs">
+                <script>magestore/bannercampaign/prototip.js</script>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="campaign/adminhtml_date" name="campaign.report.date" template="bannercampaign/date.phtml"/>
+            <block type="campaign/adminhtml_report" name="campaign.report"/>
+            <block type="campaign/adminhtml_customjs" name="campaign.report.customjs" template="bannercampaign/customjs.phtml"/>
+        </reference>
+    </campaignadmin_adminhtml_report_index>
+
+    <campaignadmin_adminhtml_report_banner>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/bannercampaign/tooltip.js</script>
+            </action>
+            <action method="addJs">
+                <script>magestore/bannercampaign/prototip.js</script>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="campaign/adminhtml_date" name="campaign.report.date.banner" template="bannercampaign/date.phtml"/>
+            <block type="campaign/adminhtml_reportbanner" name="campaign.report.banner"/>
+            <block type="campaign/adminhtml_customjs" name="campaign.report.customjs.banner" template="bannercampaign/customjs.phtml"/>
+        </reference>
+    </campaignadmin_adminhtml_report_banner>
     <!--zeus End layout-->
 
 
