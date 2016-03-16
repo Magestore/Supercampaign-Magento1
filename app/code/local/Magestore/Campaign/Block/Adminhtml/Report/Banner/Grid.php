@@ -96,6 +96,14 @@ class Magestore_Campaign_Block_Adminhtml_Report_Banner_Grid extends Mage_Adminht
             'width' => '200px',
         ));
 
+        $this->addColumn('campaign_name', array(
+            'header' => Mage::helper('campaign')->__('Campaign'),
+            'align' => 'left',
+            'index' => 'campaign_name',
+            'filter_index' => 'main_table.campaign_name',
+            'width' => '200px',
+        ));
+
         $this->addColumn('banner_impress', array(
             'header' => Mage::helper('campaign')->__('Impressions'),
             'align' => 'left',

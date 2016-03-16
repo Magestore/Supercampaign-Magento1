@@ -47,12 +47,12 @@ class Magestore_Campaign_IndexController extends Mage_Core_Controller_Front_Acti
     }
 
     public function preDispatch() {
-//            if(!Mage::getStoreConfig('bannerslider/general/enable')){			
-//                 header('Location: '.Mage::getUrl());          
-//                 exit;      				
-//            }else{                
-//                return $this;
-//            }
+            if(!Mage::getStoreConfig('campaign/general/enable')){
+                 header('Location: '.Mage::getUrl());
+                 exit;
+            }else{
+                return $this;
+            }
     }
 
     public function clickAction() {
@@ -60,6 +60,10 @@ class Magestore_Campaign_IndexController extends Mage_Core_Controller_Front_Acti
         $id = $this->getRequest()->getParam('id_banner');
         $userCode = $this->getUserCode($id);
         $slider_id = $this->getRequest()->getParam('slider_id');
+        $campaign_banner = Mage::getModel('campaign/bannerslider')->load($slider_id);
+        $campaign_id = $campaign_banner->getCampaignId();
+        $campaign = Mage::getModel('campaign/campaign')->load($campaign_id);
+        $campaign_name = $campaign->getName();
         $date_click = date('Y-m-d');
         $report = Mage::getModel('campaign/report');
         $collection = $report->getCollection();
@@ -72,11 +76,13 @@ class Magestore_Campaign_IndexController extends Mage_Core_Controller_Front_Acti
                 if (count($collection)) {
                     foreach ($collection as $item) {
                         $item->setData('clicks', $item->getData('clicks') + 1);
+                        $item->setData('campaign_name', $campaign_name);
                         $item->save();
                     }
                 } else {
                     $report->setData('banner_id', $id)
                             ->setData('bannerslider_id', $slider_id)
+                            ->setData('campaign_name', $campaign_name)
                             ->setData('date_click', $date_click)
                             ->setData('clicks', $report->getData('clicks') + 1);
                     try {
@@ -96,6 +102,10 @@ class Magestore_Campaign_IndexController extends Mage_Core_Controller_Front_Acti
         $banner_id_arr = explode(",", $banner_ids);
         $banner_popup_id = $this->getRequest()->getParam("banner_popup_id");
         $slider_id = $this->getRequest()->getParam("slider_id");
+        $campaign_banner = Mage::getModel('campaign/bannerslider')->load($slider_id);
+        $campaign_id = $campaign_banner->getCampaignId();
+        $campaign = Mage::getModel('campaign/campaign')->load($campaign_id);
+        $campaign_name = $campaign->getName();
         $date_click = date('Y-m-d');
         $report = Mage::getModel('campaign/report');
         if ($slider_id && $date_click) {
@@ -109,6 +119,7 @@ class Magestore_Campaign_IndexController extends Mage_Core_Controller_Front_Acti
                     $bannerIdsCache= array();                   
                     foreach ($collection as $item) {
                         $item->setData('impmode', $item->getData('impmode') + 1);
+                        $item->setData('campaign_name', $campaign_name);
                         try {
                             $item->save();
                             $bannerIdsCache[] = $item->getBannerId();
@@ -124,6 +135,7 @@ class Magestore_Campaign_IndexController extends Mage_Core_Controller_Front_Acti
                             $report_b = Mage::getModel('campaign/report');
                             $report_b->setData('banner_id', $b_id)
                                     ->setData('bannerslider_id', $slider_id)
+                                    ->setData('campaign_name', $campaign_name)
                                     ->setData('impmode', $report_b->getData('impmode') + 1)
                                     ->setData('date_click', $date_click);
                             try {
@@ -139,6 +151,7 @@ class Magestore_Campaign_IndexController extends Mage_Core_Controller_Front_Acti
                             $report_b = Mage::getModel('campaign/report');
                             $report_b->setData('banner_id', $banner_id)
                                     ->setData('bannerslider_id', $slider_id)
+                                    ->setData('campaign_name', $campaign_name)
                                     ->setData('impmode', $report_b->getData('impmode') + 1)
                                     ->setData('date_click', $date_click);
                             try {
@@ -152,6 +165,7 @@ class Magestore_Campaign_IndexController extends Mage_Core_Controller_Front_Acti
                         $report_b = Mage::getModel('campaign/report');
                         $report_b->setData('banner_id', $banner_popup_id)
                                 ->setData('bannerslider_id', $slider_id)
+                                ->setData('campaign_name', $campaign_name)
                                 ->setData('impmode', $report_b->getData('impmode') + 1)
                                 ->setData('date_click', $date_click);
                         try {
