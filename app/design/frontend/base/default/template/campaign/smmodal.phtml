@@ -4,8 +4,8 @@
 $helper = Mage::helper('campaign');
 $popups = $this->getAllPopupAvailable();
 $couponcampaign = $this->getCampaignCoupon();
-
 ?>
+<div id="magestore-super-campaign">
 <?php foreach ($popups as $key => $popup): ?>
     <?php
 
@@ -131,9 +131,26 @@ $couponcampaign = $this->getCampaignCoupon();
                 Popups[i].showPopup();
             }
         }
+
+        //fix form action https
+        $j('#magestore-super-campaign form').each(function(i, element){
+            var action = $j(element).attr('action');
+            var location = window.location.href;
+            if(action.search('https') == -1 && location.search('https') == 0){
+                //change to https
+                action = action.replace('http://', 'https://');
+            }else if(action.search('https') == 0 && location.search('https') == -1){
+                //change to http
+                action = action.replace('https://', 'http://');
+            }
+            //otherwise
+
+            //replace back action to form
+            $j(element).attr('action', action);
+        });
     });
 
 </script>
-
+</div>
 <?php endif; ?>
 

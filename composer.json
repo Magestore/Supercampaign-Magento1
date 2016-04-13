@@ -1,0 +1,8 @@
+{
+    "name": "magestore/supercampaign",
+    "description": "Super Campaign",
+    "version": "1.0.3",
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
