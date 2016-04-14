@@ -28,7 +28,7 @@
  */
 class Magestore_Campaign_AjaxformController extends Mage_Core_Controller_Front_Action
 {
-    public function subscriberAction(){
+    public function subcriberAction(){
         $helper = Mage::helper('campaign');
         $popupId = $this->getRequest()->getParam('popup_id');
         $popup = Mage::getModel('campaign/popup')->load($popupId);

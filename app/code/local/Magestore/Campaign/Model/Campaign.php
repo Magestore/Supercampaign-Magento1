@@ -486,13 +486,12 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
     public function checkCustomerGroup(){
         $grouptoshow = array();
         $group = $this->getCustomerGroupIds();
-
+        if($group == ','){return true;}
         //call group code of group customer
         $login = Mage::getSingleton('customer/session')->isLoggedIn();
         $gid = Mage::getSingleton('customer/session')->getCustomerGroupId();
         $groupcustomer = Mage::getModel('customer/group')->load($gid);
         $groupcode = $groupcustomer->getCustomerGroupCode();
-
         if($group != ''){
             if(!is_array($group)){
                 $grouptoshow[] = $group;
@@ -506,61 +505,20 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
                     $sub_group[] = explode(',', trim($subgr));
                 }
             }
-
-        }else{
-            return false;
         }
-
-        //end get value of device
+        //end get value of customer group
         if($group != ''){
-
             foreach($sub_group as $subg){
                 foreach($subg as $sub){
+                    if($sub ==''){return true;}
 
-                    if($sub == 'all_group'){
-                        return true;
-
-                    }
-
-                    if($sub == 'general'){
-
-                        if($groupcode == 'General'){
+                        if($groupcode == $sub){
                             return true;
                         }
-
-
-                    }
-                    if($sub == 'wholesale'){
-
-                        if($groupcode == 'Wholesale'){
-                            return true;
-                        }
-
-                    }
-                    if($sub == 'vip_member'){
-
-                        if($groupcode == 'VIP Member'){
-                            return true;
-                        }
-                        break;
-                    }
-                    if($sub == 'private_sale_member'){
-
-                        if($groupcode == 'Private Sales Member'){
-                            return true;
-                        }
-
-                    }
-
                 }
             }
-
-
-            return false;
-        }else{
             return false;
         }
-
     }
 
 

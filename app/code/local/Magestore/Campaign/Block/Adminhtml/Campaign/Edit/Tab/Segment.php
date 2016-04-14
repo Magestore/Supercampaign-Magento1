@@ -71,23 +71,6 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Segment extends Mage_
             ),
         ));
 
-        /*$enable_cookie = $viSegmentFieldset->addField('cookies_enabled', 'select', array(
-            'label'		=> Mage::helper('campaign')->__('Cookies Enabled:'),
-            'required'	=> true,
-            'name'		=> 'cookies_enabled',
-            'note'      => "Allow enable cookie to config show popup .",
-            'values' => array(
-                array(
-                    'value' => 0,
-                    'label' => Mage::helper('campaign')->__('No'),
-                ),
-                array(
-                    'value' => 1,
-                    'label' => Mage::helper('campaign')->__('Yes'),
-                ),
-            ),
-        ));*/
-
         $cookie_time = $viSegmentFieldset->addField('cookie_time', 'text', array(
             'label'		=> Mage::helper('campaign')->__('Cookie Life Time:'),
             'note'      => 'Set days for cookie to show popup.',
@@ -137,32 +120,20 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Segment extends Mage_
             ),
         ));
 
+        //check option customer group
+        $cus_group = Mage::getModel('customer/group')->getCollection();
+        $cusoption = array();
+        foreach($cus_group as $cus){
+            $cusoption[]=array(
+                'value' => $cus->getCustomerGroupCode(),
+                'label' => $cus->getCustomerGroupCode()
+            );
+        }
         $viSegmentFieldset->addField('customer_group_ids', 'multiselect', array(
             'label'		=> Mage::helper('campaign')->__('Customer groups:'),
             'name'		=> 'customer_group_ids',
             'note'      => "Show popup for customer group.",
-            'values' => array(
-                array(
-                    'value' => 'all_group',
-                    'label' => Mage::helper('campaign')->__('All Group'),
-                ),
-                array(
-                    'value' => 'general',
-                    'label' => Mage::helper('campaign')->__('General'),
-                ),
-                array(
-                    'value' => 'wholesale',
-                    'label' => Mage::helper('campaign')->__('Wholesale'),
-                ),
-                array(
-                    'value' => 'vip_member',
-                    'label' => Mage::helper('campaign')->__('Vip member'),
-                ),
-                array(
-                    'value' => 'private_sale_member',
-                    'label' => Mage::helper('campaign')->__('Private sale member'),
-                ),
-            ),
+            'values' => $cusoption,
         ));
 
         $viSegmentFieldset->addField('user_ip', 'text', array(
@@ -177,8 +148,6 @@ class Magestore_Campaign_Block_Adminhtml_Campaign_Edit_Tab_Segment extends Mage_
         if($data['cookie_time'] == ''){$data['cookie_time'] = '1';}
         if($data['devices'] == ''){$data['devices'] = 'all_device';}
         if($data['login_user'] == ''){$data['login_user'] = 'registed';}
-        if($data['customer_group_ids'] == ''){$data['customer_group_ids'] = 'all_group';}
-
         $form->setValues($data);
         $this->setForm($form);
 
