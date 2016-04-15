@@ -191,6 +191,16 @@ class Magestore_Campaign_Adminhtml_PopupController extends Mage_Adminhtml_Contro
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('campaign')->__('Item was successfully saved'));
                 Mage::getSingleton('adminhtml/session')->setFormData(false);
 
+                //auto refresh cache block_html after save popup
+                try {
+                    $CacheType='block_html';
+                    Mage::app()->getCacheInstance()->cleanType($CacheType);
+                    //Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('campaign')->__('Your default magento cache was successfully saved!'));
+                } catch (Exception $e) {
+                    error_log($e->getMessage());
+                }
+                //end auto refresh cache block_html save popup
+
                 if ($this->getRequest()->getParam('back')) {
                     $this->_redirect('*/*/edit', array('id' => $model->getId()));
                     return;
