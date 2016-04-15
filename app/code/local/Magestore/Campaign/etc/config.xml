@@ -23,7 +23,7 @@
 <config>
     <modules>
         <Magestore_Campaign>
-            <version>0.2.4</version>
+            <version>1.0.4</version>
         </Magestore_Campaign>
     </modules>
     <frontend>
