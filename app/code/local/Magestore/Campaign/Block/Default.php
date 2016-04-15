@@ -256,6 +256,7 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
         $gid = Mage::getSingleton('customer/session')->getCustomerGroupId();
         $groupcustomer = Mage::getModel('customer/group')->load($gid);
         $groupcode = $groupcustomer->getCustomerGroupCode();
+
         if($group != ''){
             if(!is_array($group)){
                 $grouptoshow[] = $group;
@@ -269,13 +270,9 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
                     $sub_group[] = explode(',', trim($subgr));
                 }
             }
-        }
-        //end get value of customer group
-        if($group != ''){
+            //end get value of customer group
             foreach($sub_group as $subg){
                 foreach($subg as $sub){
-                    if($sub ==''){return true;}
-
                     if($groupcode == $sub){
                         return true;
                     }
@@ -283,6 +280,7 @@ class Magestore_Campaign_Block_Default extends Mage_Core_Block_Template {
             }
             return false;
         }
+
     }
 
 

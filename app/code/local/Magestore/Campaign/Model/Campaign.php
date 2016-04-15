@@ -492,6 +492,7 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
         $gid = Mage::getSingleton('customer/session')->getCustomerGroupId();
         $groupcustomer = Mage::getModel('customer/group')->load($gid);
         $groupcode = $groupcustomer->getCustomerGroupCode();
+
         if($group != ''){
             if(!is_array($group)){
                 $grouptoshow[] = $group;
@@ -505,20 +506,17 @@ class Magestore_Campaign_Model_Campaign extends Mage_Core_Model_Abstract
                     $sub_group[] = explode(',', trim($subgr));
                 }
             }
-        }
-        //end get value of customer group
-        if($group != ''){
+            //end get value of customer group
             foreach($sub_group as $subg){
                 foreach($subg as $sub){
-                    if($sub ==''){return true;}
-
-                        if($groupcode == $sub){
-                            return true;
-                        }
+                    if($groupcode == $sub){
+                        return true;
+                    }
                 }
             }
             return false;
         }
+
     }
 
 
