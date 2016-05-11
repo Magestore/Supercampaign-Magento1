@@ -1,16 +1,26 @@
-            <div class="sc-popup15">
-                <table style="background-image: url(<?php echo Mage::getDesign()->setArea('frontend')->getSkinUrl('images/campaign/popup/image-2-new.png') ?>); background-position: right; background-size:auto 100%; background-repeat: no-repeat; width: 100%;" border="0">
-                    <tbody>
-                    <tr>
-                        <td style="padding: 30px;">
-                            <p class="fontBig" style="text-align: left; font-size: 26px; font-style: italic; margin: 0;">Wanna know</p>
-                            <p class="fontBig" style="text-align: left; font-size: 70px; line-height: 1; margin: 0;">SPECIAL</p>
-                            <p class="fontBig" style="text-align: left; font-size: 70px; line-height: 1; font-weight: bold; margin: 0; color: #ff1176;">DISCOUNTS?</p>
-                            <p class="popupSmall" style="text-align: left; font-size: 24px; line-height: 1; margin: 20px 0; font-style: italic;">Enter your email & get all <br />exclusive savings & news right into your inbox!</p>
-                            <div style="text-align: left;"><?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setArea('frontend')->setTemplate('campaign/popup/form/subscribe-type2.phtml')->toHtml(); ?></div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+<div class="sc-popup15">
+    <table
+        style="vertical-align: top;border-collapse: separate;border-spacing: 25px;background-size: contain; background-image:url(<?php echo Mage::getDesign()->setArea('frontend')->getSkinUrl('images/campaign/bg-popup15.png')?>); width: 100%; background-repeat: round;"
+        border="0">
+        <tbody>
+        <tr>
+            <td style="background-color: rgba(255, 255, 255, 0.85); padding: 20px 10px;">
+                <p style="text-align: center; font-size: 30px; margin: 0; line-height: 45px;"><span>Inspirational Newsletter</span>
+                </p>
 
+                <p style="text-align: center; font-size: 15px; margin: 0; line-height: 25px; margin-bottom: 30px;"><span>Every two weeks you’ll get the latest content from the wonderful world of web design. There are also exclusive freebies, contests, giveaways ets...
+                        </span>
+                </p>
+
+                <div style="text-align: center;"> <?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setArea('frontend')->setTemplate('campaign/popup/form/subscribe.phtml')->toHtml(); ?></div>
+                <div style="text-align: center;">
+                    <p style="font-size: 15px; margin-top: 30px; color: #DDDDDD;">(Your email address is 100% safe from spam. We hate it with a passion.)</p>
+
+                    <div style="text-align: center;">&nbsp;</div>
+                    <div style="text-align: center;">&nbsp;</div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,5 +1,5 @@
 
-.sc-popup16 form {
+.sc-popup19 form {
     width: 90%;
     -moz-box-sizing:    border-box;
     -webkit-box-sizing: border-box;
@@ -7,20 +7,20 @@
 
 }
 
-.sc-popup16 button {
-    background-color: #D83C3C;
+.sc-popup19 button {
+    background-color: #1a80ff;
     color:#FFFFFF;
 }
-.sc-popup16 button:before { /* left arrow */
-    border-color: transparent #D83C3C transparent;
+.sc-popup19 button:before { /* left arrow */
+    border-color: transparent #1a80ff transparent;
     content:' '
 }
 
-.sc-popup16 form table{
+.sc-popup19 form table{
     border-spacing:0 !important;
 }
 
-.sc-popup16 form input {
+.sc-popup19 form input {
     padding: 10px 5px;
     float: left;
     font-size: 15px;
@@ -37,13 +37,13 @@
     box-sizing: border-box;
 }
 
-.sc-popup16 form input:focus {
+.sc-popup19 form input:focus {
     outline: 0;
     background: #fff;
     box-shadow: 1px 0 2px rgba(0,0,0,0.4) inset;
 }
 
-.sc-popup16 form button {
+.sc-popup19 form button {
     height:40px;
     overflow: visible;
     position: relative;
@@ -63,7 +63,7 @@
     line-height:19px;
 }
 
-.sc-popup16 button:before { /* left arrow */
+.sc-popup19 button:before { /* left arrow */
     content: '';
     position: absolute;
     border-width: 8px 8px 8px 0;
@@ -72,17 +72,17 @@
     left: -7px;
 }
 
-.sc-popup16 form table, .sc-popup16 form input {
+.sc-popup19 form table, .sc-popup04 form input {
     width:100%;
     height:40px;
 }
 
-.sc-popup16 form button {
+.sc-popup19 form button {
     width:auto;
 }
 
-.sc-popup16 form button:hover{
-    background-color: #D83C3C;
+.sc-popup19 form button:hover{
+    background-color: #1a80ff;
     color:#FFFFFF;
     cursor: pointer;
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
@@ -92,4 +92,4 @@
     opacity: 1;
     text-shadow: 0 -1px 0 rgba(0, 0 ,0, 0.9);
 }
-.sc-popup16 .modal-dialog .modal-content{padding:20px;}
+.sc-popup19 .modal-dialog .modal-content{padding:20px;}
